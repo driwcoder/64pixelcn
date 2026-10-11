@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "type": "registry:ui",
+  "title": "Accordion",
+  "description": "Pixel art accordion",
+  "dependencies": [
+    "@radix-ui/react-accordion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/accordion.tsx",
+      "content": "import * as React from \"react\";\r\nimport * as AccordionPrimitive from \"@radix-ui/react-accordion\";\r\nimport { ChevronDown } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelAccordion = AccordionPrimitive.Root;\r\n\r\nconst PixelAccordionItem = React.forwardRef<\r\n  React.ElementRef<typeof AccordionPrimitive.Item>,\r\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>\r\n>(({ className, ...props }, ref) => (\r\n  <AccordionPrimitive.Item\r\n    ref={ref}\r\n    data-slot=\"accordion-item\"\r\n    className={cn(\"border-b-2 border-foreground\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelAccordionItem.displayName = \"PixelAccordionItem\";\r\n\r\nconst PixelAccordionTrigger = React.forwardRef<\r\n  React.ElementRef<typeof AccordionPrimitive.Trigger>,\r\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>\r\n>(({ className, children, ...props }, ref) => (\r\n  <AccordionPrimitive.Header className=\"flex\">\r\n    <AccordionPrimitive.Trigger\r\n      ref={ref}\r\n      data-slot=\"accordion-trigger\"\r\n      className={cn(\r\n        \"flex flex-1 items-center justify-between py-4 text-left\",\r\n        \"font-[family-name:var(--pixel-font)] text-xs uppercase tracking-widest\",\r\n        \"transition-all hover:text-primary [&[data-state=open]>svg]:rotate-180\",\r\n        className\r\n      )}\r\n      {...props}\r\n    >\r\n      {children}\r\n      <ChevronDown className=\"h-4 w-4 shrink-0 transition-transform duration-200\" strokeWidth={3} />\r\n    </AccordionPrimitive.Trigger>\r\n  </AccordionPrimitive.Header>\r\n));\r\nPixelAccordionTrigger.displayName = \"PixelAccordionTrigger\";\r\n\r\nconst PixelAccordionContent = React.forwardRef<\r\n  React.ElementRef<typeof AccordionPrimitive.Content>,\r\n  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>\r\n>(({ className, children, ...props }, ref) => (\r\n  <AccordionPrimitive.Content\r\n    ref={ref}\r\n    data-slot=\"accordion-content\"\r\n    className=\"overflow-hidden text-xs data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down\"\r\n    {...props}\r\n  >\r\n    <div className={cn(\"pt-0 pb-4 leading-relaxed\", className)}>{children}</div>\r\n  </AccordionPrimitive.Content>\r\n));\r\nPixelAccordionContent.displayName = \"PixelAccordionContent\";\r\n\r\nexport { PixelAccordion, PixelAccordionItem, PixelAccordionTrigger, PixelAccordionContent };\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

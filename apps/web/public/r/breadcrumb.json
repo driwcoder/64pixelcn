@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "breadcrumb",
+  "type": "registry:ui",
+  "title": "Breadcrumb",
+  "description": "Pixel art breadcrumb",
+  "dependencies": [
+    "@radix-ui/react-breadcrumb"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/breadcrumb.tsx",
+      "content": "import * as React from \"react\";\r\nimport { Slot } from \"@radix-ui/react-slot\";\r\nimport { ChevronRight, MoreHorizontal } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelBreadcrumb = React.forwardRef<HTMLElement, React.ComponentPropsWithoutRef<\"nav\">>(({ ...props }, ref) => (\r\n  <nav ref={ref} aria-label=\"breadcrumb\" data-slot=\"breadcrumb\" {...props} />\r\n));\r\nPixelBreadcrumb.displayName = \"PixelBreadcrumb\";\r\n\r\nconst PixelBreadcrumbList = React.forwardRef<HTMLOListElement, React.ComponentPropsWithoutRef<\"ol\">>(\r\n  ({ className, ...props }, ref) => (\r\n    <ol\r\n      ref={ref}\r\n      data-slot=\"breadcrumb-list\"\r\n      className={cn(\"flex flex-wrap items-center gap-1.5 font-[family-name:var(--pixel-font)] text-xs\", className)}\r\n      {...props}\r\n    />\r\n  )\r\n);\r\nPixelBreadcrumbList.displayName = \"PixelBreadcrumbList\";\r\n\r\nconst PixelBreadcrumbItem = React.forwardRef<HTMLLIElement, React.ComponentPropsWithoutRef<\"li\">>(\r\n  ({ className, ...props }, ref) => (\r\n    <li ref={ref} data-slot=\"breadcrumb-item\" className={cn(\"inline-flex items-center gap-1.5\", className)} {...props} />\r\n  )\r\n);\r\nPixelBreadcrumbItem.displayName = \"PixelBreadcrumbItem\";\r\n\r\nconst PixelBreadcrumbLink = React.forwardRef<\r\n  HTMLAnchorElement,\r\n  React.ComponentPropsWithoutRef<\"a\"> & { asChild?: boolean }\r\n>(({ asChild, className, ...props }, ref) => {\r\n  const Comp = asChild ? Slot : \"a\";\r\n  return <Comp ref={ref} data-slot=\"breadcrumb-link\" className={cn(\"transition-colors hover:text-primary\", className)} {...props} />;\r\n});\r\nPixelBreadcrumbLink.displayName = \"PixelBreadcrumbLink\";\r\n\r\nconst PixelBreadcrumbPage = React.forwardRef<HTMLSpanElement, React.ComponentPropsWithoutRef<\"span\">>(\r\n  ({ className, ...props }, ref) => (\r\n    <span ref={ref} data-slot=\"breadcrumb-page\" role=\"link\" aria-disabled=\"true\" aria-current=\"page\"\r\n      className={cn(\"text-muted-foreground\", className)} {...props} />\r\n  )\r\n);\r\nPixelBreadcrumbPage.displayName = \"PixelBreadcrumbPage\";\r\n\r\nconst PixelBreadcrumbSeparator = ({ children, className, ...props }: React.ComponentProps<\"li\">) => (\r\n  <li data-slot=\"breadcrumb-separator\" role=\"presentation\" aria-hidden=\"true\"\r\n    className={cn(\"[&>svg]:size-3.5 text-muted-foreground\", className)} {...props}>\r\n    {children ?? <ChevronRight strokeWidth={3} />}\r\n  </li>\r\n);\r\n\r\nconst PixelBreadcrumbEllipsis = ({ className, ...props }: React.ComponentProps<\"span\">) => (\r\n  <span data-slot=\"breadcrumb-ellipsis\" role=\"presentation\" aria-hidden=\"true\"\r\n    className={cn(\"flex h-9 w-9 items-center justify-center\", className)} {...props}>\r\n    <MoreHorizontal className=\"h-4 w-4\" />\r\n    <span className=\"sr-only\">More</span>\r\n  </span>\r\n);\r\n\r\nexport {\r\n  PixelBreadcrumb, PixelBreadcrumbList, PixelBreadcrumbItem, PixelBreadcrumbLink,\r\n  PixelBreadcrumbPage, PixelBreadcrumbSeparator, PixelBreadcrumbEllipsis,\r\n};\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

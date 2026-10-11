@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hover-card",
+  "type": "registry:ui",
+  "title": "Hover Card",
+  "description": "Pixel art hover card",
+  "dependencies": [
+    "@radix-ui/react-hover-card"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/hover-card.tsx",
+      "content": "import * as React from \"react\";\r\nimport * as HoverCardPrimitive from \"@radix-ui/react-hover-card\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelHoverCard = HoverCardPrimitive.Root;\r\nconst PixelHoverCardTrigger = HoverCardPrimitive.Trigger;\r\n\r\nconst PixelHoverCardContent = React.forwardRef<\r\n  React.ElementRef<typeof HoverCardPrimitive.Content>,\r\n  React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>\r\n>(({ className, align = \"center\", sideOffset = 4, ...props }, ref) => (\r\n  <HoverCardPrimitive.Portal>\r\n    <HoverCardPrimitive.Content\r\n      ref={ref}\r\n      data-slot=\"hover-card-content\"\r\n      align={align}\r\n      sideOffset={sideOffset}\r\n      className={cn(\r\n        \"z-50 w-64 border-2 border-foreground bg-popover p-4 text-popover-foreground shadow-[var(--pixel-shadow)] outline-none\",\r\n        \"font-[family-name:var(--pixel-font)]\",\r\n        className\r\n      )}\r\n      {...props}\r\n    />\r\n  </HoverCardPrimitive.Portal>\r\n));\r\nPixelHoverCardContent.displayName = \"PixelHoverCardContent\";\r\n\r\nexport { PixelHoverCard, PixelHoverCardTrigger, PixelHoverCardContent };\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
