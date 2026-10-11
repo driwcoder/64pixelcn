@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "date-picker",
+  "type": "registry:ui",
+  "title": "Date Picker",
+  "description": "Pixel art date picker",
+  "dependencies": [
+    "react-day-picker",
+    "@radix-ui/react-popover"
+  ],
+  "registryDependencies": [
+    "utils",
+    "button",
+    "calendar",
+    "popover"
+  ],
+  "files": [
+    {
+      "path": "components/ui/date-picker.tsx",
+      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport { CalendarIcon } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { PixelButton } from \"./button\";\r\nimport { PixelCalendar } from \"./calendar\";\r\nimport { PixelPopover, PixelPopoverContent, PixelPopoverTrigger } from \"./popover\";\r\n\r\ninterface PixelDatePickerProps {\r\n  date?: Date;\r\n  onDateChange?: (date: Date | undefined) => void;\r\n  placeholder?: string;\r\n  className?: string;\r\n}\r\n\r\nexport function PixelDatePicker({ date, onDateChange, placeholder = \"Pick a date\", className }: PixelDatePickerProps) {\r\n  const [open, setOpen] = React.useState(false);\r\n\r\n  return (\r\n    <PixelPopover open={open} onOpenChange={setOpen}>\r\n      <PixelPopoverTrigger asChild>\r\n        <PixelButton\r\n          data-slot=\"date-picker-trigger\"\r\n          variant=\"outline\"\r\n          className={cn(\r\n            \"w-full justify-start text-left font-normal\",\r\n            !date && \"text-muted-foreground\",\r\n            className\r\n          )}\r\n        >\r\n          <CalendarIcon className=\"mr-2 h-4 w-4\" strokeWidth={3} />\r\n          {date ? date.toLocaleDateString() : <span>{placeholder}</span>}\r\n        </PixelButton>\r\n      </PixelPopoverTrigger>\r\n      <PixelPopoverContent className=\"w-auto p-0\" align=\"start\">\r\n        <PixelCalendar\r\n          mode=\"single\"\r\n          selected={date}\r\n          onSelect={(d) => { onDateChange?.(d); setOpen(false); }}\r\n          initialFocus\r\n        />\r\n      </PixelPopoverContent>\r\n    </PixelPopover>\r\n  );\r\n}\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
