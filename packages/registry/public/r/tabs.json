@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "type": "registry:ui",
+  "title": "Tabs",
+  "description": "Pixel art tabs with stepped indicators",
+  "dependencies": [
+    "@radix-ui/react-tabs"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/tabs.tsx",
+      "content": "import * as React from \"react\";\r\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelTabs = TabsPrimitive.Root;\r\n\r\nconst PixelTabsList = React.forwardRef<\r\n  React.ElementRef<typeof TabsPrimitive.List>,\r\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>\r\n>(({ className, ...props }, ref) => (\r\n  <TabsPrimitive.List\r\n    ref={ref}\r\n    data-slot=\"tabs-list\"\r\n    className={cn(\"inline-flex items-center gap-1 border-2 border-foreground bg-muted p-1\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelTabsList.displayName = \"PixelTabsList\";\r\n\r\nconst PixelTabsTrigger = React.forwardRef<\r\n  React.ElementRef<typeof TabsPrimitive.Trigger>,\r\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>\r\n>(({ className, ...props }, ref) => (\r\n  <TabsPrimitive.Trigger\r\n    ref={ref}\r\n    data-slot=\"tabs-trigger\"\r\n    className={cn(\r\n      \"inline-flex items-center justify-center whitespace-nowrap px-4 py-1.5\",\r\n      \"font-[family-name:var(--pixel-font)] text-[10px] uppercase tracking-widest\",\r\n      \"transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\r\n      \"disabled:pointer-events-none disabled:opacity-50\",\r\n      \"data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-2 data-[state=active]:border-foreground data-[state=active]:shadow-[2px_2px_0px_var(--foreground)]\",\r\n      className\r\n    )}\r\n    {...props}\r\n  />\r\n));\r\nPixelTabsTrigger.displayName = \"PixelTabsTrigger\";\r\n\r\nconst PixelTabsContent = React.forwardRef<\r\n  React.ElementRef<typeof TabsPrimitive.Content>,\r\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>\r\n>(({ className, ...props }, ref) => (\r\n  <TabsPrimitive.Content\r\n    ref={ref}\r\n    data-slot=\"tabs-content\"\r\n    className={cn(\"mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelTabsContent.displayName = \"PixelTabsContent\";\r\n\r\nexport { PixelTabs, PixelTabsList, PixelTabsTrigger, PixelTabsContent };\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

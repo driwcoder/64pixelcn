@@ -1,0 +1,210 @@
+/* pixelcn base styles - Pixel Art shadcn registry */
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Pixel base tokens (default preset: nintendo) ─────────────────── */
+:root {
+  --radius: 0px;
+  --background: oklch(0.09 0.014 285);
+  --foreground: oklch(0.95 0.02 100);
+  --card: oklch(0.13 0.02 285);
+  --card-foreground: oklch(0.95 0.02 100);
+  --popover: oklch(0.11 0.02 285);
+  --popover-foreground: oklch(0.95 0.02 100);
+  --primary: oklch(0.75 0.18 35);
+  --primary-foreground: oklch(0.15 0.02 35);
+  --secondary: oklch(0.25 0.03 285);
+  --secondary-foreground: oklch(0.95 0.02 100);
+  --muted: oklch(0.2 0.02 285);
+  --muted-foreground: oklch(0.65 0.02 285);
+  --accent: oklch(0.8 0.15 200);
+  --accent-foreground: oklch(0.15 0.02 285);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.95 0.02 25);
+  --border: oklch(0.3 0.03 285);
+  --input: oklch(0.3 0.03 285);
+  --ring: oklch(0.75 0.18 35);
+  --chart-1: oklch(0.7 0.2 35);
+  --chart-2: oklch(0.7 0.2 200);
+  --chart-3: oklch(0.7 0.2 120);
+  --chart-4: oklch(0.7 0.2 300);
+  --chart-5: oklch(0.7 0.2 60);
+
+  /* pixel cn specific */
+  --pixel-size: 2px;
+  --pixel-border: 2px;
+  --pixel-shadow: 2px 2px 0px var(--foreground);
+  --pixel-font: "Press Start 2P", monospace;
+}
+
+.dark {
+  --background: oklch(0.05 0.01 285);
+  --foreground: oklch(0.98 0.02 100);
+  --card: oklch(0.08 0.015 285);
+  --card-foreground: oklch(0.98 0.02 100);
+  --popover: oklch(0.06 0.015 285);
+  --popover-foreground: oklch(0.98 0.02 100);
+  --primary: oklch(0.85 0.2 35);
+  --primary-foreground: oklch(0.05 0.02 35);
+  --secondary: oklch(0.2 0.03 285);
+  --secondary-foreground: oklch(0.98 0.02 100);
+  --muted: oklch(0.15 0.02 285);
+  --muted-foreground: oklch(0.7 0.02 285);
+  --accent: oklch(0.85 0.18 200);
+  --accent-foreground: oklch(0.05 0.02 285);
+  --destructive: oklch(0.7 0.25 25);
+  --destructive-foreground: oklch(0.98 0.02 25);
+  --border: oklch(0.25 0.03 285);
+  --input: oklch(0.25 0.03 285);
+  --ring: oklch(0.85 0.2 35);
+  --chart-1: oklch(0.8 0.2 35);
+  --chart-2: oklch(0.8 0.2 200);
+  --chart-3: oklch(0.8 0.2 120);
+  --chart-4: oklch(0.8 0.2 300);
+  --chart-5: oklch(0.8 0.2 60);
+}
+
+/* ── Size presets ──────────────────────────────────────────────────── */
+[data-size="128"] { --pixel-size: 8px; --pixel-border: 4px; --pixel-shadow: 4px 4px 0px var(--foreground); }
+[data-size="64"]  { --pixel-size: 4px; --pixel-border: 3px; --pixel-shadow: 3px 3px 0px var(--foreground); }
+[data-size="32"]  { --pixel-size: 2px; --pixel-border: 2px; --pixel-shadow: 2px 2px 0px var(--foreground); }
+[data-size="16"]  { --pixel-size: 1px; --pixel-border: 1px; --pixel-shadow: 1px 1px 0px var(--foreground); }
+[data-size="8"]   { --pixel-size: 0.5px; --pixel-border: 1px; --pixel-shadow: 1px 1px 0px var(--foreground); }
+
+/* ── Font presets ──────────────────────────────────────────────────── */
+[data-font="press-start"] { --pixel-font: "Press Start 2P", monospace; }
+[data-font="vt323"]       { --pixel-font: "VT323", monospace; }
+[data-font="silkscreen"]  { --pixel-font: "Silkscreen", monospace; }
+[data-font="pixelify"]    { --pixel-font: "Pixelify Sans", monospace; }
+[data-font="monogram"]    { --pixel-font: "Monogram", monospace; }
+[data-font="system"]      { --pixel-font: ui-monospace, "Cascadia Code", "Courier New", monospace; }
+
+/* ── Color presets ─────────────────────────────────────────────────── */
+[data-preset="nintendo"] {
+  --primary: oklch(0.78 0.2 355);
+  --primary-foreground: oklch(0.1 0.02 355);
+  --accent: oklch(0.8 0.18 220);
+  --accent-foreground: oklch(0.1 0.02 285);
+  --ring: oklch(0.78 0.2 355);
+}
+
+[data-preset="gameboy"] {
+  --background: oklch(0.88 0.06 120);
+  --foreground: oklch(0.2 0.05 120);
+  --card: oklch(0.9 0.05 120);
+  --card-foreground: oklch(0.15 0.04 120);
+  --primary: oklch(0.35 0.06 120);
+  --primary-foreground: oklch(0.9 0.05 120);
+  --secondary: oklch(0.75 0.06 120);
+  --secondary-foreground: oklch(0.2 0.04 120);
+  --muted: oklch(0.8 0.05 120);
+  --muted-foreground: oklch(0.45 0.04 120);
+  --accent: oklch(0.5 0.08 120);
+  --accent-foreground: oklch(0.95 0.04 120);
+  --border: oklch(0.3 0.05 120);
+  --input: oklch(0.3 0.05 120);
+  --ring: oklch(0.35 0.06 120);
+}
+
+[data-preset="neon"] {
+  --background: oklch(0.08 0.03 300);
+  --foreground: oklch(0.92 0.1 300);
+  --card: oklch(0.12 0.05 300);
+  --card-foreground: oklch(0.92 0.1 300);
+  --primary: oklch(0.85 0.25 340);
+  --primary-foreground: oklch(0.1 0.02 340);
+  --secondary: oklch(0.2 0.08 300);
+  --secondary-foreground: oklch(0.92 0.1 300);
+  --accent: oklch(0.85 0.25 180);
+  --accent-foreground: oklch(0.1 0.02 300);
+  --border: oklch(0.4 0.15 300);
+  --input: oklch(0.4 0.15 300);
+  --ring: oklch(0.85 0.25 340);
+}
+
+[data-preset="sepia"] {
+  --background: oklch(0.9 0.05 60);
+  --foreground: oklch(0.2 0.04 60);
+  --card: oklch(0.88 0.05 60);
+  --card-foreground: oklch(0.18 0.04 60);
+  --primary: oklch(0.5 0.1 30);
+  --primary-foreground: oklch(0.95 0.03 60);
+  --secondary: oklch(0.8 0.04 60);
+  --secondary-foreground: oklch(0.2 0.04 60);
+  --accent: oklch(0.6 0.12 20);
+  --accent-foreground: oklch(0.95 0.03 60);
+  --border: oklch(0.7 0.04 60);
+  --input: oklch(0.7 0.04 60);
+  --ring: oklch(0.5 0.1 30);
+}
+
+[data-preset="mono"] {
+  --background: oklch(0.1 0 0);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.15 0 0);
+  --card-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.95 0 0);
+  --primary-foreground: oklch(0.1 0 0);
+  --secondary: oklch(0.2 0 0);
+  --secondary-foreground: oklch(0.95 0 0);
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.3 0 0);
+  --accent-foreground: oklch(0.95 0 0);
+  --border: oklch(0.35 0 0);
+  --input: oklch(0.35 0 0);
+  --ring: oklch(0.95 0 0);
+}
+
+/* ── Tailwind theme mapping ────────────────────────────────────────── */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-pixel: var(--pixel-font);
+  --font-sans: var(--pixel-font);
+}
+
+/* ── Global pixel rendering ────────────────────────────────────────── */
+* {
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+
+html {
+  font-family: var(--pixel-font);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--pixel-font);
+  image-rendering: pixelated;
+}
+
+/* ── Pixel utilities ───────────────────────────────────────────────── */
+.pixel-border {
+  border: var(--pixel-border) solid var(--foreground);
+  box-shadow: var(--pixel-shadow);
+}
+
+.pixel-no-shadow { box-shadow: none; }
+.pixel-hover { transform: translate(var(--pixel-border), var(--pixel-border)); box-shadow: none; }

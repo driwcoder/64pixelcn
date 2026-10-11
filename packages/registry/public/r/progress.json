@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "type": "registry:ui",
+  "title": "Progress",
+  "description": "Pixel art progress bar with block segments",
+  "dependencies": [
+    "@radix-ui/react-progress"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/progress.tsx",
+      "content": "import * as React from \"react\";\r\nimport * as ProgressPrimitive from \"@radix-ui/react-progress\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelProgress = React.forwardRef<\r\n  React.ElementRef<typeof ProgressPrimitive.Root>,\r\n  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>\r\n>(({ className, value, ...props }, ref) => (\r\n  <ProgressPrimitive.Root\r\n    ref={ref}\r\n    data-slot=\"progress\"\r\n    className={cn(\"relative h-4 w-full overflow-hidden border-2 border-foreground bg-muted\", className)}\r\n    {...props}\r\n  >\r\n    <ProgressPrimitive.Indicator\r\n      className=\"h-full bg-primary transition-all\"\r\n      style={{\r\n        width: `${value || 0}%`,\r\n        backgroundImage: \"repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px)\",\r\n      }}\r\n    />\r\n  </ProgressPrimitive.Root>\r\n));\r\nPixelProgress.displayName = \"PixelProgress\";\r\n\r\nexport { PixelProgress };\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "title": "Badge",
+  "description": "Pixel art badge for status and labels",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/badge.tsx",
+      "content": "import * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst pixelBadgeVariants = cva(\r\n  \"inline-flex items-center border-2 border-foreground px-2.5 py-0.5 font-[family-name:var(--pixel-font)] text-[10px] uppercase tracking-widest\",\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"bg-primary text-primary-foreground\",\r\n        secondary: \"bg-secondary text-secondary-foreground\",\r\n        destructive: \"bg-destructive text-destructive-foreground\",\r\n        outline: \"bg-transparent text-foreground\",\r\n        muted: \"bg-muted text-muted-foreground\",\r\n      },\r\n    },\r\n    defaultVariants: { variant: \"default\" },\r\n  }\r\n);\r\n\r\nexport interface PixelBadgeProps\r\n  extends React.HTMLAttributes<HTMLDivElement>,\r\n    VariantProps<typeof pixelBadgeVariants> {}\r\n\r\nfunction PixelBadge({ className, variant, ...props }: PixelBadgeProps) {\r\n  return <div data-slot=\"badge\" className={cn(pixelBadgeVariants({ variant }), className)} {...props} />;\r\n}\r\n\r\nexport { PixelBadge, pixelBadgeVariants };\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pixelcn",
+  "type": "registry:base",
+  "title": "pixelcn base",
+  "description": "Base configuration for pixelcn pixel art components",
+  "dependencies": [
+    "tailwindcss",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "cssVars": {
+    "theme": {
+      "--radius": "0px",
+      "--background": "oklch(0.09 0.014 285)",
+      "--foreground": "oklch(0.95 0.02 100)",
+      "--card": "oklch(0.13 0.02 285)",
+      "--card-foreground": "oklch(0.95 0.02 100)",
+      "--popover": "oklch(0.11 0.02 285)",
+      "--popover-foreground": "oklch(0.95 0.02 100)",
+      "--primary": "oklch(0.75 0.18 35)",
+      "--primary-foreground": "oklch(0.15 0.02 35)",
+      "--secondary": "oklch(0.25 0.03 285)",
+      "--secondary-foreground": "oklch(0.95 0.02 100)",
+      "--muted": "oklch(0.2 0.02 285)",
+      "--muted-foreground": "oklch(0.65 0.02 285)",
+      "--accent": "oklch(0.8 0.15 200)",
+      "--accent-foreground": "oklch(0.15 0.02 285)",
+      "--destructive": "oklch(0.6 0.22 25)",
+      "--destructive-foreground": "oklch(0.95 0.02 25)",
+      "--border": "oklch(0.3 0.03 285)",
+      "--input": "oklch(0.3 0.03 285)",
+      "--ring": "oklch(0.75 0.18 35)",
+      "--pixel-size": "2px",
+      "--pixel-border": "2px",
+      "--pixel-shadow": "2px 2px 0px var(--foreground)",
+      "--pixel-font": "Press Start 2P, monospace"
+    }
+  },
+  "files": [
+    {
+      "path": "lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { clsx, type ClassValue } from \"clsx\";\r\nimport { twMerge } from \"tailwind-merge\";\r\n\r\nexport function cn(...inputs: ClassValue[]) {\r\n  return twMerge(clsx(inputs));\r\n}\r\n\r\nexport type Size = 8 | 16 | 32 | 64 | 128;\r\n\r\nexport const SIZES: Size[] = [8, 16, 32, 64, 128];\r\n\r\nexport type Preset = \"nintendo\" | \"gameboy\" | \"neon\" | \"sepia\" | \"mono\";\r\n\r\nexport const PRESETS: Preset[] = [\"nintendo\", \"gameboy\", \"neon\", \"sepia\", \"mono\"];\r\n\r\nexport type PixelFont = \"press-start\" | \"vt323\" | \"silkscreen\" | \"pixelify\" | \"monogram\" | \"system\";\r\n\r\nexport const FONTS: PixelFont[] = [\"press-start\", \"vt323\", \"silkscreen\", \"pixelify\", \"monogram\", \"system\"];\r\n\r\nexport interface PixelConfig {\r\n  preset: Preset;\r\n  font: PixelFont;\r\n  size: Size;\r\n}\r\n"
+    }
+  ]
+}

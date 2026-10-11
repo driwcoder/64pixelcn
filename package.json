@@ -1,0 +1,15 @@
+{
+  "name": "64pixelcn",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "start": "pnpm --filter web start",
+    "registry:build": "cd packages/registry && node scripts/build-registry.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "pnpm@11.24.0"
+}

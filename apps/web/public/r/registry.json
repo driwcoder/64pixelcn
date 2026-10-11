@@ -1,0 +1,197 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "pixelcn",
+  "homepage": "https://pixelcn.vercel.app",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Pixel art button with retro gaming aesthetics",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/button.tsx",
+          "content": "import * as React from \"react\";\r\nimport { Slot } from \"@radix-ui/react-slot\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst pixelButtonVariants = cva(\r\n  [\r\n    \"inline-flex items-center justify-center gap-2 whitespace-nowrap\",\r\n    \"font-[family-name:var(--pixel-font)] uppercase tracking-widest\",\r\n    \"transition-all duration-75\",\r\n    \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\r\n    \"disabled:pointer-events-none disabled:opacity-50\",\r\n    \"active:translate-x-[var(--pixel-border)] active:translate-y-[var(--pixel-border)] active:shadow-none\",\r\n    \"[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:image-rendering-pixelated\",\r\n  ],\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"bg-primary text-primary-foreground border-2 border-foreground shadow-[var(--pixel-shadow)]\",\r\n        secondary: \"bg-secondary text-secondary-foreground border-2 border-foreground shadow-[var(--pixel-shadow)]\",\r\n        destructive: \"bg-destructive text-destructive-foreground border-2 border-foreground shadow-[var(--pixel-shadow)]\",\r\n        outline: \"bg-transparent text-foreground border-2 border-foreground shadow-[var(--pixel-shadow)]\",\r\n        ghost: \"bg-transparent text-foreground border-2 border-transparent hover:border-foreground\",\r\n        link: \"bg-transparent text-primary underline underline-offset-4 decoration-2\",\r\n      },\r\n      size: {\r\n        default: \"h-10 px-6 py-2 text-xs\",\r\n        sm: \"h-8 px-4 text-[10px]\",\r\n        lg: \"h-12 px-8 text-sm\",\r\n        xl: \"h-16 px-10 text-base\",\r\n        icon: \"h-10 w-10\",\r\n      },\r\n    },\r\n    defaultVariants: { variant: \"default\", size: \"default\" },\r\n  }\r\n);\r\n\r\nexport interface PixelButtonProps\r\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\r\n    VariantProps<typeof pixelButtonVariants> {\r\n  asChild?: boolean;\r\n}\r\n\r\nconst PixelButton = React.forwardRef<HTMLButtonElement, PixelButtonProps>(\r\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\r\n    const Comp = asChild ? Slot : \"button\";\r\n    return (\r\n      <Comp\r\n        ref={ref}\r\n        data-slot=\"button\"\r\n        className={cn(pixelButtonVariants({ variant, size, className }))}\r\n        {...props}\r\n      />\r\n    );\r\n  }\r\n);\r\nPixelButton.displayName = \"PixelButton\";\r\n\r\nexport { PixelButton, pixelButtonVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Pixel art card with stepped borders and shadows",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/card.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelCard = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <div\r\n      ref={ref}\r\n      data-slot=\"card\"\r\n      className={cn(\r\n        \"bg-card text-card-foreground flex flex-col gap-4 border-2 border-foreground\",\r\n        \"shadow-[var(--pixel-shadow)]\",\r\n        className\r\n      )}\r\n      {...props}\r\n    />\r\n  )\r\n);\r\nPixelCard.displayName = \"PixelCard\";\r\n\r\nconst PixelCardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <div ref={ref} data-slot=\"card-header\" className={cn(\"flex flex-col gap-1.5 px-6 pt-6\", className)} {...props} />\r\n  )\r\n);\r\nPixelCardHeader.displayName = \"PixelCardHeader\";\r\n\r\nconst PixelCardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <div\r\n      ref={ref}\r\n      data-slot=\"card-title\"\r\n      className={cn(\"font-[family-name:var(--pixel-font)] text-sm uppercase leading-none tracking-widest\", className)}\r\n      {...props}\r\n    />\r\n  )\r\n);\r\nPixelCardTitle.displayName = \"PixelCardTitle\";\r\n\r\nconst PixelCardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <div\r\n      ref={ref}\r\n      data-slot=\"card-description\"\r\n      className={cn(\"font-[family-name:var(--pixel-font)] text-xs text-muted-foreground leading-relaxed\", className)}\r\n      {...props}\r\n    />\r\n  )\r\n);\r\nPixelCardDescription.displayName = \"PixelCardDescription\";\r\n\r\nconst PixelCardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <div ref={ref} data-slot=\"card-content\" className={cn(\"px-6\", className)} {...props} />\r\n  )\r\n);\r\nPixelCardContent.displayName = \"PixelCardContent\";\r\n\r\nconst PixelCardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <div ref={ref} data-slot=\"card-footer\" className={cn(\"flex items-center px-6 pb-6\", className)} {...props} />\r\n  )\r\n);\r\nPixelCardFooter.displayName = \"PixelCardFooter\";\r\n\r\nexport { PixelCard, PixelCardHeader, PixelCardTitle, PixelCardDescription, PixelCardContent, PixelCardFooter };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Pixel art input with retro styling",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/input.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelInput = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(\r\n  ({ className, type, ...props }, ref) => (\r\n    <input\r\n      ref={ref}\r\n      type={type}\r\n      data-slot=\"input\"\r\n      className={cn(\r\n        \"flex h-10 w-full bg-transparent px-3 py-2\",\r\n        \"border-2 border-input\",\r\n        \"font-[family-name:var(--pixel-font)] text-xs\",\r\n        \"placeholder:text-muted-foreground\",\r\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background\",\r\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\r\n        \"file:border-0 file:bg-transparent file:text-xs file:font-[family-name:var(--pixel-font)]\",\r\n        \"shadow-[inset_1px_1px_0px_var(--muted),inset_-1px_-1px_0px_var(--border)]\",\r\n        className\r\n      )}\r\n      {...props}\r\n    />\r\n  )\r\n);\r\nPixelInput.displayName = \"PixelInput\";\r\n\r\nexport { PixelInput };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Pixel art badge for status and labels",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/badge.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst pixelBadgeVariants = cva(\r\n  \"inline-flex items-center border-2 border-foreground px-2.5 py-0.5 font-[family-name:var(--pixel-font)] text-[10px] uppercase tracking-widest\",\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"bg-primary text-primary-foreground\",\r\n        secondary: \"bg-secondary text-secondary-foreground\",\r\n        destructive: \"bg-destructive text-destructive-foreground\",\r\n        outline: \"bg-transparent text-foreground\",\r\n        muted: \"bg-muted text-muted-foreground\",\r\n      },\r\n    },\r\n    defaultVariants: { variant: \"default\" },\r\n  }\r\n);\r\n\r\nexport interface PixelBadgeProps\r\n  extends React.HTMLAttributes<HTMLDivElement>,\r\n    VariantProps<typeof pixelBadgeVariants> {}\r\n\r\nfunction PixelBadge({ className, variant, ...props }: PixelBadgeProps) {\r\n  return <div data-slot=\"badge\" className={cn(pixelBadgeVariants({ variant }), className)} {...props} />;\r\n}\r\n\r\nexport { PixelBadge, pixelBadgeVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Pixel art checkbox with stepped check mark",
+      "dependencies": [
+        "@radix-ui/react-checkbox"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/checkbox.tsx",
+          "content": "import * as React from \"react\";\r\nimport * as CheckboxPrimitive from \"@radix-ui/react-checkbox\";\r\nimport { Check } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelCheckbox = React.forwardRef<\r\n  React.ElementRef<typeof CheckboxPrimitive.Root>,\r\n  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>\r\n>(({ className, ...props }, ref) => (\r\n  <CheckboxPrimitive.Root\r\n    ref={ref}\r\n    data-slot=\"checkbox\"\r\n    className={cn(\r\n      \"peer h-5 w-5 shrink-0 border-2 border-foreground bg-transparent\",\r\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1\",\r\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\r\n      \"data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground\",\r\n      className\r\n    )}\r\n    {...props}\r\n  >\r\n    <CheckboxPrimitive.Indicator className={cn(\"flex items-center justify-center text-current\")}>\r\n      <Check className=\"h-4 w-4\" strokeWidth={4} />\r\n    </CheckboxPrimitive.Indicator>\r\n  </CheckboxPrimitive.Root>\r\n));\r\nPixelCheckbox.displayName = \"PixelCheckbox\";\r\n\r\nexport { PixelCheckbox };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Pixel art switch toggle",
+      "dependencies": [
+        "@radix-ui/react-switch"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/switch.tsx",
+          "content": "import * as React from \"react\";\r\nimport * as SwitchPrimitive from \"@radix-ui/react-switch\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelSwitch = React.forwardRef<\r\n  React.ElementRef<typeof SwitchPrimitive.Root>,\r\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>\r\n>(({ className, ...props }, ref) => (\r\n  <SwitchPrimitive.Root\r\n    ref={ref}\r\n    data-slot=\"switch\"\r\n    className={cn(\r\n      \"peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center border-2 border-foreground\",\r\n      \"transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1\",\r\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\r\n      \"data-[state=checked]:bg-primary data-[state=unchecked]:bg-muted\",\r\n      className\r\n    )}\r\n    {...props}\r\n  >\r\n    <SwitchPrimitive.Thumb\r\n      className={cn(\r\n        \"pointer-events-none block h-4 w-4 border border-foreground bg-foreground\",\r\n        \"shadow-[1px_1px_0px_rgba(0,0,0,0.3)]\",\r\n        \"transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0.5\"\r\n      )}\r\n    />\r\n  </SwitchPrimitive.Root>\r\n));\r\nPixelSwitch.displayName = \"PixelSwitch\";\r\n\r\nexport { PixelSwitch };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Pixel art modal dialog",
+      "dependencies": [
+        "@radix-ui/react-dialog"
+      ],
+      "registryDependencies": [
+        "utils",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "components/ui/dialog.tsx",
+          "content": "import * as React from \"react\";\r\nimport * as DialogPrimitive from \"@radix-ui/react-dialog\";\r\nimport { X } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelDialog = DialogPrimitive.Root;\r\nconst PixelDialogTrigger = DialogPrimitive.Trigger;\r\nconst PixelDialogPortal = DialogPrimitive.Portal;\r\nconst PixelDialogClose = DialogPrimitive.Close;\r\n\r\nconst PixelDialogOverlay = React.forwardRef<\r\n  React.ElementRef<typeof DialogPrimitive.Overlay>,\r\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>\r\n>(({ className, ...props }, ref) => (\r\n  <DialogPrimitive.Overlay\r\n    ref={ref}\r\n    data-slot=\"dialog-overlay\"\r\n    className={cn(\"fixed inset-0 z-50 bg-black/70 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelDialogOverlay.displayName = \"PixelDialogOverlay\";\r\n\r\nconst PixelDialogContent = React.forwardRef<\r\n  React.ElementRef<typeof DialogPrimitive.Content>,\r\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>\r\n>(({ className, children, ...props }, ref) => (\r\n  <PixelDialogPortal>\r\n    <PixelDialogOverlay />\r\n    <DialogPrimitive.Content\r\n      ref={ref}\r\n      data-slot=\"dialog-content\"\r\n      className={cn(\r\n        \"fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%]\",\r\n        \"bg-popover text-popover-foreground border-2 border-foreground p-6\",\r\n        \"shadow-[4px_4px_0px_var(--foreground)]\",\r\n        \"font-[family-name:var(--pixel-font)]\",\r\n        className\r\n      )}\r\n      {...props}\r\n    >\r\n      {children}\r\n      <DialogPrimitive.Close className=\"absolute right-4 top-4 opacity-70 hover:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring\">\r\n        <X className=\"h-4 w-4\" strokeWidth={3} />\r\n        <span className=\"sr-only\">Close</span>\r\n      </DialogPrimitive.Close>\r\n    </DialogPrimitive.Content>\r\n  </PixelDialogPortal>\r\n));\r\nPixelDialogContent.displayName = \"PixelDialogContent\";\r\n\r\nconst PixelDialogHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <div ref={ref} className={cn(\"flex flex-col gap-1.5 text-center sm:text-left\", className)} {...props} />\r\n  )\r\n);\r\nPixelDialogHeader.displayName = \"PixelDialogHeader\";\r\n\r\nconst PixelDialogTitle = React.forwardRef<\r\n  React.ElementRef<typeof DialogPrimitive.Title>,\r\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>\r\n>(({ className, ...props }, ref) => (\r\n  <DialogPrimitive.Title\r\n    ref={ref}\r\n    data-slot=\"dialog-title\"\r\n    className={cn(\"text-sm uppercase tracking-widest leading-none\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelDialogTitle.displayName = \"PixelDialogTitle\";\r\n\r\nconst PixelDialogDescription = React.forwardRef<\r\n  React.ElementRef<typeof DialogPrimitive.Description>,\r\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>\r\n>(({ className, ...props }, ref) => (\r\n  <DialogPrimitive.Description\r\n    ref={ref}\r\n    data-slot=\"dialog-description\"\r\n    className={cn(\"text-xs text-muted-foreground leading-relaxed\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelDialogDescription.displayName = \"PixelDialogDescription\";\r\n\r\nexport {\r\n  PixelDialog, PixelDialogPortal, PixelDialogOverlay, PixelDialogTrigger,\r\n  PixelDialogClose, PixelDialogContent, PixelDialogHeader, PixelDialogTitle, PixelDialogDescription,\r\n};\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Pixel art alert component",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/alert.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst pixelAlertVariants = cva(\r\n  \"relative w-full border-2 border-foreground px-4 py-3 font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)]\",\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"bg-card text-card-foreground\",\r\n        info: \"bg-accent/20 text-accent-foreground border-accent\",\r\n        warning: \"bg-yellow-500/20 text-yellow-200 border-yellow-500\",\r\n        destructive: \"bg-destructive/20 text-destructive border-destructive\",\r\n        success: \"bg-green-500/20 text-green-200 border-green-500\",\r\n      },\r\n    },\r\n    defaultVariants: { variant: \"default\" },\r\n  }\r\n);\r\n\r\nconst PixelAlert = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof pixelAlertVariants>>(\r\n  ({ className, variant, ...props }, ref) => (\r\n    <div ref={ref} data-slot=\"alert\" role=\"alert\" className={cn(pixelAlertVariants({ variant }), className)} {...props} />\r\n  )\r\n);\r\nPixelAlert.displayName = \"PixelAlert\";\r\n\r\nconst PixelAlertTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <h5 ref={ref} data-slot=\"alert-title\" className={cn(\"mb-1 text-xs uppercase leading-none tracking-widest\", className)} {...props} />\r\n  )\r\n);\r\nPixelAlertTitle.displayName = \"PixelAlertTitle\";\r\n\r\nconst PixelAlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <div ref={ref} data-slot=\"alert-description\" className={cn(\"text-xs leading-relaxed [&_p]:leading-relaxed\", className)} {...props} />\r\n  )\r\n);\r\nPixelAlertDescription.displayName = \"PixelAlertDescription\";\r\n\r\nexport { PixelAlert, PixelAlertTitle, PixelAlertDescription, pixelAlertVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Pixel art tabs with stepped indicators",
+      "dependencies": [
+        "@radix-ui/react-tabs"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/tabs.tsx",
+          "content": "import * as React from \"react\";\r\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelTabs = TabsPrimitive.Root;\r\n\r\nconst PixelTabsList = React.forwardRef<\r\n  React.ElementRef<typeof TabsPrimitive.List>,\r\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>\r\n>(({ className, ...props }, ref) => (\r\n  <TabsPrimitive.List\r\n    ref={ref}\r\n    data-slot=\"tabs-list\"\r\n    className={cn(\"inline-flex items-center gap-1 border-2 border-foreground bg-muted p-1\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelTabsList.displayName = \"PixelTabsList\";\r\n\r\nconst PixelTabsTrigger = React.forwardRef<\r\n  React.ElementRef<typeof TabsPrimitive.Trigger>,\r\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>\r\n>(({ className, ...props }, ref) => (\r\n  <TabsPrimitive.Trigger\r\n    ref={ref}\r\n    data-slot=\"tabs-trigger\"\r\n    className={cn(\r\n      \"inline-flex items-center justify-center whitespace-nowrap px-4 py-1.5\",\r\n      \"font-[family-name:var(--pixel-font)] text-[10px] uppercase tracking-widest\",\r\n      \"transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\r\n      \"disabled:pointer-events-none disabled:opacity-50\",\r\n      \"data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-2 data-[state=active]:border-foreground data-[state=active]:shadow-[2px_2px_0px_var(--foreground)]\",\r\n      className\r\n    )}\r\n    {...props}\r\n  />\r\n));\r\nPixelTabsTrigger.displayName = \"PixelTabsTrigger\";\r\n\r\nconst PixelTabsContent = React.forwardRef<\r\n  React.ElementRef<typeof TabsPrimitive.Content>,\r\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>\r\n>(({ className, ...props }, ref) => (\r\n  <TabsPrimitive.Content\r\n    ref={ref}\r\n    data-slot=\"tabs-content\"\r\n    className={cn(\"mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelTabsContent.displayName = \"PixelTabsContent\";\r\n\r\nexport { PixelTabs, PixelTabsList, PixelTabsTrigger, PixelTabsContent };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Pixel art progress bar with block segments",
+      "dependencies": [
+        "@radix-ui/react-progress"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/progress.tsx",
+          "content": "import * as React from \"react\";\r\nimport * as ProgressPrimitive from \"@radix-ui/react-progress\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelProgress = React.forwardRef<\r\n  React.ElementRef<typeof ProgressPrimitive.Root>,\r\n  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>\r\n>(({ className, value, ...props }, ref) => (\r\n  <ProgressPrimitive.Root\r\n    ref={ref}\r\n    data-slot=\"progress\"\r\n    className={cn(\"relative h-4 w-full overflow-hidden border-2 border-foreground bg-muted\", className)}\r\n    {...props}\r\n  >\r\n    <ProgressPrimitive.Indicator\r\n      className=\"h-full bg-primary transition-all\"\r\n      style={{\r\n        width: `${value || 0}%`,\r\n        backgroundImage: \"repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px)\",\r\n      }}\r\n    />\r\n  </ProgressPrimitive.Root>\r\n));\r\nPixelProgress.displayName = \"PixelProgress\";\r\n\r\nexport { PixelProgress };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    }
+  ]
+}

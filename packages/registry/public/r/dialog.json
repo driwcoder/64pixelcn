@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dialog",
+  "type": "registry:ui",
+  "title": "Dialog",
+  "description": "Pixel art modal dialog",
+  "dependencies": [
+    "@radix-ui/react-dialog"
+  ],
+  "registryDependencies": [
+    "utils",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/ui/dialog.tsx",
+      "content": "import * as React from \"react\";\r\nimport * as DialogPrimitive from \"@radix-ui/react-dialog\";\r\nimport { X } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelDialog = DialogPrimitive.Root;\r\nconst PixelDialogTrigger = DialogPrimitive.Trigger;\r\nconst PixelDialogPortal = DialogPrimitive.Portal;\r\nconst PixelDialogClose = DialogPrimitive.Close;\r\n\r\nconst PixelDialogOverlay = React.forwardRef<\r\n  React.ElementRef<typeof DialogPrimitive.Overlay>,\r\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>\r\n>(({ className, ...props }, ref) => (\r\n  <DialogPrimitive.Overlay\r\n    ref={ref}\r\n    data-slot=\"dialog-overlay\"\r\n    className={cn(\"fixed inset-0 z-50 bg-black/70 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelDialogOverlay.displayName = \"PixelDialogOverlay\";\r\n\r\nconst PixelDialogContent = React.forwardRef<\r\n  React.ElementRef<typeof DialogPrimitive.Content>,\r\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>\r\n>(({ className, children, ...props }, ref) => (\r\n  <PixelDialogPortal>\r\n    <PixelDialogOverlay />\r\n    <DialogPrimitive.Content\r\n      ref={ref}\r\n      data-slot=\"dialog-content\"\r\n      className={cn(\r\n        \"fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%]\",\r\n        \"bg-popover text-popover-foreground border-2 border-foreground p-6\",\r\n        \"shadow-[4px_4px_0px_var(--foreground)]\",\r\n        \"font-[family-name:var(--pixel-font)]\",\r\n        className\r\n      )}\r\n      {...props}\r\n    >\r\n      {children}\r\n      <DialogPrimitive.Close className=\"absolute right-4 top-4 opacity-70 hover:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring\">\r\n        <X className=\"h-4 w-4\" strokeWidth={3} />\r\n        <span className=\"sr-only\">Close</span>\r\n      </DialogPrimitive.Close>\r\n    </DialogPrimitive.Content>\r\n  </PixelDialogPortal>\r\n));\r\nPixelDialogContent.displayName = \"PixelDialogContent\";\r\n\r\nconst PixelDialogHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <div ref={ref} className={cn(\"flex flex-col gap-1.5 text-center sm:text-left\", className)} {...props} />\r\n  )\r\n);\r\nPixelDialogHeader.displayName = \"PixelDialogHeader\";\r\n\r\nconst PixelDialogTitle = React.forwardRef<\r\n  React.ElementRef<typeof DialogPrimitive.Title>,\r\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>\r\n>(({ className, ...props }, ref) => (\r\n  <DialogPrimitive.Title\r\n    ref={ref}\r\n    data-slot=\"dialog-title\"\r\n    className={cn(\"text-sm uppercase tracking-widest leading-none\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelDialogTitle.displayName = \"PixelDialogTitle\";\r\n\r\nconst PixelDialogDescription = React.forwardRef<\r\n  React.ElementRef<typeof DialogPrimitive.Description>,\r\n  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>\r\n>(({ className, ...props }, ref) => (\r\n  <DialogPrimitive.Description\r\n    ref={ref}\r\n    data-slot=\"dialog-description\"\r\n    className={cn(\"text-xs text-muted-foreground leading-relaxed\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelDialogDescription.displayName = \"PixelDialogDescription\";\r\n\r\nexport {\r\n  PixelDialog, PixelDialogPortal, PixelDialogOverlay, PixelDialogTrigger,\r\n  PixelDialogClose, PixelDialogContent, PixelDialogHeader, PixelDialogTitle, PixelDialogDescription,\r\n};\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
