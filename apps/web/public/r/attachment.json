@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "attachment",
+  "type": "registry:ui",
+  "title": "Attachment",
+  "description": "Pixel art attachment",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/attachment.tsx",
+      "content": "import * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { Paperclip, X } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst attachmentVariants = cva(\r\n  \"inline-flex items-center gap-2 border-2 border-foreground bg-card px-3 py-1.5 text-xs font-[family-name:var(--pixel-font)]\",\r\n  {\r\n    variants: {\r\n      variant: { default: \"shadow-[var(--pixel-shadow)]\", ghost: \"border-transparent bg-transparent shadow-none\" },\r\n    },\r\n    defaultVariants: { variant: \"default\" },\r\n  }\r\n);\r\n\r\nconst PixelAttachment = React.forwardRef<\r\n  HTMLSpanElement,\r\n  React.HTMLAttributes<HTMLSpanElement> & VariantProps<typeof attachmentVariants>\r\n>(({ className, variant, ...props }, ref) => (\r\n  <span ref={ref} data-slot=\"attachment\" className={cn(attachmentVariants({ variant }), className)} {...props} />\r\n));\r\nPixelAttachment.displayName = \"PixelAttachment\";\r\n\r\ninterface PixelAttachmentInfoProps extends React.HTMLAttributes<HTMLDivElement> {\r\n  onRemove?: () => void;\r\n}\r\n\r\nconst PixelAttachmentInfo = React.forwardRef<HTMLDivElement, PixelAttachmentInfoProps>(\r\n  ({ className, children, onRemove, ...props }, ref) => (\r\n    <div ref={ref} data-slot=\"attachment-info\" className={cn(\"flex min-w-0 items-center gap-2\", className)} {...props}>\r\n      <Paperclip className=\"h-3.5 w-3.5 shrink-0\" strokeWidth={3} />\r\n      <span className=\"truncate\">{children}</span>\r\n      {onRemove && (\r\n        <button type=\"button\" onClick={onRemove} aria-label=\"Remove attachment\" className=\"ml-1 shrink-0 hover:text-destructive\">\r\n          <X className=\"h-3.5 w-3.5\" strokeWidth={3} />\r\n        </button>\r\n      )}\r\n    </div>\r\n  )\r\n);\r\nPixelAttachmentInfo.displayName = \"PixelAttachmentInfo\";\r\n\r\nexport { PixelAttachment, PixelAttachmentInfo, attachmentVariants };\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "native-select",
+  "type": "registry:ui",
+  "title": "Native Select",
+  "description": "Pixel art native select",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/native-select.tsx",
+      "content": "import * as React from \"react\";\r\nimport { ChevronDown } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelNativeSelect = React.forwardRef<\r\n  HTMLSelectElement,\r\n  React.SelectHTMLAttributes<HTMLSelectElement>\r\n>(({ className, children, ...props }, ref) => (\r\n  <div className=\"relative w-full\">\r\n    <select\r\n      ref={ref}\r\n      data-slot=\"native-select\"\r\n      className={cn(\r\n        \"peer h-10 w-full appearance-none border-2 border-foreground bg-transparent px-3 py-2 pr-8\",\r\n        \"font-[family-name:var(--pixel-font)] text-xs\",\r\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1\",\r\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\r\n        \"[&>option]:bg-popover [&>option]:text-popover-foreground\",\r\n        className\r\n      )}\r\n      {...props}\r\n    >\r\n      {children}\r\n    </select>\r\n    <ChevronDown className=\"pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 opacity-50\" strokeWidth={3} />\r\n  </div>\r\n));\r\nPixelNativeSelect.displayName = \"PixelNativeSelect\";\r\n\r\nconst PixelNativeSelectOption = React.forwardRef<\r\n  HTMLOptionElement,\r\n  React.OptionHTMLAttributes<HTMLOptionElement>\r\n>(({ className, ...props }, ref) => <option ref={ref} className={cn(className)} {...props} />);\r\nPixelNativeSelectOption.displayName = \"PixelNativeSelectOption\";\r\n\r\nconst PixelNativeSelectOptGroup = React.forwardRef<\r\n  HTMLOptGroupElement,\r\n  React.OptgroupHTMLAttributes<HTMLOptGroupElement>\r\n>(({ className, ...props }, ref) => <optgroup ref={ref} className={cn(className)} {...props} />);\r\nPixelNativeSelectOptGroup.displayName = \"PixelNativeSelectOptGroup\";\r\n\r\nexport { PixelNativeSelect, PixelNativeSelectOption, PixelNativeSelectOptGroup };\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
