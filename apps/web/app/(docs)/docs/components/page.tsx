@@ -1,9 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { ChevronRight } from "lucide-react";
 import { componentsMeta, categories } from "@/lib/components";
 import { componentDemos } from "@/components/component-demos";
 import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle, PixelCardDescription } from "@/components/ui/card";
+import { PixelButton } from "@/components/ui/button";
 
 export default function ComponentsPage() {
   const router = useRouter();
@@ -13,7 +15,7 @@ export default function ComponentsPage() {
       <div className="mx-auto max-w-6xl">
         <h1 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-2">Components</h1>
         <p className="text-sm text-muted-foreground mb-8">
-          {componentsMeta.length} pixel art components. Click any component to see details and installation.
+          {componentsMeta.length} pixel art components. Try them live below, or open a component for code and details.
         </p>
 
         {categories.map((category) => {
@@ -28,25 +30,32 @@ export default function ComponentsPage() {
                 {items.map((comp) => {
                   const Demo = componentDemos[comp.name];
                   return (
-                    <div
-                      key={comp.name}
-                      role="button"
-                      tabIndex={0}
-                      onClick={() => router.push(`/docs/components/${comp.name}`)}
-                      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") router.push(`/docs/components/${comp.name}`); }}
-                    >
-                      <PixelCard className="h-full hover:border-primary transition-colors cursor-pointer">
-                        <PixelCardHeader>
-                          <PixelCardTitle className="text-xs">{comp.title}</PixelCardTitle>
-                          <PixelCardDescription className="text-[10px]">{comp.description}</PixelCardDescription>
-                        </PixelCardHeader>
-                        <PixelCardContent>
-                          <div className="flex min-h-[80px] items-center justify-center border-2 border-dashed border-border p-4 overflow-hidden">
-                            {Demo ? <Demo /> : <span className="text-[10px] text-muted-foreground">No preview</span>}
-                          </div>
-                        </PixelCardContent>
-                      </PixelCard>
-                    </div>
+                    <PixelCard key={comp.name} className="h-full flex flex-col hover:border-primary transition-colors">
+                      <PixelCardHeader className="pb-2">
+                        <PixelCardTitle className="text-xs">{comp.title}</PixelCardTitle>
+                        <PixelCardDescription className="text-[10px] leading-relaxed">{comp.description}</PixelCardDescription>
+                      </PixelCardHeader>
+
+                      {/* Interactive preview — NOT wrapped in a nav handler so users can test it */}
+                      <PixelCardContent className="flex-1">
+                        <div className="flex min-h-[110px] items-center justify-center border-2 border-dashed border-border p-4 overflow-hidden">
+                          {Demo ? <Demo /> : <span className="text-[10px] text-muted-foreground">No preview</span>}
+                        </div>
+                      </PixelCardContent>
+
+                      {/* Explicit navigation button */}
+                      <div className="px-6 pb-5 pt-1">
+                        <PixelButton
+                          variant="ghost"
+                          size="sm"
+                          className="w-full justify-between text-[10px]"
+                          onClick={() => router.push(`/docs/components/${comp.name}`)}
+                        >
+                          View {comp.title}
+                          <ChevronRight className="h-3.5 w-3.5" />
+                        </PixelButton>
+                      </div>
+                    </PixelCard>
                   );
                 })}
               </div>

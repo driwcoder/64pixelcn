@@ -50,7 +50,7 @@ PixelCardDescription.displayName = "PixelCardDescription";
 
 const PixelCardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} data-slot="card-content" className={cn("px-6", className)} {...props} />
+    <div ref={ref} data-slot="card-content" className={cn("px-6 pb-6", className)} {...props} />
   )
 );
 PixelCardContent.displayName = "PixelCardContent";
