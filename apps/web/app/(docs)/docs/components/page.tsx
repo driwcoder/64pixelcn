@@ -9,7 +9,7 @@ export default function ComponentsPage() {
   const router = useRouter();
 
   return (
-    <div className="px-6 py-12">
+    <div className="px-6 py-12 pb-24">
       <div className="mx-auto max-w-6xl">
         <h1 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-2">Components</h1>
         <p className="text-sm text-muted-foreground mb-8">

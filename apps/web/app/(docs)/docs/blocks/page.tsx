@@ -130,7 +130,7 @@ export default function BlocksPage() {
   const total = CATEGORIES.reduce((a, c) => a + c.blocks.length, 0);
 
   return (
-    <div className="px-6 py-8">
+    <div className="px-6 py-8 pb-24">
       <div className="mx-auto max-w-5xl">
         <h1 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-2">Blocks</h1>
         <p className="text-sm text-muted-foreground mb-8">

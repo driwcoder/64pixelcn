@@ -29,7 +29,7 @@ export default function CreatePage() {
   const installCommand = `npx shadcn@latest init https://pixelcn.vercel.app/r/pixelcn.json`;
 
   return (
-    <main className="min-h-screen px-6 py-12">
+    <div className="px-6 py-12 pb-24">
       <div className="mx-auto max-w-3xl">
         <h1 className="mb-2 font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest">Create Preset</h1>
         <p className="mb-8 text-sm text-muted-foreground">Customize your pixelcn configuration.</p>
@@ -127,6 +127,6 @@ export default function CreatePage() {
           </PixelCardContent>
         </PixelCard>
       </div>
-    </main>
+    </div>
   );
 }

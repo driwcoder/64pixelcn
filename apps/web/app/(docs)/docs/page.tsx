@@ -18,7 +18,7 @@ export default function DocsPage() {
   const [progress] = useState(65);
 
   return (
-    <main className="min-h-screen px-6 py-12">
+    <div className="px-6 py-12 pb-24">
       <div className="mx-auto max-w-4xl space-y-8">
         <div>
           <h1 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-2">Components</h1>
@@ -140,6 +140,6 @@ export default function DocsPage() {
           </PixelCardContent>
         </PixelCard>
       </div>
-    </main>
+    </div>
   );
 }

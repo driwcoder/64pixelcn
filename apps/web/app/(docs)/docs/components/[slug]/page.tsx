@@ -1,17 +1,48 @@
 "use client";
 
+import * as React from "react";
 import { use } from "react";
 import Link from "next/link";
-import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, Check, Copy } from "lucide-react";
 import { getComponentMeta, componentsMeta } from "@/lib/components";
+import { getCodeSnippet } from "@/lib/code-snippets";
 import { componentDemos } from "@/components/component-demos";
 import { PixelBadge } from "@/components/ui/badge";
 import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle } from "@/components/ui/card";
 import { PixelButton } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+type Tab = "preview" | "code";
+
+function CodeBlock({ code }: { code: string }) {
+  const [copied, setCopied] = React.useState(false);
+
+  const copy = () => {
+    navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  return (
+    <div className="relative">
+      <button
+        onClick={copy}
+        aria-label="Copy code"
+        className="absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center border-2 border-foreground bg-popover text-muted-foreground hover:text-primary transition-colors"
+      >
+        {copied ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : <Copy className="h-3.5 w-3.5" strokeWidth={3} />}
+      </button>
+      <pre className="overflow-x-auto border-2 border-border bg-muted p-4 pr-12 font-mono text-[11px] leading-relaxed">
+        <code>{code}</code>
+      </pre>
+    </div>
+  );
+}
 
 export default function ComponentPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const meta = getComponentMeta(slug);
+  const [tab, setTab] = React.useState<Tab>("preview");
 
   // prev / next
   const idx = componentsMeta.findIndex((c) => c.name === slug);
@@ -20,7 +51,7 @@ export default function ComponentPage({ params }: { params: Promise<{ slug: stri
 
   if (!meta) {
     return (
-      <div className="px-6 py-12">
+      <div className="px-6 py-12 pb-24">
         <div className="mx-auto max-w-2xl text-center">
           <h1 className="font-[family-name:var(--pixel-font)] text-xl uppercase tracking-widest mb-4">Component not found</h1>
           <Link href="/docs/components">
@@ -35,17 +66,39 @@ export default function ComponentPage({ params }: { params: Promise<{ slug: stri
 
   const Demo = componentDemos[meta.name];
   const installCmd = `npx shadcn@latest init https://pixelcn.vercel.app/r/pixelcn.json && npx shadcn@latest add https://pixelcn.vercel.app/r/${meta.name}.json`;
+  const usageCode = getCodeSnippet(meta.name);
 
   return (
-    <div className="px-6 py-8">
+    <div className="px-6 pt-4 pb-24">
       <div className="mx-auto max-w-3xl">
-        {/* Back link */}
-        <Link href="/docs/components" className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-primary mb-6">
-          <ArrowLeft className="h-3 w-3" /> All Components
-        </Link>
+        {/* ── Top prev / next ─────────────────────────────────── */}
+        <div className="flex items-center justify-between gap-4 mb-6 pb-4 border-b-2 border-border">
+          {prev ? (
+            <Link href={`/docs/components/${prev.name}`} className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
+              <ChevronLeft className="h-4 w-4" />
+              <span className="uppercase tracking-widest">{prev.title}</span>
+            </Link>
+          ) : (
+            <Link href="/docs/components" className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
+              <ChevronLeft className="h-4 w-4" />
+              <span className="uppercase tracking-widest">All</span>
+            </Link>
+          )}
+          {next ? (
+            <Link href={`/docs/components/${next.name}`} className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
+              <span className="uppercase tracking-widest">{next.title}</span>
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          ) : (
+            <Link href="/docs/components" className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
+              <span className="uppercase tracking-widest">All</span>
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          )}
+        </div>
 
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-6">
           <div className="flex items-center gap-3 mb-2">
             <h1 className="font-[family-name:var(--pixel-font)] text-xl uppercase tracking-widest">{meta.title}</h1>
             <PixelBadge variant="outline">{meta.category}</PixelBadge>
@@ -53,15 +106,37 @@ export default function ComponentPage({ params }: { params: Promise<{ slug: stri
           <p className="text-sm text-muted-foreground">{meta.description}</p>
         </div>
 
-        {/* Preview */}
+        {/* ── Preview / Code tabs ─────────────────────────────── */}
         <PixelCard className="mb-6">
-          <PixelCardHeader>
-            <PixelCardTitle className="text-xs">Preview</PixelCardTitle>
-          </PixelCardHeader>
-          <PixelCardContent>
-            <div className="flex min-h-[140px] items-center justify-center border-2 border-dashed border-border p-6 overflow-hidden">
-              {Demo ? <Demo /> : <span className="text-xs text-muted-foreground">No preview available</span>}
-            </div>
+          <div className="flex items-center gap-1 border-b-2 border-border px-4 pt-3">
+            <button
+              onClick={() => setTab("preview")}
+              className={cn(
+                "px-3 py-1.5 font-[family-name:var(--pixel-font)] text-[10px] uppercase tracking-widest transition-colors",
+                tab === "preview" ? "bg-primary text-primary-foreground border-2 border-b-0 border-foreground" : "text-muted-foreground hover:text-primary"
+              )}
+            >
+              Preview
+            </button>
+            <button
+              onClick={() => setTab("code")}
+              className={cn(
+                "px-3 py-1.5 font-[family-name:var(--pixel-font)] text-[10px] uppercase tracking-widest transition-colors",
+                tab === "code" ? "bg-primary text-primary-foreground border-2 border-b-0 border-foreground" : "text-muted-foreground hover:text-primary"
+              )}
+            >
+              Code
+            </button>
+          </div>
+
+          <PixelCardContent className="pt-6">
+            {tab === "preview" ? (
+              <div className="flex min-h-[180px] items-center justify-center border-2 border-dashed border-border p-6 overflow-hidden">
+                {Demo ? <Demo /> : <span className="text-xs text-muted-foreground">No preview available</span>}
+              </div>
+            ) : (
+              <CodeBlock code={usageCode} />
+            )}
           </PixelCardContent>
         </PixelCard>
 
@@ -71,9 +146,7 @@ export default function ComponentPage({ params }: { params: Promise<{ slug: stri
             <PixelCardTitle className="text-xs">Installation</PixelCardTitle>
           </PixelCardHeader>
           <PixelCardContent>
-            <pre className="border-2 border-border bg-muted p-4 text-xs overflow-x-auto font-mono whitespace-pre-wrap">
-              {installCmd}
-            </pre>
+            <CodeBlock code={installCmd} />
             <p className="mt-2 text-[10px] text-muted-foreground">
               Registry hosted at{" "}
               <a href="https://pixelcn.vercel.app" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
@@ -84,16 +157,16 @@ export default function ComponentPage({ params }: { params: Promise<{ slug: stri
           </PixelCardContent>
         </PixelCard>
 
-        {/* Prev / Next */}
-        <div className="flex items-center justify-between gap-4 pt-4 border-t-2 border-border">
+        {/* ── Bottom prev / next ──────────────────────────────── */}
+        <div className="flex items-center justify-between gap-4 pt-6 border-t-2 border-border">
           {prev ? (
-            <Link href={`/docs/components/${prev.name}`} className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary">
+            <Link href={`/docs/components/${prev.name}`} className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
               <ChevronLeft className="h-4 w-4" />
               <span className="uppercase tracking-widest">{prev.title}</span>
             </Link>
           ) : <span />}
           {next ? (
-            <Link href={`/docs/components/${next.name}`} className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary">
+            <Link href={`/docs/components/${next.name}`} className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
               <span className="uppercase tracking-widest">{next.title}</span>
               <ChevronRight className="h-4 w-4" />
             </Link>
