@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio-group",
+  "type": "registry:ui",
+  "title": "Radio Group",
+  "description": "Pixel art radio group",
+  "dependencies": [
+    "@radix-ui/react-radio-group"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/radio-group.tsx",
+      "content": "import * as React from \"react\";\r\nimport * as RadioGroupPrimitive from \"@radix-ui/react-radio-group\";\r\nimport { Circle } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelRadioGroup = React.forwardRef<\r\n  React.ElementRef<typeof RadioGroupPrimitive.Root>,\r\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>\r\n>(({ className, ...props }, ref) => (\r\n  <RadioGroupPrimitive.Root ref={ref} data-slot=\"radio-group\" className={cn(\"grid gap-2\", className)} {...props} />\r\n));\r\nPixelRadioGroup.displayName = \"PixelRadioGroup\";\r\n\r\nconst PixelRadioGroupItem = React.forwardRef<\r\n  React.ElementRef<typeof RadioGroupPrimitive.Item>,\r\n  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>\r\n>(({ className, ...props }, ref) => (\r\n  <RadioGroupPrimitive.Item\r\n    ref={ref}\r\n    data-slot=\"radio-group-item\"\r\n    className={cn(\r\n      \"aspect-square h-4 w-4 border-2 border-foreground text-primary\",\r\n      \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1\",\r\n      \"disabled:cursor-not-allowed disabled:opacity-50\",\r\n      className\r\n    )}\r\n    {...props}\r\n  >\r\n    <RadioGroupPrimitive.Indicator className=\"flex items-center justify-center\">\r\n      <Circle className=\"h-2.5 w-2.5 fill-current text-current\" />\r\n    </RadioGroupPrimitive.Indicator>\r\n  </RadioGroupPrimitive.Item>\r\n));\r\nPixelRadioGroupItem.displayName = \"PixelRadioGroupItem\";\r\n\r\nexport { PixelRadioGroup, PixelRadioGroupItem };\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
