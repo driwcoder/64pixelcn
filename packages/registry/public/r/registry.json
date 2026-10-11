@@ -192,6 +192,674 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Pixel art accordion",
+      "dependencies": [
+        "@radix-ui/react-accordion"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Pixel art avatar",
+      "dependencies": [
+        "@radix-ui/react-avatar"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Pixel art breadcrumb",
+      "dependencies": [
+        "@radix-ui/react-breadcrumb"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Pixel art carousel",
+      "dependencies": [
+        "embla-carousel-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "button"
+      ],
+      "files": []
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Pixel art collapsible",
+      "dependencies": [
+        "@radix-ui/react-collapsible"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Pixel art combobox",
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "cmdk"
+      ],
+      "registryDependencies": [
+        "utils",
+        "input"
+      ],
+      "files": []
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Pixel art context menu",
+      "dependencies": [
+        "@radix-ui/react-context-menu"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Pixel art dropdown menu",
+      "dependencies": [
+        "@radix-ui/react-dropdown-menu"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Pixel art hover card",
+      "dependencies": [
+        "@radix-ui/react-hover-card"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Pixel art label",
+      "dependencies": [
+        "@radix-ui/react-label"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "Pixel art menubar",
+      "dependencies": [
+        "@radix-ui/react-menubar"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "Pixel art navigation menu",
+      "dependencies": [
+        "@radix-ui/react-navigation-menu"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Pixel art popover",
+      "dependencies": [
+        "@radix-ui/react-popover"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Pixel art radio group",
+      "dependencies": [
+        "@radix-ui/react-radio-group"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Pixel art scroll area",
+      "dependencies": [
+        "@radix-ui/react-scroll-area"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Pixel art select",
+      "dependencies": [
+        "@radix-ui/react-select"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Pixel art separator",
+      "dependencies": [
+        "@radix-ui/react-separator"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Pixel art sheet",
+      "dependencies": [
+        "@radix-ui/react-dialog"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Pixel art skeleton",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Pixel art slider",
+      "dependencies": [
+        "@radix-ui/react-slider"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Pixel art textarea",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Pixel art toast",
+      "dependencies": [
+        "@radix-ui/react-toast"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Pixel art toggle",
+      "dependencies": [
+        "@radix-ui/react-toggle"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "Pixel art toggle group",
+      "dependencies": [
+        "@radix-ui/react-toggle-group"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Pixel art tooltip",
+      "dependencies": [
+        "@radix-ui/react-tooltip"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Pixel art button group",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils",
+        "button"
+      ],
+      "files": []
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Pixel art input group",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils",
+        "input"
+      ],
+      "files": []
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input OTP",
+      "description": "Pixel art input OTP",
+      "dependencies": [
+        "input-otp"
+      ],
+      "registryDependencies": [
+        "utils",
+        "input"
+      ],
+      "files": []
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Pixel art keyboard key",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "Pixel art empty state",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "item",
+      "type": "registry:ui",
+      "title": "Item",
+      "description": "Pixel art item",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Pixel art spinner",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "Pixel art aspect ratio",
+      "dependencies": [
+        "@radix-ui/react-aspect-ratio"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Pixel art table",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "typography",
+      "type": "registry:ui",
+      "title": "Typography",
+      "description": "Pixel art typography",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Pixel art sidebar",
+      "dependencies": [
+        "@radix-ui/react-slot"
+      ],
+      "registryDependencies": [
+        "utils",
+        "button",
+        "input",
+        "separator",
+        "sheet",
+        "skeleton",
+        "tooltip"
+      ],
+      "files": []
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Pixel art calendar",
+      "dependencies": [
+        "react-day-picker"
+      ],
+      "registryDependencies": [
+        "utils",
+        "button"
+      ],
+      "files": []
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Pixel art date picker",
+      "dependencies": [
+        "react-day-picker",
+        "@radix-ui/react-popover"
+      ],
+      "registryDependencies": [
+        "utils",
+        "button",
+        "calendar",
+        "popover"
+      ],
+      "files": []
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "Pixel art chart",
+      "dependencies": [
+        "recharts"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Pixel art data table",
+      "dependencies": [
+        "@tanstack/react-table"
+      ],
+      "registryDependencies": [
+        "utils",
+        "table"
+      ],
+      "files": []
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Pixel art drawer",
+      "dependencies": [
+        "vaul"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Pixel art field",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "utils",
+        "label"
+      ],
+      "files": []
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "title": "Native Select",
+      "description": "Pixel art native select",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "message",
+      "type": "registry:ui",
+      "title": "Message",
+      "description": "Pixel art message",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "message-scroller",
+      "type": "registry:ui",
+      "title": "Message Scroller",
+      "description": "Pixel art message scroller",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "bubble",
+      "type": "registry:ui",
+      "title": "Bubble",
+      "description": "Pixel art bubble",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "attachment",
+      "type": "registry:ui",
+      "title": "Attachment",
+      "description": "Pixel art attachment",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "marker",
+      "type": "registry:ui",
+      "title": "Marker",
+      "description": "Pixel art marker",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "questionnaire",
+      "type": "registry:ui",
+      "title": "Questionnaire",
+      "description": "Pixel art questionnaire",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "Pixel art resizable panels",
+      "dependencies": [
+        "react-resizable-panels"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Pixel art command palette",
+      "dependencies": [
+        "cmdk"
+      ],
+      "registryDependencies": [
+        "utils",
+        "dialog"
+      ],
+      "files": []
+    },
+    {
+      "name": "direction",
+      "type": "registry:ui",
+      "title": "Direction",
+      "description": "Pixel art direction provider",
+      "dependencies": [
+        "@radix-ui/react-direction"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": []
     }
   ]
 }
