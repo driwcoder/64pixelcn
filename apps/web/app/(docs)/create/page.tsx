@@ -3,7 +3,7 @@
 import { PixelButton } from "@/components/ui/button";
 import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle } from "@/components/ui/card";
 import { PixelBadge } from "@/components/ui/badge";
-import { usePixel, type Preset, type PixelFont, type PixelSize } from "@/components/pixel-provider";
+import { usePixel, type Preset, type PixelFont, type PixelSize, type TextScale } from "@/components/pixel-provider";
 import { cn } from "@/lib/utils";
 
 const PRESETS: { id: Preset; label: string }[] = [
@@ -18,13 +18,23 @@ const FONTS: { id: PixelFont; label: string }[] = [
   { id: "press-start", label: "Press Start 2P" },
   { id: "vt323", label: "VT323" },
   { id: "silkscreen", label: "Silkscreen" },
+  { id: "pixelify", label: "Pixelify Sans" },
+  { id: "monogram", label: "Monogram" },
   { id: "system", label: "System Mono" },
 ];
 
 const SIZES: PixelSize[] = [8, 16, 32, 64, 128];
 
+const TEXT_SCALES: { id: TextScale; label: string; hint: string }[] = [
+  { id: "xs", label: "XS", hint: "0.8×" },
+  { id: "sm", label: "Small", hint: "0.9×" },
+  { id: "md", label: "Medium", hint: "1×" },
+  { id: "lg", label: "Large", hint: "1.15×" },
+  { id: "xl", label: "XL", hint: "1.3×" },
+];
+
 export default function CreatePage() {
-  const { preset, setPreset, font, setFont, size, setSize } = usePixel();
+  const { preset, setPreset, font, setFont, size, setSize, textScale, setTextScale } = usePixel();
 
   const installCommand = `npx shadcn@latest init https://pixelcn.vercel.app/r/pixelcn.json`;
 
@@ -69,6 +79,30 @@ export default function CreatePage() {
                 {f.label}
               </PixelButton>
             ))}
+          </PixelCardContent>
+        </PixelCard>
+
+        {/* Text Size */}
+        <PixelCard className="mb-6">
+          <PixelCardHeader>
+            <PixelCardTitle>Text Size</PixelCardTitle>
+          </PixelCardHeader>
+          <PixelCardContent className="space-y-2">
+            <p className="text-xs text-muted-foreground">
+              Shrink the text so pixel components feel less bulky and take up less space.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {TEXT_SCALES.map((t) => (
+                <PixelButton
+                  key={t.id}
+                  variant={textScale === t.id ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setTextScale(t.id)}
+                >
+                  {t.label} <span className="text-[10px] opacity-70">{t.hint}</span>
+                </PixelButton>
+              ))}
+            </div>
           </PixelCardContent>
         </PixelCard>
 

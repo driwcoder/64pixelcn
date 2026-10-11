@@ -36,6 +36,7 @@
   --pixel-border: 2px;
   --pixel-shadow: 2px 2px 0px var(--foreground);
   --pixel-font: "Press Start 2P", monospace;
+  --pixel-text-scale: 1;
 }
 
 .dark {
@@ -71,6 +72,14 @@
 [data-size="32"]  { --pixel-size: 2px; --pixel-border: 2px; --pixel-shadow: 2px 2px 0px var(--foreground); }
 [data-size="16"]  { --pixel-size: 1px; --pixel-border: 1px; --pixel-shadow: 1px 1px 0px var(--foreground); }
 [data-size="8"]   { --pixel-size: 0.5px; --pixel-border: 1px; --pixel-shadow: 1px 1px 0px var(--foreground); }
+
+/* ── Text scale (font size multiplier across docs) ─────────────────── */
+/* Lets users shrink pixel text so components feel less bulky. */
+[data-text-scale="xs"] { --pixel-text-scale: 0.8; }
+[data-text-scale="sm"] { --pixel-text-scale: 0.9; }
+[data-text-scale="md"] { --pixel-text-scale: 1; }
+[data-text-scale="lg"] { --pixel-text-scale: 1.15; }
+[data-text-scale="xl"] { --pixel-text-scale: 1.3; }
 
 /* ── Font presets ──────────────────────────────────────────────────── */
 [data-font="press-start"] { --pixel-font: "Press Start 2P", monospace; }
@@ -191,6 +200,8 @@
 
 html {
   font-family: var(--pixel-font);
+  /* Scale all rem-based text so users can shrink pixel UI globally. */
+  font-size: calc(16px * var(--pixel-text-scale, 1));
 }
 
 body {

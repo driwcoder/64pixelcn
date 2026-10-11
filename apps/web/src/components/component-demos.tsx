@@ -560,19 +560,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
   ),
 
   "navigation-menu": () => (
-    <PixelNavigationMenu>
-      <PixelNavigationMenuList>
-        <PixelNavigationMenuItem>
-          <PixelNavigationMenuTrigger>Getting started</PixelNavigationMenuTrigger>
-          <PixelNavigationMenuContent>
-            <div className="p-2 text-xs">Introduction docs here.</div>
-          </PixelNavigationMenuContent>
-        </PixelNavigationMenuItem>
-        <PixelNavigationMenuItem>
-          <PixelNavigationMenuLink href="#" className="group inline-flex h-10 w-max items-center px-4 py-2 text-xs">Documentation</PixelNavigationMenuLink>
-        </PixelNavigationMenuItem>
-      </PixelNavigationMenuList>
-    </PixelNavigationMenu>
+    <NavigationMenuDemo />
   ),
 
   popover: () => (
@@ -1054,6 +1042,96 @@ function RetroModeDemo() {
 function ThemeSelectorDemo() {
   const [theme, setTheme] = React.useState("nintendo");
   return <PixelThemeSelector value={theme} onValueChange={setTheme} className="max-w-sm" />;
+}
+
+// ─── Navigation menu demo ─────────────────────────────────────
+function NavigationMenuDemo() {
+  return (
+    <PixelNavigationMenu className="w-full">
+      <PixelNavigationMenuList>
+        <PixelNavigationMenuItem>
+          <PixelNavigationMenuTrigger>Getting started</PixelNavigationMenuTrigger>
+          <PixelNavigationMenuContent>
+            <ul className="grid w-[400px] gap-1 p-2">
+              <li>
+                <PixelNavigationMenuLink asChild>
+                  <a
+                    href="#"
+                    className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
+                  >
+                    <div className="text-xs uppercase tracking-widest">Introduction</div>
+                    <p className="text-[10px] leading-snug text-muted-foreground">Re-usable pixel components.</p>
+                  </a>
+                </PixelNavigationMenuLink>
+              </li>
+              <li>
+                <PixelNavigationMenuLink asChild>
+                  <a
+                    href="#"
+                    className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
+                  >
+                    <div className="text-xs uppercase tracking-widest">Installation</div>
+                    <p className="text-[10px] leading-snug text-muted-foreground">How to install via the CLI.</p>
+                  </a>
+                </PixelNavigationMenuLink>
+              </li>
+              <li>
+                <PixelNavigationMenuLink asChild>
+                  <a
+                    href="#"
+                    className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
+                  >
+                    <div className="text-xs uppercase tracking-widest">Typography</div>
+                    <p className="text-[10px] leading-snug text-muted-foreground">Styles for headings and text.</p>
+                  </a>
+                </PixelNavigationMenuLink>
+              </li>
+            </ul>
+          </PixelNavigationMenuContent>
+        </PixelNavigationMenuItem>
+
+        <PixelNavigationMenuItem>
+          <PixelNavigationMenuTrigger>Components</PixelNavigationMenuTrigger>
+          <PixelNavigationMenuContent>
+            <ul className="grid w-[500px] grid-cols-2 gap-1 p-2">
+              {[
+                { title: "Alert Dialog", desc: "Modal confirmation dialogs" },
+                { title: "Hover Card", desc: "Preview cards on hover" },
+                { title: "Progress", desc: "Progress indicators" },
+                { title: "Scroll Area", desc: "Custom scrollable regions" },
+                { title: "Tabs", desc: "Tabbed content sections" },
+                { title: "Tooltip", desc: "Hover information popups" },
+              ].map((c) => (
+                <li key={c.title}>
+                  <PixelNavigationMenuLink asChild>
+                    <a
+                      href="#"
+                      className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
+                    >
+                      <div className="text-xs uppercase tracking-widest">{c.title}</div>
+                      <p className="text-[10px] leading-snug text-muted-foreground">{c.desc}</p>
+                    </a>
+                  </PixelNavigationMenuLink>
+                </li>
+              ))}
+            </ul>
+          </PixelNavigationMenuContent>
+        </PixelNavigationMenuItem>
+
+        <PixelNavigationMenuItem>
+          <PixelNavigationMenuLink href="#" className="group inline-flex h-10 items-center justify-center px-4 py-2 text-xs uppercase tracking-widest transition-colors hover:bg-accent">
+            Blocks
+          </PixelNavigationMenuLink>
+        </PixelNavigationMenuItem>
+
+        <PixelNavigationMenuItem>
+          <PixelNavigationMenuLink href="#" className="group inline-flex h-10 items-center justify-center px-4 py-2 text-xs uppercase tracking-widest transition-colors hover:bg-accent">
+            Docs
+          </PixelNavigationMenuLink>
+        </PixelNavigationMenuItem>
+      </PixelNavigationMenuList>
+    </PixelNavigationMenu>
+  );
 }
 
 // ─── Toast demo ───────────────────────────────────────────────

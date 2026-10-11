@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PixelBadge } from "@/components/ui/badge";
 import { componentsMeta } from "@/lib/components";
 import { PixelNavButton } from "@/components/pixel-nav";
+import { PixelControls } from "@/components/pixel-controls";
 
 const SECTIONS = [
   { href: "/docs", label: "Get Started" },
@@ -24,6 +25,9 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
               <PixelNavButton key={s.href} href={s.href}>{s.label}</PixelNavButton>
             ))}
           </nav>
+          <div className="ml-2 flex items-center">
+            <PixelControls />
+          </div>
         </div>
       </header>
 
