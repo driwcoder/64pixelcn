@@ -583,7 +583,13 @@
       "registryDependencies": [
         "utils"
       ],
-      "files": []
+      "files": [
+        {
+          "path": "components/ui/textarea.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelTextarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttributes<HTMLTextAreaElement>>(\r\n  ({ className, ...props }, ref) => (\r\n    <textarea\r\n      ref={ref}\r\n      data-slot=\"textarea\"\r\n      className={cn(\r\n        \"flex min-h-[80px] w-full bg-transparent px-3 py-2\",\r\n        \"border-2 border-input\",\r\n        \"font-[family-name:var(--pixel-font)] text-xs\",\r\n        \"placeholder:text-muted-foreground\",\r\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background\",\r\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\r\n        \"shadow-[inset_1px_1px_0px_var(--muted),inset_-1px_-1px_0px_var(--border)]\",\r\n        className\r\n      )}\r\n      {...props}\r\n    />\r\n  )\r\n);\r\nPixelTextarea.displayName = \"PixelTextarea\";\r\n\r\nexport { PixelTextarea };\r\n",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "toast",
@@ -596,7 +602,13 @@
       "registryDependencies": [
         "utils"
       ],
-      "files": []
+      "files": [
+        {
+          "path": "components/ui/toast.tsx",
+          "content": "import * as React from \"react\";\r\nimport * as ToastPrimitives from \"@radix-ui/react-toast\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { X } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelToastProvider = ToastPrimitives.Provider;\r\n\r\nconst PixelToastViewport = React.forwardRef<\r\n  React.ElementRef<typeof ToastPrimitives.Viewport>,\r\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>\r\n>(({ className, ...props }, ref) => (\r\n  <ToastPrimitives.Viewport\r\n    ref={ref}\r\n    data-slot=\"toast-viewport\"\r\n    className={cn(\r\n      \"fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]\",\r\n      className\r\n    )}\r\n    {...props}\r\n  />\r\n));\r\nPixelToastViewport.displayName = \"PixelToastViewport\";\r\n\r\nconst toastVariants = cva(\r\n  \"group pointer-events-auto relative flex w-full items-center justify-between gap-4 overflow-hidden border-2 border-foreground p-4 pr-6 shadow-[var(--pixel-shadow)] transition-all font-[family-name:var(--pixel-font)]\",\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"bg-popover text-popover-foreground\",\r\n        destructive: \"destructive group border-destructive bg-destructive text-destructive-foreground\",\r\n        success: \"border-green-500 bg-green-600 text-white\",\r\n      },\r\n    },\r\n    defaultVariants: { variant: \"default\" },\r\n  }\r\n);\r\n\r\nconst PixelToast = React.forwardRef<\r\n  React.ElementRef<typeof ToastPrimitives.Root>,\r\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> & VariantProps<typeof toastVariants>\r\n>(({ className, variant, ...props }, ref) => (\r\n  <ToastPrimitives.Root ref={ref} data-slot=\"toast\" className={cn(toastVariants({ variant }), className)} {...props} />\r\n));\r\nPixelToast.displayName = \"PixelToast\";\r\n\r\nconst PixelToastAction = React.forwardRef<\r\n  React.ElementRef<typeof ToastPrimitives.Action>,\r\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Action>\r\n>(({ className, ...props }, ref) => (\r\n  <ToastPrimitives.Action\r\n    ref={ref}\r\n    data-slot=\"toast-action\"\r\n    className={cn(\r\n      \"inline-flex h-8 shrink-0 items-center border-2 border-current bg-transparent px-3 text-[10px] uppercase tracking-widest\",\r\n      \"transition-colors hover:bg-current/10 focus:outline-none focus:ring-2 focus:ring-ring\",\r\n      className\r\n    )}\r\n    {...props}\r\n  />\r\n));\r\nPixelToastAction.displayName = \"PixelToastAction\";\r\n\r\nconst PixelToastClose = React.forwardRef<\r\n  React.ElementRef<typeof ToastPrimitives.Close>,\r\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close>\r\n>(({ className, ...props }, ref) => (\r\n  <ToastPrimitives.Close\r\n    ref={ref}\r\n    data-slot=\"toast-close\"\r\n    className={cn(\"absolute right-1 top-1 p-1 text-current/50 opacity-0 transition-opacity hover:text-current focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100\", className)}\r\n    toast-close=\"\"\r\n    {...props}\r\n  >\r\n    <X className=\"h-4 w-4\" strokeWidth={3} />\r\n  </ToastPrimitives.Close>\r\n));\r\nPixelToastClose.displayName = \"PixelToastClose\";\r\n\r\nconst PixelToastTitle = React.forwardRef<\r\n  React.ElementRef<typeof ToastPrimitives.Title>,\r\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title>\r\n>(({ className, ...props }, ref) => (\r\n  <ToastPrimitives.Title ref={ref} data-slot=\"toast-title\" className={cn(\"text-xs uppercase tracking-widest\", className)} {...props} />\r\n));\r\nPixelToastTitle.displayName = \"PixelToastTitle\";\r\n\r\nconst PixelToastDescription = React.forwardRef<\r\n  React.ElementRef<typeof ToastPrimitives.Description>,\r\n  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>\r\n>(({ className, ...props }, ref) => (\r\n  <ToastPrimitives.Description ref={ref} data-slot=\"toast-description\" className={cn(\"text-xs opacity-90\", className)} {...props} />\r\n));\r\nPixelToastDescription.displayName = \"PixelToastDescription\";\r\n\r\nexport {\r\n  PixelToastProvider, PixelToastViewport, PixelToast, PixelToastTitle,\r\n  PixelToastDescription, PixelToastClose, PixelToastAction,\r\n};\r\n",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "toggle",
@@ -609,7 +621,13 @@
       "registryDependencies": [
         "utils"
       ],
-      "files": []
+      "files": [
+        {
+          "path": "components/ui/toggle.tsx",
+          "content": "import * as React from \"react\";\r\nimport * as TogglePrimitive from \"@radix-ui/react-toggle\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst toggleVariants = cva(\r\n  \"inline-flex items-center justify-center gap-2 border-2 border-transparent text-xs font-[family-name:var(--pixel-font)] uppercase tracking-widest transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-primary data-[state=on]:text-primary-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0\",\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"bg-transparent\",\r\n        outline: \"border-foreground bg-transparent shadow-[var(--pixel-shadow)]\",\r\n      },\r\n      size: {\r\n        default: \"h-10 px-3 min-w-10\",\r\n        sm: \"h-9 px-2.5 min-w-9\",\r\n        lg: \"h-11 px-5 min-w-11\",\r\n      },\r\n    },\r\n    defaultVariants: { variant: \"default\", size: \"default\" },\r\n  }\r\n);\r\n\r\nconst PixelToggle = React.forwardRef<\r\n  React.ElementRef<typeof TogglePrimitive.Root>,\r\n  React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> & VariantProps<typeof toggleVariants>\r\n>(({ className, variant, size, ...props }, ref) => (\r\n  <TogglePrimitive.Root ref={ref} data-slot=\"toggle\" className={cn(toggleVariants({ variant, size, className }))} {...props} />\r\n));\r\nPixelToggle.displayName = \"PixelToggle\";\r\n\r\nexport { PixelToggle, toggleVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "toggle-group",
@@ -622,7 +640,13 @@
       "registryDependencies": [
         "utils"
       ],
-      "files": []
+      "files": [
+        {
+          "path": "components/ui/toggle-group.tsx",
+          "content": "import * as React from \"react\";\r\nimport * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\";\r\nimport { type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { toggleVariants } from \"./toggle\";\r\n\r\nconst PixelToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants>>({ size: \"default\", variant: \"default\" });\r\n\r\nconst PixelToggleGroup = React.forwardRef<\r\n  React.ElementRef<typeof ToggleGroupPrimitive.Root>,\r\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants>\r\n>(({ className, variant, size, children, ...props }, ref) => (\r\n  <ToggleGroupPrimitive.Root ref={ref} data-slot=\"toggle-group\" className={cn(\"flex items-center border-2 border-foreground [&>*:not(:first-child)]:border-l-2 [&>*:not(:first-child)]:border-l-foreground\", className)} {...props}>\r\n    <PixelToggleGroupContext.Provider value={{ variant, size }}>{children}</PixelToggleGroupContext.Provider>\r\n  </ToggleGroupPrimitive.Root>\r\n));\r\nPixelToggleGroup.displayName = \"PixelToggleGroup\";\r\n\r\nconst PixelToggleGroupItem = React.forwardRef<\r\n  React.ElementRef<typeof ToggleGroupPrimitive.Item>,\r\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> & VariantProps<typeof toggleVariants>\r\n>(({ className, children, variant, size, ...props }, ref) => {\r\n  const context = React.useContext(PixelToggleGroupContext);\r\n  return (\r\n    <ToggleGroupPrimitive.Item\r\n      ref={ref}\r\n      data-slot=\"toggle-group-item\"\r\n      className={cn(\r\n        toggleVariants({ variant: context.variant || variant, size: context.size || size }),\r\n        \"border-none shadow-none\",\r\n        className\r\n      )}\r\n      {...props}\r\n    >\r\n      {children}\r\n    </ToggleGroupPrimitive.Item>\r\n  );\r\n});\r\nPixelToggleGroupItem.displayName = \"PixelToggleGroupItem\";\r\n\r\nexport { PixelToggleGroup, PixelToggleGroupItem };\r\n",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "tooltip",
@@ -635,7 +659,13 @@
       "registryDependencies": [
         "utils"
       ],
-      "files": []
+      "files": [
+        {
+          "path": "components/ui/tooltip.tsx",
+          "content": "import * as React from \"react\";\r\nimport * as TooltipPrimitive from \"@radix-ui/react-tooltip\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelTooltipProvider = TooltipPrimitive.Provider;\r\nconst PixelTooltip = TooltipPrimitive.Root;\r\nconst PixelTooltipTrigger = TooltipPrimitive.Trigger;\r\n\r\nconst PixelTooltipContent = React.forwardRef<\r\n  React.ElementRef<typeof TooltipPrimitive.Content>,\r\n  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>\r\n>(({ className, sideOffset = 4, ...props }, ref) => (\r\n  <TooltipPrimitive.Portal>\r\n    <TooltipPrimitive.Content\r\n      ref={ref}\r\n      data-slot=\"tooltip-content\"\r\n      sideOffset={sideOffset}\r\n      className={cn(\r\n        \"z-50 overflow-hidden border-2 border-foreground bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-[var(--pixel-shadow)]\",\r\n        \"font-[family-name:var(--pixel-font)]\",\r\n        \"animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95\",\r\n        className\r\n      )}\r\n      {...props}\r\n    />\r\n  </TooltipPrimitive.Portal>\r\n));\r\nPixelTooltipContent.displayName = \"PixelTooltipContent\";\r\n\r\nexport { PixelTooltip, PixelTooltipTrigger, PixelTooltipContent, PixelTooltipProvider };\r\n",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "button-group",
@@ -649,7 +679,13 @@
         "utils",
         "button"
       ],
-      "files": []
+      "files": [
+        {
+          "path": "components/ui/button-group.tsx",
+          "content": "import { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst buttonGroupVariants = cva(\r\n  \"flex w-fit items-stretch border-2 border-foreground shadow-[var(--pixel-shadow)] [&>*]:border-none [&>*]:shadow-none [&>*:not(:first-child)]:border-l-2 [&>*:not(:first-child)]:border-l-foreground [&>*]:rounded-none\",\r\n  {\r\n    variants: {\r\n      orientation: {\r\n        horizontal: \"flex-row [&>*:not(:first-child)]:border-l-2 [&>*:not(:first-child)]:border-l-foreground\",\r\n        vertical: \"flex-col [&>*:not(:first-child)]:border-t-2 [&>*:not(:first-child)]:border-t-foreground\",\r\n      },\r\n    },\r\n    defaultVariants: { orientation: \"horizontal\" },\r\n  }\r\n);\r\n\r\nfunction PixelButtonGroup({\r\n  className, orientation, ...props\r\n}: React.ComponentProps<\"div\"> & VariantProps<typeof buttonGroupVariants>) {\r\n  return <div data-slot=\"button-group\" className={cn(buttonGroupVariants({ orientation }), className)} {...props} />;\r\n}\r\n\r\nexport { PixelButtonGroup, buttonGroupVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "input-group",
@@ -663,7 +699,13 @@
         "utils",
         "input"
       ],
-      "files": []
+      "files": [
+        {
+          "path": "components/ui/input-group.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst inputGroupVariants = cva(\r\n  \"flex w-full items-center border-2 border-foreground bg-transparent shadow-[inset_1px_1px_0px_var(--muted),inset_-1px_-1px_0px_var(--border)] focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-1\",\r\n  {\r\n    variants: {\r\n      size: {\r\n        default: \"h-10\",\r\n        sm: \"h-8 text-[10px]\",\r\n        lg: \"h-12\",\r\n      },\r\n    },\r\n    defaultVariants: { size: \"default\" },\r\n  }\r\n);\r\n\r\nconst PixelInputGroup = React.forwardRef<\r\n  HTMLDivElement,\r\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof inputGroupVariants>\r\n>(({ className, size, ...props }, ref) => (\r\n  <div ref={ref} data-slot=\"input-group\" className={cn(inputGroupVariants({ size }), className)} {...props} />\r\n));\r\nPixelInputGroup.displayName = \"PixelInputGroup\";\r\n\r\nconst PixelInputGroupInput = React.forwardRef<\r\n  HTMLInputElement,\r\n  React.InputHTMLAttributes<HTMLInputElement>\r\n>(({ className, ...props }, ref) => (\r\n  <input\r\n    ref={ref}\r\n    data-slot=\"input-group-input\"\r\n    className={cn(\r\n      \"h-full w-full bg-transparent px-3 font-[family-name:var(--pixel-font)] text-xs\",\r\n      \"placeholder:text-muted-foreground focus-visible:outline-none\",\r\n      className\r\n    )}\r\n    {...props}\r\n  />\r\n));\r\nPixelInputGroupInput.displayName = \"PixelInputGroupInput\";\r\n\r\nconst PixelInputGroupAddon = React.forwardRef<\r\n  HTMLDivElement,\r\n  React.HTMLAttributes<HTMLDivElement> & { align?: \"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\" }\r\n>(({ className, align = \"inline-start\", ...props }, ref) => (\r\n  <div\r\n    ref={ref}\r\n    data-slot=\"input-group-addon\"\r\n    data-align={align}\r\n    className={cn(\r\n      \"flex items-center gap-2 border-foreground bg-muted px-3 text-[10px] uppercase tracking-widest text-muted-foreground\",\r\n      align === \"inline-start\" && \"border-r-2\",\r\n      align === \"inline-end\" && \"border-l-2\",\r\n      align === \"block-start\" && \"border-b-2 w-full\",\r\n      align === \"block-end\" && \"border-t-2 w-full\",\r\n      className\r\n    )}\r\n    {...props}\r\n  />\r\n));\r\nPixelInputGroupAddon.displayName = \"PixelInputGroupAddon\";\r\n\r\nconst PixelInputGroupText = React.forwardRef<\r\n  HTMLSpanElement,\r\n  React.HTMLAttributes<HTMLSpanElement>\r\n>(({ className, ...props }, ref) => (\r\n  <span ref={ref} data-slot=\"input-group-text\" className={cn(\"text-[10px] uppercase tracking-widest text-muted-foreground\", className)} {...props} />\r\n));\r\nPixelInputGroupText.displayName = \"PixelInputGroupText\";\r\n\r\nconst PixelInputGroupTextarea = React.forwardRef<\r\n  HTMLTextAreaElement,\r\n  React.TextareaHTMLAttributes<HTMLTextAreaElement>\r\n>(({ className, ...props }, ref) => (\r\n  <textarea\r\n    ref={ref}\r\n    data-slot=\"input-group-textarea\"\r\n    className={cn(\r\n      \"min-h-[80px] w-full bg-transparent px-3 py-2 font-[family-name:var(--pixel-font)] text-xs\",\r\n      \"placeholder:text-muted-foreground focus-visible:outline-none resize-none\",\r\n      className\r\n    )}\r\n    {...props}\r\n  />\r\n));\r\nPixelInputGroupTextarea.displayName = \"PixelInputGroupTextarea\";\r\n\r\nexport { PixelInputGroup, PixelInputGroupInput, PixelInputGroupAddon, PixelInputGroupText, PixelInputGroupTextarea, inputGroupVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "input-otp",
@@ -677,7 +719,13 @@
         "utils",
         "input"
       ],
-      "files": []
+      "files": [
+        {
+          "path": "components/ui/input-otp.tsx",
+          "content": "import * as React from \"react\";\r\nimport { OTPInput, OTPInputContext } from \"input-otp\";\r\nimport { Minus } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst PixelInputOTP = React.forwardRef<\r\n  React.ElementRef<typeof OTPInput>,\r\n  React.ComponentPropsWithoutRef<typeof OTPInput>\r\n>(({ className, containerClassName, ...props }, ref) => (\r\n  <OTPInput\r\n    ref={ref}\r\n    containerClassName={cn(\"flex items-center gap-2 has-[:disabled]:opacity-50\", containerClassName)}\r\n    className={cn(\"disabled:cursor-not-allowed\", className)}\r\n    {...props}\r\n  />\r\n));\r\nPixelInputOTP.displayName = \"PixelInputOTP\";\r\n\r\nconst PixelInputOTPGroup = React.forwardRef<\r\n  React.ElementRef<\"div\">,\r\n  React.ComponentPropsWithoutRef<\"div\">\r\n>(({ className, ...props }, ref) => (\r\n  <div ref={ref} data-slot=\"input-otp-group\" className={cn(\"flex items-center\", className)} {...props} />\r\n));\r\nPixelInputOTPGroup.displayName = \"PixelInputOTPGroup\";\r\n\r\nconst PixelInputOTPSlot = React.forwardRef<\r\n  React.ElementRef<\"div\">,\r\n  React.ComponentPropsWithoutRef<\"div\"> & { index: number }\r\n>(({ index, className, ...props }, ref) => {\r\n  const inputOTPContext = React.useContext(OTPInputContext);\r\n  const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index];\r\n\r\n  return (\r\n    <div\r\n      ref={ref}\r\n      data-slot=\"input-otp-slot\"\r\n      data-active={isActive}\r\n      className={cn(\r\n        \"relative flex h-10 w-10 items-center justify-center border-2 border-foreground text-sm font-[family-name:var(--pixel-font)]\",\r\n        \"transition-all\",\r\n        isActive && \"z-10 border-primary ring-2 ring-ring ring-offset-1 ring-offset-background\",\r\n        className\r\n      )}\r\n      {...props}\r\n    >\r\n      {char}\r\n      {hasFakeCaret && (\r\n        <div className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\r\n          <div className=\"h-4 w-px animate-caret-blink bg-foreground duration-1000\" />\r\n        </div>\r\n      )}\r\n    </div>\r\n  );\r\n});\r\nPixelInputOTPSlot.displayName = \"PixelInputOTPSlot\";\r\n\r\nconst PixelInputOTPSeparator = React.forwardRef<\r\n  React.ElementRef<\"div\">,\r\n  React.ComponentPropsWithoutRef<\"div\">\r\n>(({ ...props }, ref) => (\r\n  <div ref={ref} data-slot=\"input-otp-separator\" role=\"separator\" {...props}>\r\n    <Minus strokeWidth={3} />\r\n  </div>\r\n));\r\nPixelInputOTPSeparator.displayName = \"PixelInputOTPSeparator\";\r\n\r\nexport { PixelInputOTP, PixelInputOTPGroup, PixelInputOTPSlot, PixelInputOTPSeparator };\r\n",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "kbd",
@@ -690,7 +738,13 @@
       "registryDependencies": [
         "utils"
       ],
-      "files": []
+      "files": [
+        {
+          "path": "components/ui/kbd.tsx",
+          "content": "import { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nconst kbdVariants = cva(\r\n  \"pointer-events-none inline-flex select-none items-center justify-center gap-1 border-2 border-foreground bg-muted font-[family-name:var(--pixel-font)] uppercase\",\r\n  {\r\n    variants: {\r\n      size: {\r\n        default: \"h-6 min-w-6 px-1 text-[10px]\",\r\n        sm: \"h-5 min-w-5 px-0.5 text-[8px]\",\r\n        lg: \"h-8 min-w-8 px-2 text-xs\",\r\n      },\r\n    },\r\n    defaultVariants: { size: \"default\" },\r\n  }\r\n);\r\n\r\nconst Kbd = React.forwardRef<\r\n  HTMLDivElement,\r\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof kbdVariants>\r\n>(({ className, size, ...props }, ref) => (\r\n  <div ref={ref} data-slot=\"kbd\" className={cn(kbdVariants({ size }), className)} {...props} />\r\n));\r\nKbd.displayName = \"Kbd\";\r\n\r\nconst KbdGroup = React.forwardRef<\r\n  HTMLDivElement,\r\n  React.HTMLAttributes<HTMLDivElement>\r\n>(({ className, ...props }, ref) => (\r\n  <div ref={ref} data-slot=\"kbd-group\" className={cn(\"inline-flex items-center gap-1\", className)} {...props} />\r\n));\r\nKbdGroup.displayName = \"KbdGroup\";\r\n\r\nexport { Kbd as PixelKbd, KbdGroup as PixelKbdGroup, kbdVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "empty",
@@ -701,7 +755,13 @@
       "registryDependencies": [
         "utils"
       ],
-      "files": []
+      "files": [
+        {
+          "path": "components/ui/empty.tsx",
+          "content": "import { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\n\r\nfunction PixelEmpty({ className, ...props }: React.ComponentProps<\"div\">) {\r\n  return (\r\n    <div\r\n      data-slot=\"empty\"\r\n      className={cn(\r\n        \"flex min-w-0 flex-1 flex-col items-center justify-center gap-6 border-2 border-foreground p-6 text-center md:p-12\",\r\n        \"font-[family-name:var(--pixel-font)]\",\r\n        className\r\n      )}\r\n      {...props}\r\n    />\r\n  );\r\n}\r\n\r\nfunction PixelEmptyHeader({ className, ...props }: React.ComponentProps<\"div\">) {\r\n  return (\r\n    <div data-slot=\"empty-header\" className={cn(\"flex max-w-sm flex-col items-center gap-2 text-center\", className)} {...props} />\r\n  );\r\n}\r\n\r\nconst emptyMediaVariants = cva(\r\n  \"flex shrink-0 items-center justify-center mb-2 [&_svg]:pointer-events-none [&_svg]:shrink-0\",\r\n  {\r\n    variants: {\r\n      variant: {\r\n        default: \"bg-transparent\",\r\n        icon: \"bg-muted text-foreground flex size-10 shrink-0 items-center justify-center border-2 border-foreground [&_svg:not([class*='size-'])]:size-6\",\r\n      },\r\n    },\r\n    defaultVariants: { variant: \"default\" },\r\n  }\r\n);\r\n\r\nfunction PixelEmptyMedia({\r\n  className, variant = \"default\", ...props\r\n}: React.ComponentProps<\"div\"> & VariantProps<typeof emptyMediaVariants>) {\r\n  return (\r\n    <div data-slot=\"empty-icon\" data-variant={variant} className={cn(emptyMediaVariants({ variant, className }))} {...props} />\r\n  );\r\n}\r\n\r\nfunction PixelEmptyTitle({ className, ...props }: React.ComponentProps<\"div\">) {\r\n  return <div data-slot=\"empty-title\" className={cn(\"text-sm uppercase tracking-widest\", className)} {...props} />;\r\n}\r\n\r\nfunction PixelEmptyDescription({ className, ...props }: React.ComponentProps<\"p\">) {\r\n  return (\r\n    <div\r\n      data-slot=\"empty-description\"\r\n      className={cn(\"text-xs text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a]:hover:text-primary\", className)}\r\n      {...props}\r\n    />\r\n  );\r\n}\r\n\r\nfunction PixelEmptyContent({ className, ...props }: React.ComponentProps<\"div\">) {\r\n  return (\r\n    <div\r\n      data-slot=\"empty-content\"\r\n      className={cn(\"flex w-full max-w-sm min-w-0 flex-col items-center gap-4 text-xs\", className)}\r\n      {...props}\r\n    />\r\n  );\r\n}\r\n\r\nexport {\r\n  PixelEmpty, PixelEmptyHeader, PixelEmptyTitle, PixelEmptyDescription,\r\n  PixelEmptyContent, PixelEmptyMedia,\r\n};\r\n",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "item",

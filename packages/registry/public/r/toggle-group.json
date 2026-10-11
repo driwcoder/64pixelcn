@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle-group",
+  "type": "registry:ui",
+  "title": "Toggle Group",
+  "description": "Pixel art toggle group",
+  "dependencies": [
+    "@radix-ui/react-toggle-group"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "content": "import * as React from \"react\";\r\nimport * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\";\r\nimport { type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { toggleVariants } from \"./toggle\";\r\n\r\nconst PixelToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants>>({ size: \"default\", variant: \"default\" });\r\n\r\nconst PixelToggleGroup = React.forwardRef<\r\n  React.ElementRef<typeof ToggleGroupPrimitive.Root>,\r\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants>\r\n>(({ className, variant, size, children, ...props }, ref) => (\r\n  <ToggleGroupPrimitive.Root ref={ref} data-slot=\"toggle-group\" className={cn(\"flex items-center border-2 border-foreground [&>*:not(:first-child)]:border-l-2 [&>*:not(:first-child)]:border-l-foreground\", className)} {...props}>\r\n    <PixelToggleGroupContext.Provider value={{ variant, size }}>{children}</PixelToggleGroupContext.Provider>\r\n  </ToggleGroupPrimitive.Root>\r\n));\r\nPixelToggleGroup.displayName = \"PixelToggleGroup\";\r\n\r\nconst PixelToggleGroupItem = React.forwardRef<\r\n  React.ElementRef<typeof ToggleGroupPrimitive.Item>,\r\n  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> & VariantProps<typeof toggleVariants>\r\n>(({ className, children, variant, size, ...props }, ref) => {\r\n  const context = React.useContext(PixelToggleGroupContext);\r\n  return (\r\n    <ToggleGroupPrimitive.Item\r\n      ref={ref}\r\n      data-slot=\"toggle-group-item\"\r\n      className={cn(\r\n        toggleVariants({ variant: context.variant || variant, size: context.size || size }),\r\n        \"border-none shadow-none\",\r\n        className\r\n      )}\r\n      {...props}\r\n    >\r\n      {children}\r\n    </ToggleGroupPrimitive.Item>\r\n  );\r\n});\r\nPixelToggleGroupItem.displayName = \"PixelToggleGroupItem\";\r\n\r\nexport { PixelToggleGroup, PixelToggleGroupItem };\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}
