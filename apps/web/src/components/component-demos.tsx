@@ -41,6 +41,7 @@ import {
   PixelSidebarTrigger, PixelSkeleton, PixelSlider, PixelSpinner, PixelSwitch, PixelTable,
   PixelTableBody, PixelTableCaption, PixelTableCell, PixelTableHead, PixelTableHeader,
   PixelTableRow, PixelTabs, PixelTabsContent, PixelTabsList, PixelTabsTrigger, PixelTextarea,
+  PixelToast, PixelToastProvider, PixelToastViewport, PixelToastTitle, PixelToastDescription, PixelToastAction, PixelToastClose,
   PixelAlertDialog, PixelAlertDialogAction, PixelAlertDialogCancel, PixelAlertDialogContent, PixelAlertDialogDescription, PixelAlertDialogFooter, PixelAlertDialogHeader, PixelAlertDialogTitle, PixelAlertDialogTrigger,
   PixelPagination, PixelPaginationContent, PixelPaginationEllipsis, PixelPaginationItem, PixelPaginationLink, PixelPaginationNext, PixelPaginationPrevious,
   PixelHealthBar, PixelManaBar, PixelXpBar, PixelEnemyHealthDisplay, PixelRetroModeSwitcher, PixelThemeSelector,
@@ -774,6 +775,10 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
     </PixelTooltipProvider>
   ),
 
+  toast: () => (
+    <ToastDemo />
+  ),
+
   typography: () => (
     <div className="space-y-2 w-full">
       <PixelTypographyH1>Taxing Laughter</PixelTypographyH1>
@@ -1049,4 +1054,53 @@ function RetroModeDemo() {
 function ThemeSelectorDemo() {
   const [theme, setTheme] = React.useState("nintendo");
   return <PixelThemeSelector value={theme} onValueChange={setTheme} className="max-w-sm" />;
+}
+
+// ─── Toast demo ───────────────────────────────────────────────
+function ToastDemo() {
+  const [openDefault, setOpenDefault] = React.useState(false);
+  const [openSuccess, setOpenSuccess] = React.useState(false);
+  const [openError, setOpenError] = React.useState(false);
+
+  return (
+    <PixelToastProvider swipeDirection="right">
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        <PixelButton variant="outline" size="sm" onClick={() => setOpenDefault(true)}>
+          Show Toast
+        </PixelButton>
+        <PixelButton variant="outline" size="sm" onClick={() => setOpenSuccess(true)}>
+          Success
+        </PixelButton>
+        <PixelButton variant="destructive" size="sm" onClick={() => setOpenError(true)}>
+          Error
+        </PixelButton>
+      </div>
+
+      <PixelToast open={openDefault} onOpenChange={setOpenDefault}>
+        <div className="grid gap-1">
+          <PixelToastTitle>Scheduled: Catch up</PixelToastTitle>
+          <PixelToastDescription>Friday, February 10, 2024 at 5:57 PM</PixelToastDescription>
+        </div>
+        <PixelToastAction altText="Try again">Try again</PixelToastAction>
+      </PixelToast>
+
+      <PixelToast variant="success" open={openSuccess} onOpenChange={setOpenSuccess}>
+        <div className="grid gap-1">
+          <PixelToastTitle>Success</PixelToastTitle>
+          <PixelToastDescription>Your changes have been saved.</PixelToastDescription>
+        </div>
+        <PixelToastClose />
+      </PixelToast>
+
+      <PixelToast variant="destructive" open={openError} onOpenChange={setOpenError}>
+        <div className="grid gap-1">
+          <PixelToastTitle>Error</PixelToastTitle>
+          <PixelToastDescription>Something went wrong. Please retry.</PixelToastDescription>
+        </div>
+        <PixelToastAction altText="Try again">Try again</PixelToastAction>
+      </PixelToast>
+
+      <PixelToastViewport />
+    </PixelToastProvider>
+  );
 }
