@@ -26,7 +26,7 @@ const SIZES: PixelSize[] = [8, 16, 32, 64, 128];
 export default function CreatePage() {
   const { preset, setPreset, font, setFont, size, setSize } = usePixel();
 
-  const installCommand = `npx shadcn@latest init <your-url>/r/pixelcn.json`;
+  const installCommand = `npx shadcn@latest init https://pixelcn.vercel.app/r/pixelcn.json`;
 
   return (
     <main className="min-h-screen px-6 py-12">
@@ -119,7 +119,10 @@ export default function CreatePage() {
               {installCommand}
             </pre>
             <p className="mt-2 text-xs text-muted-foreground">
-              Replace &lt;your-url&gt; with your deployed registry URL after deployment.
+              Registry hosted at{" "}
+              <a href="https://pixelcn.vercel.app" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                pixelcn.vercel.app
+              </a>
             </p>
           </PixelCardContent>
         </PixelCard>

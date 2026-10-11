@@ -41,6 +41,9 @@ import {
   PixelSidebarTrigger, PixelSkeleton, PixelSlider, PixelSpinner, PixelSwitch, PixelTable,
   PixelTableBody, PixelTableCaption, PixelTableCell, PixelTableHead, PixelTableHeader,
   PixelTableRow, PixelTabs, PixelTabsContent, PixelTabsList, PixelTabsTrigger, PixelTextarea,
+  PixelAlertDialog, PixelAlertDialogAction, PixelAlertDialogCancel, PixelAlertDialogContent, PixelAlertDialogDescription, PixelAlertDialogFooter, PixelAlertDialogHeader, PixelAlertDialogTitle, PixelAlertDialogTrigger,
+  PixelPagination, PixelPaginationContent, PixelPaginationEllipsis, PixelPaginationItem, PixelPaginationLink, PixelPaginationNext, PixelPaginationPrevious,
+  PixelHealthBar, PixelManaBar, PixelXpBar, PixelEnemyHealthDisplay, PixelRetroModeSwitcher, PixelThemeSelector,
   PixelToggle, PixelToggleGroup, PixelToggleGroupItem, PixelTooltip, PixelTooltipContent,
   PixelTooltipProvider, PixelTooltipTrigger, PixelTypographyH1, PixelTypographyH2,
   PixelTypographyH3, PixelTypographyP, PixelTypographyBlockquote, PixelTypographyList,
@@ -785,6 +788,46 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
       <PixelTypographyMuted>Muted description text.</PixelTypographyMuted>
     </div>
   ),
+  "alert-dialog": () => (
+    <PixelAlertDialog>
+      <PixelAlertDialogTrigger asChild>
+        <PixelButton variant="outline">Delete Account</PixelButton>
+      </PixelAlertDialogTrigger>
+      <PixelAlertDialogContent>
+        <PixelAlertDialogHeader>
+          <PixelAlertDialogTitle>Are you absolutely sure?</PixelAlertDialogTitle>
+          <PixelAlertDialogDescription>
+            This action cannot be undone. This will permanently delete your account.
+          </PixelAlertDialogDescription>
+        </PixelAlertDialogHeader>
+        <PixelAlertDialogFooter>
+          <PixelAlertDialogCancel>Cancel</PixelAlertDialogCancel>
+          <PixelAlertDialogAction>Continue</PixelAlertDialogAction>
+        </PixelAlertDialogFooter>
+      </PixelAlertDialogContent>
+    </PixelAlertDialog>
+  ),
+
+  pagination: () => (
+    <PixelPagination>
+      <PixelPaginationContent>
+        <PixelPaginationItem><PixelPaginationPrevious href="#" /></PixelPaginationItem>
+        <PixelPaginationItem><PixelPaginationLink href="#">1</PixelPaginationLink></PixelPaginationItem>
+        <PixelPaginationItem><PixelPaginationLink href="#" isActive>2</PixelPaginationLink></PixelPaginationItem>
+        <PixelPaginationItem><PixelPaginationLink href="#">3</PixelPaginationLink></PixelPaginationItem>
+        <PixelPaginationItem><PixelPaginationEllipsis /></PixelPaginationItem>
+        <PixelPaginationItem><PixelPaginationNext href="#" /></PixelPaginationItem>
+      </PixelPaginationContent>
+    </PixelPagination>
+  ),
+
+  "health-bar": () => <HealthBarDemo />,
+  "mana-bar": () => <ManaBarDemo />,
+  "xp-bar": () => <XpBarDemo />,
+  "enemy-health-display": () => <EnemyHealthDemo />,
+  "retro-mode-switcher": () => <RetroModeDemo />,
+  "theme-selector": () => <ThemeSelectorDemo />,
+
 };
 
 // ─── Demos interativos ───────────────────────────────────────────
@@ -961,4 +1004,49 @@ function DataTableDemo() {
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return <PixelDataTable table={fakeTable as any} columns={columns} />;
+}
+
+// ─── Gaming demos ───────────────────────────────────────────────
+function HealthBarDemo() {
+  const [hp, setHp] = React.useState(72);
+  return (
+    <div className="w-full max-w-xs space-y-3">
+      <PixelHealthBar value={hp} showIcon />
+      <div className="flex gap-2">
+        <PixelButton size="sm" variant="destructive" onClick={() => setHp(Math.max(0, hp - 25))}>-25</PixelButton>
+        <PixelButton size="sm" onClick={() => setHp(Math.min(100, hp + 25))}>+25</PixelButton>
+      </div>
+    </div>
+  );
+}
+
+function ManaBarDemo() {
+  const [mp, setMp] = React.useState(45);
+  return (
+    <div className="w-full max-w-xs space-y-3">
+      <PixelManaBar value={mp} showIcon />
+      <div className="flex gap-2">
+        <PixelButton size="sm" variant="outline" onClick={() => setMp(Math.max(0, mp - 20))}>Cast</PixelButton>
+        <PixelButton size="sm" onClick={() => setMp(Math.min(100, mp + 20))}>Restore</PixelButton>
+      </div>
+    </div>
+  );
+}
+
+function XpBarDemo() {
+  return <PixelXpBar value={65} level={7} showIcon className="max-w-xs" />;
+}
+
+function EnemyHealthDemo() {
+  return <PixelEnemyHealthDisplay name="Dark Lord" level={42} value={8} max={100} segments={12} className="max-w-xs" />;
+}
+
+function RetroModeDemo() {
+  const [on, setOn] = React.useState(true);
+  return <PixelRetroModeSwitcher checked={on} onCheckedChange={setOn} />;
+}
+
+function ThemeSelectorDemo() {
+  const [theme, setTheme] = React.useState("nintendo");
+  return <PixelThemeSelector value={theme} onValueChange={setTheme} className="max-w-sm" />;
 }

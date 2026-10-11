@@ -93,6 +93,14 @@ const components = [
   { name: "resizable", title: "Resizable", description: "Pixel art resizable panels", dependencies: ["react-resizable-panels"], registryDependencies: ["utils"] },
   { name: "command", title: "Command", description: "Pixel art command palette", dependencies: ["cmdk"], registryDependencies: ["utils", "dialog"] },
   { name: "direction", title: "Direction", description: "Pixel art direction provider", dependencies: ["@radix-ui/react-direction"], registryDependencies: ["utils"] },
+  { name: "alert-dialog", title: "Alert Dialog", description: "Pixel art alert dialog", dependencies: ["@radix-ui/react-alert-dialog"], registryDependencies: ["utils", "button"] },
+  { name: "pagination", title: "Pagination", description: "Pixel art pagination", dependencies: ["lucide-react"], registryDependencies: ["utils", "button"] },
+  { name: "health-bar", title: "Health Bar", description: "Player health indicator bar", dependencies: ["class-variance-authority", "lucide-react"], registryDependencies: ["utils"] },
+  { name: "mana-bar", title: "Mana Bar", description: "Magic/resource bar", dependencies: ["class-variance-authority", "lucide-react"], registryDependencies: ["utils"] },
+  { name: "xp-bar", title: "XP Bar", description: "Experience progression bar", dependencies: ["class-variance-authority", "lucide-react"], registryDependencies: ["utils"] },
+  { name: "enemy-health-display", title: "Enemy Health Display", description: "Boss and enemy health UI", dependencies: ["lucide-react"], registryDependencies: ["utils"] },
+  { name: "retro-mode-switcher", title: "Retro Mode Switcher", description: "Toggle retro visual effects", dependencies: ["class-variance-authority", "lucide-react"], registryDependencies: ["utils"] },
+  { name: "theme-selector", title: "Theme Selector", description: "Switch between retro themes", dependencies: ["lucide-react"], registryDependencies: ["utils"] },
 ];
 
 if (!existsSync(PUBLIC_DIR)) mkdirSync(PUBLIC_DIR, { recursive: true });

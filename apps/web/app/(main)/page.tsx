@@ -16,7 +16,7 @@ export default function Home() {
           </h1>
           <p className="mb-8 font-[family-name:var(--pixel-font)] text-sm text-muted-foreground leading-relaxed max-w-2xl mx-auto">
             A pixel art component library based on shadcn/ui.
-            62 components. Install, customize presets, and build retro UIs.
+            70 components including gaming bars. Install, customize presets, and build retro UIs.
           </p>
           <div className="flex items-center justify-center gap-4">
             <Link href="/docs/components">
@@ -24,11 +24,16 @@ export default function Home() {
                 Browse Components <ArrowRight className="ml-2 h-4 w-4" />
               </PixelButton>
             </Link>
-            <Link href="/create">
+            <Link href="/docs/blocks">
               <PixelButton size="lg" variant="outline">
-                Create Preset
+                Browse Blocks
               </PixelButton>
             </Link>
+          </div>
+          <div className="mt-4">
+            <a href="https://pixelcn.vercel.app" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline">
+              pixelcn.vercel.app
+            </a>
           </div>
         </div>
 
@@ -48,9 +53,9 @@ export default function Home() {
 
           <PixelCard>
             <PixelCardHeader>
-              <PixelCardTitle>62 Components</PixelCardTitle>
+              <PixelCardTitle>70 Components + Blocks</PixelCardTitle>
               <PixelCardDescription>
-                Every shadcn component in pixel art form.
+                Every shadcn component plus gaming bars (HP, MP, XP).
               </PixelCardDescription>
             </PixelCardHeader>
             <PixelCardContent>

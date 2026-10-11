@@ -1172,6 +1172,164 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "Pixel art alert dialog",
+      "dependencies": [
+        "@radix-ui/react-alert-dialog"
+      ],
+      "registryDependencies": [
+        "utils",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "components/ui/alert-dialog.tsx",
+          "content": "import * as React from \"react\";\nimport * as AlertDialogPrimitive from \"@radix-ui/react-alert-dialog\";\nimport { cn } from \"@/lib/utils\";\nimport { pixelButtonVariants } from \"./button\";\n\nconst PixelAlertDialog = AlertDialogPrimitive.Root;\nconst PixelAlertDialogTrigger = AlertDialogPrimitive.Trigger;\nconst PixelAlertDialogPortal = AlertDialogPrimitive.Portal;\n\nconst PixelAlertDialogOverlay = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Overlay>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Overlay\n    className={cn(\"fixed inset-0 z-50 bg-black/70 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\", className)}\n    {...props}\n    ref={ref}\n  />\n));\nPixelAlertDialogOverlay.displayName = \"PixelAlertDialogOverlay\";\n\nconst PixelAlertDialogContent = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Content>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Portal>\n    <PixelAlertDialogOverlay />\n    <AlertDialogPrimitive.Content\n      ref={ref}\n      data-slot=\"alert-dialog-content\"\n      className={cn(\n        \"fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border-2 border-foreground bg-popover p-6 shadow-[var(--pixel-shadow)]\",\n        \"font-[family-name:var(--pixel-font)] duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",\n        className\n      )}\n      {...props}\n    />\n  </AlertDialogPrimitive.Portal>\n));\nPixelAlertDialogContent.displayName = \"PixelAlertDialogContent\";\n\nconst PixelAlertDialogHeader = ({ className, ...props }: React.ComponentProps<\"div\">) => (\n  <div className={cn(\"flex flex-col gap-2 text-center sm:text-left\", className)} {...props} />\n);\nPixelAlertDialogHeader.displayName = \"PixelAlertDialogHeader\";\n\nconst PixelAlertDialogFooter = ({ className, ...props }: React.ComponentProps<\"div\">) => (\n  <div className={cn(\"flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2\", className)} {...props} />\n);\nPixelAlertDialogFooter.displayName = \"PixelAlertDialogFooter\";\n\nconst PixelAlertDialogTitle = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Title>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Title ref={ref} className={cn(\"text-sm uppercase tracking-widest\", className)} {...props} />\n));\nPixelAlertDialogTitle.displayName = \"PixelAlertDialogTitle\";\n\nconst PixelAlertDialogDescription = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Description>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Description ref={ref} className={cn(\"text-xs text-muted-foreground\", className)} {...props} />\n));\nPixelAlertDialogDescription.displayName = \"PixelAlertDialogDescription\";\n\nconst PixelAlertDialogAction = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Action>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Action ref={ref} className={cn(pixelButtonVariants({ variant: \"default\" }), className)} {...props} />\n));\nPixelAlertDialogAction.displayName = \"PixelAlertDialogAction\";\n\nconst PixelAlertDialogCancel = React.forwardRef<\n  React.ElementRef<typeof AlertDialogPrimitive.Cancel>,\n  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>\n>(({ className, ...props }, ref) => (\n  <AlertDialogPrimitive.Cancel ref={ref} className={cn(pixelButtonVariants({ variant: \"outline\" }), \"mt-2 sm:mt-0\", className)} {...props} />\n));\nPixelAlertDialogCancel.displayName = \"PixelAlertDialogCancel\";\n\nexport {\n  PixelAlertDialog, PixelAlertDialogPortal, PixelAlertDialogOverlay, PixelAlertDialogTrigger,\n  PixelAlertDialogContent, PixelAlertDialogHeader, PixelAlertDialogFooter, PixelAlertDialogTitle,\n  PixelAlertDialogDescription, PixelAlertDialogAction, PixelAlertDialogCancel,\n};\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Pixel art pagination",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "components/ui/pagination.tsx",
+          "content": "import * as React from \"react\";\r\nimport { ChevronLeft, ChevronRight, MoreHorizontal } from \"lucide-react\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { PixelButton } from \"./button\";\r\n\r\nconst PixelPagination = ({ className, ...props }: React.ComponentProps<\"nav\">) => (\r\n  <nav role=\"navigation\" aria-label=\"pagination\" data-slot=\"pagination\" className={cn(\"mx-auto flex w-full justify-center font-[family-name:var(--pixel-font)]\", className)} {...props} />\r\n);\r\nPixelPagination.displayName = \"PixelPagination\";\r\n\r\nconst PixelPaginationContent = React.forwardRef<HTMLUListElement, React.ComponentProps<\"ul\">>(\r\n  ({ className, ...props }, ref) => (\r\n    <ul ref={ref} data-slot=\"pagination-content\" className={cn(\"flex flex-row items-center gap-1\", className)} {...props} />\r\n  )\r\n);\r\nPixelPaginationContent.displayName = \"PixelPaginationContent\";\r\n\r\nconst PixelPaginationItem = React.forwardRef<HTMLLIElement, React.ComponentProps<\"li\">>(\r\n  ({ className, ...props }, ref) => <li ref={ref} data-slot=\"pagination-item\" className={cn(\"\", className)} {...props} />\r\n);\r\nPixelPaginationItem.displayName = \"PixelPaginationItem\";\r\n\r\ntype PixelPaginationLinkProps = {\r\n  isActive?: boolean;\r\n} & Pick<React.ComponentProps<typeof PixelButton>, \"size\"> & React.ComponentProps<\"a\">;\r\n\r\nconst PixelPaginationLink = ({ className, isActive, size = \"icon\", ...props }: PixelPaginationLinkProps) => (\r\n  <PixelButton\r\n    aria-current={isActive ? \"page\" : undefined}\r\n    variant={isActive ? \"default\" : \"ghost\"}\r\n    size={size}\r\n    className={cn(\"min-w-9\", className)}\r\n    {...(props as React.ComponentProps<typeof PixelButton>)}\r\n  />\r\n);\r\nPixelPaginationLink.displayName = \"PixelPaginationLink\";\r\n\r\nconst PixelPaginationPrevious = ({ className, ...props }: React.ComponentProps<typeof PixelPaginationLink>) => (\r\n  <PixelPaginationLink aria-label=\"Go to previous page\" size=\"default\" className={cn(\"gap-1 px-2.5\", className)} {...props}>\r\n    <ChevronLeft className=\"h-4 w-4\" strokeWidth={3} />\r\n    <span className=\"hidden sm:block\">Prev</span>\r\n  </PixelPaginationLink>\r\n);\r\nPixelPaginationPrevious.displayName = \"PixelPaginationPrevious\";\r\n\r\nconst PixelPaginationNext = ({ className, ...props }: React.ComponentProps<typeof PixelPaginationLink>) => (\r\n  <PixelPaginationLink aria-label=\"Go to next page\" size=\"default\" className={cn(\"gap-1 px-2.5\", className)} {...props}>\r\n    <span className=\"hidden sm:block\">Next</span>\r\n    <ChevronRight className=\"h-4 w-4\" strokeWidth={3} />\r\n  </PixelPaginationLink>\r\n);\r\nPixelPaginationNext.displayName = \"PixelPaginationNext\";\r\n\r\nconst PixelPaginationEllipsis = ({ className, ...props }: React.ComponentProps<\"span\">) => (\r\n  <span aria-hidden data-slot=\"pagination-ellipsis\" className={cn(\"flex h-9 w-9 items-center justify-center\", className)} {...props}>\r\n    <MoreHorizontal className=\"h-4 w-4\" strokeWidth={3} />\r\n    <span className=\"sr-only\">More pages</span>\r\n  </span>\r\n);\r\nPixelPaginationEllipsis.displayName = \"PixelPaginationEllipsis\";\r\n\r\nexport {\r\n  PixelPagination, PixelPaginationContent, PixelPaginationLink, PixelPaginationItem,\r\n  PixelPaginationPrevious, PixelPaginationNext, PixelPaginationEllipsis,\r\n};\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "health-bar",
+      "type": "registry:ui",
+      "title": "Health Bar",
+      "description": "Player health indicator bar",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/health-bar.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { Heart } from \"lucide-react\";\r\n\r\nconst healthBarVariants = cva(\r\n  \"relative w-full overflow-hidden border-2 border-foreground bg-muted font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)]\",\r\n  {\r\n    variants: {\r\n      size: {\r\n        sm: \"h-3\",\r\n        default: \"h-5\",\r\n        lg: \"h-7\",\r\n      },\r\n    },\r\n    defaultVariants: { size: \"default\" },\r\n  }\r\n);\r\n\r\nexport interface PixelHealthBarProps\r\n  extends React.HTMLAttributes<HTMLDivElement>,\r\n    VariantProps<typeof healthBarVariants> {\r\n  value: number;\r\n  max?: number;\r\n  showLabel?: boolean;\r\n  showIcon?: boolean;\r\n}\r\n\r\nconst PixelHealthBar = React.forwardRef<HTMLDivElement, PixelHealthBarProps>(\r\n  ({ className, value, max = 100, size, showLabel = true, showIcon = false, ...props }, ref) => {\r\n    const pct = Math.max(0, Math.min(100, (value / max) * 100));\r\n    const danger = pct < 25;\r\n\r\n    return (\r\n      <div ref={ref} data-slot=\"health-bar\" className={cn(\"w-full\", className)} {...props}>\r\n        {showLabel && (\r\n          <div className=\"mb-1 flex items-center justify-between text-[10px] uppercase tracking-widest\">\r\n            <span className=\"flex items-center gap-1\">\r\n              {showIcon && <Heart className=\"h-3 w-3\" strokeWidth={3} />} HP\r\n            </span>\r\n            <span className={danger ? \"text-destructive\" : \"text-muted-foreground\"}>\r\n              {value} / {max}\r\n            </span>\r\n          </div>\r\n        )}\r\n        <div\r\n          className={cn(healthBarVariants({ size }))}\r\n          role=\"progressbar\"\r\n          aria-valuenow={value}\r\n          aria-valuemin={0}\r\n          aria-valuemax={max}\r\n        >\r\n          <div\r\n            className={cn(\r\n              \"h-full transition-all duration-300\",\r\n              danger\r\n                ? \"bg-destructive\"\r\n                : pct < 60\r\n                ? \"bg-yellow-500\"\r\n                : \"bg-green-500\",\r\n            )}\r\n            style={{\r\n              width: `${pct}%`,\r\n              backgroundImage: \"repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.2) 3px, rgba(0,0,0,0.2) 4px)\",\r\n            }}\r\n          />\r\n          {/* segmented notches */}\r\n          <div className=\"pointer-events-none absolute inset-0 flex justify-between px-0 opacity-40\">\r\n            {Array.from({ length: 9 }).map((_, i) => (\r\n              <div key={i} className=\"w-px bg-foreground\" />\r\n            ))}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    );\r\n  }\r\n);\r\nPixelHealthBar.displayName = \"PixelHealthBar\";\r\n\r\nexport { PixelHealthBar, healthBarVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "mana-bar",
+      "type": "registry:ui",
+      "title": "Mana Bar",
+      "description": "Magic/resource bar",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/mana-bar.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { Sparkles } from \"lucide-react\";\r\n\r\nconst manaBarVariants = cva(\r\n  \"relative w-full overflow-hidden border-2 border-foreground bg-muted font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)]\",\r\n  {\r\n    variants: {\r\n      size: {\r\n        sm: \"h-3\",\r\n        default: \"h-5\",\r\n        lg: \"h-7\",\r\n      },\r\n    },\r\n    defaultVariants: { size: \"default\" },\r\n  }\r\n);\r\n\r\nexport interface PixelManaBarProps\r\n  extends React.HTMLAttributes<HTMLDivElement>,\r\n    VariantProps<typeof manaBarVariants> {\r\n  value: number;\r\n  max?: number;\r\n  showLabel?: boolean;\r\n  showIcon?: boolean;\r\n}\r\n\r\nconst PixelManaBar = React.forwardRef<HTMLDivElement, PixelManaBarProps>(\r\n  ({ className, value, max = 100, size, showLabel = true, showIcon = false, ...props }, ref) => {\r\n    const pct = Math.max(0, Math.min(100, (value / max) * 100));\r\n\r\n    return (\r\n      <div ref={ref} data-slot=\"mana-bar\" className={cn(\"w-full\", className)} {...props}>\r\n        {showLabel && (\r\n          <div className=\"mb-1 flex items-center justify-between text-[10px] uppercase tracking-widest\">\r\n            <span className=\"flex items-center gap-1\">\r\n              {showIcon && <Sparkles className=\"h-3 w-3\" strokeWidth={3} />} MP\r\n            </span>\r\n            <span className=\"text-muted-foreground\">\r\n              {value} / {max}\r\n            </span>\r\n          </div>\r\n        )}\r\n        <div\r\n          className={cn(manaBarVariants({ size }))}\r\n          role=\"progressbar\"\r\n          aria-valuenow={value}\r\n          aria-valuemin={0}\r\n          aria-valuemax={max}\r\n        >\r\n          <div\r\n            className=\"h-full bg-blue-500 transition-all duration-300\"\r\n            style={{\r\n              width: `${pct}%`,\r\n              backgroundImage: \"repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.2) 3px, rgba(0,0,0,0.2) 4px)\",\r\n            }}\r\n          />\r\n          <div className=\"pointer-events-none absolute inset-0 flex justify-between px-0 opacity-40\">\r\n            {Array.from({ length: 9 }).map((_, i) => (\r\n              <div key={i} className=\"w-px bg-foreground\" />\r\n            ))}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    );\r\n  }\r\n);\r\nPixelManaBar.displayName = \"PixelManaBar\";\r\n\r\nexport { PixelManaBar, manaBarVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "xp-bar",
+      "type": "registry:ui",
+      "title": "XP Bar",
+      "description": "Experience progression bar",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/xp-bar.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { Star } from \"lucide-react\";\r\n\r\nconst xpBarVariants = cva(\r\n  \"relative w-full overflow-hidden border-2 border-foreground bg-muted font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)]\",\r\n  {\r\n    variants: {\r\n      size: {\r\n        sm: \"h-3\",\r\n        default: \"h-5\",\r\n        lg: \"h-7\",\r\n      },\r\n    },\r\n    defaultVariants: { size: \"default\" },\r\n  }\r\n);\r\n\r\nexport interface PixelXpBarProps\r\n  extends React.HTMLAttributes<HTMLDivElement>,\r\n    VariantProps<typeof xpBarVariants> {\r\n  value: number;\r\n  max?: number;\r\n  level?: number;\r\n  showLabel?: boolean;\r\n  showIcon?: boolean;\r\n}\r\n\r\nconst PixelXpBar = React.forwardRef<HTMLDivElement, PixelXpBarProps>(\r\n  ({ className, value, max = 100, level, size, showLabel = true, showIcon = false, ...props }, ref) => {\r\n    const pct = Math.max(0, Math.min(100, (value / max) * 100));\r\n\r\n    return (\r\n      <div ref={ref} data-slot=\"xp-bar\" className={cn(\"w-full\", className)} {...props}>\r\n        {showLabel && (\r\n          <div className=\"mb-1 flex items-center justify-between text-[10px] uppercase tracking-widest\">\r\n            <span className=\"flex items-center gap-1\">\r\n              {showIcon && <Star className=\"h-3 w-3\" strokeWidth={3} />}\r\n              {level !== undefined ? `Lv ${level}` : \"XP\"}\r\n            </span>\r\n            <span className=\"text-muted-foreground\">\r\n              {value} / {max}\r\n            </span>\r\n          </div>\r\n        )}\r\n        <div\r\n          className={cn(xpBarVariants({ size }))}\r\n          role=\"progressbar\"\r\n          aria-valuenow={value}\r\n          aria-valuemin={0}\r\n          aria-valuemax={max}\r\n        >\r\n          <div\r\n            className=\"h-full bg-primary transition-all duration-300\"\r\n            style={{\r\n              width: `${pct}%`,\r\n              backgroundImage: \"repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.25) 3px, rgba(0,0,0,0.25) 4px)\",\r\n            }}\r\n          />\r\n          <div className=\"pointer-events-none absolute inset-0 flex justify-between px-0 opacity-40\">\r\n            {Array.from({ length: 9 }).map((_, i) => (\r\n              <div key={i} className=\"w-px bg-foreground\" />\r\n            ))}\r\n          </div>\r\n        </div>\r\n      </div>\r\n    );\r\n  }\r\n);\r\nPixelXpBar.displayName = \"PixelXpBar\";\r\n\r\nexport { PixelXpBar, xpBarVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "enemy-health-display",
+      "type": "registry:ui",
+      "title": "Enemy Health Display",
+      "description": "Boss and enemy health UI",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/enemy-health-display.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { Skull } from \"lucide-react\";\r\n\r\nexport interface PixelEnemyHealthDisplayProps\r\n  extends React.HTMLAttributes<HTMLDivElement> {\r\n  name: string;\r\n  level?: number;\r\n  value: number;\r\n  max?: number;\r\n  segments?: number;\r\n}\r\n\r\nconst PixelEnemyHealthDisplay = React.forwardRef<HTMLDivElement, PixelEnemyHealthDisplayProps>(\r\n  ({ className, name, level, value, max = 100, segments = 10, ...props }, ref) => {\r\n    const filled = Math.round((value / max) * segments);\r\n\r\n    return (\r\n      <div\r\n        ref={ref}\r\n        data-slot=\"enemy-health-display\"\r\n        className={cn(\r\n          \"w-full border-2 border-foreground bg-popover p-3 font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)]\",\r\n          className\r\n        )}\r\n        {...props}\r\n      >\r\n        {/* Header */}\r\n        <div className=\"mb-2 flex items-center justify-between\">\r\n          <div className=\"flex items-center gap-2\">\r\n            <Skull className=\"h-4 w-4 text-destructive\" strokeWidth={3} />\r\n            <span className=\"text-xs uppercase tracking-widest\">{name}</span>\r\n          </div>\r\n          {level !== undefined && (\r\n            <span className=\"text-[10px] text-muted-foreground\">Lv {level}</span>\r\n          )}\r\n        </div>\r\n\r\n        {/* Segmented bar */}\r\n        <div\r\n          className=\"flex h-4 w-full gap-px border-2 border-foreground bg-muted p-px\"\r\n          role=\"progressbar\"\r\n          aria-valuenow={value}\r\n          aria-valuemin={0}\r\n          aria-valuemax={max}\r\n        >\r\n          {Array.from({ length: segments }).map((_, i) => (\r\n            <div\r\n              key={i}\r\n              className={cn(\r\n                \"flex-1 transition-colors\",\r\n                i < filled ? \"bg-destructive\" : \"bg-transparent\"\r\n              )}\r\n            />\r\n          ))}\r\n        </div>\r\n\r\n        {/* HP text */}\r\n        <div className=\"mt-1 text-right text-[10px] text-muted-foreground\">\r\n          {value} / {max} HP\r\n        </div>\r\n      </div>\r\n    );\r\n  }\r\n);\r\nPixelEnemyHealthDisplay.displayName = \"PixelEnemyHealthDisplay\";\r\n\r\nexport { PixelEnemyHealthDisplay };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "retro-mode-switcher",
+      "type": "registry:ui",
+      "title": "Retro Mode Switcher",
+      "description": "Toggle retro visual effects",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/retro-mode-switcher.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cva, type VariantProps } from \"class-variance-authority\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { Monitor, Tv } from \"lucide-react\";\r\n\r\nconst retroModeSwitcherVariants = cva(\r\n  \"inline-flex items-center gap-2 border-2 border-foreground bg-card font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)] transition-all hover:bg-accent\",\r\n  {\r\n    variants: {\r\n      size: {\r\n        default: \"px-3 py-2 text-xs\",\r\n        sm: \"px-2 py-1 text-[10px]\",\r\n      },\r\n    },\r\n    defaultVariants: { size: \"default\" },\r\n  }\r\n);\r\n\r\nexport interface PixelRetroModeSwitcherProps\r\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\r\n    VariantProps<typeof retroModeSwitcherVariants> {\r\n  checked?: boolean;\r\n  onCheckedChange?: (checked: boolean) => void;\r\n}\r\n\r\nconst PixelRetroModeSwitcher = React.forwardRef<HTMLButtonElement, PixelRetroModeSwitcherProps>(\r\n  ({ className, size, checked = false, onCheckedChange, ...props }, ref) => {\r\n    return (\r\n      <button\r\n        ref={ref}\r\n        type=\"button\"\r\n        role=\"switch\"\r\n        aria-checked={checked}\r\n        data-slot=\"retro-mode-switcher\"\r\n        data-state={checked ? \"on\" : \"off\"}\r\n        onClick={() => onCheckedChange?.(!checked)}\r\n        className={cn(\r\n          retroModeSwitcherVariants({ size }),\r\n          checked && \"bg-primary text-primary-foreground\",\r\n          className\r\n        )}\r\n        {...props}\r\n      >\r\n        {checked ? (\r\n          <Tv className=\"h-4 w-4\" strokeWidth={3} />\r\n        ) : (\r\n          <Monitor className=\"h-4 w-4\" strokeWidth={3} />\r\n        )}\r\n        <span className=\"uppercase tracking-widest\">\r\n          {checked ? \"Retro ON\" : \"Retro OFF\"}\r\n        </span>\r\n      </button>\r\n    );\r\n  }\r\n);\r\nPixelRetroModeSwitcher.displayName = \"PixelRetroModeSwitcher\";\r\n\r\nexport { PixelRetroModeSwitcher, retroModeSwitcherVariants };\r\n",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "theme-selector",
+      "type": "registry:ui",
+      "title": "Theme Selector",
+      "description": "Switch between retro themes",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
+      "files": [
+        {
+          "path": "components/ui/theme-selector.tsx",
+          "content": "import * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { Palette } from \"lucide-react\";\r\n\r\nexport interface ThemeOption {\r\n  id: string;\r\n  label: string;\r\n  /** small color swatches to preview */\r\n  swatches: [string, string, string];\r\n}\r\n\r\nconst THEME_OPTIONS: ThemeOption[] = [\r\n  { id: \"nintendo\", label: \"Nintendo\", swatches: [\"#e91e63\", \"#1a1a2e\", \"#4fc3f7\"] },\r\n  { id: \"gameboy\", label: \"GameBoy\", swatches: [\"#9bbc0f\", \"#0f380f\", \"#8bac0f\"] },\r\n  { id: \"neon\", label: \"Neon\", swatches: [\"#f0f\", \"#0d001a\", \"#0ff\"] },\r\n  { id: \"sepia\", label: \"Sepia\", swatches: [\"#8b5a2b\", \"#f5deb3\", \"#a0522d\"] },\r\n  { id: \"mono\", label: \"Mono\", swatches: [\"#fff\", \"#0a0a0a\", \"#888\"] },\r\n];\r\n\r\nexport interface PixelThemeSelectorProps extends React.HTMLAttributes<HTMLDivElement> {\r\n  value?: string;\r\n  onValueChange?: (value: string) => void;\r\n}\r\n\r\nconst PixelThemeSelector = React.forwardRef<HTMLDivElement, PixelThemeSelectorProps>(\r\n  ({ className, value = \"nintendo\", onValueChange, ...props }, ref) => {\r\n    return (\r\n      <div\r\n        ref={ref}\r\n        data-slot=\"theme-selector\"\r\n        className={cn(\"w-full font-[family-name:var(--pixel-font)]\", className)}\r\n        {...props}\r\n      >\r\n        <div className=\"mb-2 flex items-center gap-2 text-[10px] uppercase tracking-widest text-muted-foreground\">\r\n          <Palette className=\"h-3 w-3\" strokeWidth={3} /> Theme\r\n        </div>\r\n        <div className=\"flex flex-wrap gap-2\">\r\n          {THEME_OPTIONS.map((theme) => {\r\n            const active = value === theme.id;\r\n            return (\r\n              <button\r\n                key={theme.id}\r\n                type=\"button\"\r\n                onClick={() => onValueChange?.(theme.id)}\r\n                data-active={active}\r\n                className={cn(\r\n                  \"flex items-center gap-2 border-2 border-foreground px-3 py-2 text-[10px] uppercase tracking-widest transition-all\",\r\n                  \"hover:-translate-y-0.5\",\r\n                  active\r\n                    ? \"bg-primary text-primary-foreground shadow-[var(--pixel-shadow)]\"\r\n                    : \"bg-card hover:bg-accent\"\r\n                )}\r\n              >\r\n                <span className=\"flex gap-0.5\">\r\n                  {theme.swatches.map((c, i) => (\r\n                    <span\r\n                      key={i}\r\n                      className=\"h-3 w-3 border border-foreground/40\"\r\n                      style={{ backgroundColor: c }}\r\n                    />\r\n                  ))}\r\n                </span>\r\n                {theme.label}\r\n              </button>\r\n            );\r\n          })}\r\n        </div>\r\n      </div>\r\n    );\r\n  }\r\n);\r\nPixelThemeSelector.displayName = \"PixelThemeSelector\";\r\n\r\nexport { PixelThemeSelector };\r\n",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

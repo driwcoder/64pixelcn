@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "enemy-health-display",
+  "type": "registry:ui",
+  "title": "Enemy Health Display",
+  "description": "Boss and enemy health UI",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/enemy-health-display.tsx",
+      "content": "import * as React from \"react\";\r\nimport { cn } from \"@/lib/utils\";\r\nimport { Skull } from \"lucide-react\";\r\n\r\nexport interface PixelEnemyHealthDisplayProps\r\n  extends React.HTMLAttributes<HTMLDivElement> {\r\n  name: string;\r\n  level?: number;\r\n  value: number;\r\n  max?: number;\r\n  segments?: number;\r\n}\r\n\r\nconst PixelEnemyHealthDisplay = React.forwardRef<HTMLDivElement, PixelEnemyHealthDisplayProps>(\r\n  ({ className, name, level, value, max = 100, segments = 10, ...props }, ref) => {\r\n    const filled = Math.round((value / max) * segments);\r\n\r\n    return (\r\n      <div\r\n        ref={ref}\r\n        data-slot=\"enemy-health-display\"\r\n        className={cn(\r\n          \"w-full border-2 border-foreground bg-popover p-3 font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)]\",\r\n          className\r\n        )}\r\n        {...props}\r\n      >\r\n        {/* Header */}\r\n        <div className=\"mb-2 flex items-center justify-between\">\r\n          <div className=\"flex items-center gap-2\">\r\n            <Skull className=\"h-4 w-4 text-destructive\" strokeWidth={3} />\r\n            <span className=\"text-xs uppercase tracking-widest\">{name}</span>\r\n          </div>\r\n          {level !== undefined && (\r\n            <span className=\"text-[10px] text-muted-foreground\">Lv {level}</span>\r\n          )}\r\n        </div>\r\n\r\n        {/* Segmented bar */}\r\n        <div\r\n          className=\"flex h-4 w-full gap-px border-2 border-foreground bg-muted p-px\"\r\n          role=\"progressbar\"\r\n          aria-valuenow={value}\r\n          aria-valuemin={0}\r\n          aria-valuemax={max}\r\n        >\r\n          {Array.from({ length: segments }).map((_, i) => (\r\n            <div\r\n              key={i}\r\n              className={cn(\r\n                \"flex-1 transition-colors\",\r\n                i < filled ? \"bg-destructive\" : \"bg-transparent\"\r\n              )}\r\n            />\r\n          ))}\r\n        </div>\r\n\r\n        {/* HP text */}\r\n        <div className=\"mt-1 text-right text-[10px] text-muted-foreground\">\r\n          {value} / {max} HP\r\n        </div>\r\n      </div>\r\n    );\r\n  }\r\n);\r\nPixelEnemyHealthDisplay.displayName = \"PixelEnemyHealthDisplay\";\r\n\r\nexport { PixelEnemyHealthDisplay };\r\n",
+      "type": "registry:ui"
+    }
+  ]
+}

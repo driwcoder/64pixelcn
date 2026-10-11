@@ -2,7 +2,7 @@ export interface ComponentMeta {
   name: string;
   title: string;
   description: string;
-  category: "Forms" | "Layout" | "Navigation" | "Feedback" | "Data Display" | "Overlays" | "Typography";
+  category: "Forms" | "Layout" | "Navigation" | "Feedback" | "Data Display" | "Overlays" | "Typography" | "Gaming";
 }
 
 export const componentsMeta: ComponentMeta[] = [
@@ -69,6 +69,7 @@ export const componentsMeta: ComponentMeta[] = [
 
   // Overlays
   { name: "dialog", title: "Dialog", description: "Pixel art modal dialog", category: "Overlays" },
+  { name: "alert-dialog", title: "Alert Dialog", description: "Pixel art alert dialog", category: "Overlays" },
   { name: "sheet", title: "Sheet", description: "Pixel art sheet", category: "Overlays" },
   { name: "drawer", title: "Drawer", description: "Pixel art drawer", category: "Overlays" },
   { name: "popover", title: "Popover", description: "Pixel art popover", category: "Overlays" },
@@ -79,9 +80,13 @@ export const componentsMeta: ComponentMeta[] = [
   { name: "command", title: "Command", description: "Pixel art command palette", category: "Overlays" },
   { name: "combobox", title: "Combobox", description: "Pixel art combobox", category: "Overlays" },
 
-  // Misc
-  { name: "carousel", title: "Carousel", description: "Pixel art carousel", category: "Layout" },
-  { name: "direction", title: "Direction", description: "Pixel art direction provider", category: "Layout" },
+  // Gaming (exclusive)
+  { name: "health-bar", title: "Health Bar", description: "Player health indicator bar", category: "Gaming" },
+  { name: "mana-bar", title: "Mana Bar", description: "Magic/resource bar", category: "Gaming" },
+  { name: "xp-bar", title: "XP Bar", description: "Experience progression bar", category: "Gaming" },
+  { name: "enemy-health-display", title: "Enemy Health Display", description: "Boss and enemy health UI", category: "Gaming" },
+  { name: "retro-mode-switcher", title: "Retro Mode Switcher", description: "Toggle retro visual effects", category: "Gaming" },
+  { name: "theme-selector", title: "Theme Selector", description: "Switch between retro themes", category: "Gaming" },
 ];
 
 export function getComponentMeta(name: string): ComponentMeta | undefined {
@@ -95,5 +100,6 @@ export const categories = [
   "Feedback",
   "Data Display",
   "Overlays",
+  "Gaming",
   "Typography",
 ] as const;
