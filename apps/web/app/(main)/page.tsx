@@ -16,12 +16,12 @@ export default function Home() {
           </h1>
           <p className="mb-8 font-[family-name:var(--pixel-font)] text-sm text-muted-foreground leading-relaxed max-w-2xl mx-auto">
             A pixel art component library based on shadcn/ui.
-            Install, customize presets, and build retro UIs.
+            62 components. Install, customize presets, and build retro UIs.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <Link href="/docs">
+            <Link href="/docs/components">
               <PixelButton size="lg">
-                Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                Browse Components <ArrowRight className="ml-2 h-4 w-4" />
               </PixelButton>
             </Link>
             <Link href="/create">
@@ -48,23 +48,21 @@ export default function Home() {
 
           <PixelCard>
             <PixelCardHeader>
-              <PixelCardTitle>Multi-Size</PixelCardTitle>
+              <PixelCardTitle>62 Components</PixelCardTitle>
               <PixelCardDescription>
-                8px to 128px. Switch sizes instantly with data attributes.
+                Every shadcn component in pixel art form.
               </PixelCardDescription>
             </PixelCardHeader>
-            <PixelCardContent className="flex gap-2">
-              {[8, 16, 32, 64, 128].map((s) => (
-                <PixelBadge key={s} variant="outline">{s}</PixelBadge>
-              ))}
+            <PixelCardContent>
+              <Link href="/docs/components" className="text-xs text-primary hover:underline">Browse all →</Link>
             </PixelCardContent>
           </PixelCard>
 
           <PixelCard>
             <PixelCardHeader>
-              <PixelCardTitle>Presets</PixelCardTitle>
+              <PixelCardTitle>Multi-Size & Presets</PixelCardTitle>
               <PixelCardDescription>
-                Nintendo, GameBoy, Neon, Sepia, Mono. Swap colors and fonts.
+                8px to 128px. Nintendo, GameBoy, Neon, Sepia, Mono themes.
               </PixelCardDescription>
             </PixelCardHeader>
             <PixelCardFooter>
