@@ -18,7 +18,10 @@ function inline(text: string) {
   });
 }
 
-// Rendered at build time from apps/web/CHANGELOG.md (the source of truth).
+// Rendered at build time from apps/web/CHANGELOG.md (the source of truth), so
+// the file is never read at runtime (it is not part of the serverless bundle).
+export const dynamic = "force-static";
+
 export default function ChangelogPage() {
   const md = readFileSync(join(process.cwd(), "CHANGELOG.md"), "utf-8").replace(/\r\n/g, "\n");
   const blocks: React.ReactNode[] = [];
