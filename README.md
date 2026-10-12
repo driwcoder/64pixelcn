@@ -67,13 +67,14 @@ accessibility notes, the last two generated from the component source.
 
 Every option comes from `apps/web/src/lib/tokens.ts`:
 
-- **Themes**: nintendo, gameboy, neon, sepia, mono, each in **light** and **dark** mode
+- **Themes**: nintendo, gameboy, neon, sepia, mono (hand-tuned), plus 9 generated from Lospec palettes (waldgeist, grim32, darkseed16, vinik24, lostcentury, lux2k, mushroom, justparchment8, fading16), in **light** and **dark** mode
 - **Fonts**: press-start, vt323, silkscreen (default), pixelify, dotgothic, jacquard (Jacquard 12), jacquard24, handjet, system
 - **Pixel sizes**: 8x, 16x, 32x, 64x, 128x (shadow offset, corner step and shading bands)
 - **Text sizes**: xs, sm, md, lg, xl
 - **Icons**: pixelarticons (default), hackernoon, lucide
 - **Corners**: square, notched, rounded, round. Stepped pixel-art corners on the same grid as the drop shadow
-- **Shading**: flat, hard drop, bevel, extruded. Hue-shifted ramps per palette (warm light from the top-left, cool shadows), 2 tones up to 16x and 4 tones from 32x
+- **Shading**: flat, hard drop, bevel, top-lit, extruded. Each box steps through its own color ramp (palette colors of its hue family), with more bands at higher pixel sizes (1+1 at 8x up to 3+3 at 128x)
+- **Borders**: solid, selout (outline in the ramp's darkest color), double frame, none
 
 Build a preset visually at `/create` (each option is a select, like ui.shadcn.com/create). The link
 holds the whole preset in a short code, and the page generates a command such as:
@@ -93,8 +94,16 @@ On the site the same settings are data attributes on `<html>`:
 <html data-theme="gameboy" data-mode="light" data-font="vt323" data-size="32" data-radius="md" data-shading="bevel">
 ```
 
-Components opt into stepped corners with the `pixel-rounded` class and into the drop shadow with the
-`pixel-shadow` utility.
+Components declare a role and the style engine (`apps/web/src/lib/pixel-engine.ts`) draws it:
+`pixel-raised` (button, card, popover), `pixel-surface` (badge, tabs), `pixel-sunken` (input), plus an
+optional tone (`pixel-tone-primary`, `-secondary`, `-accent`, `-destructive`) that picks the shading ramp.
+
+## Kit (vanilla JS, canvas games)
+
+No React or Tailwind needed: `https://pixelcn.vercel.app/kit/pixelcn.css` and
+`https://pixelcn.vercel.app/kit/pixelcn.js` (ES module). The JS has the themes, a palette-to-theme
+generator (any Lospec palette), `applyAppearance()`, `applyPalette()` and `drawPanel()`, which draws the
+same panels on a `<canvas>`. Docs and a live demo at `/docs/kit`. Rebuild with `pnpm kit:build`.
 
 ## Testing
 
@@ -107,8 +116,8 @@ pnpm test:layout   # Playwright: builds the app, then checks every page and comp
   their container, text cut by a corner and horizontal page scroll.
 - `tests/contrast.spec.ts`: WCAG AA contrast of every palette in both modes.
 
-CI (`.github/workflows/ci.yml`) also runs lint, typecheck and checks that the generated registry JSON
-and component API docs are up to date.
+CI (`.github/workflows/ci.yml`) also runs lint, typecheck and checks that the generated registry JSON,
+component API docs, kit and `app/theme.css` are up to date.
 
 ## Versioning
 
@@ -117,6 +126,7 @@ The version lives in `apps/web/package.json`; see [CHANGELOG.md](apps/web/CHANGE
 
 ## Credits
 
+- Palettes: from [Lospec](https://lospec.com/palette-list) (Waldgeist, Grim32, Darkseed 16, Vinik24, Lost Century, Lux2K, Mushroom, JustParchment8, Fading 16), credit to their authors
 - Icons: [pixelarticons](https://pixelarticons.com) by Gerrit Halfmann (MIT),
   [Pixel Icon Library](https://pixeliconlibrary.com) by HackerNoon
   ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): keep this credit when you ship the

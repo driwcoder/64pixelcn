@@ -13,7 +13,10 @@ export function SiteFooter() {
           <Link href="/docs/changelog" className="underline underline-offset-4 hover:text-foreground">
             v{VERSION}
           </Link>{" "}
-          · built on shadcn/ui and Radix UI · fonts from Google Fonts (SIL OFL)
+          · built on shadcn/ui and Radix UI · fonts from Google Fonts (SIL OFL) · palettes from{" "}
+          <a href="https://lospec.com/palette-list" target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-foreground">
+            Lospec
+          </a>
         </p>
         <ul aria-label="Icon credits" className="min-w-0 space-y-1 md:text-right">
           {ICON_SET_IDS.map((id) => (

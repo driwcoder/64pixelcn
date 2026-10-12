@@ -313,7 +313,7 @@ function gameboyRamps(mode: Mode): Tokens {
   return out;
 }
 
-function proceduralRamps(): Tokens {
+export function proceduralRamps(): Tokens {
   const light = "oklch(0.97 0.06 85)";
   const dark = "oklch(0.13 0.07 285)";
   const out: Tokens = {};

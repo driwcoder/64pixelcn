@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
           { key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400" },
         ],
       },
+      {
+        // The kit is loaded from other sites (ES modules and fonts need CORS).
+        source: "/kit/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400" },
+        ],
+      },
     ];
   },
 };

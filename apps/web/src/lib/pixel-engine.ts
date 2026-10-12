@@ -34,6 +34,7 @@ import {
   fontFamily,
   fontHasCaps,
   paletteTokens,
+  proceduralRamps,
   themeHasMode,
   type Appearance,
   type Border,
@@ -361,6 +362,12 @@ export function cssRule([selector, decls]: Rule) {
   return `${selector}{${Object.entries(decls).map(([k, v]) => `${k}:${v};`).join("")}}`;
 }
 
+const SHARED_RAMPS = proceduralRamps();
+/** Drops tokens identical to the shared classic ramps declared on :root. */
+function withoutShared(tokens: Tokens): Tokens {
+  return Object.fromEntries(Object.entries(tokens).filter(([k, v]) => SHARED_RAMPS[k] !== v));
+}
+
 export const PROPERTY_RULES = NON_INHERITED_VARS.map((name) => `@property ${name}{syntax:"*";inherits:false;}`).join("\n");
 
 /**
@@ -391,9 +398,11 @@ export function buildThemeCss() {
       ...fontVars(d.font),
       "pixel-text-scale": TEXT_SCALES[d.textScale].value,
     }),
-    // Dark is the default when data-mode is missing or the theme has no light mode.
-    ...THEME_IDS.map((x) => varRule(`[data-theme="${x}"]`, paletteTokens(x, "dark"))),
-    ...THEME_IDS.filter((x) => themeHasMode(x, "light")).map((x) => varRule(`[data-theme="${x}"][data-mode="light"]`, paletteTokens(x, "light"))),
+    // Dark is the default when data-mode is missing or the theme has no light
+    // mode. The classic themes' mixed ramps are the same expressions for all
+    // of them (they mix each theme's own colors), so :root holds them once.
+    ...THEME_IDS.map((x) => varRule(`[data-theme="${x}"]`, withoutShared(paletteTokens(x, "dark")))),
+    ...THEME_IDS.filter((x) => themeHasMode(x, "light")).map((x) => varRule(`[data-theme="${x}"][data-mode="light"]`, withoutShared(paletteTokens(x, "light")))),
     ...PIXEL_SIZES.map((s) => varRule(`[data-size="${s}"]`, SIZE_TOKENS[s])),
     ...TEXT_SCALE_IDS.map((x) => varRule(`[data-text-scale="${x}"]`, { "pixel-text-scale": TEXT_SCALES[x].value })),
     ...FONT_IDS.map((f) => varRule(`[data-font="${f}"]`, fontVars(f))),

@@ -4,6 +4,22 @@ All notable changes to pixelcn. The version is in `apps/web/package.json` and
 follows [Semantic Versioning](https://semver.org): while it is 0.x, a minor
 bump may change component markup or tokens.
 
+## 0.4.0 - 2026-10-12
+
+### Added
+
+- 9 themes from Lospec palettes: Waldgeist, Grim32, Darkseed 16, Vinik24, Lost Century, Lux2K, Mushroom, JustParchment8 and Fading 16. Each uses only its palette's colors, picked so text passes WCAG AA; where a palette can't (Grim32's text, the reds of Lost Century and Fading 16) the nearest palette color is lightened or darkened along its own hue. Grim32 has no light colors, so its light mode is its dark mode.
+- Shading follows each element's own color ramp (the palette colors of its hue family, dark to light) and gets more tones as the pixel size grows: 1 highlight and 1 shadow band at 8x, up to 3 and 3 at 128x.
+- Border setting: Solid, Selout (each box outlined in its ramp's darkest color), Double frame (RPG window) and None.
+- Top-lit shading (light from above).
+- Kit for browser games and vanilla JS, at `/kit` (see `/docs/kit`): `pixelcn.css` (every theme and setting, role classes, fonts) and `pixelcn.js` (themes, palette-to-theme generator, `applyAppearance`, `applyPalette`, and `drawPanel` to draw the same panels on a canvas).
+
+### Changed
+
+- Components declare a role (`pixel-raised`, `pixel-surface`, `pixel-sunken`) and optionally a tone (`pixel-tone-primary`...), and the style engine (`lib/pixel-engine.ts`) draws borders, corners and shading. Classes in a component's `className` still override it. `pixel-rounded` and `pixel-shadow` keep working.
+- Every component's registry item depends on `/r/roles.json` (the role classes), so it renders even without a preset.
+- The engine CSS is generated into `app/theme.css` (and the kit) by `pnpm kit:build`, instead of being inlined in every page.
+
 ## 0.3.0 - 2026-10-12
 
 ### Changed

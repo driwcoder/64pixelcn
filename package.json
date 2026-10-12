@@ -8,7 +8,8 @@
     "start": "pnpm --filter web start",
     "test:layout": "pnpm --filter web test:layout",
     "lint": "pnpm --filter web lint",
-    "registry:build": "pnpm --filter web registry:build"
+    "registry:build": "pnpm --filter web registry:build",
+    "kit:build": "pnpm --filter web kit:build"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
