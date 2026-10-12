@@ -1,0 +1,2100 @@
+{
+  "button": {
+    "exports": [
+      "PixelButton"
+    ],
+    "props": [
+      {
+        "owner": "PixelButtonProps",
+        "name": "asChild",
+        "type": "boolean",
+        "required": false,
+        "default": "false",
+        "description": ""
+      }
+    ],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "secondary",
+          "destructive",
+          "outline",
+          "ghost",
+          "link"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm",
+          "lg",
+          "xl",
+          "icon"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "button"
+    ],
+    "accessibility": [
+      "Native <button>: Enter/Space activate. With asChild it renders its child (e.g. a link) instead. Icon-only buttons need aria-label."
+    ]
+  },
+  "input": {
+    "exports": [
+      "PixelInput"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "input"
+    ],
+    "accessibility": [
+      "Native <input>: pair with a Label (htmlFor) and use aria-invalid for errors."
+    ]
+  },
+  "textarea": {
+    "exports": [
+      "PixelTextarea"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "textarea"
+    ],
+    "accessibility": [
+      "Native <textarea>: pair with a Label (htmlFor)."
+    ]
+  },
+  "checkbox": {
+    "exports": [
+      "PixelCheckbox"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "checkbox"
+    ],
+    "accessibility": [
+      "Radix Checkbox: role=checkbox with aria-checked (including mixed), toggled with Space. Pair with a Label."
+    ]
+  },
+  "radio-group": {
+    "exports": [
+      "PixelRadioGroup",
+      "PixelRadioGroupItem"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "radio-group",
+      "radio-group-item"
+    ],
+    "accessibility": [
+      "Radix Radio Group: role=radiogroup, arrow keys move and select, one tab stop for the group."
+    ]
+  },
+  "switch": {
+    "exports": [
+      "PixelSwitch"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "switch"
+    ],
+    "accessibility": [
+      "Radix Switch: role=switch with aria-checked, toggled with Space/Enter. Pair with a Label."
+    ]
+  },
+  "select": {
+    "exports": [
+      "PixelSelect",
+      "PixelSelectGroup",
+      "PixelSelectValue",
+      "PixelSelectTrigger",
+      "PixelSelectContent",
+      "PixelSelectLabel",
+      "PixelSelectItem",
+      "PixelSelectSeparator"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "select-trigger",
+      "select-content",
+      "select-label",
+      "select-item",
+      "select-separator"
+    ],
+    "accessibility": [
+      "Radix Select: role=combobox trigger with a listbox, arrow keys and typeahead pick options, Esc closes."
+    ]
+  },
+  "native-select": {
+    "exports": [
+      "PixelNativeSelect",
+      "PixelNativeSelectOption",
+      "PixelNativeSelectOptGroup"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "native-select"
+    ],
+    "accessibility": [
+      "Native <select>: full keyboard and screen reader support from the browser."
+    ]
+  },
+  "label": {
+    "exports": [
+      "PixelLabel"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "label"
+    ],
+    "accessibility": [
+      "Radix Label: native <label>; clicking it focuses the associated control (htmlFor)."
+    ]
+  },
+  "field": {
+    "exports": [
+      "PixelField",
+      "PixelFieldContent",
+      "PixelFieldDescription",
+      "PixelFieldError",
+      "PixelFieldGroup",
+      "PixelFieldLabel",
+      "PixelFieldLegend",
+      "PixelFieldSeparator",
+      "PixelFieldSet",
+      "PixelFieldTitle"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "orientation",
+        "options": [
+          "vertical",
+          "horizontal",
+          "responsive"
+        ],
+        "default": "vertical"
+      }
+    ],
+    "slots": [
+      "field-set",
+      "field-legend",
+      "field-group",
+      "field",
+      "field-content",
+      "field-label",
+      "field-title",
+      "field-description",
+      "field-separator",
+      "field-error"
+    ],
+    "accessibility": [
+      "Field groups a control with its label, description and error: the set renders a <fieldset> (role=group) and errors use role=alert."
+    ]
+  },
+  "input-group": {
+    "exports": [
+      "PixelInputGroup",
+      "PixelInputGroupInput",
+      "PixelInputGroupAddon",
+      "PixelInputGroupText",
+      "PixelInputGroupTextarea"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "input-group",
+      "input-group-input",
+      "input-group-addon",
+      "input-group-text",
+      "input-group-textarea"
+    ],
+    "accessibility": [
+      "Native <input> with addons; give icon-only addons an aria-label and keep the input labelled."
+    ]
+  },
+  "input-otp": {
+    "exports": [
+      "PixelInputOTP",
+      "PixelInputOTPGroup",
+      "PixelInputOTPSlot",
+      "PixelInputOTPSeparator"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "input-otp-group",
+      "input-otp-slot",
+      "input-otp-separator"
+    ],
+    "accessibility": [
+      "input-otp: one real input behind the slots, so paste, autofill (autocomplete=one-time-code) and screen readers work."
+    ]
+  },
+  "slider": {
+    "exports": [
+      "PixelSlider"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "slider",
+      "slider-track",
+      "slider-range",
+      "slider-thumb"
+    ],
+    "accessibility": [
+      "Radix Slider: role=slider thumbs with aria-valuenow, arrow keys step, PageUp/PageDown jump, Home/End go to the ends."
+    ]
+  },
+  "toggle": {
+    "exports": [
+      "PixelToggle"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "outline"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "toggle"
+    ],
+    "accessibility": [
+      "Radix Toggle: a button with aria-pressed."
+    ]
+  },
+  "toggle-group": {
+    "exports": [
+      "PixelToggleGroup",
+      "PixelToggleGroupItem"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "toggle-group",
+      "toggle-group-item"
+    ],
+    "accessibility": [
+      "Radix Toggle Group: arrow keys move between items, one tab stop; items expose aria-pressed (or radio semantics when type=single)."
+    ]
+  },
+  "calendar": {
+    "exports": [
+      "PixelCalendar"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [],
+    "accessibility": [
+      "React DayPicker: grid of day buttons, arrow keys move by day/week, PageUp/PageDown by month."
+    ]
+  },
+  "date-picker": {
+    "exports": [
+      "PixelDatePicker"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "date-picker-trigger"
+    ],
+    "accessibility": [
+      "Popover + Calendar: see both for keyboard behavior; the trigger shows the selected date as text."
+    ]
+  },
+  "questionnaire": {
+    "exports": [
+      "PixelQuestionnaire"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "state",
+        "options": [
+          "default",
+          "active",
+          "answered"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [],
+    "accessibility": [
+      "Steps are plain content; give each question a heading or label so the step is announced."
+    ]
+  },
+  "card": {
+    "exports": [
+      "PixelCard",
+      "PixelCardHeader",
+      "PixelCardTitle",
+      "PixelCardDescription",
+      "PixelCardContent",
+      "PixelCardFooter"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "card",
+      "card-header",
+      "card-title",
+      "card-description",
+      "card-content",
+      "card-footer"
+    ],
+    "accessibility": [
+      "Plain <div> container. CardTitle renders a <div>: put a heading inside it (<PixelCardTitle><h2>...</h2></PixelCardTitle>) when the card belongs in the page outline."
+    ]
+  },
+  "accordion": {
+    "exports": [
+      "PixelAccordion",
+      "PixelAccordionItem",
+      "PixelAccordionTrigger",
+      "PixelAccordionContent"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "accordion-item",
+      "accordion-trigger",
+      "accordion-content"
+    ],
+    "accessibility": [
+      "Radix Accordion: triggers are buttons with aria-expanded/aria-controls; Up/Down/Home/End move between triggers."
+    ]
+  },
+  "collapsible": {
+    "exports": [
+      "PixelCollapsible",
+      "PixelCollapsibleTrigger",
+      "PixelCollapsibleContent"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [],
+    "accessibility": [
+      "Radix Collapsible: the trigger exposes aria-expanded and aria-controls."
+    ]
+  },
+  "resizable": {
+    "exports": [
+      "PixelResizablePanelGroup",
+      "PixelResizablePanel",
+      "PixelResizableHandle"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "resizable-panel-group",
+      "resizable-panel",
+      "resizable-handle"
+    ],
+    "accessibility": [
+      "Resize handles are focusable separators; arrow keys resize."
+    ]
+  },
+  "separator": {
+    "exports": [
+      "PixelSeparator"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "separator"
+    ],
+    "accessibility": [
+      "Radix Separator: role=separator, or role=none when decorative."
+    ]
+  },
+  "scroll-area": {
+    "exports": [
+      "PixelScrollArea",
+      "PixelScrollBar"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "scroll-area",
+      "scroll-area-viewport",
+      "scroll-area-scrollbar",
+      "scroll-area-thumb"
+    ],
+    "accessibility": [
+      "Radix Scroll Area: native scrolling (keyboard, wheel, touch) with custom scrollbars."
+    ]
+  },
+  "aspect-ratio": {
+    "exports": [
+      "PixelAspectRatio"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "aspect-ratio"
+    ],
+    "accessibility": [
+      "Layout only; give images inside meaningful alt text."
+    ]
+  },
+  "sidebar": {
+    "exports": [
+      "PixelSidebar",
+      "PixelSidebarContent",
+      "PixelSidebarFooter",
+      "PixelSidebarGroup",
+      "PixelSidebarGroupAction",
+      "PixelSidebarGroupContent",
+      "PixelSidebarGroupLabel",
+      "PixelSidebarHeader",
+      "PixelSidebarInput",
+      "PixelSidebarInset",
+      "PixelSidebarMenu",
+      "PixelSidebarMenuAction",
+      "PixelSidebarMenuBadge",
+      "PixelSidebarMenuButton",
+      "PixelSidebarMenuItem",
+      "PixelSidebarMenuSkeleton",
+      "PixelSidebarMenuSub",
+      "PixelSidebarMenuSubButton",
+      "PixelSidebarMenuSubItem",
+      "PixelSidebarProvider",
+      "PixelSidebarRail",
+      "PixelSidebarSeparator",
+      "PixelSidebarTrigger"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "outline"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [],
+    "accessibility": [
+      "List-based navigation (<ul>); the trigger button is labelled \"Toggle Sidebar\". Wrap it in a <nav> with aria-label when it holds site navigation."
+    ]
+  },
+  "direction": {
+    "exports": [
+      "PixelDirectionProvider"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "direction-provider"
+    ],
+    "accessibility": [
+      "Sets the reading direction (ltr/rtl) that Radix primitives use for keyboard navigation."
+    ]
+  },
+  "breadcrumb": {
+    "exports": [
+      "PixelBreadcrumb",
+      "PixelBreadcrumbList",
+      "PixelBreadcrumbItem",
+      "PixelBreadcrumbLink",
+      "PixelBreadcrumbPage",
+      "PixelBreadcrumbSeparator",
+      "PixelBreadcrumbEllipsis"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "breadcrumb",
+      "breadcrumb-list",
+      "breadcrumb-item",
+      "breadcrumb-link",
+      "breadcrumb-page",
+      "breadcrumb-separator",
+      "breadcrumb-ellipsis"
+    ],
+    "accessibility": [
+      "<nav aria-label=\"breadcrumb\"> with an ordered list; the current page has aria-current=page and separators are hidden from screen readers."
+    ]
+  },
+  "navigation-menu": {
+    "exports": [
+      "PixelNavigationMenu",
+      "PixelNavigationMenuList",
+      "PixelNavigationMenuItem",
+      "PixelNavigationMenuTrigger",
+      "PixelNavigationMenuContent",
+      "PixelNavigationMenuIndicator",
+      "PixelNavigationMenuLink",
+      "PixelNavigationMenuViewport"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "navigation-menu",
+      "navigation-menu-list",
+      "navigation-menu-trigger",
+      "navigation-menu-content",
+      "navigation-menu-viewport",
+      "navigation-menu-indicator"
+    ],
+    "accessibility": [
+      "Radix Navigation Menu: nav landmark, triggers expose aria-expanded, arrow keys move between items."
+    ]
+  },
+  "menubar": {
+    "exports": [
+      "PixelMenubar",
+      "PixelMenubarMenu",
+      "PixelMenubarTrigger",
+      "PixelMenubarContent",
+      "PixelMenubarItem",
+      "PixelMenubarSeparator",
+      "PixelMenubarLabel",
+      "PixelMenubarCheckboxItem",
+      "PixelMenubarRadioGroup",
+      "PixelMenubarRadioItem",
+      "PixelMenubarPortal",
+      "PixelMenubarSubContent",
+      "PixelMenubarSubTrigger",
+      "PixelMenubarGroup",
+      "PixelMenubarSub",
+      "PixelMenubarShortcut"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "menubar",
+      "menubar-trigger",
+      "menubar-sub-trigger",
+      "menubar-sub-content",
+      "menubar-content",
+      "menubar-item",
+      "menubar-checkbox-item",
+      "menubar-radio-item",
+      "menubar-label",
+      "menubar-separator",
+      "menubar-shortcut"
+    ],
+    "accessibility": [
+      "Radix Menubar: role=menubar, Left/Right move between menus, Up/Down within a menu."
+    ]
+  },
+  "pagination": {
+    "exports": [
+      "PixelPagination",
+      "PixelPaginationContent",
+      "PixelPaginationLink",
+      "PixelPaginationItem",
+      "PixelPaginationPrevious",
+      "PixelPaginationNext",
+      "PixelPaginationEllipsis"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "pagination",
+      "pagination-content",
+      "pagination-item",
+      "pagination-ellipsis"
+    ],
+    "accessibility": [
+      "<nav aria-label=\"pagination\">; the active page has aria-current=page and Previous/Next are labelled."
+    ]
+  },
+  "tabs": {
+    "exports": [
+      "PixelTabs",
+      "PixelTabsList",
+      "PixelTabsTrigger",
+      "PixelTabsContent"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "tabs-list",
+      "tabs-trigger",
+      "tabs-content"
+    ],
+    "accessibility": [
+      "Radix Tabs: role=tablist/tab/tabpanel, arrow keys move between tabs, one tab stop."
+    ]
+  },
+  "button-group": {
+    "exports": [
+      "PixelButtonGroup"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "orientation",
+        "options": [
+          "horizontal",
+          "vertical"
+        ],
+        "default": "horizontal"
+      }
+    ],
+    "slots": [
+      "button-group"
+    ],
+    "accessibility": [
+      "Visual grouping only; add role=group and aria-label when the buttons form one control."
+    ]
+  },
+  "alert": {
+    "exports": [
+      "PixelAlert",
+      "PixelAlertTitle",
+      "PixelAlertDescription"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "info",
+          "warning",
+          "destructive",
+          "success"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "alert",
+      "alert-title",
+      "alert-description"
+    ],
+    "accessibility": [
+      "role=alert: the content is announced when it appears."
+    ]
+  },
+  "toast": {
+    "exports": [
+      "PixelToastProvider",
+      "PixelToastViewport",
+      "PixelToast",
+      "PixelToastTitle",
+      "PixelToastDescription",
+      "PixelToastClose",
+      "PixelToastAction"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "destructive",
+          "success"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "toast-viewport",
+      "toast",
+      "toast-action",
+      "toast-close",
+      "toast-title",
+      "toast-description"
+    ],
+    "accessibility": [
+      "Radix Toast: announced through a live region, swipe or Esc dismisses, F8 focuses the viewport. Timers pause on hover/focus."
+    ]
+  },
+  "progress": {
+    "exports": [
+      "PixelProgress"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "progress"
+    ],
+    "accessibility": [
+      "Radix Progress: role=progressbar with aria-valuenow/min/max."
+    ]
+  },
+  "skeleton": {
+    "exports": [
+      "PixelSkeleton"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "skeleton"
+    ],
+    "accessibility": [
+      "Decorative placeholder; mark the loading region with aria-busy=true."
+    ]
+  },
+  "spinner": {
+    "exports": [
+      "PixelSpinner"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "spinner"
+    ],
+    "accessibility": [
+      "role=status with aria-label=\"Loading\" (override it to describe what is loading)."
+    ]
+  },
+  "empty": {
+    "exports": [
+      "PixelEmpty",
+      "PixelEmptyHeader",
+      "PixelEmptyTitle",
+      "PixelEmptyDescription",
+      "PixelEmptyContent",
+      "PixelEmptyMedia"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "icon"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "empty",
+      "empty-header",
+      "empty-icon",
+      "empty-title",
+      "empty-description",
+      "empty-content"
+    ],
+    "accessibility": [
+      "Plain content; the title should say what is empty and the action what to do next."
+    ]
+  },
+  "badge": {
+    "exports": [
+      "PixelBadge"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "secondary",
+          "destructive",
+          "outline",
+          "muted"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "badge"
+    ],
+    "accessibility": [
+      "Plain text in a box; don't rely on its color alone to convey meaning."
+    ]
+  },
+  "avatar": {
+    "exports": [
+      "PixelAvatar",
+      "PixelAvatarImage",
+      "PixelAvatarFallback"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "avatar",
+      "avatar-image",
+      "avatar-fallback"
+    ],
+    "accessibility": [
+      "Radix Avatar: the fallback renders while the image loads or if it fails; pass alt to the image."
+    ]
+  },
+  "table": {
+    "exports": [
+      "PixelTable",
+      "PixelTableHeader",
+      "PixelTableBody",
+      "PixelTableFooter",
+      "PixelTableHead",
+      "PixelTableRow",
+      "PixelTableCell",
+      "PixelTableCaption"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "table-container",
+      "table",
+      "table-header",
+      "table-body",
+      "table-footer",
+      "table-row",
+      "table-head",
+      "table-cell",
+      "table-caption"
+    ],
+    "accessibility": [
+      "Native <table>, <th> and <caption> semantics."
+    ]
+  },
+  "data-table": {
+    "exports": [
+      "PixelDataTable"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "data-table"
+    ],
+    "accessibility": [
+      "Native <table> semantics (via Table); sort buttons in headers are real buttons."
+    ]
+  },
+  "chart": {
+    "exports": [
+      "ChartContainer",
+      "ChartTooltip",
+      "ChartLegend",
+      "ChartLegendContent",
+      "ChartStyle"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "chart"
+    ],
+    "accessibility": [
+      "Recharts renders SVG; summarize the data in text or a table for screen reader users."
+    ]
+  },
+  "item": {
+    "exports": [
+      "PixelItem",
+      "PixelItemMedia",
+      "PixelItemContent",
+      "PixelItemActions",
+      "PixelItemGroup",
+      "PixelItemSeparator",
+      "PixelItemTitle",
+      "PixelItemDescription",
+      "PixelItemHeader",
+      "PixelItemFooter"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "outline",
+          "muted"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "icon",
+          "image"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "item",
+      "item-media",
+      "item-content",
+      "item-title",
+      "item-description",
+      "item-actions",
+      "item-header",
+      "item-footer",
+      "item-group",
+      "item-separator"
+    ],
+    "accessibility": [
+      "Plain list content; use ItemGroup inside a list or pass asChild to render a link or button."
+    ]
+  },
+  "kbd": {
+    "exports": [
+      "PixelKbd",
+      "PixelKbdGroup"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "kbd",
+      "kbd-group"
+    ],
+    "accessibility": [
+      "Renders <kbd>, read as keyboard input."
+    ]
+  },
+  "typography": {
+    "exports": [
+      "PixelTypographyH1",
+      "PixelTypographyH2",
+      "PixelTypographyH3",
+      "PixelTypographyH4",
+      "PixelTypographyP",
+      "PixelTypographyBlockquote",
+      "PixelTypographyList",
+      "PixelTypographyLead",
+      "PixelTypographyLarge",
+      "PixelTypographySmall",
+      "PixelTypographyMuted",
+      "PixelTypographyInlineCode"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "typography-h1",
+      "typography-h2",
+      "typography-h3",
+      "typography-h4",
+      "typography-p",
+      "typography-blockquote",
+      "typography-list",
+      "typography-lead",
+      "typography-large",
+      "typography-small",
+      "typography-muted",
+      "typography-inline-code"
+    ],
+    "accessibility": [
+      "Semantic elements (<h1>-<h4>, <p>, <blockquote>, <ul>, <code>), so headings form the document outline."
+    ]
+  },
+  "marker": {
+    "exports": [
+      "PixelMarker"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "highlight",
+          "underline",
+          "strike"
+        ],
+        "default": "highlight"
+      }
+    ],
+    "slots": [
+      "marker"
+    ],
+    "accessibility": [
+      "Decorative highlight; the text inside stays readable as normal text."
+    ]
+  },
+  "bubble": {
+    "exports": [
+      "PixelBubble"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "secondary",
+          "outline"
+        ],
+        "default": "default"
+      },
+      {
+        "name": "side",
+        "options": [
+          "left",
+          "right"
+        ],
+        "default": "left"
+      }
+    ],
+    "slots": [
+      "bubble"
+    ],
+    "accessibility": [
+      "Plain text container; for conversations prefer Message, which has author context."
+    ]
+  },
+  "message": {
+    "exports": [
+      "PixelMessage",
+      "PixelMessageAvatar",
+      "PixelMessageContent"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "contained",
+          "flat",
+          "faded"
+        ],
+        "default": "contained"
+      },
+      {
+        "name": "align",
+        "options": [
+          "start",
+          "center",
+          "end"
+        ],
+        "default": "start"
+      }
+    ],
+    "slots": [
+      "message",
+      "message-avatar",
+      "message-content"
+    ],
+    "accessibility": [
+      "Plain container; include the author name in text so each message is attributable."
+    ]
+  },
+  "message-scroller": {
+    "exports": [
+      "PixelMessageScroller"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "message-scroller"
+    ],
+    "accessibility": [
+      "Native scrolling; the Scroll to bottom button is labelled."
+    ]
+  },
+  "attachment": {
+    "exports": [
+      "PixelAttachment",
+      "PixelAttachmentInfo"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "variant",
+        "options": [
+          "default",
+          "ghost"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "attachment",
+      "attachment-info"
+    ],
+    "accessibility": [
+      "The remove button is labelled \"Remove attachment\"."
+    ]
+  },
+  "carousel": {
+    "exports": [
+      "CarouselApi",
+      "PixelCarousel",
+      "PixelCarouselContent",
+      "PixelCarouselItem",
+      "PixelCarouselPrevious",
+      "PixelCarouselNext"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "carousel",
+      "carousel-content",
+      "carousel-item",
+      "carousel-previous",
+      "carousel-next"
+    ],
+    "accessibility": [
+      "Embla: region with aria-roledescription=carousel; Previous/Next buttons and Left/Right arrow keys move slides."
+    ]
+  },
+  "dialog": {
+    "exports": [
+      "PixelDialog",
+      "PixelDialogPortal",
+      "PixelDialogOverlay",
+      "PixelDialogTrigger",
+      "PixelDialogClose",
+      "PixelDialogContent",
+      "PixelDialogHeader",
+      "PixelDialogTitle",
+      "PixelDialogDescription"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "dialog-overlay",
+      "dialog-content",
+      "dialog-title",
+      "dialog-description"
+    ],
+    "accessibility": [
+      "Radix Dialog: role=dialog with aria-modal, focus is trapped, Esc and outside click close, focus returns to the trigger. Title and Description are wired with aria-labelledby/-describedby."
+    ]
+  },
+  "alert-dialog": {
+    "exports": [
+      "PixelAlertDialog",
+      "PixelAlertDialogPortal",
+      "PixelAlertDialogOverlay",
+      "PixelAlertDialogTrigger",
+      "PixelAlertDialogContent",
+      "PixelAlertDialogHeader",
+      "PixelAlertDialogFooter",
+      "PixelAlertDialogTitle",
+      "PixelAlertDialogDescription",
+      "PixelAlertDialogAction",
+      "PixelAlertDialogCancel"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "alert-dialog-content"
+    ],
+    "accessibility": [
+      "Radix Alert Dialog: role=alertdialog, focus is trapped and starts on Cancel, Esc closes, focus returns to the trigger. Clicking outside does not dismiss."
+    ]
+  },
+  "sheet": {
+    "exports": [
+      "PixelSheet",
+      "PixelSheetPortal",
+      "PixelSheetOverlay",
+      "PixelSheetTrigger",
+      "PixelSheetClose",
+      "PixelSheetContent",
+      "PixelSheetHeader",
+      "PixelSheetFooter",
+      "PixelSheetTitle",
+      "PixelSheetDescription"
+    ],
+    "props": [],
+    "variants": [
+      {
+        "name": "side",
+        "options": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "default": "right"
+      }
+    ],
+    "slots": [
+      "sheet-content",
+      "sheet-header",
+      "sheet-footer",
+      "sheet-title",
+      "sheet-description"
+    ],
+    "accessibility": [
+      "Radix Dialog: role=dialog with aria-modal, focus is trapped, Esc and outside click close, focus returns to the trigger. Title and Description are wired with aria-labelledby/-describedby."
+    ]
+  },
+  "drawer": {
+    "exports": [
+      "PixelDrawer",
+      "PixelDrawerPortal",
+      "PixelDrawerOverlay",
+      "PixelDrawerTrigger",
+      "PixelDrawerClose",
+      "PixelDrawerContent",
+      "PixelDrawerHeader",
+      "PixelDrawerFooter",
+      "PixelDrawerTitle",
+      "PixelDrawerDescription"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "drawer",
+      "drawer-overlay",
+      "drawer-content",
+      "drawer-header",
+      "drawer-footer",
+      "drawer-title",
+      "drawer-description"
+    ],
+    "accessibility": [
+      "Vaul (Radix Dialog underneath): focus trap, Esc closes, drag or swipe to dismiss."
+    ]
+  },
+  "popover": {
+    "exports": [
+      "PixelPopover",
+      "PixelPopoverTrigger",
+      "PixelPopoverContent",
+      "PixelPopoverAnchor"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "popover-content"
+    ],
+    "accessibility": [
+      "Radix Popover: the trigger exposes aria-expanded, focus moves into the content, Esc and outside click close."
+    ]
+  },
+  "hover-card": {
+    "exports": [
+      "PixelHoverCard",
+      "PixelHoverCardTrigger",
+      "PixelHoverCardContent"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "hover-card-content"
+    ],
+    "accessibility": [
+      "Radix Hover Card: opens on hover and keyboard focus; for sighted pointer users only, so don't put essential content in it."
+    ]
+  },
+  "tooltip": {
+    "exports": [
+      "PixelTooltip",
+      "PixelTooltipTrigger",
+      "PixelTooltipContent",
+      "PixelTooltipProvider"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "tooltip-content"
+    ],
+    "accessibility": [
+      "Radix Tooltip: shown on hover and focus, linked with aria-describedby, Esc hides. Keep it supplementary."
+    ]
+  },
+  "dropdown-menu": {
+    "exports": [
+      "PixelDropdownMenu",
+      "PixelDropdownMenuTrigger",
+      "PixelDropdownMenuContent",
+      "PixelDropdownMenuItem",
+      "PixelDropdownMenuCheckboxItem",
+      "PixelDropdownMenuRadioItem",
+      "PixelDropdownMenuLabel",
+      "PixelDropdownMenuSeparator",
+      "PixelDropdownMenuShortcut",
+      "PixelDropdownMenuGroup",
+      "PixelDropdownMenuPortal",
+      "PixelDropdownMenuSub",
+      "PixelDropdownMenuSubContent",
+      "PixelDropdownMenuSubTrigger",
+      "PixelDropdownMenuRadioGroup"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "dropdown-menu-sub-trigger",
+      "dropdown-menu-sub-content",
+      "dropdown-menu-content",
+      "dropdown-menu-item",
+      "dropdown-menu-checkbox-item",
+      "dropdown-menu-radio-item",
+      "dropdown-menu-label",
+      "dropdown-menu-separator",
+      "dropdown-menu-shortcut"
+    ],
+    "accessibility": [
+      "Radix Dropdown Menu: role=menu, arrow keys and typeahead navigate, Esc closes and returns focus to the trigger."
+    ]
+  },
+  "context-menu": {
+    "exports": [
+      "PixelContextMenu",
+      "PixelContextMenuTrigger",
+      "PixelContextMenuContent",
+      "PixelContextMenuItem",
+      "PixelContextMenuCheckboxItem",
+      "PixelContextMenuRadioItem",
+      "PixelContextMenuLabel",
+      "PixelContextMenuSeparator",
+      "PixelContextMenuShortcut",
+      "PixelContextMenuSub",
+      "PixelContextMenuSubTrigger",
+      "PixelContextMenuSubContent",
+      "PixelContextMenuRadioGroup"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "context-menu-sub-trigger",
+      "context-menu-sub-content",
+      "context-menu-content",
+      "context-menu-item",
+      "context-menu-checkbox-item",
+      "context-menu-radio-item",
+      "context-menu-label",
+      "context-menu-separator",
+      "context-menu-shortcut"
+    ],
+    "accessibility": [
+      "Radix Context Menu: opens on right click or long press, arrow keys and typeahead navigate, Esc closes."
+    ]
+  },
+  "command": {
+    "exports": [
+      "PixelCommand",
+      "PixelCommandDialog",
+      "PixelCommandInput",
+      "PixelCommandList",
+      "PixelCommandEmpty",
+      "PixelCommandGroup",
+      "PixelCommandItem",
+      "PixelCommandShortcut",
+      "PixelCommandSeparator"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "command",
+      "command-input-wrapper",
+      "command-input",
+      "command-list",
+      "command-empty",
+      "command-group",
+      "command-separator",
+      "command-item",
+      "command-shortcut"
+    ],
+    "accessibility": [
+      "Radix Dialog: role=dialog with aria-modal, focus is trapped, Esc and outside click close, focus returns to the trigger. Title and Description are wired with aria-labelledby/-describedby.",
+      "cmdk: combobox input with a listbox; arrow keys move the active item, Enter selects."
+    ]
+  },
+  "combobox": {
+    "exports": [
+      "PixelCombobox",
+      "PixelComboboxTrigger",
+      "PixelComboboxButton",
+      "PixelComboboxAnchor",
+      "PixelComboboxCancel",
+      "PixelComboboxContent",
+      "PixelComboboxInput",
+      "PixelComboboxList",
+      "PixelComboboxEmpty",
+      "PixelComboboxGroup",
+      "PixelComboboxItem"
+    ],
+    "props": [],
+    "variants": [],
+    "slots": [
+      "combobox-button"
+    ],
+    "accessibility": [
+      "Radix Popover: the trigger exposes aria-expanded, focus moves into the content, Esc and outside click close.",
+      "cmdk: combobox input with a listbox; arrow keys move the active item, Enter selects."
+    ]
+  },
+  "health-bar": {
+    "exports": [
+      "PixelHealthBar"
+    ],
+    "props": [
+      {
+        "owner": "PixelHealthBarProps",
+        "name": "value",
+        "type": "number",
+        "required": true,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelHealthBarProps",
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "default": "100",
+        "description": ""
+      },
+      {
+        "owner": "PixelHealthBarProps",
+        "name": "showLabel",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": ""
+      },
+      {
+        "owner": "PixelHealthBarProps",
+        "name": "showIcon",
+        "type": "boolean",
+        "required": false,
+        "default": "false",
+        "description": ""
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "sm",
+          "default",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "health-bar"
+    ],
+    "accessibility": [
+      "role=progressbar with aria-valuenow/min/max; add aria-label when showLabel is off."
+    ]
+  },
+  "mana-bar": {
+    "exports": [
+      "PixelManaBar"
+    ],
+    "props": [
+      {
+        "owner": "PixelManaBarProps",
+        "name": "value",
+        "type": "number",
+        "required": true,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelManaBarProps",
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "default": "100",
+        "description": ""
+      },
+      {
+        "owner": "PixelManaBarProps",
+        "name": "showLabel",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": ""
+      },
+      {
+        "owner": "PixelManaBarProps",
+        "name": "showIcon",
+        "type": "boolean",
+        "required": false,
+        "default": "false",
+        "description": ""
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "sm",
+          "default",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "mana-bar"
+    ],
+    "accessibility": [
+      "Same semantics as Health Bar."
+    ]
+  },
+  "xp-bar": {
+    "exports": [
+      "PixelXpBar"
+    ],
+    "props": [
+      {
+        "owner": "PixelXpBarProps",
+        "name": "value",
+        "type": "number",
+        "required": true,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelXpBarProps",
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "default": "100",
+        "description": ""
+      },
+      {
+        "owner": "PixelXpBarProps",
+        "name": "level",
+        "type": "number",
+        "required": false,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelXpBarProps",
+        "name": "showLabel",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": ""
+      },
+      {
+        "owner": "PixelXpBarProps",
+        "name": "showIcon",
+        "type": "boolean",
+        "required": false,
+        "default": "false",
+        "description": ""
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "sm",
+          "default",
+          "lg"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "xp-bar"
+    ],
+    "accessibility": [
+      "Same semantics as Health Bar."
+    ]
+  },
+  "enemy-health-display": {
+    "exports": [
+      "PixelEnemyHealthDisplay"
+    ],
+    "props": [
+      {
+        "owner": "PixelEnemyHealthDisplayProps",
+        "name": "name",
+        "type": "string",
+        "required": true,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelEnemyHealthDisplayProps",
+        "name": "level",
+        "type": "number",
+        "required": false,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelEnemyHealthDisplayProps",
+        "name": "value",
+        "type": "number",
+        "required": true,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelEnemyHealthDisplayProps",
+        "name": "max",
+        "type": "number",
+        "required": false,
+        "default": "100",
+        "description": ""
+      },
+      {
+        "owner": "PixelEnemyHealthDisplayProps",
+        "name": "segments",
+        "type": "number",
+        "required": false,
+        "default": "10",
+        "description": ""
+      }
+    ],
+    "variants": [],
+    "slots": [
+      "enemy-health-display"
+    ],
+    "accessibility": [
+      "role=progressbar with aria-valuenow/min/max for the enemy's HP."
+    ]
+  },
+  "retro-mode-switcher": {
+    "exports": [
+      "PixelRetroModeSwitcher"
+    ],
+    "props": [
+      {
+        "owner": "PixelRetroModeSwitcherProps",
+        "name": "checked",
+        "type": "boolean",
+        "required": false,
+        "default": "false",
+        "description": ""
+      },
+      {
+        "owner": "PixelRetroModeSwitcherProps",
+        "name": "onCheckedChange",
+        "type": "(checked: boolean) => void",
+        "required": false,
+        "default": null,
+        "description": ""
+      }
+    ],
+    "variants": [
+      {
+        "name": "size",
+        "options": [
+          "default",
+          "sm"
+        ],
+        "default": "default"
+      }
+    ],
+    "slots": [
+      "retro-mode-switcher"
+    ],
+    "accessibility": [
+      "role=switch buttons with aria-checked."
+    ]
+  },
+  "theme-selector": {
+    "exports": [
+      "PixelThemeSelector"
+    ],
+    "props": [
+      {
+        "owner": "PixelThemeSelectorProps",
+        "name": "value",
+        "type": "string",
+        "required": false,
+        "default": "\"nintendo\"",
+        "description": ""
+      },
+      {
+        "owner": "PixelThemeSelectorProps",
+        "name": "onValueChange",
+        "type": "(value: string) => void",
+        "required": false,
+        "default": null,
+        "description": ""
+      }
+    ],
+    "variants": [],
+    "slots": [
+      "theme-selector"
+    ],
+    "accessibility": [
+      "Native buttons; the selected theme should also be shown by its label, not only its color."
+    ]
+  },
+  "dialogue-box": {
+    "exports": [
+      "PixelDialogueBox"
+    ],
+    "props": [
+      {
+        "owner": "PixelDialogueBoxProps",
+        "name": "lines",
+        "type": "string[]",
+        "required": true,
+        "default": null,
+        "description": "Lines shown one at a time, typed out like an RPG text box."
+      },
+      {
+        "owner": "PixelDialogueBoxProps",
+        "name": "speaker",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Name shown on the box's tab."
+      },
+      {
+        "owner": "PixelDialogueBoxProps",
+        "name": "portrait",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": "Portrait (an <img>, an avatar, an icon...) shown on the left."
+      },
+      {
+        "owner": "PixelDialogueBoxProps",
+        "name": "speed",
+        "type": "number",
+        "required": false,
+        "default": "30",
+        "description": "Milliseconds per character."
+      },
+      {
+        "owner": "PixelDialogueBoxProps",
+        "name": "onComplete",
+        "type": "() => void",
+        "required": false,
+        "default": null,
+        "description": "Called after the last line is dismissed."
+      }
+    ],
+    "variants": [],
+    "slots": [
+      "dialogue",
+      "dialogue-box",
+      "dialogue-portrait"
+    ],
+    "accessibility": [
+      "role=region labelled by the speaker; the typewriter text is also exposed in full to screen readers (aria-live=polite announces new lines). Click, Enter or Space skips or advances. The animation is skipped under prefers-reduced-motion."
+    ]
+  },
+  "inventory": {
+    "exports": [
+      "PixelInventory"
+    ],
+    "props": [
+      {
+        "owner": "PixelInventoryProps",
+        "name": "slots",
+        "type": "(PixelInventoryItem | null)[]",
+        "required": true,
+        "default": null,
+        "description": "One entry per slot; null is an empty slot."
+      },
+      {
+        "owner": "PixelInventoryProps",
+        "name": "columns",
+        "type": "number",
+        "required": false,
+        "default": "4",
+        "description": ""
+      },
+      {
+        "owner": "PixelInventoryProps",
+        "name": "selectedId",
+        "type": "string | null",
+        "required": false,
+        "default": null,
+        "description": "Selected item id (controlled)."
+      },
+      {
+        "owner": "PixelInventoryProps",
+        "name": "defaultSelectedId",
+        "type": "string | null",
+        "required": false,
+        "default": "null",
+        "description": ""
+      },
+      {
+        "owner": "PixelInventoryProps",
+        "name": "onSelectedIdChange",
+        "type": "(id: string | null, item: PixelInventoryItem | null) => void",
+        "required": false,
+        "default": null,
+        "description": ""
+      }
+    ],
+    "variants": [],
+    "slots": [
+      "inventory",
+      "inventory-slot"
+    ],
+    "accessibility": [
+      "role=grid with one tab stop: arrow keys move between slots, Enter/Space select. Each slot is labelled with its item name and count."
+    ]
+  },
+  "scoreboard": {
+    "exports": [
+      "PixelScoreboard"
+    ],
+    "props": [
+      {
+        "owner": "PixelScoreboardProps",
+        "name": "entries",
+        "type": "PixelScoreboardEntry[]",
+        "required": true,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelScoreboardProps",
+        "name": "title",
+        "type": "string",
+        "required": false,
+        "default": "\"High scores\"",
+        "description": "Table caption, e.g. \"High scores\"."
+      },
+      {
+        "owner": "PixelScoreboardProps",
+        "name": "highlight",
+        "type": "string",
+        "required": false,
+        "default": null,
+        "description": "Name of the row to highlight (the current player)."
+      },
+      {
+        "owner": "PixelScoreboardProps",
+        "name": "digits",
+        "type": "number",
+        "required": false,
+        "default": "6",
+        "description": "Zero-padded digit count for scores."
+      }
+    ],
+    "variants": [],
+    "slots": [
+      "scoreboard"
+    ],
+    "accessibility": [
+      "Native <table> with a caption; the highlighted row has aria-current."
+    ]
+  },
+  "coin-counter": {
+    "exports": [
+      "PixelCoinCounter"
+    ],
+    "props": [
+      {
+        "owner": "PixelCoinCounterProps",
+        "name": "value",
+        "type": "number",
+        "required": true,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelCoinCounterProps",
+        "name": "digits",
+        "type": "number",
+        "required": false,
+        "default": "4",
+        "description": "Zero-padded digit count, like an arcade HUD."
+      },
+      {
+        "owner": "PixelCoinCounterProps",
+        "name": "label",
+        "type": "string",
+        "required": false,
+        "default": "\"coins\"",
+        "description": "Unit read by screen readers (\"42 coins\")."
+      },
+      {
+        "owner": "PixelCoinCounterProps",
+        "name": "icon",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelCoinCounterProps",
+        "name": "duration",
+        "type": "number",
+        "required": false,
+        "default": "400",
+        "description": "Count-up duration in ms when the value changes."
+      }
+    ],
+    "variants": [],
+    "slots": [
+      "coin-counter"
+    ],
+    "accessibility": [
+      "role=status: changes are announced politely. The count-up animation is skipped under prefers-reduced-motion."
+    ]
+  },
+  "continue-screen": {
+    "exports": [
+      "PixelContinueScreen"
+    ],
+    "props": [
+      {
+        "owner": "PixelContinueScreenProps",
+        "name": "seconds",
+        "type": "number",
+        "required": false,
+        "default": "10",
+        "description": "Countdown start, in seconds."
+      },
+      {
+        "owner": "PixelContinueScreenProps",
+        "name": "title",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": "\"Continue?\"",
+        "description": ""
+      },
+      {
+        "owner": "PixelContinueScreenProps",
+        "name": "onContinue",
+        "type": "() => void",
+        "required": false,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelContinueScreenProps",
+        "name": "onQuit",
+        "type": "() => void",
+        "required": false,
+        "default": null,
+        "description": "Called on Quit, Esc, or when the countdown runs out."
+      },
+      {
+        "owner": "PixelContinueScreenProps",
+        "name": "continueLabel",
+        "type": "string",
+        "required": false,
+        "default": "\"Continue\"",
+        "description": ""
+      },
+      {
+        "owner": "PixelContinueScreenProps",
+        "name": "quitLabel",
+        "type": "string",
+        "required": false,
+        "default": "\"Quit\"",
+        "description": ""
+      }
+    ],
+    "variants": [],
+    "slots": [
+      "continue-screen"
+    ],
+    "accessibility": [
+      "role=alertdialog with the countdown announced; focus starts on Continue, Esc or Quit picks Quit."
+    ]
+  },
+  "achievement": {
+    "exports": [
+      "PixelAchievement"
+    ],
+    "props": [
+      {
+        "owner": "PixelAchievementProps",
+        "name": "title",
+        "type": "React.ReactNode",
+        "required": true,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelAchievementProps",
+        "name": "description",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelAchievementProps",
+        "name": "icon",
+        "type": "React.ReactNode",
+        "required": false,
+        "default": null,
+        "description": ""
+      },
+      {
+        "owner": "PixelAchievementProps",
+        "name": "unlocked",
+        "type": "boolean",
+        "required": false,
+        "default": "true",
+        "description": "Locked achievements are dimmed and show a lock."
+      },
+      {
+        "owner": "PixelAchievementProps",
+        "name": "points",
+        "type": "number",
+        "required": false,
+        "default": null,
+        "description": "Points / gamerscore shown on the right."
+      }
+    ],
+    "variants": [],
+    "slots": [
+      "achievement"
+    ],
+    "accessibility": [
+      "role=status so the unlock is announced without stealing focus."
+    ]
+  }
+}

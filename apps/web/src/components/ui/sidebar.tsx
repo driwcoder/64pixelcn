@@ -93,7 +93,7 @@ const PixelSidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div"
       <div ref={ref} className="group peer hidden text-card-foreground md:block" data-state={state} data-collapsible={state === "collapsed" ? collapsible : ""} data-variant={variant} data-side={side}>
         <div className={cn("relative h-svh w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear", "group-data-[collapsible=offcanvas]:w-0", "group-data-[side=right]:rotate-180", variant === "floating" || variant === "inset" ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]" : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)")} />
         <div className={cn("fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex", side === "left" ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]" : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]", variant === "floating" ? "p-2" : variant === "inset" ? "p-2 md:p-2" : "group-data-[side=left]:border-r-2 group-data-[side=left]:border-foreground group-data-[side=right]:border-l-2 group-data-[side=right]:border-foreground", className)} {...props}>
-          <div data-sidebar="sidebar" className="flex h-full w-full flex-col bg-card group-data-[variant=floating]:border-2 group-data-[variant=floating]:border-foreground group-data-[variant=floating]:shadow-[var(--pixel-shadow)]">{children}</div>
+          <div data-sidebar="sidebar" className="flex h-full w-full flex-col bg-card group-data-[variant=floating]:border-2 group-data-[variant=floating]:border-foreground group-data-[variant=floating]:pixel-shadow">{children}</div>
         </div>
       </div>
     );
@@ -116,7 +116,7 @@ const PixelSidebarRail = React.forwardRef<HTMLButtonElement, React.ComponentProp
 PixelSidebarRail.displayName = "PixelSidebarRail";
 
 const PixelSidebarInset = React.forwardRef<HTMLDivElement, React.ComponentProps<"main">>(({ className, ...props }, ref) => (
-  <main ref={ref} className={cn("relative flex w-full flex-1 flex-col bg-background", "md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-none md:peer-data-[variant=inset]:shadow-[var(--pixel-shadow)] md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2", className)} {...props} />
+  <main ref={ref} className={cn("relative flex w-full flex-1 flex-col bg-background", "md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-none md:peer-data-[variant=inset]:pixel-shadow md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2", className)} {...props} />
 ));
 PixelSidebarInset.displayName = "PixelSidebarInset";
 
@@ -163,7 +163,7 @@ const sidebarMenuButtonVariants = cva(
   "peer/menu-button flex w-full items-center gap-2 overflow-hidden p-2 text-left text-xs uppercase tracking-widest outline-none transition-[width,height,padding] hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-primary data-[active=true]:text-primary-foreground data-[active=true]:border-2 data-[active=true]:border-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
-      variant: { default: "hover:bg-accent hover:text-accent-foreground", outline: "bg-transparent border-2 border-foreground shadow-[var(--pixel-shadow)] hover:bg-accent hover:text-accent-foreground" },
+      variant: { default: "hover:bg-accent hover:text-accent-foreground", outline: "bg-transparent border-2 border-foreground pixel-shadow hover:bg-accent hover:text-accent-foreground" },
       size: { default: "h-8 text-xs", sm: "h-7 text-[0.7rem]", lg: "h-12 text-sm" },
     },
     defaultVariants: { variant: "default", size: "default" },

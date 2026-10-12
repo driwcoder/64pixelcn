@@ -1205,6 +1205,89 @@ export function ThemeSelectorDemo() {
   return <PixelThemeSelector value={theme} onValueChange={setTheme} />
 }`,
 
+  "dialogue-box": `import { PixelDialogueBox } from "@/components/ui/dialogue-box"
+import { Sparkles } from "@/components/ui/icons"
+
+export function DialogueBoxDemo() {
+  return (
+    <PixelDialogueBox
+      speaker="Old Man"
+      portrait={<Sparkles />}
+      lines={["It's dangerous to go alone!", "Take this."]}
+      onComplete={() => console.log("done")}
+    />
+  )
+}`,
+
+  inventory: `import { PixelInventory } from "@/components/ui/inventory"
+import { Heart, Shield, Sword } from "@/components/ui/icons"
+
+const slots = [
+  { id: "sword", name: "Sword", icon: <Sword /> },
+  { id: "shield", name: "Shield", icon: <Shield /> },
+  { id: "potion", name: "Potion", icon: <Heart />, count: 3 },
+  null, // empty slot
+]
+
+export function InventoryDemo() {
+  const [selected, setSelected] = React.useState<string | null>("sword")
+
+  return <PixelInventory slots={slots} columns={4} selectedId={selected} onSelectedIdChange={setSelected} />
+}`,
+
+  scoreboard: `import { PixelScoreboard } from "@/components/ui/scoreboard"
+
+export function ScoreboardDemo() {
+  return (
+    <PixelScoreboard
+      highlight="YOU"
+      entries={[
+        { name: "AAA", score: 98200 },
+        { name: "YOU", score: 45150 },
+        { name: "BOB", score: 61000 },
+      ]}
+    />
+  )
+}`,
+
+  "coin-counter": `import { PixelCoinCounter } from "@/components/ui/coin-counter"
+import { PixelButton } from "@/components/ui/button"
+
+export function CoinCounterDemo() {
+  const [coins, setCoins] = React.useState(42)
+
+  return (
+    <>
+      <PixelCoinCounter value={coins} />
+      <PixelButton onClick={() => setCoins((c) => c + 100)}>+100</PixelButton>
+    </>
+  )
+}`,
+
+  "continue-screen": `import { PixelContinueScreen } from "@/components/ui/continue-screen"
+
+export function ContinueScreenDemo() {
+  return (
+    <PixelContinueScreen
+      seconds={9}
+      onContinue={() => console.log("continue")}
+      onQuit={() => console.log("game over")}
+    />
+  )
+}`,
+
+  achievement: `import { PixelAchievement } from "@/components/ui/achievement"
+import { Crown } from "@/components/ui/icons"
+
+export function AchievementDemo() {
+  return (
+    <>
+      <PixelAchievement title="First blood" description="Defeat your first enemy." points={10} />
+      <PixelAchievement title="Treasure hunter" icon={<Crown />} points={50} unlocked={false} />
+    </>
+  )
+}`,
+
 };
 
 export function getCodeSnippet(name: string): string {

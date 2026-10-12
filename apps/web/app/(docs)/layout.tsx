@@ -1,5 +1,6 @@
 import { DocsSidebarNav } from "@/components/docs-nav";
 import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,6 +16,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         {/* ── Main content ───────────────────────────────────── */}
         <main className="min-w-0 flex-1">{children}</main>
       </div>
+      <SiteFooter />
     </div>
   );
 }

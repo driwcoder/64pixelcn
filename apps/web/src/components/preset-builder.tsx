@@ -8,15 +8,9 @@ import { CreatePreview } from "@/components/create-preview";
 import { PixelButton } from "@/components/ui/button";
 import { PixelInput } from "@/components/ui/input";
 import { PixelSwitch } from "@/components/ui/switch";
-import { FONTS, FONT_IDS, PIXEL_SIZES, PRESETS, PRESET_IDS, TEXT_SCALES, TEXT_SCALE_IDS, type FontSpec } from "@/lib/tokens";
-
-const PRESET_OPTIONS = PRESET_IDS.map((id) => ({ id, ...PRESETS[id] }));
-const FONT_OPTIONS = FONT_IDS.map((id) => {
-  const spec: FontSpec = FONTS[id];
-  return { id, label: spec.label, sample: spec.cssVar ? `var(${spec.cssVar})` : spec.fallback };
-});
-const SIZE_OPTIONS = PIXEL_SIZES;
-const TEXT_SCALE_OPTIONS = TEXT_SCALE_IDS.map((id) => ({ id, label: TEXT_SCALES[id].label }));
+import { PixelSelect, PixelSelectContent, PixelSelectItem, PixelSelectTrigger, PixelSelectValue } from "@/components/ui/select";
+import { AppearanceSelects } from "@/components/appearance-selects";
+import { APPEARANCE_VALUES, type Appearance } from "@/lib/tokens";
 import { DEFAULT_CHOICE, decodePreset, encodePreset, type PresetChoice } from "@/lib/preset-registry";
 import { cn } from "@/lib/utils";
 
@@ -27,7 +21,17 @@ const PACKAGE_MANAGERS = {
   bun: "bunx --bun shadcn@latest",
 } as const;
 type PackageManager = keyof typeof PACKAGE_MANAGERS;
-type Mode = "new" | "existing";
+type ProjectMode = "new" | "existing";
+
+/** `shadcn init --template` values (shadcn CLI v4). */
+const FRAMEWORKS = {
+  next: "Next.js",
+  vite: "Vite",
+  start: "TanStack Start",
+  "react-router": "React Router",
+  astro: "Astro",
+} as const;
+type Framework = keyof typeof FRAMEWORKS;
 
 // Public origin of this site, so the command points at the registry that
 // actually serves the preset (localhost in dev, the deployment in prod).
@@ -36,9 +40,9 @@ function useOrigin() {
   return React.useSyncExternalStore(subscribeNoop, () => window.location.origin, () => "https://pixelcn.vercel.app");
 }
 
-/** ?c=<code> holds the whole preset, so a link reproduces it exactly. */
+/** ?preset=<code> holds the whole preset, so a link reproduces it exactly (?c= is the legacy form). */
 function choiceFromParams(params: URLSearchParams): PresetChoice {
-  const code = params.get("c");
+  const code = params.get("preset") ?? params.get("c");
   return (code && decodePreset(code)) || DEFAULT_CHOICE;
 }
 
@@ -54,7 +58,8 @@ function pick<T>(list: readonly T[]): T {
 export function PresetBuilder() {
   const searchParams = useSearchParams();
   const [choice, setChoice] = React.useState<PresetChoice>(() => choiceFromParams(searchParams));
-  const [mode, setMode] = React.useState<Mode>("new");
+  const [mode, setMode] = React.useState<ProjectMode>("new");
+  const [framework, setFramework] = React.useState<Framework>("next");
   const [pm, setPm] = React.useState<PackageManager>("npm");
   const [name, setName] = React.useState("my-pixel-app");
   const { setOverride } = usePixel();
@@ -64,32 +69,35 @@ export function PresetBuilder() {
 
   // The page renders with the preset being built, not with the Display
   // settings, so what you see is exactly what the command installs.
-  const { preset, font, size, textScale, icons } = choice;
+  // Keyed by value so the effect runs only when the look actually changes.
+  const appearanceKey = JSON.stringify(Object.fromEntries(Object.entries(choice).filter(([k]) => k !== "components")));
   React.useEffect(() => {
-    setOverride({ preset, font, size, textScale, icons });
-  }, [preset, font, size, textScale, icons, setOverride]);
+    setOverride(JSON.parse(appearanceKey) as Appearance);
+  }, [appearanceKey, setOverride]);
   React.useEffect(() => () => setOverride(null), [setOverride]);
 
   // Keep the URL shareable.
   const code = encodePreset(choice);
   React.useEffect(() => {
-    window.history.replaceState(null, "", `?c=${code}`);
+    window.history.replaceState(null, "", `?preset=${code}`);
   }, [code]);
 
   const url = `${origin}/r/presets/${code}.json`;
   const runner = PACKAGE_MANAGERS[pm];
   const command =
     mode === "new"
-      ? `${runner} init --template next --base radix --name ${toProjectName(name)} --preset ${url}`
+      ? `${runner} init --template ${framework} --base radix --name ${toProjectName(name)} --preset ${url}`
       : `${runner} init --force --no-reinstall --preset ${url}`;
 
   const shuffle = () =>
     setChoice((c) => ({
       ...c,
-      preset: pick(PRESET_OPTIONS).id,
-      font: pick(FONT_OPTIONS).id,
-      size: pick(SIZE_OPTIONS),
-      textScale: pick(TEXT_SCALE_OPTIONS).id,
+      preset: pick(APPEARANCE_VALUES.preset),
+      mode: pick(APPEARANCE_VALUES.mode),
+      font: pick(APPEARANCE_VALUES.font),
+      size: pick(APPEARANCE_VALUES.size),
+      radius: pick(APPEARANCE_VALUES.radius),
+      shading: pick(APPEARANCE_VALUES.shading),
     }));
 
   return (
@@ -104,7 +112,7 @@ export function PresetBuilder() {
           </p>
         </div>
         {/* ── Command ──────────────────────────────────────────── */}
-        <div className="space-y-3 border-2 border-foreground bg-card p-4 shadow-[var(--pixel-shadow)]">
+        <div className="pixel-rounded space-y-3 border-2 border-foreground bg-card p-4 pixel-shadow">
           <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
             <div className="space-y-1">
               <div className="text-[0.65rem] uppercase tracking-widest text-muted-foreground">Project</div>
@@ -125,6 +133,21 @@ export function PresetBuilder() {
               />
             </div>
             {mode === "new" && (
+              <div className="min-w-0 basis-40 space-y-1">
+                <label htmlFor="create-framework" className="block text-[0.65rem] uppercase tracking-widest text-muted-foreground">Framework</label>
+                <PixelSelect value={framework} onValueChange={(v) => setFramework(v as Framework)}>
+                  <PixelSelectTrigger id="create-framework" className="h-auto min-h-10 text-[0.7rem] uppercase tracking-widest">
+                    <PixelSelectValue />
+                  </PixelSelectTrigger>
+                  <PixelSelectContent>
+                    {(Object.keys(FRAMEWORKS) as Framework[]).map((id) => (
+                      <PixelSelectItem key={id} value={id} className="text-[0.7rem] uppercase tracking-widest">{FRAMEWORKS[id]}</PixelSelectItem>
+                    ))}
+                  </PixelSelectContent>
+                </PixelSelect>
+              </div>
+            )}
+            {mode === "new" && (
               <div className="min-w-0 flex-1 basis-48 space-y-1">
                 <label htmlFor="project-name" className="text-[0.65rem] uppercase tracking-widest text-muted-foreground">Project name</label>
                 <PixelInput id="project-name" value={name} onChange={(e) => setName(e.target.value)} spellCheck={false} />
@@ -134,58 +157,16 @@ export function PresetBuilder() {
           <CommandBox command={command} />
           <p className="text-[0.65rem] leading-relaxed text-muted-foreground">
             {mode === "new"
-              ? "Creates a Next.js app with this preset, its font and every component already configured."
+              ? `Creates a ${FRAMEWORKS[framework]} app with this preset, its font and every component already configured.`
               : "Run inside your project root. Replaces components.json and theme variables with this preset."}
           </p>
         </div>
       </div>
 
       {/* ── Options ───────────────────────────────────────────── */}
-      <aside aria-label="Preset options" className="lg:col-start-1 lg:row-span-2 lg:row-start-1 border-2 border-foreground bg-card shadow-[var(--pixel-shadow)] lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100dvh-5.5rem)] lg:self-start lg:overflow-y-auto">
-        <div className="space-y-5 p-4">
-          <Group label="Color preset">
-            <div className="grid grid-cols-2 gap-1.5">
-              {PRESET_OPTIONS.map((p) => (
-                <Choice key={p.id} active={choice.preset === p.id} onClick={() => update({ preset: p.id })}>
-                  <span aria-hidden className="inline-block h-3 w-3 shrink-0 border-2 border-current" style={{ backgroundColor: p.swatch }} />
-                  {p.label}
-                </Choice>
-              ))}
-            </div>
-          </Group>
-
-          <Group label="Font">
-            <div className="grid gap-1.5">
-              {FONT_OPTIONS.map((f) => (
-                <Choice key={f.id} active={choice.font === f.id} onClick={() => update({ font: f.id })} className="justify-between">
-                  {f.label}
-                  {/* Sample in the font itself, so you can compare before picking. */}
-                  <span aria-hidden className="text-base normal-case tracking-normal" style={{ fontFamily: f.sample }}>Aa</span>
-                </Choice>
-              ))}
-            </div>
-          </Group>
-
-          <Group label="Pixel size">
-            <div className="grid grid-cols-5 gap-1.5">
-              {SIZE_OPTIONS.map((s) => (
-                <Choice key={s} active={choice.size === s} onClick={() => update({ size: s })} className="justify-center px-1">
-                  {s}
-                </Choice>
-              ))}
-            </div>
-          </Group>
-
-          <Group label="Text size">
-            <div className="grid grid-cols-3 gap-1.5">
-              {TEXT_SCALE_OPTIONS.map((t) => (
-                <Choice key={t.id} active={choice.textScale === t.id} onClick={() => update({ textScale: t.id })} className="justify-center">
-                  {t.label}
-                </Choice>
-              ))}
-            </div>
-          </Group>
-
+      <aside aria-label="Preset options" className="pixel-rounded lg:col-start-1 lg:row-span-2 lg:row-start-1 border-2 border-foreground bg-card pixel-shadow lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100dvh-5.5rem)] lg:self-start lg:overflow-y-auto">
+        <div className="space-y-4 p-4">
+          <AppearanceSelects value={choice} onChange={update} idPrefix="create" />
           <label className="flex items-center justify-between gap-3 text-[0.7rem] uppercase tracking-widest">
             Install all components
             <PixelSwitch checked={choice.components} onCheckedChange={(v) => update({ components: v })} />
@@ -204,45 +185,6 @@ export function PresetBuilder() {
         <CreatePreview />
       </section>
     </div>
-  );
-}
-
-function Group({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <fieldset className="space-y-2">
-      <legend className="mb-2 text-[0.65rem] uppercase tracking-widest text-muted-foreground">{label}</legend>
-      {children}
-    </fieldset>
-  );
-}
-
-function Choice({
-  active,
-  onClick,
-  className,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      aria-pressed={active}
-      onClick={onClick}
-      className={cn(
-        "flex min-w-0 items-center gap-2 border-2 px-2 py-1.5 text-left text-[0.7rem] uppercase tracking-widest transition-colors wrap-anywhere",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        active
-          ? "border-foreground bg-primary text-primary-foreground"
-          : "border-border hover:border-foreground hover:bg-accent hover:text-accent-foreground",
-        className
-      )}
-    >
-      {children}
-    </button>
   );
 }
 

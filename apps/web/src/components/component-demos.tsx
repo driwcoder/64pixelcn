@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { gameDemos } from "@/components/game-demos";
 import {
   Check, ChevronDown, Heart, Search, Bell, Settings, User,
   Star,
@@ -821,6 +822,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
   "retro-mode-switcher": () => <RetroModeDemo />,
   "theme-selector": () => <ThemeSelectorDemo />,
 
+  ...gameDemos,
 };
 
 // ─── Demos interativos ───────────────────────────────────────────

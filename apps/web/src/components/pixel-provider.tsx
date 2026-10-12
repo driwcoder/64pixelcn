@@ -10,75 +10,47 @@ import {
   type ReactNode,
 } from "react";
 
-import {
-  DEFAULT_APPEARANCE,
-  FONT_IDS,
-  PIXEL_SIZES,
-  PRESET_IDS,
-  TEXT_SCALE_IDS,
-  ICON_SET_IDS,
-  type Appearance,
-  type PixelFont,
-  type PixelSize,
-  type Preset,
-  type TextScale,
-  type IconSet,
-} from "@/lib/tokens";
+import { APPEARANCE_ATTRS, APPEARANCE_VALUES, DEFAULT_APPEARANCE, type Appearance } from "@/lib/tokens";
 import { STORAGE_KEY } from "@/lib/pixel-settings";
 
-interface PixelContextValue {
-  preset: Preset;
-  setPreset: (p: Preset) => void;
-  font: PixelFont;
-  setFont: (f: PixelFont) => void;
-  size: PixelSize;
-  setSize: (s: PixelSize) => void;
-  textScale: TextScale;
-  setTextScale: (s: TextScale) => void;
-  icons: IconSet;
-  setIcons: (s: IconSet) => void;
+interface PixelContextValue extends Appearance {
+  /** The saved settings as one object. */
+  appearance: Appearance;
+  /** Change saved settings (Display). Applied to <html> right away. */
+  update: (patch: Partial<Appearance>) => void;
   /** True while a page (e.g. /create) drives the look instead of Display. */
   overridden: boolean;
   /** Temporarily render with other settings without touching the saved ones. */
-  setOverride: (s: PixelAppearance | null) => void;
+  setOverride: (s: Appearance | null) => void;
 }
 
 const PixelContext = createContext<PixelContextValue | undefined>(undefined);
 
-export type PixelAppearance = Appearance;
-type StoredSettings = Appearance;
 const DEFAULTS = DEFAULT_APPEARANCE;
+const KEYS = Object.keys(DEFAULTS) as (keyof Appearance)[];
 
-function pick<T>(allowed: readonly T[], value: unknown, fallback: T): T {
-  return allowed.includes(value as T) ? (value as T) : fallback;
-}
-
-function loadSettings(): StoredSettings {
+function loadSettings(): Appearance {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return DEFAULTS;
-    const parsed = JSON.parse(raw) as Partial<StoredSettings>;
-    // Validate: stale values from older versions (e.g. a removed font) fall
-    // back to the default instead of leaving the UI unstyled.
-    return {
-      preset: pick(PRESET_IDS, parsed.preset, DEFAULTS.preset),
-      font: pick(FONT_IDS, parsed.font, DEFAULTS.font),
-      size: pick(PIXEL_SIZES, parsed.size, DEFAULTS.size),
-      textScale: pick(TEXT_SCALE_IDS, parsed.textScale, DEFAULTS.textScale),
-      icons: pick(ICON_SET_IDS, parsed.icons, DEFAULTS.icons),
-    };
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    // Validate: stale values from older versions (e.g. a removed font) and
+    // fields that didn't exist yet fall back to the default.
+    const out = { ...DEFAULTS } as Record<keyof Appearance, unknown>;
+    for (const k of KEYS) {
+      if ((APPEARANCE_VALUES[k] as readonly unknown[]).includes(parsed[k])) out[k] = parsed[k];
+    }
+    return out as Appearance;
   } catch {
     return DEFAULTS;
   }
 }
 
-function applyToDocument({ preset, font, size, textScale, icons }: StoredSettings) {
+function applyToDocument(settings: Appearance) {
   const root = document.documentElement;
-  root.setAttribute("data-preset", preset);
-  root.setAttribute("data-font", font);
-  root.setAttribute("data-size", String(size));
-  root.setAttribute("data-text-scale", textScale);
-  root.setAttribute("data-icons", icons);
+  for (const k of KEYS) root.setAttribute(APPEARANCE_ATTRS[k], String(settings[k]));
+  // shadcn/Tailwind `dark:` variants key off the .dark class.
+  root.classList.toggle("dark", settings.mode === "dark");
 }
 
 export function PixelProvider({ children }: { children: ReactNode }) {
@@ -86,8 +58,8 @@ export function PixelProvider({ children }: { children: ReactNode }) {
   // the server HTML (no hydration mismatch). The inline script already put
   // the saved values on <html>, so the page is styled correctly meanwhile,
   // and nothing below writes DEFAULTS over them.
-  const [settings, setSettings] = useState<StoredSettings | null>(null);
-  const [override, setOverride] = useState<PixelAppearance | null>(null);
+  const [settings, setSettings] = useState<Appearance | null>(null);
+  const [override, setOverride] = useState<Appearance | null>(null);
 
   useEffect(() => {
     // Syncing from an external store (localStorage) after hydration.
@@ -109,18 +81,15 @@ export function PixelProvider({ children }: { children: ReactNode }) {
     }
   }, [settings]);
 
-  const update = useCallback((patch: Partial<StoredSettings>) => {
+  const update = useCallback((patch: Partial<Appearance>) => {
     setSettings((cur) => ({ ...(cur ?? DEFAULTS), ...patch }));
   }, []);
 
   const value = useMemo<PixelContextValue>(
     () => ({
       ...(settings ?? DEFAULTS),
-      setPreset: (preset) => update({ preset }),
-      setFont: (font) => update({ font }),
-      setSize: (size) => update({ size }),
-      setTextScale: (textScale) => update({ textScale }),
-      setIcons: (icons) => update({ icons }),
+      appearance: settings ?? DEFAULTS,
+      update,
       overridden: override !== null,
       setOverride,
     }),

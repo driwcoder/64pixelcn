@@ -12,7 +12,7 @@ type Shape = [tag: "path" | "polygon" | "rect", attrs: Record<string, string | n
 
 export type IconProps = React.SVGProps<SVGSVGElement> & { size?: number | string; strokeWidth?: number | string };
 
-function PixelSvg({ shapes, size = 24, strokeWidth: _strokeWidth, className, ...props }: IconProps & { shapes: Shape[] }) {
+function PixelSvg({ shapes, size = 24, className, ...props }: IconProps & { shapes: Shape[] }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -24,6 +24,8 @@ function PixelSvg({ shapes, size = 24, strokeWidth: _strokeWidth, className, ...
       aria-hidden="true"
       className={className}
       {...props}
+      // Filled pixel shapes have no stroke; ignore Lucide's strokeWidth prop.
+      strokeWidth={undefined}
     >
       {shapes.map(([Tag, attrs], i) => <Tag key={i} {...attrs} />)}
     </svg>

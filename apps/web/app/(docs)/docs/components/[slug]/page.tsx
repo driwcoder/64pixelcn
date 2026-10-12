@@ -7,6 +7,7 @@ import { ArrowLeft, ChevronLeft, ChevronRight, Check, Copy } from "@/components/
 import { getComponentMeta, componentsMeta } from "@/lib/components";
 import { getCodeSnippet } from "@/lib/code-snippets";
 import { componentDemos } from "@/components/component-demos";
+import { ComponentApiDocs } from "@/components/component-api-docs";
 import { PixelBadge } from "@/components/ui/badge";
 import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle } from "@/components/ui/card";
 import { PixelButton } from "@/components/ui/button";
@@ -168,6 +169,8 @@ npx shadcn@latest add https://pixelcn.vercel.app/r/${meta.name}.json`;
             </p>
           </PixelCardContent>
         </PixelCard>
+
+        <ComponentApiDocs name={meta.name} />
 
         {/* ── Bottom prev / next ──────────────────────────────── */}
         <div className="flex items-center justify-between gap-4 pt-6 border-t-2 border-border">

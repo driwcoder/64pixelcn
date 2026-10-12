@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "components/ui/direction.tsx",
-      "content": "\"use client\";\r\n\r\nimport * as React from \"react\";\r\nimport {\r\n  DirectionProvider as DirectionProviderPrimitive,\r\n  useDirection,\r\n} from \"@radix-ui/react-direction\";\r\n\r\nfunction PixelDirectionProvider({\r\n  children,\r\n  ...props\r\n}: React.ComponentProps<typeof DirectionProviderPrimitive>) {\r\n  return (\r\n    <DirectionProviderPrimitive\r\n      data-slot=\"direction-provider\"\r\n      {...props}\r\n    >\r\n      {children}\r\n    </DirectionProviderPrimitive>\r\n  );\r\n}\r\n\r\nexport { PixelDirectionProvider, useDirection };\r\n",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport {\n  DirectionProvider as DirectionProviderPrimitive,\n  useDirection,\n} from \"@radix-ui/react-direction\";\n\nfunction PixelDirectionProvider({\n  children,\n  ...props\n}: React.ComponentProps<typeof DirectionProviderPrimitive>) {\n  return (\n    <DirectionProviderPrimitive\n      data-slot=\"direction-provider\"\n      {...props}\n    >\n      {children}\n    </DirectionProviderPrimitive>\n  );\n}\n\nexport { PixelDirectionProvider, useDirection };\n",
       "type": "registry:ui"
     }
   ]

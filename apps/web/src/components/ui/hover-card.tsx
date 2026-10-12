@@ -16,7 +16,7 @@ const PixelHoverCardContent = React.forwardRef<
       align={align}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 w-64 border-2 border-foreground bg-popover p-4 text-popover-foreground shadow-[var(--pixel-shadow)] outline-none",
+        "z-50 w-64 pixel-rounded border-2 border-foreground bg-popover p-4 text-popover-foreground pixel-shadow outline-none",
         "font-[family-name:var(--pixel-font)]",
         className
       )}

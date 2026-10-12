@@ -47,7 +47,7 @@ const PixelThemeSelector = React.forwardRef<HTMLDivElement, PixelThemeSelectorPr
                   "flex items-center gap-2 border-2 border-foreground px-3 py-2 text-[0.7rem] uppercase tracking-widest transition-all",
                   "hover:-translate-y-0.5",
                   active
-                    ? "bg-primary text-primary-foreground shadow-[var(--pixel-shadow)]"
+                    ? "bg-primary text-primary-foreground pixel-shadow"
                     : "bg-card hover:bg-accent"
                 )}
               >

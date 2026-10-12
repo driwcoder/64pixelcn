@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "components/ui/aspect-ratio.tsx",
-      "content": "import * as AspectRatioPrimitive from \"@radix-ui/react-aspect-ratio\";\r\n\r\nfunction PixelAspectRatio({ ...props }: React.ComponentProps<typeof AspectRatioPrimitive.Root>) {\r\n  return <AspectRatioPrimitive.Root data-slot=\"aspect-ratio\" {...props} />;\r\n}\r\n\r\nexport { PixelAspectRatio };\r\n",
+      "content": "import * as AspectRatioPrimitive from \"@radix-ui/react-aspect-ratio\";\n\nfunction PixelAspectRatio({ ...props }: React.ComponentProps<typeof AspectRatioPrimitive.Root>) {\n  return <AspectRatioPrimitive.Root data-slot=\"aspect-ratio\" {...props} />;\n}\n\nexport { PixelAspectRatio };\n",
       "type": "registry:ui"
     }
   ]

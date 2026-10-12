@@ -32,8 +32,8 @@ const PixelDialogContent = React.forwardRef<
       data-slot="dialog-content"
       className={cn(
         "fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%]",
-        "bg-popover text-popover-foreground border-2 border-foreground p-6",
-        "shadow-[4px_4px_0px_var(--foreground)]",
+        "bg-popover text-popover-foreground pixel-rounded border-2 border-foreground p-6",
+        "pixel-shadow",
         "font-[family-name:var(--pixel-font)]",
         className
       )}

@@ -18,11 +18,11 @@ const pixelButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground border-2 border-foreground shadow-[var(--pixel-shadow)]",
-        secondary: "bg-secondary text-secondary-foreground border-2 border-foreground shadow-[var(--pixel-shadow)]",
-        destructive: "bg-destructive text-destructive-foreground border-2 border-foreground shadow-[var(--pixel-shadow)]",
-        outline: "bg-transparent text-foreground border-2 border-foreground shadow-[var(--pixel-shadow)]",
-        ghost: "bg-transparent text-foreground border-2 border-transparent hover:border-foreground",
+        default: "pixel-rounded bg-primary text-primary-foreground border-2 border-foreground pixel-shadow",
+        secondary: "pixel-rounded bg-secondary text-secondary-foreground border-2 border-foreground pixel-shadow",
+        destructive: "pixel-rounded bg-destructive text-destructive-foreground border-2 border-foreground pixel-shadow",
+        outline: "pixel-rounded bg-transparent text-foreground border-2 border-foreground pixel-shadow",
+        ghost: "pixel-rounded bg-transparent text-foreground border-2 border-transparent [--pixel-corner-color:transparent] hover:border-foreground hover:[--pixel-corner-color:var(--foreground)]",
         link: "bg-transparent text-primary underline underline-offset-4 decoration-2",
       },
       size: {

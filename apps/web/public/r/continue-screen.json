@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "continue-screen",
+  "type": "registry:ui",
+  "title": "Continue Screen",
+  "description": "Arcade continue countdown",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils",
+    "https://pixelcn.vercel.app/r/button.json"
+  ],
+  "files": [
+    {
+      "path": "components/ui/continue-screen.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { PixelButton } from \"./button\";\n\nexport interface PixelContinueScreenProps extends Omit<React.HTMLAttributes<HTMLDivElement>, \"title\"> {\n  /** Countdown start, in seconds. */\n  seconds?: number;\n  title?: React.ReactNode;\n  onContinue?: () => void;\n  /** Called on Quit, Esc, or when the countdown runs out. */\n  onQuit?: () => void;\n  continueLabel?: string;\n  quitLabel?: string;\n}\n\n/** Arcade \"Continue? 9... 8...\" screen. Remount it (key) to restart the countdown. */\nconst PixelContinueScreen = React.forwardRef<HTMLDivElement, PixelContinueScreenProps>(\n  ({ seconds = 10, title = \"Continue?\", onContinue, onQuit, continueLabel = \"Continue\", quitLabel = \"Quit\", className, onKeyDown, ...props }, ref) => {\n    const [left, setLeft] = React.useState(seconds);\n    const titleId = React.useId();\n    const countId = React.useId();\n    const quitRef = React.useRef(onQuit);\n    React.useEffect(() => {\n      quitRef.current = onQuit;\n    }, [onQuit]);\n\n    React.useEffect(() => {\n      if (left <= 0) {\n        quitRef.current?.();\n        return;\n      }\n      const t = setTimeout(() => setLeft((n) => n - 1), 1000);\n      return () => clearTimeout(t);\n    }, [left]);\n\n    return (\n      <div\n        ref={ref}\n        role=\"alertdialog\"\n        aria-labelledby={titleId}\n        aria-describedby={countId}\n        data-slot=\"continue-screen\"\n        onKeyDown={(e) => {\n          onKeyDown?.(e);\n          if (e.key === \"Escape\") onQuit?.();\n        }}\n        className={cn(\n          \"flex w-full flex-col items-center gap-[1em] bg-background p-[1.5em] text-center text-foreground\",\n          \"font-[family-name:var(--pixel-font)] uppercase tracking-widest\",\n          className\n        )}\n        {...props}\n      >\n        <h2 id={titleId} className=\"text-[1.25rem] leading-relaxed wrap-anywhere\">{title}</h2>\n        <div id={countId} aria-live=\"polite\" className=\"text-[3rem] leading-none tabular-nums text-primary motion-safe:animate-pulse\">\n          <span className=\"sr-only\">Seconds left: </span>\n          {Math.max(0, left)}\n        </div>\n        <div className=\"flex flex-wrap justify-center gap-[0.75em]\">\n          <PixelButton autoFocus onClick={onContinue}>{continueLabel}</PixelButton>\n          <PixelButton variant=\"outline\" onClick={onQuit}>{quitLabel}</PixelButton>\n        </div>\n      </div>\n    );\n  }\n);\nPixelContinueScreen.displayName = \"PixelContinueScreen\";\n\nexport { PixelContinueScreen };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

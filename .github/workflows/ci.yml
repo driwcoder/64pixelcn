@@ -18,10 +18,11 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm --filter web exec tsc --noEmit
-      # The committed registry JSON must match the components.
-      - run: pnpm registry:build && git diff --exit-code -- apps/web/public/r
+      # The committed registry JSON and API docs must match the components.
+      - run: pnpm registry:build && git diff --exit-code -- apps/web/public/r apps/web/src/lib/component-api.json
       - run: pnpm --filter web exec playwright install --with-deps chromium
-      # Builds the app and checks every page/component with every font.
+      # Builds the app, checks every page/component with every font, and
+      # audits the contrast of every palette.
       - run: pnpm test:layout
       - uses: actions/upload-artifact@v4
         if: failure()

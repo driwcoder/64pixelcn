@@ -23,7 +23,7 @@ const PixelToastViewport = React.forwardRef<
 PixelToastViewport.displayName = "PixelToastViewport";
 
 const toastVariants = cva(
-  "group pointer-events-auto relative flex w-full items-center justify-between gap-4 overflow-hidden border-2 border-foreground p-4 pr-6 shadow-[var(--pixel-shadow)] transition-all font-[family-name:var(--pixel-font)]",
+  "group pointer-events-auto relative flex w-full items-center justify-between gap-4 overflow-hidden pixel-rounded border-2 border-foreground p-4 pr-6 pixel-shadow transition-all font-[family-name:var(--pixel-font)]",
   {
     variants: {
       variant: {

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Heart } from "./icons";
 
 const healthBarVariants = cva(
-  "relative w-full overflow-hidden border-2 border-foreground bg-muted font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)]",
+  "relative w-full overflow-hidden border-2 border-foreground bg-muted font-[family-name:var(--pixel-font)] pixel-shadow",
   {
     variants: {
       size: {

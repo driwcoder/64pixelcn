@@ -24,6 +24,7 @@ export function DocsSidebarNav() {
         {SECTIONS.map((s) => (
           <PixelNavButton key={s.href} href={s.href} block>{s.label}</PixelNavButton>
         ))}
+        <PixelNavButton href="/docs/changelog" block>Changelog</PixelNavButton>
       </nav>
 
       <div className="mb-2 font-[family-name:var(--pixel-font)] text-[0.7rem] uppercase tracking-widest text-muted-foreground">

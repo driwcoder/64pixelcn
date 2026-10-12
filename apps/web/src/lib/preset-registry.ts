@@ -2,66 +2,23 @@
 // from the same tokens the site's theme CSS is generated from (lib/tokens.ts).
 
 import {
-  BASE_COLORS,
-  DEFAULT_APPEARANCE,
-  FONT_IDS,
   FONTS,
-  PIXEL_SIZES,
-  PRESET_COLORS,
-  PRESET_IDS,
   SIZE_TOKENS,
-  TEXT_SCALE_IDS,
   TEXT_SCALES,
   ICON_SETS,
-  ICON_SET_IDS,
   fontFamily,
-  type IconSet,
+  paletteTokens,
+  roundedRules,
+  shadingTokens,
+  NON_INHERITED_VARS,
   type FontSpec,
   type PixelFont,
-  type PixelSize,
-  type Preset,
-  type TextScale,
   type Tokens,
 } from "@/lib/tokens";
 import { componentsMeta } from "@/lib/components";
+import { encodePreset, type PresetChoice } from "@/lib/preset-code";
 
-export interface PresetChoice {
-  preset: Preset;
-  font: PixelFont;
-  size: PixelSize;
-  textScale: TextScale;
-  icons: IconSet;
-  /** Install every pixelcn component along with the preset. */
-  components: boolean;
-}
-
-export const DEFAULT_CHOICE: PresetChoice = { ...DEFAULT_APPEARANCE, components: true };
-
-// ── Encoding: nintendo_silkscreen_64_md_pixelarticons_all ─────────────
-// (legacy 5-part codes without the icon set still decode, with the default set)
-export function encodePreset(c: PresetChoice): string {
-  return [c.preset, c.font, c.size, c.textScale, c.icons, c.components ? "all" : "none"].join("_");
-}
-
-export function decodePreset(code: string): PresetChoice | null {
-  const parts = code.split("_");
-  if (parts.length === 5) parts.splice(4, 0, DEFAULT_APPEARANCE.icons);
-  const [preset, font, size, textScale, icons, components] = parts;
-  if (!ICON_SET_IDS.includes(icons as IconSet)) return null;
-  if (!PRESET_IDS.includes(preset as Preset)) return null;
-  if (!FONT_IDS.includes(font as PixelFont)) return null;
-  if (!PIXEL_SIZES.includes(Number(size) as PixelSize)) return null;
-  if (!TEXT_SCALE_IDS.includes(textScale as TextScale)) return null;
-  if (components !== "all" && components !== "none") return null;
-  return {
-    preset: preset as Preset,
-    font: font as PixelFont,
-    size: Number(size) as PixelSize,
-    textScale: textScale as TextScale,
-    icons: icons as IconSet,
-    components: components === "all",
-  };
-}
+export { DEFAULT_CHOICE, decodePreset, encodePreset, type PresetChoice } from "@/lib/preset-code";
 
 /** CSS variable the font item exposes (next/font `variable`). */
 const FONT_VARIABLE = "--font-pixel-family";
@@ -84,21 +41,29 @@ export function buildFontItem(font: PixelFont) {
       variable: FONT_VARIABLE,
       weight: ["400"],
       subsets: spec.google.subsets,
+      // Non-Next templates (Vite, React Router, Astro...) load the font from
+      // Fontsource instead of next/font.
+      dependency: `@fontsource/${spec.google.family.toLowerCase().replace(/\s+/g, "-")}`,
     },
   };
 }
 
 export function buildPresetItem(choice: PresetChoice, origin: string) {
   const spec: FontSpec = FONTS[choice.font];
-  const vars: Tokens = {
+  const shared: Tokens = {
     radius: "0px",
-    ...BASE_COLORS,
-    ...PRESET_COLORS[choice.preset],
     ...SIZE_TOKENS[choice.size],
+    ...shadingTokens(choice.shading),
     "pixel-font": fontFamily(choice.font, FONT_VARIABLE),
     "pixel-font-adjust": spec.adjust,
     "pixel-text-scale": TEXT_SCALES[choice.textScale].value,
   };
+  // The chosen mode is the default (:root); the other one is still there
+  // under .dark, so a dark-mode toggle in the app keeps working. For a light
+  // pick :root is light and .dark is dark; for a dark pick both are dark.
+  const light = { ...paletteTokens(choice.preset, choice.mode === "light" ? "light" : "dark"), ...shared };
+  const dark = { ...paletteTokens(choice.preset, "dark"), ...shared };
+  const rounded = Object.fromEntries(roundedRules(choice.radius));
 
   const registryDependencies = [
     "utils",
@@ -112,19 +77,21 @@ export function buildPresetItem(choice: PresetChoice, origin: string) {
     name: `pixelcn-${encodePreset(choice)}`,
     type: "registry:base",
     title: "pixelcn preset",
-    description: `pixelcn preset: ${choice.preset} colors, ${choice.font} font, ${choice.size}px pixels, ${choice.textScale} text.`,
+    description: `pixelcn preset: ${choice.preset} ${choice.mode} colors, ${choice.font} font, ${choice.size}x pixels, ${choice.textScale} text, ${choice.radius} corners, ${choice.shading} shading.`,
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge", "tw-animate-css", ...(choice.icons === "lucide" ? ["lucide-react"] : [])],
     registryDependencies,
-    // Pixel presets are single-mode: dark mirrors light so `.dark` keeps the look.
     cssVars: {
       theme: {
         "font-sans": "var(--pixel-font)",
         "font-pixel": "var(--pixel-font)",
       },
-      light: vars,
-      dark: vars,
+      light,
+      dark,
     },
     css: {
+      "@utility pixel-shadow": { "box-shadow": "var(--pixel-shadow)" },
+      ...Object.fromEntries(NON_INHERITED_VARS.map((name) => [`@property ${name}`, { syntax: '"*"', inherits: "false" }])),
+      ...(Object.keys(rounded).length ? { "@layer components": rounded } : {}),
       "@layer base": {
         "*": { "image-rendering": "pixelated" },
         html: {

@@ -57,6 +57,16 @@ body {
 }
 
 /* ── Pixel utilities ───────────────────────────────────────────────── */
+/* Hard pixel drop shadow; its look comes from the Shading setting
+   (--pixel-shadow, see SHADINGS in lib/tokens.ts). A utility (not a plain
+   class) so variants like active:shadow-none override it. */
+@utility pixel-shadow {
+  box-shadow: var(--pixel-shadow);
+}
+
+/* .pixel-rounded gets stepped corners from the Corners setting
+   ([data-radius] rules generated from lib/tokens.ts). */
+
 .pixel-border {
   border: var(--pixel-border) solid var(--foreground);
   box-shadow: var(--pixel-shadow);

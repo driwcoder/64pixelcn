@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "components/ui/collapsible.tsx",
-      "content": "import * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\";\r\n\r\nconst PixelCollapsible = CollapsiblePrimitive.Root;\r\nconst PixelCollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger;\r\nconst PixelCollapsibleContent = CollapsiblePrimitive.CollapsibleContent;\r\n\r\nexport { PixelCollapsible, PixelCollapsibleTrigger, PixelCollapsibleContent };\r\n",
+      "content": "import * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\";\n\nconst PixelCollapsible = CollapsiblePrimitive.Root;\nconst PixelCollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger;\nconst PixelCollapsibleContent = CollapsiblePrimitive.CollapsibleContent;\n\nexport { PixelCollapsible, PixelCollapsibleTrigger, PixelCollapsibleContent };\n",
       "type": "registry:ui"
     }
   ]

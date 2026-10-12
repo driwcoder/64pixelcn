@@ -89,6 +89,12 @@ export const componentsMeta: ComponentMeta[] = [
   { name: "enemy-health-display", title: "Enemy Health Display", description: "Boss and enemy health UI", category: "Gaming" },
   { name: "retro-mode-switcher", title: "Retro Mode Switcher", description: "Toggle retro visual effects", category: "Gaming" },
   { name: "theme-selector", title: "Theme Selector", description: "Switch between retro themes", category: "Gaming" },
+  { name: "dialogue-box", title: "Dialogue Box", description: "RPG text box that types out each line", category: "Gaming" },
+  { name: "inventory", title: "Inventory", description: "Keyboard-navigable grid of item slots", category: "Gaming" },
+  { name: "scoreboard", title: "Scoreboard", description: "Arcade high-score table", category: "Gaming" },
+  { name: "coin-counter", title: "Coin Counter", description: "HUD counter that counts up to its value", category: "Gaming" },
+  { name: "continue-screen", title: "Continue Screen", description: "Arcade continue countdown", category: "Gaming" },
+  { name: "achievement", title: "Achievement", description: "Achievement unlocked card", category: "Gaming" },
 ];
 
 export function getComponentMeta(name: string): ComponentMeta | undefined {

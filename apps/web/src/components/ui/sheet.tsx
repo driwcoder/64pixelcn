@@ -18,7 +18,7 @@ const PixelSheetOverlay = React.forwardRef<
 PixelSheetOverlay.displayName = "PixelSheetOverlay";
 
 const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-popover p-6 shadow-[var(--pixel-shadow)] transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500 font-[family-name:var(--pixel-font)]",
+  "fixed z-50 gap-4 bg-popover p-6 pixel-shadow transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500 font-[family-name:var(--pixel-font)]",
   {
     variants: {
       side: {

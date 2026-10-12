@@ -11,6 +11,8 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${PORT}`,
     browserName: "chromium",
+    // Use a preinstalled Chromium when the bundled one isn't downloaded.
+    launchOptions: { executablePath: process.env.CHROMIUM_PATH || undefined },
   },
   // Tests run against a production build so they see what users get.
   webServer: {

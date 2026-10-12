@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const pixelBadgeVariants = cva(
-  "inline-flex items-center border-2 border-foreground px-[0.9em] py-[0.3em] font-[family-name:var(--pixel-font)] text-[0.7rem] leading-normal uppercase tracking-widest",
+  "inline-flex items-center pixel-rounded border-2 border-foreground px-[0.9em] py-[0.3em] font-[family-name:var(--pixel-font)] text-[0.7rem] leading-normal uppercase tracking-widest",
   {
     variants: {
       variant: {

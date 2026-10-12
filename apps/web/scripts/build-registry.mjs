@@ -10,8 +10,9 @@ const APP_DIR = join(__dirname, "..");
 const SRC_DIR = join(APP_DIR, "src");
 const PUBLIC_DIR = join(APP_DIR, "public", "r");
 
+// LF only, so the generated JSON is identical on Windows (CRLF checkouts) and in CI.
 function readFile(filePath) {
-  try { return readFileSync(filePath, "utf-8"); } catch { return null; }
+  try { return readFileSync(filePath, "utf-8").replace(/\r\n/g, "\n"); } catch { return null; }
 }
 
 function getComponentFiles(name) {
@@ -86,6 +87,11 @@ for (const set of ICON_SETS) {
     files: [{ path: "components/ui/icons.tsx", content: renderStaticModule(set), type: "registry:ui" }],
   }, null, 2));
 }
+
+// API + accessibility docs for each component page.
+const { buildComponentApi } = await import("./component-api.mjs");
+const api = buildComponentApi(join(SRC_DIR, "components", "ui"), components.map((c) => c.name));
+writeFileSync(join(SRC_DIR, "lib", "component-api.json"), JSON.stringify(api, null, 2) + "\n");
 
 const registry = buildMainRegistry(components);
 writeFileSync(join(PUBLIC_DIR, "registry.json"), JSON.stringify(registry, null, 2));

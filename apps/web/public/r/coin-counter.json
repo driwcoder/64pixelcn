@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "coin-counter",
+  "type": "registry:ui",
+  "title": "Coin Counter",
+  "description": "HUD counter that counts up to its value",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/ui/coin-counter.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { Coins } from \"./icons\";\n\nfunction subscribeMotion(onChange: () => void) {\n  const mq = window.matchMedia(\"(prefers-reduced-motion: reduce)\");\n  mq.addEventListener(\"change\", onChange);\n  return () => mq.removeEventListener(\"change\", onChange);\n}\nfunction useReducedMotion() {\n  return React.useSyncExternalStore(subscribeMotion, () => window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches, () => false);\n}\n\nexport interface PixelCoinCounterProps extends React.HTMLAttributes<HTMLDivElement> {\n  value: number;\n  /** Zero-padded digit count, like an arcade HUD. */\n  digits?: number;\n  /** Unit read by screen readers (\"42 coins\"). */\n  label?: string;\n  icon?: React.ReactNode;\n  /** Count-up duration in ms when the value changes. */\n  duration?: number;\n}\n\n/** HUD coin counter that counts up (or down) to its value. */\nconst PixelCoinCounter = React.forwardRef<HTMLDivElement, PixelCoinCounterProps>(\n  ({ value, digits = 4, label = \"coins\", icon, duration = 400, className, ...props }, ref) => {\n    const reduced = useReducedMotion();\n    // What's on screen; it trails `value` while counting.\n    const [shown, setShown] = React.useState(value);\n    const shownRef = React.useRef(value);\n\n    React.useEffect(() => {\n      const from = shownRef.current;\n      if (from === value) return;\n      // One rAF loop from what's shown now to the new value (instant when\n      // motion is reduced); a newer value cancels it and starts from there.\n      const start = performance.now();\n      let frame = 0;\n      const tick = (now: number) => {\n        const t = reduced ? 1 : Math.min(1, (now - start) / duration);\n        shownRef.current = Math.round(from + (value - from) * t);\n        setShown(shownRef.current);\n        if (t < 1) frame = requestAnimationFrame(tick);\n      };\n      frame = requestAnimationFrame(tick);\n      return () => cancelAnimationFrame(frame);\n    }, [value, reduced, duration]);\n\n    return (\n      <div\n        ref={ref}\n        role=\"status\"\n        aria-label={`${value} ${label}`}\n        data-slot=\"coin-counter\"\n        className={cn(\n          \"inline-flex max-w-full items-center gap-[0.5em] font-[family-name:var(--pixel-font)] text-[0.9rem] uppercase tracking-widest tabular-nums\",\n          className\n        )}\n        {...props}\n      >\n        <span aria-hidden className=\"flex size-[1.4em] shrink-0 items-center justify-center text-[oklch(0.82_0.17_85)] [&_svg]:size-full\">\n          {icon ?? <Coins />}\n        </span>\n        <span aria-hidden className=\"text-muted-foreground\">x</span>\n        <span aria-hidden>{String(Math.max(0, shown)).padStart(digits, \"0\")}</span>\n      </div>\n    );\n  }\n);\nPixelCoinCounter.displayName = \"PixelCoinCounter\";\n\nexport { PixelCoinCounter };\n",
+      "type": "registry:ui"
+    }
+  ]
+}

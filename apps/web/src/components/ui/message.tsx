@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const messageVariants = cva(
-  "flex gap-3 border-2 border-foreground p-3 font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)]",
+  "flex gap-3 pixel-rounded border-2 border-foreground p-3 font-[family-name:var(--pixel-font)] pixel-shadow",
   {
     variants: {
       variant: {

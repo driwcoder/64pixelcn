@@ -38,7 +38,7 @@ const PixelDropdownMenuSubContent = React.forwardRef<
   <DropdownMenuPrimitive.SubContent
     ref={ref}
     data-slot="dropdown-menu-sub-content"
-    className={cn("z-50 min-w-[8rem] border-2 border-foreground bg-popover p-1 text-popover-foreground shadow-[var(--pixel-shadow)]", className)}
+    className={cn("z-50 min-w-[8rem] pixel-rounded border-2 border-foreground bg-popover p-1 text-popover-foreground pixel-shadow", className)}
     {...props}
   />
 ));
@@ -54,7 +54,7 @@ const PixelDropdownMenuContent = React.forwardRef<
       data-slot="dropdown-menu-content"
       sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-[8rem] border-2 border-foreground bg-popover p-1 text-popover-foreground shadow-[var(--pixel-shadow)]",
+        "z-50 min-w-[8rem] pixel-rounded border-2 border-foreground bg-popover p-1 text-popover-foreground pixel-shadow",
         "font-[family-name:var(--pixel-font)]",
         className
       )}
