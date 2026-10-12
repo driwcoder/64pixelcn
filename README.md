@@ -35,7 +35,7 @@ registry server (the same layout shadcn/ui uses):
     ├── src/
     │   ├── components/ui/            # The pixel art components (single copy)
     │   └── lib/
-    │       ├── tokens.ts             # Single source of truth for presets, sizes, fonts
+    │       ├── tokens.ts             # Single source of truth for themes, sizes, fonts
     │       ├── components.ts         # Component list (docs + registry build)
     │       ├── preset-code.ts        # Short preset codes (?preset=)
     │       ├── preset-registry.ts    # Builds registry items from tokens
@@ -67,7 +67,7 @@ accessibility notes, the last two generated from the component source.
 
 Every option comes from `apps/web/src/lib/tokens.ts`:
 
-- **Colors**: nintendo, gameboy, neon, sepia, mono, each in **light** and **dark** mode
+- **Themes**: nintendo, gameboy, neon, sepia, mono, each in **light** and **dark** mode
 - **Fonts**: press-start, vt323, silkscreen (default), pixelify, dotgothic, jacquard (Jacquard 12), jacquard24, handjet, system
 - **Pixel sizes**: 8x, 16x, 32x, 64x, 128x (shadow offset, corner step and shading bands)
 - **Text sizes**: xs, sm, md, lg, xl
@@ -90,7 +90,7 @@ sizes, shading, corners and, optionally, every component).
 On the site the same settings are data attributes on `<html>`:
 
 ```html
-<html data-preset="gameboy" data-mode="light" data-font="vt323" data-size="32" data-radius="md" data-shading="bevel">
+<html data-theme="gameboy" data-mode="light" data-font="vt323" data-size="32" data-radius="md" data-shading="bevel">
 ```
 
 Components opt into stepped corners with the `pixel-rounded` class and into the drop shadow with the

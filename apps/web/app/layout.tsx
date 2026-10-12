@@ -16,11 +16,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Fonts are self-hosted (app/fonts.css). Only the default font's latin
-            subset is preloaded; the rest download when a preset uses them. */}
+            subset is preloaded; the rest download when a font setting uses them. */}
         <link rel="preload" href="/fonts/silkscreen-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="" />
-        {/* Theme tokens (presets, sizes, fonts, text scales) from lib/tokens.ts. */}
+        {/* Theme tokens (themes, sizes, fonts, text scales) from lib/tokens.ts. */}
         <style dangerouslySetInnerHTML={{ __html: buildThemeCss() }} />
-        {/* Applies saved preset/font/size before first paint (no theme flash). */}
+        {/* Applies saved theme/font/size before first paint (no theme flash). */}
         <InlineScript html={PIXEL_SETTINGS_SCRIPT} />
       </head>
       <body>

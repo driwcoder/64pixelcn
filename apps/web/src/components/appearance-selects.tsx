@@ -7,7 +7,7 @@ import {
   FONTS,
   ICON_SETS,
   MODES,
-  PRESETS,
+  THEMES,
   RADII,
   SHADINGS,
   TEXT_SCALES,
@@ -19,11 +19,11 @@ type Field = keyof Appearance;
 
 /** Label of every option, plus an optional visual hint shown in the list. */
 const FIELD_META: { [K in Field]: { label: string; option: (v: Appearance[K]) => { label: string; hint?: React.ReactNode } } } = {
-  preset: {
-    label: "Color preset",
+  theme: {
+    label: "Theme",
     option: (v) => ({
-      label: PRESETS[v].label,
-      hint: <span aria-hidden className="inline-block h-3 w-3 shrink-0 border-[length:var(--pixel-line,2px)] border-current" style={{ backgroundColor: PRESETS[v].swatch }} />,
+      label: THEMES[v].label,
+      hint: <span aria-hidden className="inline-block h-3 w-3 shrink-0 border-[length:var(--pixel-line,2px)] border-current" style={{ backgroundColor: THEMES[v].swatch }} />,
     }),
   },
   mode: { label: "Mode", option: (v) => ({ label: MODES[v].label }) },
@@ -44,7 +44,7 @@ const FIELD_META: { [K in Field]: { label: string; option: (v: Appearance[K]) =>
 };
 
 /** Order of the selects, matching ui.shadcn.com/create's sidebar grouping. */
-export const APPEARANCE_FIELDS: Field[] = ["preset", "mode", "font", "textScale", "icons", "size", "radius", "shading"];
+export const APPEARANCE_FIELDS: Field[] = ["theme", "mode", "font", "textScale", "icons", "size", "radius", "shading"];
 
 /** Tiny pixel drawing of a stepped corner. */
 function CornerHint({ steps }: { steps: number }) {

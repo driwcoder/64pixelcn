@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ── Design tokens ─────────────────────────────────────────────────────
-   :root defaults and every [data-preset] / [data-size] / [data-font] /
+   :root defaults and every [data-theme] / [data-mode] / [data-size] / [data-font] /
    [data-text-scale] rule are generated from src/lib/tokens.ts (the single
    source of truth) and injected by app/layout.tsx. Don't define them here. */
 

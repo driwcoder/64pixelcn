@@ -1,5 +1,5 @@
 // WCAG 2.x contrast for the oklch() colors in lib/tokens.ts (used by
-// tests/contrast.spec.ts to audit every preset in both modes).
+// tests/contrast.spec.ts to audit every theme in both modes).
 
 /** oklch(L C H [/ A]) -> linear sRGB, or null for anything else. */
 function oklchToLinearRgb(css: string): [number, number, number] | null {

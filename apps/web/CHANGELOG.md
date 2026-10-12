@@ -4,6 +4,13 @@ All notable changes to pixelcn. The version is in `apps/web/package.json` and
 follows [Semantic Versioning](https://semver.org): while it is 0.x, a minor
 bump may change component markup or tokens.
 
+## 0.3.0 - 2026-10-12
+
+### Changed
+
+- Color presets are now called **themes**: the "Theme" select in Display and /create, `data-theme` on `<html>` (was `data-preset`) and the `theme` field in code. "Preset" now only means the whole /create configuration that `shadcn init --preset` installs.
+- Old `?c=` preset links are no longer accepted; use `?preset=` codes.
+
 ## 0.2.1 - 2026-10-12
 
 ### Changed

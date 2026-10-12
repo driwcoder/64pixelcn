@@ -1,4 +1,4 @@
-// Single source of truth for pixelcn's design tokens: color presets (light
+// Single source of truth for pixelcn's design tokens: color themes (light
 // and dark), pixel sizes, shading, stepped corners, text scales and fonts.
 // Everything else derives from here:
 //  - the site's theme CSS (buildThemeCss, injected by app/layout.tsx),
@@ -9,14 +9,14 @@
 
 export type Tokens = Record<string, string>;
 
-export const PRESETS = {
+export const THEMES = {
   nintendo: { label: "Nintendo", swatch: "#ff5f6d" },
   gameboy: { label: "GameBoy", swatch: "#8bac0f" },
   neon: { label: "Neon", swatch: "#f0f" },
   sepia: { label: "Sepia", swatch: "#c08552" },
   mono: { label: "Mono", swatch: "#e0e0e0" },
 } as const;
-export type Preset = keyof typeof PRESETS;
+export type Theme = keyof typeof THEMES;
 
 export const MODES = {
   dark: { label: "Dark" },
@@ -25,7 +25,7 @@ export const MODES = {
 export type Mode = keyof typeof MODES;
 
 /**
- * Full palette for every preset in both modes. Besides the shadcn color
+ * Full palette for every theme in both modes. Besides the shadcn color
  * tokens each palette carries its pixel-art shading ramp (see SHADINGS):
  *  - shade-hi / shade-hi-2: highlight bands (top-left light source), warm
  *    hue-shifted tints rather than plain white;
@@ -36,7 +36,7 @@ export type Mode = keyof typeof MODES;
  * hardware had 4 colors, so its ramps can't have more steps.
  * Contrast of every text/surface pair is checked by tests/contrast.spec.ts.
  */
-export const PALETTES: Record<Preset, Record<Mode, Tokens>> = {
+export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
   nintendo: {
     dark: {
       background: "oklch(0.09 0.014 285)",
@@ -318,9 +318,9 @@ export const CHART_COLORS: Tokens = {
   "chart-5": "oklch(0.7 0.2 60)",
 };
 
-/** Every color token for a preset in a mode. */
-export function paletteTokens(preset: Preset, mode: Mode): Tokens {
-  return { ...PALETTES[preset][mode], ...CHART_COLORS };
+/** Every color token for a theme in a mode. */
+export function paletteTokens(theme: Theme, mode: Mode): Tokens {
+  return { ...PALETTES[theme][mode], ...CHART_COLORS };
 }
 
 export const PIXEL_SIZES = [8, 16, 32, 64, 128] as const;
@@ -450,7 +450,7 @@ export const ICON_SETS = {
 } as const;
 export type IconSet = keyof typeof ICON_SETS;
 
-export const PRESET_IDS = Object.keys(PRESETS) as Preset[];
+export const THEME_IDS = Object.keys(THEMES) as Theme[];
 export const MODE_IDS = Object.keys(MODES) as Mode[];
 export const ICON_SET_IDS = Object.keys(ICON_SETS) as IconSet[];
 export const FONT_IDS = Object.keys(FONTS) as PixelFont[];
@@ -459,7 +459,7 @@ export const RADIUS_IDS = Object.keys(RADII) as Radius[];
 export const SHADING_IDS = Object.keys(SHADINGS) as Shading[];
 
 export interface Appearance {
-  preset: Preset;
+  theme: Theme;
   mode: Mode;
   font: PixelFont;
   size: PixelSize;
@@ -470,7 +470,7 @@ export interface Appearance {
 }
 
 export const DEFAULT_APPEARANCE: Appearance = {
-  preset: "nintendo",
+  theme: "nintendo",
   mode: "dark",
   font: "silkscreen",
   size: 64,
@@ -482,7 +482,7 @@ export const DEFAULT_APPEARANCE: Appearance = {
 
 /** Allowed values of every Appearance field (validation, selects, codes). */
 export const APPEARANCE_VALUES: { [K in keyof Appearance]: readonly Appearance[K][] } = {
-  preset: PRESET_IDS,
+  theme: THEME_IDS,
   mode: MODE_IDS,
   font: FONT_IDS,
   size: PIXEL_SIZES,
@@ -494,7 +494,7 @@ export const APPEARANCE_VALUES: { [K in keyof Appearance]: readonly Appearance[K
 
 /** <html> attribute that carries each Appearance field. */
 export const APPEARANCE_ATTRS: { [K in keyof Appearance]: string } = {
-  preset: "data-preset",
+  theme: "data-theme",
   mode: "data-mode",
   font: "data-font",
   size: "data-size",
@@ -665,7 +665,7 @@ function declRule(selector: string, decls: CssDecls) {
 
 /**
  * Theme CSS for the site: :root defaults plus one rule per value of every
- * Appearance attribute on <html> ([data-preset][data-mode], [data-size]...).
+ * Appearance attribute on <html> ([data-theme][data-mode], [data-size]...).
  */
 export function buildThemeCss() {
   const d = DEFAULT_APPEARANCE;
@@ -674,15 +674,15 @@ export function buildThemeCss() {
     PROPERTY_RULES,
     rule(":root", {
       radius: "0px",
-      ...paletteTokens(d.preset, d.mode),
+      ...paletteTokens(d.theme, d.mode),
       ...SIZE_TOKENS[d.size],
       ...shadingTokens(d.shading),
       ...fontVars(d.font),
       "pixel-text-scale": TEXT_SCALES[d.textScale].value,
     }),
-    // A preset without data-mode (older saved settings) gets its dark palette.
-    ...PRESET_IDS.map((p) => rule(`[data-preset="${p}"]`, paletteTokens(p, "dark"))),
-    ...PRESET_IDS.map((p) => rule(`[data-preset="${p}"][data-mode="light"]`, paletteTokens(p, "light"))),
+    // Dark is the default when data-mode is missing.
+    ...THEME_IDS.map((t) => rule(`[data-theme="${t}"]`, paletteTokens(t, "dark"))),
+    ...THEME_IDS.map((t) => rule(`[data-theme="${t}"][data-mode="light"]`, paletteTokens(t, "light"))),
     ...PIXEL_SIZES.map((s) => rule(`[data-size="${s}"]`, SIZE_TOKENS[s])),
     ...TEXT_SCALE_IDS.map((t) => rule(`[data-text-scale="${t}"]`, { "pixel-text-scale": TEXT_SCALES[t].value })),
     ...FONT_IDS.map((f) => rule(`[data-font="${f}"]`, fontVars(f))),

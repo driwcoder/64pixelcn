@@ -34,6 +34,8 @@ function loadSettings(): Appearance {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return DEFAULTS;
     const parsed = JSON.parse(raw) as Record<string, unknown>;
+    // Settings saved before the color "preset" field was renamed "theme".
+    parsed.theme ??= parsed.preset;
     // Validate: stale values from older versions (e.g. a removed font) and
     // fields that didn't exist yet fall back to the default.
     const out = { ...DEFAULTS } as Record<keyof Appearance, unknown>;

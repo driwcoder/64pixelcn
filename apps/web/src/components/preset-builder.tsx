@@ -40,9 +40,9 @@ function useOrigin() {
   return React.useSyncExternalStore(subscribeNoop, () => window.location.origin, () => "https://pixelcn.vercel.app");
 }
 
-/** ?preset=<code> holds the whole preset, so a link reproduces it exactly (?c= is the legacy form). */
+/** ?preset=<code> holds the whole preset, so a link reproduces it exactly. */
 function choiceFromParams(params: URLSearchParams): PresetChoice {
-  const code = params.get("preset") ?? params.get("c");
+  const code = params.get("preset");
   return (code && decodePreset(code)) || DEFAULT_CHOICE;
 }
 
@@ -92,7 +92,7 @@ export function PresetBuilder() {
   const shuffle = () =>
     setChoice((c) => ({
       ...c,
-      preset: pick(APPEARANCE_VALUES.preset),
+      theme: pick(APPEARANCE_VALUES.theme),
       mode: pick(APPEARANCE_VALUES.mode),
       font: pick(APPEARANCE_VALUES.font),
       size: pick(APPEARANCE_VALUES.size),

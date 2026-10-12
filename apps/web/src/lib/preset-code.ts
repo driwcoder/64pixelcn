@@ -15,7 +15,7 @@ export const DEFAULT_CHOICE: PresetChoice = { ...DEFAULT_APPEARANCE, components:
  * a base-32 digit of one number (index into its option list), so existing
  * codes keep decoding, with index 0 for fields they predate.
  */
-const FIELDS = ["preset", "mode", "font", "size", "textScale", "icons", "radius", "shading", "components"] as const;
+const FIELDS = ["theme", "mode", "font", "size", "textScale", "icons", "radius", "shading", "components"] as const;
 const VALUES: Record<(typeof FIELDS)[number], readonly unknown[]> = { ...APPEARANCE_VALUES, components: [true, false] };
 const VERSION = "1";
 const DIGITS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -53,21 +53,8 @@ export function decodePresetCode(code: string | null, fields: readonly string[],
   return n === 0 ? out : null;
 }
 
-/** Codes from before short codes: nintendo_silkscreen_64_md[_pixelarticons]_all. */
-function decodeLegacy(code: string): PresetChoice | null {
-  const parts = code.split("_");
-  if (parts.length === 5) parts.splice(4, 0, DEFAULT_APPEARANCE.icons);
-  if (parts.length !== 6) return null;
-  const [preset, font, size, textScale, icons, components] = parts;
-  const choice = { ...DEFAULT_CHOICE, preset, font, size: Number(size), textScale, icons, components: components === "all" };
-  const ok =
-    (components === "all" || components === "none") &&
-    (["preset", "font", "size", "textScale", "icons"] as const).every((f) => (APPEARANCE_VALUES[f] as readonly unknown[]).includes(choice[f]));
-  return ok ? (choice as PresetChoice) : null;
-}
-
 export function decodePreset(code: string): PresetChoice | null {
-  return (decodePresetCode(code, FIELDS, VALUES) as PresetChoice | null) ?? decodeLegacy(code);
+  return decodePresetCode(code, FIELDS, VALUES) as PresetChoice | null;
 }
 
 /** Source of the inline decoder, with its field list and option lists. */

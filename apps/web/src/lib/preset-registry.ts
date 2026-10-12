@@ -62,8 +62,8 @@ export function buildPresetItem(choice: PresetChoice, origin: string) {
   // The chosen mode is the default (:root); the other one is still there
   // under .dark, so a dark-mode toggle in the app keeps working. For a light
   // pick :root is light and .dark is dark; for a dark pick both are dark.
-  const light = { ...paletteTokens(choice.preset, choice.mode === "light" ? "light" : "dark"), ...shared };
-  const dark = { ...paletteTokens(choice.preset, "dark"), ...shared };
+  const light = { ...paletteTokens(choice.theme, choice.mode === "light" ? "light" : "dark"), ...shared };
+  const dark = { ...paletteTokens(choice.theme, "dark"), ...shared };
   const rounded: Record<string, Record<string, string>> = Object.fromEntries(roundedRules(choice.radius));
   const extruded = choice.shading === "deep" ? extrudedRoundedDecls(choice.radius) : null;
   if (extruded) rounded[".pixel-rounded.pixel-shadow"] = { ...rounded[".pixel-rounded.pixel-shadow"], ...extruded };
@@ -80,7 +80,7 @@ export function buildPresetItem(choice: PresetChoice, origin: string) {
     name: `pixelcn-${encodePreset(choice)}`,
     type: "registry:base",
     title: "pixelcn preset",
-    description: `pixelcn preset: ${choice.preset} ${choice.mode} colors, ${choice.font} font, ${choice.size}x pixels, ${choice.textScale} text, ${choice.radius} corners, ${choice.shading} shading.`,
+    description: `pixelcn preset: ${choice.theme} ${choice.mode} theme, ${choice.font} font, ${choice.size}x pixels, ${choice.textScale} text, ${choice.radius} corners, ${choice.shading} shading.`,
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge", "tw-animate-css", ...(choice.icons === "lucide" ? ["lucide-react"] : [])],
     registryDependencies,
     cssVars: {

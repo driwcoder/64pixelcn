@@ -60,7 +60,7 @@ export function HeroGameTitle() {
 export function FeaturesCardGrid() {
   const items = [
     { icon: Sword, title: "Components", desc: "70+ pixel art components" },
-    { icon: Shield, title: "Presets", desc: "5 retro themes built-in" },
+    { icon: Shield, title: "Themes", desc: "5 retro themes, light & dark" },
     { icon: Zap, title: "Multi-size", desc: "8px to 128px" },
   ];
   return (

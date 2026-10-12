@@ -20,7 +20,7 @@ export default function Home() {
             </h1>
             <p className="mb-8 font-[family-name:var(--pixel-font)] text-sm text-muted-foreground leading-relaxed max-w-2xl mx-auto">
               A pixel art component library based on shadcn/ui.
-              {componentsMeta.length} components including game UI. Install, customize presets, and build retro UIs.
+              {componentsMeta.length} components including game UI. Install, pick a theme, and build retro UIs.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <PixelButton size="lg" asChild>
@@ -67,7 +67,7 @@ export default function Home() {
 
             <PixelCard>
               <PixelCardHeader>
-                <PixelCardTitle>Multi-Size & Presets</PixelCardTitle>
+                <PixelCardTitle>Multi-Size & Themes</PixelCardTitle>
                 <PixelCardDescription>
                   8x to 128x pixels, light & dark Nintendo, GameBoy, Neon, Sepia and Mono palettes, stepped corners and pixel-art shading.
                 </PixelCardDescription>

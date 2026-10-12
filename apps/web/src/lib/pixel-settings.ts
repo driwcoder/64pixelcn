@@ -18,4 +18,4 @@ export const PIXEL_SETTINGS_SCRIPT = `(function(){try{${DECODER_JS}var r=documen
   encodePreset(DEFAULT_CHOICE)
 )},F,V);}else{s=JSON.parse(localStorage.getItem(${JSON.stringify(
   STORAGE_KEY
-)})||"null");}if(!s)return;for(var k in A){if(s[k]!=null)r.setAttribute(A[k],String(s[k]));}r.classList.toggle("dark",s.mode!=="light");}catch(e){}})();`;
+)})||"null");}if(!s)return;if(!s.theme)s.theme=s.preset;for(var k in A){if(s[k]!=null)r.setAttribute(A[k],String(s[k]));}r.classList.toggle("dark",s.mode!=="light");}catch(e){}})();`;
