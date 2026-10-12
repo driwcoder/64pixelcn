@@ -67,10 +67,10 @@ export function FeaturesCardGrid() {
     <div className="grid md:grid-cols-3 gap-[0.6em]">
       {items.map((f) => (
         <PixelCard key={f.title} className="h-full">
-          <PixelCardContent className="pt-[0.9em] pb-[0.9em] px-[0.9em] text-center flex flex-col items-center gap-[0.4em]">
+          <PixelCardContent className="text-center flex flex-col items-center gap-[0.5em]">
             <f.icon className="h-[2em] w-[2em] text-primary shrink-0" strokeWidth={2} />
-            <PixelCardTitle className="text-[0.8em] leading-tight">{f.title}</PixelCardTitle>
-            <p className="text-[0.7em] leading-relaxed text-muted-foreground">{f.desc}</p>
+            <PixelCardTitle className="leading-relaxed">{f.title}</PixelCardTitle>
+            <PixelCardDescription className="leading-relaxed">{f.desc}</PixelCardDescription>
           </PixelCardContent>
         </PixelCard>
       ))}

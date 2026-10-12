@@ -19,7 +19,7 @@ PixelCard.displayName = "PixelCard";
 
 const PixelCardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} data-slot="card-header" className={cn("flex flex-col gap-1.5 px-6 pt-6", className)} {...props} />
+    <div ref={ref} data-slot="card-header" className={cn("flex flex-col gap-[0.4em] px-[1.5em] pt-[1.5em]", className)} {...props} />
   )
 );
 PixelCardHeader.displayName = "PixelCardHeader";
@@ -29,7 +29,7 @@ const PixelCardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTM
     <div
       ref={ref}
       data-slot="card-title"
-      className={cn("font-[family-name:var(--pixel-font)] text-sm uppercase leading-none tracking-widest", className)}
+      className={cn("font-[family-name:var(--pixel-font)] text-[0.85rem] uppercase leading-relaxed tracking-widest break-words", className)}
       {...props}
     />
   )
@@ -41,7 +41,7 @@ const PixelCardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttribut
     <div
       ref={ref}
       data-slot="card-description"
-      className={cn("font-[family-name:var(--pixel-font)] text-xs text-muted-foreground leading-relaxed", className)}
+      className={cn("font-[family-name:var(--pixel-font)] text-[0.8rem] text-muted-foreground leading-relaxed break-words", className)}
       {...props}
     />
   )
@@ -50,14 +50,14 @@ PixelCardDescription.displayName = "PixelCardDescription";
 
 const PixelCardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} data-slot="card-content" className={cn("px-6 pb-6", className)} {...props} />
+    <div ref={ref} data-slot="card-content" className={cn("px-[1.5em] pb-[1.5em]", className)} {...props} />
   )
 );
 PixelCardContent.displayName = "PixelCardContent";
 
 const PixelCardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} data-slot="card-footer" className={cn("flex items-center px-6 pb-6", className)} {...props} />
+    <div ref={ref} data-slot="card-footer" className={cn("flex items-center px-[1.5em] pb-[1.5em]", className)} {...props} />
   )
 );
 PixelCardFooter.displayName = "PixelCardFooter";

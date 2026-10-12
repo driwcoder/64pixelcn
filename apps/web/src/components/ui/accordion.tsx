@@ -12,7 +12,7 @@ const PixelAccordionItem = React.forwardRef<
   <AccordionPrimitive.Item
     ref={ref}
     data-slot="accordion-item"
-    className={cn("border-b-2 border-foreground", className)}
+    className={cn("border-b-2 border-foreground px-[1em]", className)}
     {...props}
   />
 ));
@@ -27,15 +27,15 @@ const PixelAccordionTrigger = React.forwardRef<
       ref={ref}
       data-slot="accordion-trigger"
       className={cn(
-        "flex flex-1 items-center justify-between py-4 text-left",
-        "font-[family-name:var(--pixel-font)] text-xs uppercase tracking-widest",
+        "flex flex-1 items-center justify-between gap-[0.6em] py-[0.9em] text-left",
+        "font-[family-name:var(--pixel-font)] text-[0.8rem] uppercase tracking-widest leading-relaxed",
         "transition-all hover:text-primary [&[data-state=open]>svg]:rotate-180",
         className
       )}
       {...props}
     >
       {children}
-      <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200" strokeWidth={3} />
+      <ChevronDown className="h-[1em] w-[1em] shrink-0 transition-transform duration-200" strokeWidth={3} />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
@@ -48,10 +48,10 @@ const PixelAccordionContent = React.forwardRef<
   <AccordionPrimitive.Content
     ref={ref}
     data-slot="accordion-content"
-    className="overflow-hidden text-xs data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    className="overflow-hidden text-[0.8rem] leading-relaxed data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}
   >
-    <div className={cn("pt-0 pb-4 leading-relaxed", className)}>{children}</div>
+    <div className={cn("pt-0 pb-[0.9em] leading-relaxed", className)}>{children}</div>
   </AccordionPrimitive.Content>
 ));
 PixelAccordionContent.displayName = "PixelAccordionContent";
