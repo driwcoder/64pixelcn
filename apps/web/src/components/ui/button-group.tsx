@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonGroupVariants = cva(
-  "flex w-fit items-stretch border-[length:var(--pixel-line,2px)] border-foreground pixel-shadow [&>*]:border-none [&>*]:shadow-none [&>*:not(:first-child)]:border-l-[length:var(--pixel-line,2px)] [&>*:not(:first-child)]:border-l-foreground [&>*]:rounded-none",
+  "pixel-raised flex w-fit items-stretch [&>*]:border-none [&>*]:shadow-none [&>*:not(:first-child)]:border-l-[length:var(--pixel-line,2px)] [&>*:not(:first-child)]:border-l-foreground [&>*]:rounded-none",
   {
     variants: {
       orientation: {

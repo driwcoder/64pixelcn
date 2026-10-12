@@ -8,7 +8,8 @@
     "react-day-picker"
   ],
   "registryDependencies": [
-    "utils"
+    "utils",
+    "https://pixelcn.vercel.app/r/roles.json"
   ],
   "files": [
     {

@@ -50,7 +50,7 @@ const PixelMessageScroller = React.forwardRef<HTMLDivElement, PixelMessageScroll
             aria-label="Scroll to bottom"
             className={cn(
               "absolute bottom-2 left-1/2 -translate-x-1/2 h-8 w-8",
-              "flex items-center justify-center border-[length:var(--pixel-line,2px)] border-foreground bg-popover pixel-shadow",
+              "pixel-raised flex items-center justify-center bg-popover",
               "hover:bg-accent transition-colors"
             )}
           >

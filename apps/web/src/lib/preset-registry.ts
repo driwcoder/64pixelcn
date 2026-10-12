@@ -8,21 +8,40 @@ import {
   ICON_SETS,
   fontFamily,
   paletteTokens,
-  roundedRules,
-  extrudedRoundedDecls,
-  shadingTokens,
   fontHasCaps,
-  NO_CAPS_DECLS,
-  NO_CAPS_TRACKING,
-  NON_INHERITED_VARS,
   type FontSpec,
   type PixelFont,
   type Tokens,
 } from "@/lib/tokens";
 import { componentsMeta } from "@/lib/components";
+import { NO_CAPS_DECLS, NO_CAPS_TRACKING, NON_INHERITED_VARS, ROLE_RULES, engineRules, type Rule } from "@/lib/pixel-engine";
 import { encodePreset, type PresetChoice } from "@/lib/preset-code";
 
 export { DEFAULT_CHOICE, decodePreset, encodePreset, type PresetChoice } from "@/lib/preset-code";
+
+/** shadcn `css` object from rules; rules sharing a selector are merged. */
+function cssObject(rules: Rule[]): Record<string, Record<string, string>> {
+  const out: Record<string, Record<string, string>> = {};
+  for (const [sel, decls] of rules) out[sel] = { ...out[sel], ...decls };
+  return out;
+}
+
+const PROPERTY_CSS = Object.fromEntries(NON_INHERITED_VARS.map((name) => [`@property ${name}`, { syntax: '"*"', inherits: "false" }]));
+
+/**
+ * pixelcn-roles: the role classes every component uses (.pixel-raised...),
+ * with fallbacks, so a component added without a preset still renders.
+ */
+export function buildRolesItem() {
+  return {
+    $schema: "https://ui.shadcn.com/schema/registry-item.json",
+    name: "pixelcn-roles",
+    type: "registry:style",
+    title: "pixelcn roles",
+    description: "Role classes (pixel-raised, pixel-surface, pixel-sunken, pixel-tone-*) used by every pixelcn component.",
+    css: { ...PROPERTY_CSS, "@layer components": cssObject(ROLE_RULES) },
+  };
+}
 
 /** CSS variable the font item exposes (next/font `variable`). */
 const FONT_VARIABLE = "--font-pixel-family";
@@ -57,7 +76,6 @@ export function buildPresetItem(choice: PresetChoice, origin: string) {
   const shared: Tokens = {
     radius: "0px",
     ...SIZE_TOKENS[choice.size],
-    ...shadingTokens(choice.shading),
     "pixel-font": fontFamily(choice.font, FONT_VARIABLE),
     "pixel-font-adjust": spec.adjust,
     "pixel-text-scale": TEXT_SCALES[choice.textScale].value,
@@ -67,9 +85,8 @@ export function buildPresetItem(choice: PresetChoice, origin: string) {
   // pick :root is light and .dark is dark; for a dark pick both are dark.
   const light = { ...paletteTokens(choice.theme, choice.mode === "light" ? "light" : "dark"), ...shared };
   const dark = { ...paletteTokens(choice.theme, "dark"), ...shared };
-  const rounded: Record<string, Record<string, string>> = Object.fromEntries(roundedRules(choice.radius));
-  const extruded = choice.shading === "deep" ? extrudedRoundedDecls(choice.radius) : null;
-  if (extruded) rounded[".pixel-rounded.pixel-shadow"] = { ...rounded[".pixel-rounded.pixel-shadow"], ...extruded };
+  // The engine's rules for exactly this combination (no <html> attributes).
+  const engine = engineRules(choice);
 
   const registryDependencies = [
     "utils",
@@ -83,7 +100,7 @@ export function buildPresetItem(choice: PresetChoice, origin: string) {
     name: `pixelcn-${encodePreset(choice)}`,
     type: "registry:base",
     title: "pixelcn preset",
-    description: `pixelcn preset: ${choice.theme} ${choice.mode} theme, ${choice.font} font, ${choice.size}x pixels, ${choice.textScale} text, ${choice.radius} corners, ${choice.shading} shading.`,
+    description: `pixelcn preset: ${choice.theme} ${choice.mode} theme, ${choice.font} font, ${choice.size}x pixels, ${choice.textScale} text, ${choice.radius} corners, ${choice.shading} shading, ${choice.border} border.`,
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge", "tw-animate-css", ...(choice.icons === "lucide" ? ["lucide-react"] : [])],
     registryDependencies,
     cssVars: {
@@ -96,11 +113,16 @@ export function buildPresetItem(choice: PresetChoice, origin: string) {
       dark,
     },
     css: {
-      "@utility pixel-shadow": { "box-shadow": "var(--pixel-shadow)" },
+      "@utility pixel-shadow": {
+        "--tw-shadow": "var(--pixel-shadow)",
+        "box-shadow":
+          "var(--tw-inset-shadow, 0 0 #0000), var(--tw-inset-ring-shadow, 0 0 #0000), var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)",
+      },
       // Blackletter can't be read in all caps (see NO_CAPS_DECLS).
       ...(fontHasCaps(choice.font) ? {} : { ".uppercase": NO_CAPS_DECLS }),
-      ...Object.fromEntries(NON_INHERITED_VARS.map((name) => [`@property ${name}`, { syntax: '"*"', inherits: "false" }])),
-      ...(Object.keys(rounded).length ? { "@layer components": rounded } : {}),
+      ...PROPERTY_CSS,
+      "@layer components": cssObject(engine.layered),
+      ...cssObject(engine.unlayered),
       "@layer base": {
         "*": { "image-rendering": "pixelated" },
         html: {

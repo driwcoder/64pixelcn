@@ -9,6 +9,7 @@
   ],
   "registryDependencies": [
     "utils",
+    "https://pixelcn.vercel.app/r/roles.json",
     "https://pixelcn.vercel.app/r/button.json",
     "https://pixelcn.vercel.app/r/select.json",
     "https://pixelcn.vercel.app/r/table.json"

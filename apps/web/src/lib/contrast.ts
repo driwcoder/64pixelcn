@@ -1,3 +1,5 @@
+import { parseHex } from "@/lib/palette-theme";
+
 // WCAG 2.x contrast for the oklch() colors in lib/tokens.ts (used by
 // tests/contrast.spec.ts to audit every theme in both modes).
 
@@ -20,6 +22,7 @@ function oklchToLinearRgb(css: string): [number, number, number] | null {
 }
 
 export function relativeLuminance(css: string): number {
+  if (/^#[0-9a-f]{6}$/i.test(css)) return parseHex(css).y;
   const rgb = oklchToLinearRgb(css);
   if (!rgb) throw new Error(`Not an oklch() color: ${css}`);
   return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];

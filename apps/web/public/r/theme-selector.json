@@ -6,7 +6,8 @@
   "description": "Switch between retro themes",
   "dependencies": [],
   "registryDependencies": [
-    "utils"
+    "utils",
+    "https://pixelcn.vercel.app/r/roles.json"
   ],
   "files": [
     {

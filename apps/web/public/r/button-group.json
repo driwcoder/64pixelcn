@@ -8,12 +8,13 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "utils"
+    "utils",
+    "https://pixelcn.vercel.app/r/roles.json"
   ],
   "files": [
     {
       "path": "components/ui/button-group.tsx",
-      "content": "import { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst buttonGroupVariants = cva(\n  \"flex w-fit items-stretch border-[length:var(--pixel-line,2px)] border-foreground pixel-shadow [&>*]:border-none [&>*]:shadow-none [&>*:not(:first-child)]:border-l-[length:var(--pixel-line,2px)] [&>*:not(:first-child)]:border-l-foreground [&>*]:rounded-none\",\n  {\n    variants: {\n      orientation: {\n        horizontal: \"flex-row [&>*:not(:first-child)]:border-l-[length:var(--pixel-line,2px)] [&>*:not(:first-child)]:border-l-foreground\",\n        vertical: \"flex-col [&>*:not(:first-child)]:border-t-[length:var(--pixel-line,2px)] [&>*:not(:first-child)]:border-t-foreground\",\n      },\n    },\n    defaultVariants: { orientation: \"horizontal\" },\n  }\n);\n\nfunction PixelButtonGroup({\n  className, orientation, ...props\n}: React.ComponentProps<\"div\"> & VariantProps<typeof buttonGroupVariants>) {\n  return <div data-slot=\"button-group\" className={cn(buttonGroupVariants({ orientation }), className)} {...props} />;\n}\n\nexport { PixelButtonGroup, buttonGroupVariants };\n",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst buttonGroupVariants = cva(\n  \"pixel-raised flex w-fit items-stretch [&>*]:border-none [&>*]:shadow-none [&>*:not(:first-child)]:border-l-[length:var(--pixel-line,2px)] [&>*:not(:first-child)]:border-l-foreground [&>*]:rounded-none\",\n  {\n    variants: {\n      orientation: {\n        horizontal: \"flex-row [&>*:not(:first-child)]:border-l-[length:var(--pixel-line,2px)] [&>*:not(:first-child)]:border-l-foreground\",\n        vertical: \"flex-col [&>*:not(:first-child)]:border-t-[length:var(--pixel-line,2px)] [&>*:not(:first-child)]:border-t-foreground\",\n      },\n    },\n    defaultVariants: { orientation: \"horizontal\" },\n  }\n);\n\nfunction PixelButtonGroup({\n  className, orientation, ...props\n}: React.ComponentProps<\"div\"> & VariantProps<typeof buttonGroupVariants>) {\n  return <div data-slot=\"button-group\" className={cn(buttonGroupVariants({ orientation }), className)} {...props} />;\n}\n\nexport { PixelButtonGroup, buttonGroupVariants };\n",
       "type": "registry:ui"
     }
   ]

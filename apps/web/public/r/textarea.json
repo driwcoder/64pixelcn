@@ -6,12 +6,13 @@
   "description": "Pixel art textarea",
   "dependencies": [],
   "registryDependencies": [
-    "utils"
+    "utils",
+    "https://pixelcn.vercel.app/r/roles.json"
   ],
   "files": [
     {
       "path": "components/ui/textarea.tsx",
-      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nconst PixelTextarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttributes<HTMLTextAreaElement>>(\n  ({ className, ...props }, ref) => (\n    <textarea\n      ref={ref}\n      data-slot=\"textarea\"\n      className={cn(\n        \"flex min-h-[80px] w-full bg-transparent px-3 py-2\",\n        \"pixel-rounded border-[length:var(--pixel-line,2px)] border-input [--pixel-corner-color:var(--input)]\",\n        \"font-[family-name:var(--pixel-font)] text-xs\",\n        \"placeholder:text-muted-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"shadow-[inset_1px_1px_0px_var(--muted),inset_-1px_-1px_0px_var(--border)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n);\nPixelTextarea.displayName = \"PixelTextarea\";\n\nexport { PixelTextarea };\n",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nconst PixelTextarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttributes<HTMLTextAreaElement>>(\n  ({ className, ...props }, ref) => (\n    <textarea\n      ref={ref}\n      data-slot=\"textarea\"\n      className={cn(\n        \"flex min-h-[80px] w-full bg-transparent px-3 py-2\",\n        \"pixel-sunken\",\n        \"font-[family-name:var(--pixel-font)] text-xs\",\n        \"placeholder:text-muted-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        className\n      )}\n      {...props}\n    />\n  )\n);\nPixelTextarea.displayName = \"PixelTextarea\";\n\nexport { PixelTextarea };\n",
       "type": "registry:ui"
     }
   ]

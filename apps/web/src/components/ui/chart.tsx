@@ -180,7 +180,7 @@ function ChartTooltip({
   return (
     <div
       className={cn(
-        "border-[length:var(--pixel-line,2px)] border-foreground bg-popover px-2.5 py-1.5 text-xs pixel-shadow",
+        "pixel-raised bg-popover px-2.5 py-1.5 text-xs",
         className
       )}
     >

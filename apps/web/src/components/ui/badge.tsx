@@ -3,13 +3,13 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const pixelBadgeVariants = cva(
-  "inline-flex items-center pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground px-[0.9em] py-[0.3em] font-[family-name:var(--pixel-font)] text-[0.7rem] leading-normal uppercase tracking-widest",
+  "pixel-surface inline-flex items-center px-[0.9em] py-[0.3em] font-[family-name:var(--pixel-font)] text-[0.7rem] leading-normal uppercase tracking-widest",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground",
-        secondary: "bg-secondary text-secondary-foreground",
-        destructive: "bg-destructive text-destructive-foreground",
+        default: "pixel-tone-primary bg-primary text-primary-foreground",
+        secondary: "pixel-tone-secondary bg-secondary text-secondary-foreground",
+        destructive: "pixel-tone-destructive bg-destructive text-destructive-foreground",
         outline: "bg-transparent text-foreground",
         muted: "bg-muted text-muted-foreground",
       },

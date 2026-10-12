@@ -81,7 +81,7 @@ const PixelDialogueBox = React.forwardRef<HTMLDivElement, PixelDialogueBoxProps>
             }
           }}
           className={cn(
-            "pixel-rounded pixel-shadow relative flex w-full cursor-pointer gap-[1em] border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-[1em] text-popover-foreground",
+            "pixel-raised relative flex w-full cursor-pointer gap-[1em] bg-popover p-[1em] text-popover-foreground",
             "font-[family-name:var(--pixel-font)] text-[0.8rem] leading-relaxed",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             className

@@ -6,12 +6,13 @@
   "description": "Pixel art input with retro styling",
   "dependencies": [],
   "registryDependencies": [
-    "utils"
+    "utils",
+    "https://pixelcn.vercel.app/r/roles.json"
   ],
   "files": [
     {
       "path": "components/ui/input.tsx",
-      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nconst PixelInput = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(\n  ({ className, type, ...props }, ref) => (\n    <input\n      ref={ref}\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"flex h-10 w-full bg-transparent px-3 py-2\",\n        \"pixel-rounded border-[length:var(--pixel-line,2px)] border-input [--pixel-corner-color:var(--input)]\",\n        \"font-[family-name:var(--pixel-font)] text-xs\",\n        \"placeholder:text-muted-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"file:border-0 file:bg-transparent file:text-xs file:font-[family-name:var(--pixel-font)]\",\n        \"shadow-[inset_1px_1px_0px_var(--muted),inset_-1px_-1px_0px_var(--border)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n);\nPixelInput.displayName = \"PixelInput\";\n\nexport { PixelInput };\n",
+      "content": "import * as React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nconst PixelInput = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(\n  ({ className, type, ...props }, ref) => (\n    <input\n      ref={ref}\n      type={type}\n      data-slot=\"input\"\n      className={cn(\n        \"flex h-10 w-full bg-transparent px-3 py-2\",\n        \"pixel-sunken\",\n        \"font-[family-name:var(--pixel-font)] text-xs\",\n        \"placeholder:text-muted-foreground\",\n        \"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background\",\n        \"disabled:cursor-not-allowed disabled:opacity-50\",\n        \"file:border-0 file:bg-transparent file:text-xs file:font-[family-name:var(--pixel-font)]\",\n        className\n      )}\n      {...props}\n    />\n  )\n);\nPixelInput.displayName = \"PixelInput\";\n\nexport { PixelInput };\n",
       "type": "registry:ui"
     }
   ]

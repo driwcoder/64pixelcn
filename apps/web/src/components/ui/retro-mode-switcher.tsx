@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Monitor, Tv } from "./icons";
 
 const retroModeSwitcherVariants = cva(
-  "inline-flex items-center gap-2 border-[length:var(--pixel-line,2px)] border-foreground bg-card font-[family-name:var(--pixel-font)] pixel-shadow transition-all hover:bg-accent",
+  "pixel-raised inline-flex items-center gap-2 bg-card font-[family-name:var(--pixel-font)] transition-all hover:bg-accent",
   {
     variants: {
       size: {

@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const kbdVariants = cva(
-  "pointer-events-none inline-flex select-none items-center justify-center gap-1 pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-muted font-[family-name:var(--pixel-font)] uppercase",
+  "pixel-surface pointer-events-none inline-flex select-none items-center justify-center gap-1 bg-muted font-[family-name:var(--pixel-font)] uppercase",
   {
     variants: {
       size: {

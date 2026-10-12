@@ -15,7 +15,7 @@ export const DEFAULT_CHOICE: PresetChoice = { ...DEFAULT_APPEARANCE, components:
  * a base-32 digit of one number (index into its option list), so existing
  * codes keep decoding, with index 0 for fields they predate.
  */
-const FIELDS = ["theme", "mode", "font", "size", "textScale", "icons", "radius", "shading", "components"] as const;
+const FIELDS = ["theme", "mode", "font", "size", "textScale", "icons", "radius", "shading", "components", "border"] as const;
 const VALUES: Record<(typeof FIELDS)[number], readonly unknown[]> = { ...APPEARANCE_VALUES, components: [true, false] };
 const VERSION = "1";
 const DIGITS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

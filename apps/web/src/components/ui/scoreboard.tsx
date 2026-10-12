@@ -28,7 +28,7 @@ const PixelScoreboard = React.forwardRef<HTMLDivElement, PixelScoreboardProps>(
         ref={ref}
         data-slot="scoreboard"
         className={cn(
-          "pixel-rounded pixel-shadow w-full overflow-x-auto border-[length:var(--pixel-line,2px)] border-foreground bg-card p-[1em] text-card-foreground",
+          "pixel-raised w-full overflow-x-auto bg-card p-[1em] text-card-foreground",
           "font-[family-name:var(--pixel-font)] text-[0.75rem] uppercase tracking-widest",
           className
         )}

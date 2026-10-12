@@ -11,7 +11,7 @@ const PixelTabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     data-slot="tabs-list"
-    className={cn("inline-flex max-w-full flex-wrap items-center gap-1 pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-muted p-1", className)}
+    className={cn("pixel-surface inline-flex max-w-full flex-wrap items-center gap-1 bg-muted p-1", className)}
     {...props}
   />
 ));

@@ -10,6 +10,7 @@ import {
   THEMES,
   RADII,
   SHADINGS,
+  BORDERS,
   TEXT_SCALES,
   type Appearance,
   type FontSpec,
@@ -23,7 +24,9 @@ const FIELD_META: { [K in Field]: { label: string; option: (v: Appearance[K]) =>
     label: "Theme",
     option: (v) => ({
       label: THEMES[v].label,
-      hint: <span aria-hidden className="inline-block h-3 w-3 shrink-0 border-[length:var(--pixel-line,2px)] border-current" style={{ backgroundColor: THEMES[v].swatch }} />,
+      hint: THEMES[v].palette ? <PaletteStrip colors={THEMES[v].palette.colors} /> : (
+        <span aria-hidden className="inline-block h-3 w-3 shrink-0 border-[length:var(--pixel-line,2px)] border-current" style={{ backgroundColor: THEMES[v].swatch }} />
+      ),
     }),
   },
   mode: { label: "Mode", option: (v) => ({ label: MODES[v].label }) },
@@ -41,10 +44,23 @@ const FIELD_META: { [K in Field]: { label: string; option: (v: Appearance[K]) =>
   icons: { label: "Icons", option: (v) => ({ label: ICON_SETS[v].label }) },
   radius: { label: "Corners", option: (v) => ({ label: RADII[v].label, hint: <CornerHint steps={RADII[v].steps} /> }) },
   shading: { label: "Shading", option: (v) => ({ label: SHADINGS[v].label }) },
+  border: { label: "Border", option: (v) => ({ label: BORDERS[v].label }) },
 };
 
 /** Order of the selects, matching ui.shadcn.com/create's sidebar grouping. */
-export const APPEARANCE_FIELDS: Field[] = ["theme", "mode", "font", "textScale", "icons", "size", "radius", "shading"];
+export const APPEARANCE_FIELDS: Field[] = ["theme", "mode", "font", "textScale", "icons", "size", "radius", "shading", "border"];
+
+/** A Lospec palette's colors as a strip of tiny squares (up to 12). */
+function PaletteStrip({ colors }: { colors: readonly string[] }) {
+  const shown = colors.slice(0, 12);
+  return (
+    <span aria-hidden className="inline-flex h-3 shrink-0 border border-current">
+      {shown.map((c) => (
+        <span key={c} className="h-full w-1" style={{ backgroundColor: `#${c}` }} />
+      ))}
+    </span>
+  );
+}
 
 /** Tiny pixel drawing of a stepped corner. */
 function CornerHint({ steps }: { steps: number }) {

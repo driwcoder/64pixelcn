@@ -9,6 +9,7 @@
   ],
   "registryDependencies": [
     "utils",
+    "https://pixelcn.vercel.app/r/roles.json",
     "https://pixelcn.vercel.app/r/label.json",
     "https://pixelcn.vercel.app/r/separator.json"
   ],

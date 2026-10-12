@@ -6,7 +6,8 @@
   "description": "Pixel art native select",
   "dependencies": [],
   "registryDependencies": [
-    "utils"
+    "utils",
+    "https://pixelcn.vercel.app/r/roles.json"
   ],
   "files": [
     {

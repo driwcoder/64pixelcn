@@ -3,7 +3,14 @@ import "./fonts.css";
 import "./globals.css";
 import { PixelProvider } from "@/components/pixel-provider";
 import { PIXEL_SETTINGS_SCRIPT } from "@/lib/pixel-settings";
-import { buildThemeCss } from "@/lib/tokens";
+import { buildThemeCss } from "@/lib/pixel-engine";
+import { APPEARANCE_ATTRS, DEFAULT_APPEARANCE, type Appearance } from "@/lib/tokens";
+
+// The default settings as <html> attributes, so the engine's attribute-scoped
+// rules apply on a first visit too (the inline script swaps in saved ones).
+const DEFAULT_ATTRS = Object.fromEntries(
+  (Object.keys(APPEARANCE_ATTRS) as (keyof Appearance)[]).map((k) => [APPEARANCE_ATTRS[k], String(DEFAULT_APPEARANCE[k])])
+);
 import { InlineScript } from "@/components/inline-script";
 
 export const metadata: Metadata = {
@@ -13,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning {...DEFAULT_ATTRS}>
       <head>
         {/* Fonts are self-hosted (app/fonts.css). Only the default font's latin
             subset is preloaded; the rest download when a font setting uses them. */}

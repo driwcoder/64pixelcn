@@ -135,6 +135,7 @@ async function auditAllFonts(page: Page, rootSelector: string, requireText = tru
         html.dataset.radius = "lg";
         html.dataset.size = "128";
         html.dataset.shading = "deep";
+        html.dataset.border = "frame";
         await document.fonts.ready;
         await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
       },

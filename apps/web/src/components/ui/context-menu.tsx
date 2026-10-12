@@ -35,7 +35,7 @@ const PixelContextMenuSubContent = React.forwardRef<
   <ContextMenuPrimitive.SubContent
     ref={ref}
     data-slot="context-menu-sub-content"
-    className={cn("z-50 min-w-[8rem] pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-1 text-popover-foreground pixel-shadow", className)}
+    className={cn("pixel-raised z-50 min-w-[8rem] bg-popover p-1 text-popover-foreground", className)}
     {...props}
   />
 ));
@@ -50,7 +50,7 @@ const PixelContextMenuContent = React.forwardRef<
       ref={ref}
       data-slot="context-menu-content"
       className={cn(
-        "z-50 min-w-[8rem] pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-1 text-popover-foreground pixel-shadow",
+        "pixel-raised z-50 min-w-[8rem] bg-popover p-1 text-popover-foreground",
         "font-[family-name:var(--pixel-font)]",
         className
       )}

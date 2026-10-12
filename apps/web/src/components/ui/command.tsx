@@ -12,7 +12,7 @@ const PixelCommand = React.forwardRef<
   <CommandPrimitive
     ref={ref}
     data-slot="command"
-    className={cn("flex h-full w-full flex-col overflow-hidden pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover text-popover-foreground font-[family-name:var(--pixel-font)]", className)}
+    className={cn("pixel-surface flex h-full w-full flex-col overflow-hidden bg-popover text-popover-foreground font-[family-name:var(--pixel-font)]", className)}
     {...props}
   />
 ));

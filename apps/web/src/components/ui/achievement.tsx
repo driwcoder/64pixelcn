@@ -21,7 +21,7 @@ const PixelAchievement = React.forwardRef<HTMLDivElement, PixelAchievementProps>
       data-slot="achievement"
       data-state={unlocked ? "unlocked" : "locked"}
       className={cn(
-        "pixel-rounded pixel-shadow flex w-full max-w-sm items-center gap-[0.9em] border-[length:var(--pixel-line,2px)] border-foreground bg-card p-[0.9em] text-card-foreground",
+        "pixel-raised flex w-full max-w-sm items-center gap-[0.9em] bg-card p-[0.9em] text-card-foreground",
         "font-[family-name:var(--pixel-font)] text-[0.75rem] leading-relaxed",
         !unlocked && "text-muted-foreground",
         className

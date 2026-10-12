@@ -10,6 +10,7 @@
   ],
   "registryDependencies": [
     "utils",
+    "https://pixelcn.vercel.app/r/roles.json",
     "https://pixelcn.vercel.app/r/toggle.json"
   ],
   "files": [

@@ -37,7 +37,7 @@ const PixelInputOTPSlot = React.forwardRef<
       data-slot="input-otp-slot"
       data-active={isActive}
       className={cn(
-        "relative flex h-10 w-10 items-center justify-center pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground text-sm font-[family-name:var(--pixel-font)]",
+        "pixel-sunken relative flex h-10 w-10 items-center justify-center text-sm font-[family-name:var(--pixel-font)]",
         "transition-all",
         isActive && "z-10 border-primary ring-2 ring-ring ring-offset-1 ring-offset-background",
         className

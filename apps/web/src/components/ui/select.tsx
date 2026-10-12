@@ -15,7 +15,7 @@ const PixelSelectTrigger = React.forwardRef<
     ref={ref}
     data-slot="select-trigger"
     className={cn(
-      "flex h-10 w-full items-center justify-between pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-transparent px-3 py-2",
+      "pixel-surface flex h-10 w-full items-center justify-between bg-transparent px-3 py-2",
       "font-[family-name:var(--pixel-font)] text-xs",
       "placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background",
       "disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
@@ -40,7 +40,7 @@ const PixelSelectContent = React.forwardRef<
       ref={ref}
       data-slot="select-content"
       className={cn(
-        "relative z-50 max-h-96 min-w-[8rem] overflow-hidden pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover text-popover-foreground pixel-shadow",
+        "pixel-raised relative z-50 max-h-96 min-w-[8rem] overflow-hidden bg-popover text-popover-foreground",
         "font-[family-name:var(--pixel-font)]",
         position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=top]:-translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1",
         className

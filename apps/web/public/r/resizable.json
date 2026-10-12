@@ -8,7 +8,8 @@
     "react-resizable-panels"
   ],
   "registryDependencies": [
-    "utils"
+    "utils",
+    "https://pixelcn.vercel.app/r/roles.json"
   ],
   "files": [
     {

@@ -8,12 +8,13 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "utils"
+    "utils",
+    "https://pixelcn.vercel.app/r/roles.json"
   ],
   "files": [
     {
       "path": "components/ui/kbd.tsx",
-      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst kbdVariants = cva(\n  \"pointer-events-none inline-flex select-none items-center justify-center gap-1 pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-muted font-[family-name:var(--pixel-font)] uppercase\",\n  {\n    variants: {\n      size: {\n        default: \"h-6 min-w-6 px-1 text-[0.7rem]\",\n        sm: \"h-5 min-w-5 px-0.5 text-[0.6rem]\",\n        lg: \"h-8 min-w-8 px-2 text-xs\",\n      },\n    },\n    defaultVariants: { size: \"default\" },\n  }\n);\n\nconst Kbd = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof kbdVariants>\n>(({ className, size, ...props }, ref) => (\n  <div ref={ref} data-slot=\"kbd\" className={cn(kbdVariants({ size }), className)} {...props} />\n));\nKbd.displayName = \"Kbd\";\n\nconst KbdGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} data-slot=\"kbd-group\" className={cn(\"inline-flex items-center gap-1\", className)} {...props} />\n));\nKbdGroup.displayName = \"KbdGroup\";\n\nexport { Kbd as PixelKbd, KbdGroup as PixelKbdGroup, kbdVariants };\n",
+      "content": "import * as React from \"react\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst kbdVariants = cva(\n  \"pixel-surface pointer-events-none inline-flex select-none items-center justify-center gap-1 bg-muted font-[family-name:var(--pixel-font)] uppercase\",\n  {\n    variants: {\n      size: {\n        default: \"h-6 min-w-6 px-1 text-[0.7rem]\",\n        sm: \"h-5 min-w-5 px-0.5 text-[0.6rem]\",\n        lg: \"h-8 min-w-8 px-2 text-xs\",\n      },\n    },\n    defaultVariants: { size: \"default\" },\n  }\n);\n\nconst Kbd = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof kbdVariants>\n>(({ className, size, ...props }, ref) => (\n  <div ref={ref} data-slot=\"kbd\" className={cn(kbdVariants({ size }), className)} {...props} />\n));\nKbd.displayName = \"Kbd\";\n\nconst KbdGroup = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement>\n>(({ className, ...props }, ref) => (\n  <div ref={ref} data-slot=\"kbd-group\" className={cn(\"inline-flex items-center gap-1\", className)} {...props} />\n));\nKbdGroup.displayName = \"KbdGroup\";\n\nexport { Kbd as PixelKbd, KbdGroup as PixelKbdGroup, kbdVariants };\n",
       "type": "registry:ui"
     }
   ]

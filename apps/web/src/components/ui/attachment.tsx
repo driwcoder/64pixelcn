@@ -4,7 +4,7 @@ import { Paperclip, X } from "./icons";
 import { cn } from "@/lib/utils";
 
 const attachmentVariants = cva(
-  "inline-flex max-w-full min-w-0 items-center gap-2 pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-card px-3 py-1.5 text-xs font-[family-name:var(--pixel-font)]",
+  "pixel-surface inline-flex max-w-full min-w-0 items-center gap-2 bg-card px-3 py-1.5 text-xs font-[family-name:var(--pixel-font)]",
   {
     variants: {
       variant: { default: "pixel-shadow", ghost: "border-transparent bg-transparent shadow-none" },

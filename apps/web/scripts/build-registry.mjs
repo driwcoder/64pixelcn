@@ -43,7 +43,8 @@ function getComponentDeps(name) {
   }
   return {
     dependencies: [...npm].sort(),
-    registryDependencies: ["utils", ...[...local].sort().map((n) => `${REGISTRY_URL}/r/${n}.json`)],
+    // Every component styles itself through the role classes (pixel-raised...).
+    registryDependencies: ["utils", `${REGISTRY_URL}/r/roles.json`, ...[...local].sort().map((n) => `${REGISTRY_URL}/r/${n}.json`)],
   };
 }
 

@@ -20,7 +20,7 @@ const PixelEnemyHealthDisplay = React.forwardRef<HTMLDivElement, PixelEnemyHealt
         ref={ref}
         data-slot="enemy-health-display"
         className={cn(
-          "w-full border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-3 font-[family-name:var(--pixel-font)] pixel-shadow",
+          "pixel-raised w-full bg-popover p-3 font-[family-name:var(--pixel-font)]",
           className
         )}
         {...props}

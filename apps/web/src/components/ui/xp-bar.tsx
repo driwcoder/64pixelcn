@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Star } from "./icons";
 
 const xpBarVariants = cva(
-  "relative w-full overflow-hidden border-[length:var(--pixel-line,2px)] border-foreground bg-muted font-[family-name:var(--pixel-font)] pixel-shadow",
+  "pixel-raised relative w-full overflow-hidden bg-muted font-[family-name:var(--pixel-font)]",
   {
     variants: {
       size: {

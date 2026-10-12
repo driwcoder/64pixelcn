@@ -74,7 +74,7 @@ const PixelInventory = React.forwardRef<HTMLDivElement, PixelInventoryProps>(
         aria-label={props["aria-label"] ?? "Inventory"}
         data-slot="inventory"
         className={cn(
-          "pixel-rounded pixel-shadow inline-grid max-w-full gap-[0.4em] border-[length:var(--pixel-line,2px)] border-foreground bg-card p-[0.6em] text-card-foreground",
+          "pixel-raised inline-grid max-w-full gap-[0.4em] bg-card p-[0.6em] text-card-foreground",
           "font-[family-name:var(--pixel-font)] text-[0.7rem]",
           className
         )}

@@ -6,7 +6,8 @@
   "description": "HUD counter that counts up to its value",
   "dependencies": [],
   "registryDependencies": [
-    "utils"
+    "utils",
+    "https://pixelcn.vercel.app/r/roles.json"
   ],
   "files": [
     {

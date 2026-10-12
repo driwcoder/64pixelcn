@@ -112,7 +112,7 @@ export function PresetBuilder() {
           </p>
         </div>
         {/* ── Command ──────────────────────────────────────────── */}
-        <div className="pixel-rounded space-y-3 border-[length:var(--pixel-line,2px)] border-foreground bg-card p-4 pixel-shadow">
+        <div className="pixel-raised space-y-3 bg-card p-4">
           <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
             <div className="space-y-1">
               <div className="text-[0.65rem] uppercase tracking-widest text-muted-foreground">Project</div>
@@ -164,7 +164,7 @@ export function PresetBuilder() {
       </div>
 
       {/* ── Options ───────────────────────────────────────────── */}
-      <aside aria-label="Preset options" className="pixel-rounded lg:col-start-1 lg:row-span-2 lg:row-start-1 border-[length:var(--pixel-line,2px)] border-foreground bg-card pixel-shadow lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100dvh-5.5rem)] lg:self-start lg:overflow-y-auto">
+      <aside aria-label="Preset options" className="pixel-raised lg:col-start-1 lg:row-span-2 lg:row-start-1 bg-card lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100dvh-5.5rem)] lg:self-start lg:overflow-y-auto">
         <div className="space-y-4 p-4">
           <AppearanceSelects value={choice} onChange={update} idPrefix="create" />
           <label className="flex items-center justify-between gap-3 text-[0.7rem] uppercase tracking-widest">

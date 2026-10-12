@@ -7,16 +7,43 @@
 // The only other place font names appear is app/fonts.css, the @font-face
 // rules for the self-hosted font files in public/fonts.
 
+// Relative .ts imports: scripts/icons.mjs loads this file with plain Node.
+import { LOSPEC_PALETTES, type LospecPalette } from "./palettes.ts";
+import { TONES, paletteThemeTokens } from "./palette-theme.ts";
+
 export type Tokens = Record<string, string>;
 
-export const THEMES = {
+/** Hand-tuned themes (oklch, procedural shading ramps). */
+export const CLASSIC_THEMES = {
   nintendo: { label: "Nintendo", swatch: "#ff5f6d" },
   gameboy: { label: "GameBoy", swatch: "#8bac0f" },
   neon: { label: "Neon", swatch: "#f0f" },
   sepia: { label: "Sepia", swatch: "#c08552" },
   mono: { label: "Mono", swatch: "#e0e0e0" },
 } as const;
-export type Theme = keyof typeof THEMES;
+export type ClassicTheme = keyof typeof CLASSIC_THEMES;
+export type Theme = ClassicTheme | LospecPalette;
+
+const LOSPEC_IDS = Object.keys(LOSPEC_PALETTES) as LospecPalette[];
+const isLospec = (theme: Theme): theme is LospecPalette => theme in LOSPEC_PALETTES;
+
+/** Lospec palette themes, generated from the palette's colors only (lib/palette-theme.ts). */
+const lospecTokens = new Map<string, Tokens | null>();
+function lospecThemeTokens(theme: LospecPalette, mode: "dark" | "light"): Tokens | null {
+  const key = `${theme}:${mode}`;
+  if (!lospecTokens.has(key)) lospecTokens.set(key, paletteThemeTokens([...LOSPEC_PALETTES[theme].colors], mode));
+  return lospecTokens.get(key)!;
+}
+
+export const THEMES: Record<Theme, { label: string; swatch: string; palette?: { url: string; colors: readonly string[] } }> = {
+  ...CLASSIC_THEMES,
+  ...(Object.fromEntries(
+    LOSPEC_IDS.map((id) => {
+      const p = LOSPEC_PALETTES[id];
+      return [id, { label: p.label, swatch: lospecThemeTokens(id, "dark")!.primary, palette: { url: p.url, colors: p.colors } }];
+    })
+  ) as unknown as Record<LospecPalette, { label: string; swatch: string; palette: { url: string; colors: readonly string[] } }>),
+};
 
 export const MODES = {
   dark: { label: "Dark" },
@@ -25,18 +52,12 @@ export const MODES = {
 export type Mode = keyof typeof MODES;
 
 /**
- * Full palette for every theme in both modes. Besides the shadcn color
- * tokens each palette carries its pixel-art shading ramp (see SHADINGS):
- *  - shade-hi / shade-hi-2: highlight bands (top-left light source), warm
- *    hue-shifted tints rather than plain white;
- *  - shade-lo / shade-lo-2: shadow bands (bottom-right), cool hue-shifted
- *    tints rather than plain black;
- *  - shade-drop: the extruded side of a block (Extruded shading).
- * GameBoy uses only its 4 DMG shades, opaque, with no second band: the
- * hardware had 4 colors, so its ramps can't have more steps.
- * Contrast of every text/surface pair is checked by tests/contrast.spec.ts.
+ * Colors of the classic themes in both modes. Their shading ramps are mixed
+ * from these (proceduralRamps), except GameBoy's, which stay within its 4
+ * DMG shades. Contrast of every text/surface pair is checked by
+ * tests/contrast.spec.ts.
  */
-export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
+export const PALETTES: Record<ClassicTheme, Record<Mode, Tokens>> = {
   nintendo: {
     dark: {
       background: "oklch(0.09 0.014 285)",
@@ -58,11 +79,6 @@ export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
       border: "oklch(0.3 0.03 285)",
       input: "oklch(0.48 0.03 285)",
       ring: "oklch(0.78 0.2 355)",
-      "shade-hi": "oklch(0.98 0.05 85 / 0.35)",
-      "shade-hi-2": "oklch(0.98 0.05 85 / 0.15)",
-      "shade-lo": "oklch(0.12 0.08 290 / 0.6)",
-      "shade-lo-2": "oklch(0.12 0.08 290 / 0.3)",
-      "shade-drop": "oklch(0.38 0.12 300)",
     },
     light: {
       background: "oklch(0.97 0.01 285)",
@@ -84,11 +100,6 @@ export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
       border: "oklch(0.72 0.03 285)",
       input: "oklch(0.63 0.03 285)",
       ring: "oklch(0.55 0.22 10)",
-      "shade-hi": "oklch(1 0.03 90 / 0.7)",
-      "shade-hi-2": "oklch(1 0.03 90 / 0.35)",
-      "shade-lo": "oklch(0.35 0.1 290 / 0.35)",
-      "shade-lo-2": "oklch(0.35 0.1 290 / 0.15)",
-      "shade-drop": "oklch(0.72 0.08 300)",
     },
   },
   gameboy: {
@@ -112,11 +123,6 @@ export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
       border: "oklch(0.5 0.08 120)",
       input: "oklch(0.52 0.08 120)",
       ring: "oklch(0.75 0.12 120)",
-      "shade-hi": "oklch(0.75 0.12 120)",
-      "shade-hi-2": "transparent",
-      "shade-lo": "oklch(0.15 0.04 125)",
-      "shade-lo-2": "transparent",
-      "shade-drop": "oklch(0.35 0.06 125)",
     },
     light: {
       background: "oklch(0.88 0.06 120)",
@@ -138,11 +144,6 @@ export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
       border: "oklch(0.3 0.05 120)",
       input: "oklch(0.3 0.05 120)",
       ring: "oklch(0.35 0.06 120)",
-      "shade-hi": "oklch(0.95 0.06 120)",
-      "shade-hi-2": "transparent",
-      "shade-lo": "oklch(0.35 0.06 120)",
-      "shade-lo-2": "transparent",
-      "shade-drop": "oklch(0.35 0.06 120)",
     },
   },
   neon: {
@@ -166,11 +167,6 @@ export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
       border: "oklch(0.4 0.15 300)",
       input: "oklch(0.49 0.15 300)",
       ring: "oklch(0.85 0.25 340)",
-      "shade-hi": "oklch(0.85 0.25 340 / 0.55)",
-      "shade-hi-2": "oklch(0.85 0.2 180 / 0.25)",
-      "shade-lo": "oklch(0.05 0.06 290 / 0.7)",
-      "shade-lo-2": "oklch(0.05 0.06 290 / 0.35)",
-      "shade-drop": "oklch(0.5 0.25 340)",
     },
     light: {
       background: "oklch(0.96 0.02 320)",
@@ -192,11 +188,6 @@ export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
       border: "oklch(0.7 0.12 300)",
       input: "oklch(0.64 0.12 300)",
       ring: "oklch(0.55 0.26 340)",
-      "shade-hi": "oklch(1 0.05 340 / 0.7)",
-      "shade-hi-2": "oklch(1 0.05 200 / 0.35)",
-      "shade-lo": "oklch(0.4 0.2 300 / 0.35)",
-      "shade-lo-2": "oklch(0.4 0.2 300 / 0.15)",
-      "shade-drop": "oklch(0.75 0.15 340)",
     },
   },
   sepia: {
@@ -220,11 +211,6 @@ export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
       border: "oklch(0.45 0.05 60)",
       input: "oklch(0.51 0.05 60)",
       ring: "oklch(0.72 0.12 55)",
-      "shade-hi": "oklch(0.95 0.06 85 / 0.3)",
-      "shade-hi-2": "oklch(0.95 0.06 85 / 0.12)",
-      "shade-lo": "oklch(0.1 0.03 40 / 0.6)",
-      "shade-lo-2": "oklch(0.1 0.03 40 / 0.3)",
-      "shade-drop": "oklch(0.35 0.06 45)",
     },
     light: {
       background: "oklch(0.9 0.05 60)",
@@ -246,11 +232,6 @@ export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
       border: "oklch(0.55 0.05 60)",
       input: "oklch(0.55 0.05 60)",
       ring: "oklch(0.48 0.1 30)",
-      "shade-hi": "oklch(0.99 0.04 90 / 0.65)",
-      "shade-hi-2": "oklch(0.99 0.04 90 / 0.3)",
-      "shade-lo": "oklch(0.35 0.07 40 / 0.35)",
-      "shade-lo-2": "oklch(0.35 0.07 40 / 0.15)",
-      "shade-drop": "oklch(0.6 0.08 45)",
     },
   },
   mono: {
@@ -274,11 +255,6 @@ export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
       border: "oklch(0.35 0 0)",
       input: "oklch(0.48 0 0)",
       ring: "oklch(0.95 0 0)",
-      "shade-hi": "oklch(1 0 0 / 0.3)",
-      "shade-hi-2": "oklch(1 0 0 / 0.12)",
-      "shade-lo": "oklch(0 0 0 / 0.6)",
-      "shade-lo-2": "oklch(0 0 0 / 0.3)",
-      "shade-drop": "oklch(0.4 0 0)",
     },
     light: {
       background: "oklch(0.97 0 0)",
@@ -300,11 +276,6 @@ export const PALETTES: Record<Theme, Record<Mode, Tokens>> = {
       border: "oklch(0.7 0 0)",
       input: "oklch(0.63 0 0)",
       ring: "oklch(0.15 0 0)",
-      "shade-hi": "oklch(1 0 0 / 0.8)",
-      "shade-hi-2": "oklch(1 0 0 / 0.4)",
-      "shade-lo": "oklch(0 0 0 / 0.25)",
-      "shade-lo-2": "oklch(0 0 0 / 0.1)",
-      "shade-drop": "oklch(0.75 0 0)",
     },
   },
 };
@@ -318,9 +289,55 @@ export const CHART_COLORS: Tokens = {
   "chart-5": "oklch(0.7 0.2 60)",
 };
 
-/** Every color token for a theme in a mode. */
+/**
+ * Shading ramps for the classic themes, which aren't limited to a palette:
+ * each step mixes the fill toward a warm light (highlights) or a cool dark
+ * (shadows), the hue-shifted ramp a pixel artist would pick by hand.
+ */
+const TONE_FILL: Record<string, string> = { surface: "card", primary: "primary", secondary: "secondary", accent: "accent", destructive: "destructive" };
+/** GameBoy: every ramp steps through the 4 DMG shades only, like the hardware. */
+const GAMEBOY_SHADES = {
+  dark: ["oklch(0.15 0.04 125)", "oklch(0.35 0.06 125)", "oklch(0.62 0.1 120)", "oklch(0.75 0.12 120)"],
+  light: ["oklch(0.2 0.05 120)", "oklch(0.35 0.06 120)", "oklch(0.75 0.06 120)", "oklch(0.95 0.06 120)"],
+};
+function gameboyRamps(mode: Mode): Tokens {
+  const [d0, d1, , l3] = GAMEBOY_SHADES[mode];
+  const out: Tokens = {};
+  for (const tone of TONES) {
+    for (let k = 1; k <= 3; k++) {
+      out[`${tone}-hi-${k}`] = l3;
+      out[`${tone}-lo-${k}`] = k === 1 ? d1 : d0;
+    }
+    out[`${tone}-outline`] = d0;
+  }
+  return out;
+}
+
+function proceduralRamps(): Tokens {
+  const light = "oklch(0.97 0.06 85)";
+  const dark = "oklch(0.13 0.07 285)";
+  const out: Tokens = {};
+  for (const tone of TONES) {
+    const fill = `var(--${TONE_FILL[tone]})`;
+    for (let k = 1; k <= 3; k++) {
+      out[`${tone}-hi-${k}`] = `color-mix(in oklab, ${fill}, ${light} ${k * 18}%)`;
+      out[`${tone}-lo-${k}`] = `color-mix(in oklab, ${fill}, ${dark} ${k * 20}%)`;
+    }
+    out[`${tone}-outline`] = `color-mix(in oklab, ${fill}, ${dark} 55%)`;
+  }
+  return out;
+}
+
+/** False when a theme has no colors for the mode (it then uses its dark mode). */
+export function themeHasMode(theme: Theme, mode: Mode): boolean {
+  return !isLospec(theme) || lospecThemeTokens(theme, mode) !== null;
+}
+
+/** Every color token (roles, charts, shading ramps) for a theme in a mode. */
 export function paletteTokens(theme: Theme, mode: Mode): Tokens {
-  return { ...PALETTES[theme][mode], ...CHART_COLORS };
+  if (isLospec(theme)) return (lospecThemeTokens(theme, mode) ?? lospecThemeTokens(theme, "dark"))!;
+  const ramps = theme === "gameboy" ? gameboyRamps(mode) : proceduralRamps();
+  return { ...PALETTES[theme][mode], ...CHART_COLORS, ...ramps };
 }
 
 export const PIXEL_SIZES = [8, 16, 32, 64, 128] as const;
@@ -334,60 +351,28 @@ export type PixelSize = (typeof PIXEL_SIZES)[number];
  *  - pixel-corner: one step of a stepped (rounded) corner. Always equal to the
  *    offset, so corners and shadow share one pixel grid (see
  *    roundedCornerDecls); never thinner than the border (pixel-line);
- *  - pixel-bevel: highlight/shadow bands. Low-res sprites only have room for
- *    a 2-tone ramp (1 band each side); from 32x up there's room for a 4-tone
- *    ramp (2 bands each side).
+ * Shading bands per size are in lib/pixel-engine.ts (BANDS).
  */
-const bevel = (unit: string, bands: 1 | 2) => {
-  const band = (n: number, hi: string, lo: string) =>
-    `inset calc(${unit} * ${n}) calc(${unit} * ${n}) 0 0 var(${hi}), inset calc(${unit} * ${-n}) calc(${unit} * ${-n}) 0 0 var(${lo})`;
-  return bands === 1 ? band(1, "--shade-hi", "--shade-lo") : `${band(1, "--shade-hi", "--shade-lo")}, ${band(2, "--shade-hi-2", "--shade-lo-2")}`;
-};
-
 export const SIZE_TOKENS: Record<PixelSize, Tokens> = {
-  128: { "pixel-size": "8px", "pixel-border": "4px", "pixel-line": "3px", "pixel-shadow-offset": "4px", "pixel-corner": "4px", "pixel-bevel": bevel("2px", 2) },
-  64: { "pixel-size": "4px", "pixel-border": "3px", "pixel-line": "2px", "pixel-shadow-offset": "3px", "pixel-corner": "3px", "pixel-bevel": bevel("2px", 2) },
-  32: { "pixel-size": "2px", "pixel-border": "2px", "pixel-line": "2px", "pixel-shadow-offset": "2px", "pixel-corner": "2px", "pixel-bevel": bevel("1px", 2) },
-  16: { "pixel-size": "1px", "pixel-border": "1px", "pixel-line": "1px", "pixel-shadow-offset": "2px", "pixel-corner": "2px", "pixel-bevel": bevel("1px", 1) },
-  8: { "pixel-size": "0.5px", "pixel-border": "1px", "pixel-line": "1px", "pixel-shadow-offset": "2px", "pixel-corner": "2px", "pixel-bevel": bevel("1px", 1) },
+  128: { "pixel-size": "8px", "pixel-border": "4px", "pixel-line": "3px", "pixel-shadow-offset": "4px", "pixel-corner": "4px" },
+  64: { "pixel-size": "4px", "pixel-border": "3px", "pixel-line": "2px", "pixel-shadow-offset": "3px", "pixel-corner": "3px" },
+  32: { "pixel-size": "2px", "pixel-border": "2px", "pixel-line": "2px", "pixel-shadow-offset": "2px", "pixel-corner": "2px" },
+  16: { "pixel-size": "1px", "pixel-border": "1px", "pixel-line": "1px", "pixel-shadow-offset": "2px", "pixel-corner": "2px" },
+  8: { "pixel-size": "0.5px", "pixel-border": "1px", "pixel-line": "1px", "pixel-shadow-offset": "2px", "pixel-corner": "2px" },
 };
 
 /**
- * Pixel-art shading styles. The light source is top-left, as in most 2D
- * games; shadows are hard (no blur) and offset by whole pixels.
- * `reach` is how far the shadow extends past the box, in offsets; stepped
- * corners clip to it. `drop` is the shadow color right behind the box.
+ * Pixel-art shading styles (drawn by lib/pixel-engine.ts). The light comes
+ * from the top-left (Top-lit: from above); shadows are hard and offset by
+ * whole pixels. `reach` is how far the shadow extends past the box, in
+ * offsets; stepped corners clip to it.
  */
-const OFFSET = "var(--pixel-shadow-offset)";
-
-/**
- * Extruded shadow: the block's side (shade-drop) one offset out, outlined
- * one more offset out (foreground). The side is drawn as a right strip and a
- * bottom strip that stop `cut` short of the bottom-right corner, so with
- * stepped corners it follows the stair instead of ending in a square corner
- * (a single box-shadow can only be a rectangle). With cut = 0 the two strips
- * are the plain rectangle.
- */
-export function extrudedShadow(cut: string) {
-  const o = OFFSET;
-  const side = "var(--shade-drop)";
-  return [
-    "var(--pixel-bevel)",
-    `calc(${o} + ${cut}) ${o} 0 calc(${cut} * -1) ${side}`,
-    `${o} calc(${o} + ${cut}) 0 calc(${cut} * -1) ${side}`,
-    `calc(${o} * 2) calc(${o} * 2) 0 0 var(--foreground)`,
-  ].join(", ");
-}
 export const SHADINGS = {
-  flat: { label: "Flat", shadow: "0 0 #0000", reach: 0, drop: "transparent" },
-  hard: { label: "Hard drop", shadow: `${OFFSET} ${OFFSET} 0 0 var(--foreground)`, reach: 1, drop: "var(--foreground)" },
-  bevel: { label: "Bevel", shadow: `var(--pixel-bevel), ${OFFSET} ${OFFSET} 0 0 var(--foreground)`, reach: 1, drop: "var(--foreground)" },
-  deep: {
-    label: "Extruded",
-    shadow: extrudedShadow("0px"),
-    reach: 2,
-    drop: "var(--shade-drop)",
-  },
+  flat: { label: "Flat", reach: 0 },
+  hard: { label: "Hard drop", reach: 1 },
+  bevel: { label: "Bevel", reach: 1 },
+  deep: { label: "Extruded", reach: 2 },
+  toplit: { label: "Top-lit", reach: 1 },
 } as const;
 export type Shading = keyof typeof SHADINGS;
 
@@ -399,6 +384,15 @@ export const RADII = {
   lg: { label: "Round", steps: 3 },
 } as const;
 export type Radius = keyof typeof RADII;
+
+/** Outline styles (lib/pixel-engine.ts). */
+export const BORDERS = {
+  solid: { label: "Solid" },
+  selout: { label: "Selout" },
+  frame: { label: "Double frame" },
+  none: { label: "None" },
+} as const;
+export type Border = keyof typeof BORDERS;
 
 export const TEXT_SCALES = {
   xs: { label: "XS", value: "0.8" },
@@ -457,6 +451,7 @@ export const ICON_SETS = {
 export type IconSet = keyof typeof ICON_SETS;
 
 export const THEME_IDS = Object.keys(THEMES) as Theme[];
+export const BORDER_IDS = Object.keys(BORDERS) as Border[];
 export const MODE_IDS = Object.keys(MODES) as Mode[];
 export const ICON_SET_IDS = Object.keys(ICON_SETS) as IconSet[];
 export const FONT_IDS = Object.keys(FONTS) as PixelFont[];
@@ -473,6 +468,7 @@ export interface Appearance {
   icons: IconSet;
   radius: Radius;
   shading: Shading;
+  border: Border;
 }
 
 export const DEFAULT_APPEARANCE: Appearance = {
@@ -484,6 +480,7 @@ export const DEFAULT_APPEARANCE: Appearance = {
   icons: "pixelarticons",
   radius: "none",
   shading: "hard",
+  border: "solid",
 };
 
 /** Allowed values of every Appearance field (validation, selects, codes). */
@@ -496,6 +493,7 @@ export const APPEARANCE_VALUES: { [K in keyof Appearance]: readonly Appearance[K
   icons: ICON_SET_IDS,
   radius: RADIUS_IDS,
   shading: SHADING_IDS,
+  border: BORDER_IDS,
 };
 
 /** <html> attribute that carries each Appearance field. */
@@ -508,17 +506,9 @@ export const APPEARANCE_ATTRS: { [K in keyof Appearance]: string } = {
   icons: "data-icons",
   radius: "data-radius",
   shading: "data-shading",
+  border: "data-border",
 };
 
-/**
- * For fonts with `caps: false`. Blackletter capitals are ornate and were
- * never set in runs, so all-caps text is unreadable: `uppercase` text keeps
- * the case it was written in, and Tailwind's tracking scale (letter-spacing,
- * used on uppercase labels) is brought close to normal, since spaced-out
- * blackletter falls apart too.
- */
-export const NO_CAPS_TRACKING: Tokens = { "tracking-wide": "0.01em", "tracking-wider": "0.015em", "tracking-widest": "0.02em" };
-export const NO_CAPS_DECLS: CssDecls = { "text-transform": "none" };
 export function fontHasCaps(font: PixelFont) {
   return (FONTS[font] as FontSpec).caps !== false;
 }
@@ -528,192 +518,4 @@ export function fontFamily(font: PixelFont, familyVar?: string) {
   const spec: FontSpec = FONTS[font];
   const v = familyVar ?? spec.cssVar;
   return v && spec.google ? `var(${v}), ${spec.fallback}` : spec.fallback;
-}
-
-export function shadingTokens(shading: Shading): Tokens {
-  const { shadow, reach, drop } = SHADINGS[shading];
-  return {
-    "pixel-shadow": shadow,
-    "pixel-shadow-reach": `calc(var(--pixel-shadow-offset) * ${reach})`,
-    "pixel-drop-color": drop,
-    // Color of the outermost shadow band (Extruded's outline).
-    "pixel-drop-outer": shading === "deep" ? "var(--foreground)" : drop,
-  };
-}
-
-export type CssDecls = Record<string, string>;
-
-/** Most shadow reach (in steps) any shading has; sizes the corner polygons. */
-const MAX_REACH = Math.max(...Object.values(SHADINGS).map((x) => x.reach));
-
-/**
- * Declarations that give `.pixel-rounded` elements stepped (pixel-art)
- * corners of `steps` stairs. One stair step is one shadow offset
- * (--pixel-corner), so the corners and the drop shadow sit on the same pixel
- * grid: a shadow `n` steps away just extends the top-right and bottom-left
- * stairs by `n` steps, and the shadow's bottom-right corner is the box's
- * stair moved out.
- *  - clip-path: that staircase outline. Its point count is fixed (enough for
- *    the largest reach), extra points collapse onto the last one via min();
- *  - background layers: the border pixels on the inner diagonal of each stair
- *    (the CSS border itself stays straight), in --pixel-corner-color, and the
- *    box's cut-away bottom-right pixels that the shadow shows through, in
- *    --pixel-corner-shadow.
- */
-export function roundedCornerDecls(steps: number): CssDecls | null {
-  if (steps === 0) return null;
-  const k = steps;
-  const s = "var(--pixel-corner)";
-  const r = "var(--pixel-reach, 0px)";
-  const b = "var(--pixel-line, 2px)";
-  const m = (n: number) => (n === 0 ? "0px" : `${s} * ${n}`);
-  const c = (expr: string) => `calc(${expr})`;
-  const minc = (a: string, z: string) => `min(${a}, ${z})`;
-  const pts: [string, string][] = [];
-  // Top-left: the box's stair.
-  pts.push(["0px", c(m(k))]);
-  for (let i = k - 1; i >= 0; i--) pts.push([c(m(k - i)), c(m(i + 1))], [c(m(k - i)), c(m(i))]);
-  // Top-right: one stair from the box's top edge to the shadow's right edge.
-  const xEnd = c(`100% + ${r}`);
-  const yEnd = c(`${m(k)} + ${r}`);
-  for (let j = 0; j < k + MAX_REACH; j++) {
-    const x0 = minc(c(`100% - ${m(k)} + ${m(j)}`), xEnd);
-    const x1 = minc(c(`100% - ${m(k)} + ${m(j + 1)}`), xEnd);
-    pts.push([x0, minc(c(m(j)), yEnd)], [x0, minc(c(m(j + 1)), yEnd)], [x1, minc(c(m(j + 1)), yEnd)]);
-  }
-  // Bottom-right: the box's stair moved out with the shadow.
-  pts.push([xEnd, c(`100% + ${r} - ${m(k)}`)]);
-  for (let i = k - 1; i >= 0; i--) {
-    pts.push([c(`100% + ${r} - ${m(k - i)}`), c(`100% + ${r} - ${m(i + 1)}`)], [c(`100% + ${r} - ${m(k - i)}`), c(`100% + ${r} - ${m(i)}`)]);
-  }
-  // Bottom-left: the top-right mirrored across the diagonal, walked backwards.
-  const bl: [string, string][] = [];
-  for (let j = 0; j < k + MAX_REACH; j++) {
-    const y0 = minc(c(`100% - ${m(k)} + ${m(j)}`), c(`100% + ${r}`));
-    const y1 = minc(c(`100% - ${m(k)} + ${m(j + 1)}`), c(`100% + ${r}`));
-    bl.push([minc(c(m(j)), yEnd), y0], [minc(c(m(j + 1)), yEnd), y0], [minc(c(m(j + 1)), yEnd), y1]);
-  }
-  pts.push(...bl.reverse());
-
-  // Layers in top-left coordinates, mirrored to the other corners.
-  type Layer = { x: string; y: string; w: string; h: string; color: string };
-  const edge = "var(--pixel-corner-color, var(--foreground))";
-  const stair: Layer[] = [];
-  for (let i = 0; i < k; i++) stair.push({ x: c(m(k - i)), y: c(m(i)), w: b, h: s, color: edge }); // risers
-  for (let i = 1; i <= k; i++) stair.push({ x: c(m(k - i)), y: c(m(i)), w: s, h: b, color: edge }); // treads
-  const all = (["left", "right"] as const).flatMap((h) =>
-    (["top", "bottom"] as const).flatMap((v) => stair.map((l) => ({ ...l, pos: `${h} ${l.x} ${v} ${l.y}` })))
-  );
-  // Cut-away bottom-right pixels: those more than two steps inside the
-  // corner are behind the shadow's outer band (Extruded's outline), the rest
-  // behind its first band. Pixels behind no band are clipped anyway.
-  const outer = "var(--pixel-corner-shadow-outer, var(--pixel-corner-shadow, transparent))";
-  for (let i = 0; i < k - 2; i++) all.push({ x: "0px", y: c(m(i)), w: c(m(k - 2 - i)), h: s, color: outer, pos: `right 0px bottom ${c(m(i))}` });
-  const behind = "var(--pixel-corner-shadow, transparent)";
-  for (let i = 0; i < k; i++) all.push({ x: "0px", y: c(m(i)), w: c(m(k - i)), h: s, color: behind, pos: `right 0px bottom ${c(m(i))}` });
-
-  return {
-    "clip-path": `polygon(${pts.map(([x, y]) => `${x} ${y}`).join(", ")})`,
-    "background-image": all.map((l) => `linear-gradient(${l.color}, ${l.color})`).join(", "),
-    "background-position": all.map((l) => l.pos).join(", "),
-    "background-size": all.map((l) => `${l.w} ${l.h}`).join(", "),
-    "background-repeat": "no-repeat",
-    "background-origin": "border-box",
-  };
-}
-
-/**
- * Per-element corner variables must not inherit: a rounded button inside a
- * rounded card would otherwise get the card's shadow reach and colors.
- */
-export const NON_INHERITED_VARS = ["--pixel-reach", "--pixel-corner-shadow", "--pixel-corner-shadow-outer", "--pixel-corner-color"] as const;
-export const PROPERTY_RULES = NON_INHERITED_VARS.map((name) => `@property ${name}{syntax:"*";inherits:false;}`).join("\n");
-
-/** A `.pixel-shadow` element's clip makes room for its shadow. */
-export const ROUNDED_SHADOW_DECLS: CssDecls = {
-  "--pixel-reach": "var(--pixel-shadow-reach)",
-  "--pixel-corner-shadow": "var(--pixel-drop-color)",
-  "--pixel-corner-shadow-outer": "var(--pixel-drop-outer)",
-};
-
-/** Pressed buttons drop their shadow (active:shadow-none), so the clip does too. */
-export const ROUNDED_PRESSED_DECLS: CssDecls = {
-  "--pixel-reach": "0px",
-  "--pixel-corner-shadow": "transparent",
-  "--pixel-corner-shadow-outer": "transparent",
-};
-
-/** Focus ring drawn inside the box, since stepped corners clip outer rings. */
-export const ROUNDED_FOCUS_DECLS: CssDecls = {
-  "--tw-ring-shadow": "0 0 #0000",
-  "--tw-ring-offset-shadow": "0 0 #0000",
-  outline: "2px solid var(--ring)",
-  "outline-offset": "calc(-2px - var(--pixel-line, 2px))",
-};
-
-/**
- * With Extruded shading, rounded shadowed elements get a shadow whose side
- * strips stop at this radius' corner. Declared on the element (not <html>)
- * because only `.pixel-rounded` elements have stepped corners.
- */
-export function extrudedRoundedDecls(radius: Radius): CssDecls | null {
-  const steps = RADII[radius].steps;
-  return steps ? { "--pixel-shadow": extrudedShadow(`calc(var(--pixel-corner) * ${steps})`) } : null;
-}
-
-/** Selectors (relative to the radius scope) and declarations for a radius. */
-export function roundedRules(radius: Radius): [selector: string, decls: CssDecls][] {
-  const decls = roundedCornerDecls(RADII[radius].steps);
-  if (!decls) return [];
-  return [
-    [".pixel-rounded", decls],
-    [".pixel-rounded.pixel-shadow", ROUNDED_SHADOW_DECLS],
-    ['.pixel-rounded.pixel-shadow[class*="active:shadow-none"]:active', ROUNDED_PRESSED_DECLS],
-    [".pixel-rounded:focus-visible", ROUNDED_FOCUS_DECLS],
-  ];
-}
-
-function rule(selector: string, vars: Tokens) {
-  const body = Object.entries(vars).map(([k, v]) => `--${k}:${v};`).join("");
-  return `${selector}{${body}}`;
-}
-
-function declRule(selector: string, decls: CssDecls) {
-  return `${selector}{${Object.entries(decls).map(([k, v]) => `${k}:${v};`).join("")}}`;
-}
-
-/**
- * Theme CSS for the site: :root defaults plus one rule per value of every
- * Appearance attribute on <html> ([data-theme][data-mode], [data-size]...).
- */
-export function buildThemeCss() {
-  const d = DEFAULT_APPEARANCE;
-  const fontVars = (f: PixelFont) => ({ "pixel-font": fontFamily(f), "pixel-font-adjust": FONTS[f].adjust });
-  return [
-    PROPERTY_RULES,
-    rule(":root", {
-      radius: "0px",
-      ...paletteTokens(d.theme, d.mode),
-      ...SIZE_TOKENS[d.size],
-      ...shadingTokens(d.shading),
-      ...fontVars(d.font),
-      "pixel-text-scale": TEXT_SCALES[d.textScale].value,
-    }),
-    // Dark is the default when data-mode is missing.
-    ...THEME_IDS.map((t) => rule(`[data-theme="${t}"]`, paletteTokens(t, "dark"))),
-    ...THEME_IDS.map((t) => rule(`[data-theme="${t}"][data-mode="light"]`, paletteTokens(t, "light"))),
-    ...PIXEL_SIZES.map((s) => rule(`[data-size="${s}"]`, SIZE_TOKENS[s])),
-    ...TEXT_SCALE_IDS.map((t) => rule(`[data-text-scale="${t}"]`, { "pixel-text-scale": TEXT_SCALES[t].value })),
-    ...FONT_IDS.map((f) => rule(`[data-font="${f}"]`, fontVars(f))),
-    ...FONT_IDS.filter((f) => !fontHasCaps(f)).flatMap((f) => [
-      rule(`[data-font="${f}"]`, NO_CAPS_TRACKING),
-      declRule(`[data-font="${f}"] .uppercase`, NO_CAPS_DECLS),
-    ]),
-    ...SHADING_IDS.map((s) => rule(`[data-shading="${s}"]`, shadingTokens(s))),
-    ...RADIUS_IDS.flatMap((id) => roundedRules(id).map(([sel, decls]) => declRule(`[data-radius="${id}"] ${sel}`, decls))),
-    ...RADIUS_IDS.flatMap((id) => {
-      const decls = extrudedRoundedDecls(id);
-      return decls ? [declRule(`[data-radius="${id}"][data-shading="deep"] .pixel-rounded.pixel-shadow`, decls)] : [];
-    }),
-  ].join("\n");
 }

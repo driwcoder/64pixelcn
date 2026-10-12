@@ -163,7 +163,7 @@ const sidebarMenuButtonVariants = cva(
   "peer/menu-button flex w-full items-center gap-2 overflow-hidden p-2 text-left text-xs uppercase tracking-widest outline-none transition-[width,height,padding] hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-primary data-[active=true]:text-primary-foreground data-[active=true]:border-[length:var(--pixel-line,2px)] data-[active=true]:border-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
-      variant: { default: "hover:bg-accent hover:text-accent-foreground", outline: "bg-transparent border-[length:var(--pixel-line,2px)] border-foreground pixel-shadow hover:bg-accent hover:text-accent-foreground" },
+      variant: { default: "hover:bg-accent hover:text-accent-foreground", outline: "pixel-raised bg-transparent hover:bg-accent hover:text-accent-foreground" },
       size: { default: "h-8 text-xs", sm: "h-7 text-[0.7rem]", lg: "h-12 text-sm" },
     },
     defaultVariants: { variant: "default", size: "default" },
