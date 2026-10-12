@@ -222,3 +222,51 @@ body {
 
 .pixel-no-shadow { box-shadow: none; }
 .pixel-hover { transform: translate(var(--pixel-border), var(--pixel-border)); box-shadow: none; }
+
+/* ── Themed scrollbars ────────────────────────────────────────────────
+   Track is transparent (no background box); the thumb follows the theme
+   colors and the square pixel buttons act as up/down/left/right arrows. */
+* {
+  /* Firefox: thumb follows primary, track transparent, square thumb. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+/* WebKit / Blink (Chromium, Electron, Edge). */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+  background: transparent; /* no track background */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* hide the groove/background */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border: 3px solid transparent; /* 3px gap around the thumb */
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent);
+}
+
+/* The arrow buttons: keep them (up/down/left/right), styled as pixel
+   squares with the theme's foreground. No extra background box. */
+::-webkit-scrollbar-button {
+  background-color: var(--primary);
+  border: 2px solid var(--foreground);
+  display: block;
+}
+
+::-webkit-scrollbar-button:hover {
+  background-color: var(--accent);
+}
+
+/* A single-pixel square between thumb and arrows, transparent. */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+

@@ -27,13 +27,16 @@ const PixelScrollBar = React.forwardRef<
     orientation={orientation}
     className={cn(
       "flex touch-none select-none transition-colors",
-      orientation === "vertical" && "h-full w-2.5 border-l-2 border-l-foreground",
-      orientation === "horizontal" && "h-2.5 flex-col border-t-2 border-t-foreground",
+      orientation === "vertical" && "h-full w-2.5 p-px",
+      orientation === "horizontal" && "h-2.5 flex-col p-px",
       className
     )}
     {...props}
   >
-    <ScrollAreaPrimitive.ScrollAreaThumb data-slot="scroll-area-thumb" className="relative flex-1 bg-foreground" />
+    <ScrollAreaPrimitive.ScrollAreaThumb
+      data-slot="scroll-area-thumb"
+      className="relative flex-1 bg-primary border-2 border-transparent"
+    />
   </ScrollAreaPrimitive.ScrollAreaScrollbar>
 ));
 PixelScrollBar.displayName = "PixelScrollBar";
