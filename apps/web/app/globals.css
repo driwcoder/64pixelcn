@@ -36,6 +36,7 @@
   --pixel-border: 2px;
   --pixel-shadow: 2px 2px 0px var(--foreground);
   --pixel-font: "Press Start 2P", monospace;
+  --pixel-font-adjust: cap-height 0.72;
   --pixel-text-scale: 1;
 }
 
@@ -85,12 +86,18 @@
 /* Fonts are loaded via next/font/google in app/layout.tsx, which exposes
    the --font-* CSS variables on <html>. Point each preset at its var so
    the locally-bundled font actually renders. */
-[data-font="press-start"] { --pixel-font: var(--font-press-start), monospace; }
-[data-font="vt323"]       { --pixel-font: var(--font-vt323), monospace; }
-[data-font="silkscreen"]  { --pixel-font: var(--font-silkscreen), monospace; }
-[data-font="pixelify"]    { --pixel-font: var(--font-pixelify), monospace; }
-[data-font="dotgothic"]   { --pixel-font: var(--font-dotgothic), monospace; }
-[data-font="system"]      { --pixel-font: ui-monospace, "Cascadia Code", "Courier New", monospace; }
+/* --pixel-font-adjust normalizes the *visual* size of each font so the same
+   font-size looks roughly the same in every preset. Measured cap-height /
+   advance width (in em): Press Start 2P 1.00/1.00, VT323 0.56/0.40,
+   Silkscreen 0.63/0.73, Pixelify 0.63/0.56, DotGothic16 0.82/0.50,
+   system mono 0.70/0.59. Without this, Press Start renders ~40% taller and
+   ~70% wider than the others and breaks out of fixed-size components. */
+[data-font="press-start"] { --pixel-font: var(--font-press-start), monospace; --pixel-font-adjust: cap-height 0.72; }
+[data-font="vt323"]       { --pixel-font: var(--font-vt323), monospace; --pixel-font-adjust: cap-height 0.7; }
+[data-font="silkscreen"]  { --pixel-font: var(--font-silkscreen), monospace; --pixel-font-adjust: none; }
+[data-font="pixelify"]    { --pixel-font: var(--font-pixelify), monospace; --pixel-font-adjust: cap-height 0.68; }
+[data-font="dotgothic"]   { --pixel-font: var(--font-dotgothic), monospace; --pixel-font-adjust: cap-height 0.7; }
+[data-font="system"]      { --pixel-font: ui-monospace, "Cascadia Code", "Courier New", monospace; --pixel-font-adjust: none; }
 
 /* ── Color presets ─────────────────────────────────────────────────── */
 [data-preset="nintendo"] {
@@ -213,8 +220,11 @@
 
 html {
   font-family: var(--pixel-font);
-  /* Scale all rem-based text so users can shrink pixel UI globally. */
-  font-size: calc(16px * var(--pixel-text-scale, 1));
+  font-size-adjust: var(--pixel-font-adjust, none);
+  /* Scale all rem-based text so users can shrink pixel UI globally.
+     100% (not 16px) so the browser's own font-size preference is respected. */
+  font-size: calc(100% * var(--pixel-text-scale, 1));
+  -webkit-text-size-adjust: 100%;
 }
 
 body {

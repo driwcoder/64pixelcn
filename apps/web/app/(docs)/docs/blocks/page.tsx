@@ -130,7 +130,7 @@ export default function BlocksPage() {
   const total = CATEGORIES.reduce((a, c) => a + c.blocks.length, 0);
 
   return (
-    <div className="px-6 py-8 pb-24">
+    <div className="px-4 py-8 pb-24 sm:px-6">
       <div className="mx-auto max-w-5xl">
         <h1 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-2">Blocks</h1>
         <p className="text-sm text-muted-foreground mb-8">
@@ -147,10 +147,10 @@ export default function BlocksPage() {
                 <PixelCard key={b.name}>
                   <PixelCardHeader>
                     <PixelCardTitle className="text-xs">{b.name}</PixelCardTitle>
-                    <PixelCardDescription className="text-[10px]">{b.desc}</PixelCardDescription>
+                    <PixelCardDescription className="text-[0.7rem]">{b.desc}</PixelCardDescription>
                   </PixelCardHeader>
                   <PixelCardContent>
-                    <div className="pixel-demo border-2 border-dashed border-border p-[0.75em] overflow-hidden">
+                    <div className="pixel-demo border-2 border-dashed border-border p-[0.75em] overflow-x-auto">
                       <b.Demo />
                     </div>
                   </PixelCardContent>
@@ -160,7 +160,7 @@ export default function BlocksPage() {
           </section>
         ))}
 
-        <footer className="border-t-2 border-border pt-6 text-center text-[10px] text-muted-foreground">
+        <footer className="border-t-2 border-border pt-6 text-center text-[0.7rem] text-muted-foreground">
           64pixelcn ·{" "}
           <a href="https://pixelcn.vercel.app" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
             pixelcn.vercel.app

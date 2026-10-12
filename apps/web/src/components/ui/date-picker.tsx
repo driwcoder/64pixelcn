@@ -24,13 +24,13 @@ export function PixelDatePicker({ date, onDateChange, placeholder = "Pick a date
           data-slot="date-picker-trigger"
           variant="outline"
           className={cn(
-            "w-full justify-start text-left font-normal",
+            "w-full min-w-0 justify-start text-left font-normal",
             !date && "text-muted-foreground",
             className
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" strokeWidth={3} />
-          {date ? date.toLocaleDateString() : <span>{placeholder}</span>}
+          <span className="truncate">{date ? date.toLocaleDateString() : placeholder}</span>
         </PixelButton>
       </PixelPopoverTrigger>
       <PixelPopoverContent className="w-auto p-0" align="start">

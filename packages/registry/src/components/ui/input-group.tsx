@@ -8,7 +8,7 @@ const inputGroupVariants = cva(
     variants: {
       size: {
         default: "h-10",
-        sm: "h-8 text-[10px]",
+        sm: "h-8 text-[0.7rem]",
         lg: "h-12",
       },
     },
@@ -50,7 +50,7 @@ const PixelInputGroupAddon = React.forwardRef<
     data-slot="input-group-addon"
     data-align={align}
     className={cn(
-      "flex items-center gap-2 border-foreground bg-muted px-3 text-[10px] uppercase tracking-widest text-muted-foreground",
+      "flex items-center gap-2 border-foreground bg-muted px-3 text-[0.7rem] uppercase tracking-widest text-muted-foreground",
       align === "inline-start" && "border-r-2",
       align === "inline-end" && "border-l-2",
       align === "block-start" && "border-b-2 w-full",
@@ -66,7 +66,7 @@ const PixelInputGroupText = React.forwardRef<
   HTMLSpanElement,
   React.HTMLAttributes<HTMLSpanElement>
 >(({ className, ...props }, ref) => (
-  <span ref={ref} data-slot="input-group-text" className={cn("text-[10px] uppercase tracking-widest text-muted-foreground", className)} {...props} />
+  <span ref={ref} data-slot="input-group-text" className={cn("text-[0.7rem] uppercase tracking-widest text-muted-foreground", className)} {...props} />
 ));
 PixelInputGroupText.displayName = "PixelInputGroupText";
 

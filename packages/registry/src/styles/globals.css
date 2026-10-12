@@ -36,6 +36,7 @@
   --pixel-border: 2px;
   --pixel-shadow: 2px 2px 0px var(--foreground);
   --pixel-font: "Press Start 2P", monospace;
+  --pixel-font-adjust: cap-height 0.72;
 }
 
 .dark {
@@ -73,12 +74,14 @@
 [data-size="8"]   { --pixel-size: 0.5px; --pixel-border: 1px; --pixel-shadow: 1px 1px 0px var(--foreground); }
 
 /* ── Font presets ──────────────────────────────────────────────────── */
-[data-font="press-start"] { --pixel-font: "Press Start 2P", monospace; }
-[data-font="vt323"]       { --pixel-font: "VT323", monospace; }
-[data-font="silkscreen"]  { --pixel-font: "Silkscreen", monospace; }
-[data-font="pixelify"]    { --pixel-font: "Pixelify Sans", monospace; }
+/* --pixel-font-adjust normalizes the visual size of each font (Press Start 2P
+   is ~40% taller and ~70% wider than the others at the same font-size). */
+[data-font="press-start"] { --pixel-font: "Press Start 2P", monospace; --pixel-font-adjust: cap-height 0.72; }
+[data-font="vt323"]       { --pixel-font: "VT323", monospace; --pixel-font-adjust: cap-height 0.7; }
+[data-font="silkscreen"]  { --pixel-font: "Silkscreen", monospace; --pixel-font-adjust: none; }
+[data-font="pixelify"]    { --pixel-font: "Pixelify Sans", monospace; --pixel-font-adjust: cap-height 0.68; }
 [data-font="monogram"]    { --pixel-font: "Monogram", monospace; }
-[data-font="system"]      { --pixel-font: ui-monospace, "Cascadia Code", "Courier New", monospace; }
+[data-font="system"]      { --pixel-font: ui-monospace, "Cascadia Code", "Courier New", monospace; --pixel-font-adjust: none; }
 
 /* ── Color presets ─────────────────────────────────────────────────── */
 [data-preset="nintendo"] {
@@ -191,6 +194,7 @@
 
 html {
   font-family: var(--pixel-font);
+  font-size-adjust: var(--pixel-font-adjust, none);
 }
 
 body {

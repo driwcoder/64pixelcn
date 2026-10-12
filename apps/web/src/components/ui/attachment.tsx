@@ -4,7 +4,7 @@ import { Paperclip, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const attachmentVariants = cva(
-  "inline-flex items-center gap-2 border-2 border-foreground bg-card px-3 py-1.5 text-xs font-[family-name:var(--pixel-font)]",
+  "inline-flex max-w-full min-w-0 items-center gap-2 border-2 border-foreground bg-card px-3 py-1.5 text-xs font-[family-name:var(--pixel-font)]",
   {
     variants: {
       variant: { default: "shadow-[var(--pixel-shadow)]", ghost: "border-transparent bg-transparent shadow-none" },

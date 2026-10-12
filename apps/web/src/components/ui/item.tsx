@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const itemVariants = cva(
-  "group/item flex items-center border-2 border-transparent text-xs outline-none transition-colors font-[family-name:var(--pixel-font)]",
+  "group/item flex flex-wrap items-center border-2 border-transparent text-xs outline-none transition-colors font-[family-name:var(--pixel-font)]",
   {
     variants: {
       variant: {
@@ -47,15 +47,15 @@ function PixelItemMedia({ className, variant = "default", ...props }: React.Comp
 }
 
 function PixelItemContent({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="item-content" className={cn("flex flex-1 flex-col gap-1 [&+[data-slot=item-content]]:flex-none", className)} {...props} />;
+  return <div data-slot="item-content" className={cn("flex min-w-0 flex-1 flex-col gap-1 [&+[data-slot=item-content]]:flex-none", className)} {...props} />;
 }
 
 function PixelItemTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="item-title" className={cn("flex w-fit items-center gap-2 text-xs uppercase tracking-widest", className)} {...props} />;
+  return <div data-slot="item-title" className={cn("flex w-fit max-w-full items-center gap-2 text-xs uppercase tracking-widest wrap-anywhere", className)} {...props} />;
 }
 
 function PixelItemDescription({ className, ...props }: React.ComponentProps<"p">) {
-  return <p data-slot="item-description" className={cn("text-xs text-muted-foreground [&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4", className)} {...props} />;
+  return <p data-slot="item-description" className={cn("text-xs text-muted-foreground wrap-anywhere [&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4", className)} {...props} />;
 }
 
 function PixelItemActions({ className, ...props }: React.ComponentProps<"div">) {

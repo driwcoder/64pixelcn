@@ -37,7 +37,7 @@ export function PixelDataTable<TData>({
   return (
     <div
       data-slot="data-table"
-      className="space-y-4 font-[family-name:var(--pixel-font)]"
+      className="w-full min-w-0 space-y-4 font-[family-name:var(--pixel-font)]"
     >
       <PixelTable>
         <PixelTableHeader>
@@ -83,19 +83,19 @@ export function PixelDataTable<TData>({
         </PixelTableBody>
       </PixelTable>
 
-      <div className="flex items-center justify-between px-2">
-        <div className="flex-1 text-xs text-muted-foreground">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-2">
+        <div className="min-w-0 flex-1 basis-40 text-xs text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <div className="flex items-center gap-2">
-            <span className="text-xs">Rows per page</span>
+            <span className="text-xs whitespace-nowrap">Rows per page</span>
             <PixelSelect
               value={`${table.getState().pagination.pageSize}`}
               onValueChange={(value) => table.setPageSize(Number(value))}
             >
-              <PixelSelectTrigger className="h-8 w-[70px]">
+              <PixelSelectTrigger className="h-8 w-[4.5rem]">
                 <PixelSelectValue placeholder={table.getState().pagination.pageSize} />
               </PixelSelectTrigger>
               <PixelSelectContent side="top">
@@ -107,7 +107,7 @@ export function PixelDataTable<TData>({
               </PixelSelectContent>
             </PixelSelect>
           </div>
-          <div className="flex w-[100px] items-center justify-center text-xs">
+          <div className="flex items-center justify-center whitespace-nowrap text-xs">
             Page {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
           </div>

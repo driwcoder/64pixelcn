@@ -39,7 +39,7 @@ export default function CreatePage() {
   const installCommand = `npx shadcn@latest init https://pixelcn.vercel.app/r/pixelcn.json`;
 
   return (
-    <div className="px-6 py-12 pb-24">
+    <div className="px-4 py-12 pb-24 sm:px-6">
       <div className="mx-auto max-w-3xl">
         <h1 className="mb-2 font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest">Create Preset</h1>
         <p className="mb-8 text-sm text-muted-foreground">Customize your pixelcn configuration.</p>
@@ -99,7 +99,7 @@ export default function CreatePage() {
                   size="sm"
                   onClick={() => setTextScale(t.id)}
                 >
-                  {t.label} <span className="text-[10px] opacity-70">{t.hint}</span>
+                  {t.label} <span className="text-[0.7rem] opacity-70">{t.hint}</span>
                 </PixelButton>
               ))}
             </div>
@@ -134,7 +134,7 @@ export default function CreatePage() {
             <PixelButton>Primary Button</PixelButton>
             <PixelButton variant="secondary">Secondary</PixelButton>
             <PixelButton variant="outline">Outline</PixelButton>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <PixelBadge>Default</PixelBadge>
               <PixelBadge variant="secondary">Secondary</PixelBadge>
               <PixelBadge variant="destructive">Destructive</PixelBadge>

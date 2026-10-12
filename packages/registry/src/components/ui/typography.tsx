@@ -39,7 +39,7 @@ function PixelTypographyLarge({ className, ...props }: React.ComponentProps<"div
 }
 
 function PixelTypographySmall({ className, ...props }: React.ComponentProps<"small">) {
-  return <small data-slot="typography-small" className={cn("text-[10px] font-[family-name:var(--pixel-font)] leading-none", className)} {...props} />;
+  return <small data-slot="typography-small" className={cn("text-[0.7rem] font-[family-name:var(--pixel-font)] leading-none", className)} {...props} />;
 }
 
 function PixelTypographyMuted({ className, ...props }: React.ComponentProps<"p">) {
@@ -48,7 +48,7 @@ function PixelTypographyMuted({ className, ...props }: React.ComponentProps<"p">
 
 function PixelTypographyInlineCode({ className, ...props }: React.ComponentProps<"code">) {
   return (
-    <code data-slot="typography-inline-code" className={cn("relative border-2 border-foreground bg-muted px-[0.3rem] py-[0.2rem] text-[10px] font-mono", className)} {...props} />
+    <code data-slot="typography-inline-code" className={cn("relative border-2 border-foreground bg-muted px-[0.3rem] py-[0.2rem] text-[0.7rem] font-mono box-decoration-clone break-words", className)} {...props} />
   );
 }
 

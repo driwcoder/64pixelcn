@@ -21,7 +21,7 @@ PixelCommand.displayName = "PixelCommand";
 const PixelCommandDialog = ({ children, ...props }: DialogProps) => (
   <PixelDialog {...props}>
     <PixelDialogContent className="overflow-hidden p-0">
-      <PixelCommand className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[10px] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-widest [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-4 [&_[cmdk-input-wrapper]_svg]:w-4 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4">
+      <PixelCommand className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-[0.7rem] [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-widest [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-4 [&_[cmdk-input-wrapper]_svg]:w-4 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-4 [&_[cmdk-item]_svg]:w-4">
         {children}
       </PixelCommand>
     </PixelDialogContent>
@@ -94,7 +94,7 @@ const PixelCommandItem = React.forwardRef<
 PixelCommandItem.displayName = "PixelCommandItem";
 
 const PixelCommandShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span data-slot="command-shortcut" className={cn("ml-auto text-[10px] tracking-widest text-muted-foreground", className)} {...props} />
+  <span data-slot="command-shortcut" className={cn("ml-auto text-[0.7rem] tracking-widest text-muted-foreground", className)} {...props} />
 );
 PixelCommandShortcut.displayName = "PixelCommandShortcut";
 

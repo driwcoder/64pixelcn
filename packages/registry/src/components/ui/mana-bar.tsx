@@ -33,7 +33,7 @@ const PixelManaBar = React.forwardRef<HTMLDivElement, PixelManaBarProps>(
     return (
       <div ref={ref} data-slot="mana-bar" className={cn("w-full", className)} {...props}>
         {showLabel && (
-          <div className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-widest">
+          <div className="mb-1 flex items-center justify-between text-[0.7rem] uppercase tracking-widest">
             <span className="flex items-center gap-1">
               {showIcon && <Sparkles className="h-3 w-3" strokeWidth={3} />} MP
             </span>

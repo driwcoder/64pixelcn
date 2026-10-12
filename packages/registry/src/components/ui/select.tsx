@@ -66,7 +66,7 @@ const PixelSelectLabel = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
 >(({ className, ...props }, ref) => (
-  <SelectPrimitive.Label ref={ref} data-slot="select-label" className={cn("px-2 py-1.5 text-[10px] uppercase tracking-widest text-muted-foreground", className)} {...props} />
+  <SelectPrimitive.Label ref={ref} data-slot="select-label" className={cn("px-2 py-1.5 text-[0.7rem] uppercase tracking-widest text-muted-foreground", className)} {...props} />
 ));
 PixelSelectLabel.displayName = "PixelSelectLabel";
 

@@ -16,9 +16,9 @@ export function HeroCentered() {
   return (
     <div className="text-center py-10 px-4 border-2 border-foreground bg-card">
       <PixelBadge variant="outline" className="mb-4">NEW v0.1.0</PixelBadge>
-      <h1 className="font-[family-name:var(--pixel-font)] text-3xl uppercase tracking-widest mb-3">64pixelcn</h1>
+      <h1 className="font-[family-name:var(--pixel-font)] text-2xl sm:text-3xl uppercase tracking-widest mb-3 break-words">64pixelcn</h1>
       <p className="text-xs text-muted-foreground mb-6 max-w-md mx-auto">A pixel art component library for retro UIs.</p>
-      <div className="flex justify-center gap-3">
+      <div className="flex flex-wrap justify-center gap-3">
         <PixelButton>Get Started</PixelButton>
         <PixelButton variant="outline">GitHub</PixelButton>
       </div>
@@ -28,14 +28,14 @@ export function HeroCentered() {
 
 export function HeroSplit() {
   return (
-    <div className="grid md:grid-cols-2 border-2 border-foreground bg-card">
-      <div className="p-8 flex flex-col justify-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 border-2 border-foreground bg-card">
+      <div className="min-w-0 p-[1.5em] flex flex-col justify-center">
         <PixelBadge variant="outline" className="mb-3 w-fit">RETRO UI</PixelBadge>
-        <h2 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-3">Build retro apps</h2>
+        <h2 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-3 wrap-anywhere">Build retro apps</h2>
         <p className="text-xs text-muted-foreground mb-5">Pixel-perfect components with modern React.</p>
         <PixelButton className="w-fit">Explore</PixelButton>
       </div>
-      <div className="bg-muted border-l-2 border-foreground flex items-center justify-center p-8 min-h-[160px]">
+      <div className="bg-muted border-t-2 md:border-t-0 md:border-l-2 border-foreground flex items-center justify-center p-8 min-h-[160px]">
         <Rocket className="h-16 w-16 text-primary" strokeWidth={2} />
       </div>
     </div>
@@ -45,9 +45,9 @@ export function HeroSplit() {
 export function HeroGameTitle() {
   return (
     <div className="border-2 border-foreground bg-card p-8 text-center">
-      <div className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2">PRESS START</div>
+      <div className="text-[0.7rem] uppercase tracking-widest text-muted-foreground mb-2">PRESS START</div>
       <h2 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-4 text-primary">PIXEL QUEST</h2>
-      <div className="flex justify-center gap-6 text-[10px] uppercase tracking-widest">
+      <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[0.7rem] uppercase tracking-widest">
         <span>SCORE 99900</span>
         <span>HI 100000</span>
         <span>LV 42</span>
@@ -64,10 +64,10 @@ export function FeaturesCardGrid() {
     { icon: Zap, title: "Multi-size", desc: "8px to 128px" },
   ];
   return (
-    <div className="grid md:grid-cols-3 gap-[0.6em]">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-[0.6em]">
       {items.map((f) => (
         <PixelCard key={f.title} className="h-full">
-          <PixelCardContent className="text-center flex flex-col items-center gap-[0.5em]">
+          <PixelCardContent className="flex-1 pt-[1.5em] text-center flex flex-col items-center justify-center gap-[0.5em]">
             <f.icon className="h-[2em] w-[2em] text-primary shrink-0" strokeWidth={2} />
             <PixelCardTitle className="leading-relaxed">{f.title}</PixelCardTitle>
             <PixelCardDescription className="leading-relaxed">{f.desc}</PixelCardDescription>
@@ -141,11 +141,13 @@ export function StatsBar() {
     { value: "∞", label: "Fun" },
   ];
   return (
-    <div className="grid grid-cols-4 border-2 border-foreground bg-card">
+    // gap + foreground background draws the dividers, so they stay correct
+    // however many columns fit (4 on wide screens, 2 on phones).
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-[2px] border-2 border-foreground bg-foreground">
       {stats.map((s) => (
-        <div key={s.label} className="p-[0.7em] text-center border-r-2 border-foreground last:border-r-0 flex flex-col items-center justify-center gap-[0.2em]">
+        <div key={s.label} className="min-w-0 bg-card p-[0.7em] text-center flex flex-col items-center justify-center gap-[0.2em]">
           <div className="font-[family-name:var(--pixel-font)] text-[1.3em] leading-tight text-primary">{s.value}</div>
-          <div className="text-[0.65em] uppercase tracking-widest leading-relaxed text-muted-foreground">{s.label}</div>
+          <div className="max-w-full text-[0.65em] uppercase tracking-wider leading-relaxed text-muted-foreground break-words">{s.label}</div>
         </div>
       ))}
     </div>
@@ -161,7 +163,7 @@ export function Testimonials() {
             <p className="text-xs mb-2">&ldquo;{q}&rdquo;</p>
             <div className="flex items-center gap-2">
               <PixelAvatar className="h-6 w-6"><PixelAvatarFallback>U{i}</PixelAvatarFallback></PixelAvatar>
-              <span className="text-[10px] text-muted-foreground">@user{i}</span>
+              <span className="text-[0.7rem] text-muted-foreground">@user{i}</span>
             </div>
           </PixelCardContent>
         </PixelCard>
@@ -183,7 +185,7 @@ export function TimelineVertical() {
           </div>
           <div className="pb-2">
             <div className="text-xs uppercase tracking-widest">{s}</div>
-            <div className="text-[10px] text-muted-foreground">Step {i + 1} description</div>
+            <div className="text-[0.7rem] text-muted-foreground">Step {i + 1} description</div>
           </div>
         </div>
       ))}
@@ -198,13 +200,13 @@ export function CtaComparison() {
       <PixelCard className="border-destructive">
         <PixelCardContent className="pt-4">
           <PixelCardTitle className="text-xs text-destructive mb-2">Without 64pixelcn</PixelCardTitle>
-          <ul className="text-[10px] space-y-1 text-muted-foreground"><li>✗ Boring UI</li><li>✗ No themes</li></ul>
+          <ul className="text-[0.7rem] space-y-1 text-muted-foreground"><li>✗ Boring UI</li><li>✗ No themes</li></ul>
         </PixelCardContent>
       </PixelCard>
       <PixelCard className="border-primary">
         <PixelCardContent className="pt-4">
           <PixelCardTitle className="text-xs text-primary mb-2">With 64pixelcn</PixelCardTitle>
-          <ul className="text-[10px] space-y-1 text-muted-foreground"><li>✓ Pixel perfect</li><li>✓ 5 themes</li></ul>
+          <ul className="text-[0.7rem] space-y-1 text-muted-foreground"><li>✓ Pixel perfect</li><li>✓ 5 themes</li></ul>
         </PixelCardContent>
       </PixelCard>
     </div>
@@ -219,13 +221,13 @@ export function TeamGrid() {
     { name: "Carol", role: "PM" },
   ];
   return (
-    <div className="grid grid-cols-3 gap-3">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-3">
       {team.map((m) => (
-        <PixelCard key={m.name}>
-          <PixelCardContent className="pt-4 text-center">
+        <PixelCard key={m.name} className="min-w-0">
+          <PixelCardContent className="pt-4 px-[0.75em] text-center break-words">
             <PixelAvatar className="mx-auto mb-2 h-12 w-12"><PixelAvatarFallback>{m.name[0]}</PixelAvatarFallback></PixelAvatar>
             <div className="text-xs uppercase tracking-widest">{m.name}</div>
-            <div className="text-[10px] text-muted-foreground">{m.role}</div>
+            <div className="text-[0.7rem] text-muted-foreground">{m.role}</div>
           </PixelCardContent>
         </PixelCard>
       ))}
@@ -238,10 +240,10 @@ export function MetricsDashboard() {
   return (
     <div className="border-2 border-foreground bg-card p-4 space-y-4">
       <div className="font-[family-name:var(--pixel-font)] text-xs uppercase tracking-widest">Dashboard</div>
-      <div className="grid grid-cols-3 gap-2">
-        <div className="border-2 border-foreground p-2 text-center"><div className="text-lg text-primary">1.2k</div><div className="text-[10px] text-muted-foreground">Users</div></div>
-        <div className="border-2 border-foreground p-2 text-center"><div className="text-lg text-primary">98%</div><div className="text-[10px] text-muted-foreground">Uptime</div></div>
-        <div className="border-2 border-foreground p-2 text-center"><div className="text-lg text-primary">70</div><div className="text-[10px] text-muted-foreground">Items</div></div>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(5.5rem,1fr))] gap-2">
+        <div className="border-2 border-foreground p-2 text-center"><div className="text-lg text-primary">1.2k</div><div className="text-[0.7rem] text-muted-foreground">Users</div></div>
+        <div className="border-2 border-foreground p-2 text-center"><div className="text-lg text-primary">98%</div><div className="text-[0.7rem] text-muted-foreground">Uptime</div></div>
+        <div className="border-2 border-foreground p-2 text-center"><div className="text-lg text-primary">70</div><div className="text-[0.7rem] text-muted-foreground">Items</div></div>
       </div>
       <PixelProgress value={72} />
     </div>
@@ -273,7 +275,7 @@ export function DemoShell() {
 // ─── LAYOUT ───────────────────────────────────────────────────
 export function FooterBlock() {
   return (
-    <div className="border-2 border-foreground bg-card p-4 grid md:grid-cols-3 gap-4 text-[10px]">
+    <div className="border-2 border-foreground bg-card p-4 grid md:grid-cols-3 gap-4 text-[0.7rem]">
       <div className="font-[family-name:var(--pixel-font)] uppercase tracking-widest">64pixelcn</div>
       <div className="space-y-1"><div className="uppercase tracking-widest text-muted-foreground">Product</div><div>Components</div><div>Blocks</div></div>
       <div className="space-y-1"><div className="uppercase tracking-widest text-muted-foreground">Social</div><div>GitHub</div><div>Docs</div></div>
@@ -310,12 +312,12 @@ export function GameSkillTree() {
     { icon: Flame, name: "Fire", level: 5 },
   ];
   return (
-    <div className="border-2 border-foreground bg-card p-4 grid grid-cols-3 gap-2">
+    <div className="border-2 border-foreground bg-card p-4 grid grid-cols-[repeat(auto-fit,minmax(6rem,1fr))] gap-2">
       {skills.map((s) => (
-        <div key={s.name} className="border-2 border-foreground p-2 text-center">
+        <div key={s.name} className="min-w-0 border-2 border-foreground p-2 text-center break-words">
           <s.icon className="h-6 w-6 mx-auto mb-1 text-primary" strokeWidth={2} />
-          <div className="text-[10px] uppercase tracking-widest">{s.name}</div>
-          <div className="text-[10px] text-muted-foreground">Lv {s.level}</div>
+          <div className="text-[0.7rem] uppercase tracking-widest">{s.name}</div>
+          <div className="text-[0.7rem] text-muted-foreground">Lv {s.level}</div>
         </div>
       ))}
     </div>
@@ -327,9 +329,9 @@ export function GamePartyGrid() {
   return (
     <div className="border-2 border-foreground bg-card p-4">
       <div className="text-xs uppercase tracking-widest mb-2 flex items-center gap-2"><Users className="h-4 w-4" /> Party</div>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(6rem,1fr))] gap-2">
         {party.map((p) => (
-          <div key={p} className="border-2 border-foreground p-2 text-center text-[10px] uppercase">{p}</div>
+          <div key={p} className="min-w-0 border-2 border-foreground p-2 text-center text-[0.7rem] uppercase break-words">{p}</div>
         ))}
       </div>
     </div>
@@ -354,7 +356,7 @@ export function GameLoadingScreen() {
     <div className="border-2 border-foreground bg-card p-10 text-center space-y-4">
       <div className="text-xs uppercase tracking-widest">Loading...</div>
       <PixelProgress value={66} />
-      <div className="text-[10px] text-muted-foreground">Loading assets 66%</div>
+      <div className="text-[0.7rem] text-muted-foreground">Loading assets 66%</div>
     </div>
   );
 }
@@ -374,7 +376,7 @@ export function GameVictoryScreen() {
     <div className="border-2 border-foreground bg-card p-8 text-center space-y-3">
       <Trophy className="h-12 w-12 mx-auto text-primary" strokeWidth={2} />
       <h2 className="font-[family-name:var(--pixel-font)] text-xl text-primary">VICTORY!</h2>
-      <div className="text-[10px] uppercase tracking-widest text-muted-foreground">+500 XP · +100 Gold</div>
+      <div className="text-[0.7rem] uppercase tracking-widest text-muted-foreground">+500 XP · +100 Gold</div>
     </div>
   );
 }
@@ -400,7 +402,7 @@ export function GameLeaderboard() {
   return (
     <div className="border-2 border-foreground bg-card p-4 space-y-1">
       {entries.map((e) => (
-        <div key={e.rank} className="flex justify-between border-2 border-foreground px-3 py-1.5 text-[10px] uppercase">
+        <div key={e.rank} className="flex justify-between border-2 border-foreground px-3 py-1.5 text-[0.7rem] uppercase">
           <span>#{e.rank} {e.name}</span><span className="text-primary">{e.score}</span>
         </div>
       ))}
@@ -433,5 +435,5 @@ export function CalendarBlockDemo() {
 
 // ─── CHARTS ───────────────────────────────────────────────────
 export function ChartBarDemo() {
-  return <div className="border-2 border-foreground bg-card p-3 text-center text-[10px] text-muted-foreground">Bar Chart (see Chart component)</div>;
+  return <div className="border-2 border-foreground bg-card p-3 text-center text-[0.7rem] text-muted-foreground">Bar Chart (see Chart component)</div>;
 }

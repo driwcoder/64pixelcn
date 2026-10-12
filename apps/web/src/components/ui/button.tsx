@@ -5,7 +5,9 @@ import { cn } from "@/lib/utils";
 
 const pixelButtonVariants = cva(
   [
-    "inline-flex items-center justify-center gap-2 whitespace-nowrap",
+    // No whitespace-nowrap: long labels wrap between words instead of
+    // spilling out of the button (and the button never exceeds its parent).
+    "inline-flex max-w-full items-center justify-center gap-2 text-center wrap-anywhere",
     "font-[family-name:var(--pixel-font)] uppercase tracking-widest",
     "transition-all duration-75",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",

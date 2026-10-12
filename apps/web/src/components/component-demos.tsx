@@ -663,7 +663,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
             </PixelSidebarGroupContent>
           </PixelSidebarGroup>
         </PixelSidebarContent>
-        <PixelSidebarFooter className="text-[10px] text-muted-foreground">v0.1.0</PixelSidebarFooter>
+        <PixelSidebarFooter className="text-[0.7rem] text-muted-foreground">v0.1.0</PixelSidebarFooter>
       </PixelSidebar>
       <PixelSidebarInset className="border-0">
         <div className="p-4">
@@ -898,8 +898,8 @@ function ComboboxDemo() {
   return (
     <PixelPopover open={open} onOpenChange={setOpen}>
       <PixelPopoverTrigger asChild>
-        <PixelButton variant="outline" role="combobox" aria-expanded={open} className="w-full max-w-sm justify-between">
-          {selected ? frameworks.find((f) => f.value === selected)?.label : "Select framework..."}
+        <PixelButton variant="outline" role="combobox" aria-expanded={open} className="w-full min-w-0 max-w-sm justify-between">
+          <span className="truncate">{selected ? frameworks.find((f) => f.value === selected)?.label : "Select framework..."}</span>
           <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" strokeWidth={3} />
         </PixelButton>
       </PixelPopoverTrigger>
@@ -1052,7 +1052,7 @@ function NavigationMenuDemo() {
         <PixelNavigationMenuItem>
           <PixelNavigationMenuTrigger>Getting started</PixelNavigationMenuTrigger>
           <PixelNavigationMenuContent>
-            <ul className="grid w-[400px] gap-1 p-2">
+            <ul className="grid w-[min(400px,calc(100vw-3rem))] gap-1 p-2">
               <li>
                 <PixelNavigationMenuLink asChild>
                   <a
@@ -1060,7 +1060,7 @@ function NavigationMenuDemo() {
                     className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
                   >
                     <div className="text-xs uppercase tracking-widest">Introduction</div>
-                    <p className="text-[10px] leading-snug text-muted-foreground">Re-usable pixel components.</p>
+                    <p className="text-[0.7rem] leading-snug text-muted-foreground">Re-usable pixel components.</p>
                   </a>
                 </PixelNavigationMenuLink>
               </li>
@@ -1071,7 +1071,7 @@ function NavigationMenuDemo() {
                     className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
                   >
                     <div className="text-xs uppercase tracking-widest">Installation</div>
-                    <p className="text-[10px] leading-snug text-muted-foreground">How to install via the CLI.</p>
+                    <p className="text-[0.7rem] leading-snug text-muted-foreground">How to install via the CLI.</p>
                   </a>
                 </PixelNavigationMenuLink>
               </li>
@@ -1082,7 +1082,7 @@ function NavigationMenuDemo() {
                     className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
                   >
                     <div className="text-xs uppercase tracking-widest">Typography</div>
-                    <p className="text-[10px] leading-snug text-muted-foreground">Styles for headings and text.</p>
+                    <p className="text-[0.7rem] leading-snug text-muted-foreground">Styles for headings and text.</p>
                   </a>
                 </PixelNavigationMenuLink>
               </li>
@@ -1093,7 +1093,7 @@ function NavigationMenuDemo() {
         <PixelNavigationMenuItem>
           <PixelNavigationMenuTrigger>Components</PixelNavigationMenuTrigger>
           <PixelNavigationMenuContent>
-            <ul className="grid w-[500px] grid-cols-2 gap-1 p-2">
+            <ul className="grid w-[min(500px,calc(100vw-3rem))] grid-cols-1 sm:grid-cols-2 gap-1 p-2">
               {[
                 { title: "Alert Dialog", desc: "Modal confirmation dialogs" },
                 { title: "Hover Card", desc: "Preview cards on hover" },
@@ -1109,7 +1109,7 @@ function NavigationMenuDemo() {
                       className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
                     >
                       <div className="text-xs uppercase tracking-widest">{c.title}</div>
-                      <p className="text-[10px] leading-snug text-muted-foreground">{c.desc}</p>
+                      <p className="text-[0.7rem] leading-snug text-muted-foreground">{c.desc}</p>
                     </a>
                   </PixelNavigationMenuLink>
                 </li>

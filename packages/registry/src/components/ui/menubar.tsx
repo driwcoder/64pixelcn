@@ -146,7 +146,7 @@ const PixelMenubarLabel = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Label>,
   React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Label> & { inset?: boolean }
 >(({ className, inset, ...props }, ref) => (
-  <MenubarPrimitive.Label ref={ref} data-slot="menubar-label" className={cn("px-2 py-1.5 text-[10px] uppercase tracking-widest text-muted-foreground", inset && "pl-8", className)} {...props} />
+  <MenubarPrimitive.Label ref={ref} data-slot="menubar-label" className={cn("px-2 py-1.5 text-[0.7rem] uppercase tracking-widest text-muted-foreground", inset && "pl-8", className)} {...props} />
 ));
 PixelMenubarLabel.displayName = "PixelMenubarLabel";
 
@@ -159,7 +159,7 @@ const PixelMenubarSeparator = React.forwardRef<
 PixelMenubarSeparator.displayName = "PixelMenubarSeparator";
 
 const PixelMenubarShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span data-slot="menubar-shortcut" className={cn("ml-auto text-[10px] tracking-widest text-muted-foreground", className)} {...props} />
+  <span data-slot="menubar-shortcut" className={cn("ml-auto text-[0.7rem] tracking-widest text-muted-foreground", className)} {...props} />
 );
 PixelMenubarShortcut.displayName = "PixelMenubarShortcut";
 

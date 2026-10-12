@@ -32,7 +32,7 @@ const PixelEnemyHealthDisplay = React.forwardRef<HTMLDivElement, PixelEnemyHealt
             <span className="text-xs uppercase tracking-widest">{name}</span>
           </div>
           {level !== undefined && (
-            <span className="text-[10px] text-muted-foreground">Lv {level}</span>
+            <span className="text-[0.7rem] text-muted-foreground">Lv {level}</span>
           )}
         </div>
 
@@ -56,7 +56,7 @@ const PixelEnemyHealthDisplay = React.forwardRef<HTMLDivElement, PixelEnemyHealt
         </div>
 
         {/* HP text */}
-        <div className="mt-1 text-right text-[10px] text-muted-foreground">
+        <div className="mt-1 text-right text-[0.7rem] text-muted-foreground">
           {value} / {max} HP
         </div>
       </div>

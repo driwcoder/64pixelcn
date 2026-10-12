@@ -50,9 +50,11 @@ function Option({
   return (
     <button
       type="button"
+      role="menuitemradio"
+      aria-checked={active}
       onClick={onClick}
       className={cn(
-        "flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left text-[10px] uppercase tracking-widest transition-colors",
+        "flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left text-[0.7rem] uppercase tracking-widest transition-colors",
         "hover:bg-accent hover:text-accent-foreground",
         active && "bg-accent text-accent-foreground"
       )}
@@ -66,7 +68,7 @@ function Option({
 function Group({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="border-b-2 border-border py-2 last:border-b-0">
-      <div className="px-3 pb-1 text-[9px] uppercase tracking-widest text-muted-foreground">
+      <div className="px-3 pb-1 text-[0.65rem] uppercase tracking-widest text-muted-foreground">
         {label}
       </div>
       {children}
@@ -80,11 +82,19 @@ export function PixelControls() {
   const ref = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    function onDocClick(e: MouseEvent) {
+    if (!open) return;
+    function onDocClick(e: PointerEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
-    if (open) document.addEventListener("mousedown", onDocClick);
-    return () => document.removeEventListener("mousedown", onDocClick);
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("pointerdown", onDocClick);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onDocClick);
+      document.removeEventListener("keydown", onKeyDown);
+    };
   }, [open]);
 
   return (
@@ -94,7 +104,7 @@ export function PixelControls() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-haspopup="menu"
-        className="flex items-center gap-1.5 border-2 border-foreground bg-transparent px-2.5 py-1.5 text-[10px] uppercase tracking-widest text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+        className="flex items-center gap-1.5 border-2 border-foreground bg-transparent px-2.5 py-1.5 text-[0.7rem] uppercase tracking-widest text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
       >
         <Settings2 className="h-3.5 w-3.5" strokeWidth={3} />
         <span className="hidden sm:inline">Display</span>
@@ -107,16 +117,18 @@ export function PixelControls() {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-full z-50 mt-1 w-52 border-2 border-foreground bg-popover text-popover-foreground shadow-[var(--pixel-shadow)]"
+          className="absolute right-0 top-full z-50 mt-1 max-h-[calc(100dvh-4.5rem)] w-56 max-w-[calc(100vw-2rem)] overflow-y-auto border-2 border-foreground bg-popover text-popover-foreground shadow-[var(--pixel-shadow)]"
         >
           <Group label="Color Preset">
             {PRESETS.map((p) => (
               <button
                 key={p.id}
                 type="button"
+                role="menuitemradio"
+                aria-checked={preset === p.id}
                 onClick={() => setPreset(p.id)}
                 className={cn(
-                  "flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left text-[10px] uppercase tracking-widest transition-colors",
+                  "flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left text-[0.7rem] uppercase tracking-widest transition-colors",
                   "hover:bg-accent hover:text-accent-foreground",
                   preset === p.id && "bg-accent text-accent-foreground"
                 )}

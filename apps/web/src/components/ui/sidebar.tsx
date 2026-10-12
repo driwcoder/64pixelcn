@@ -26,9 +26,22 @@ function useSidebar() {
   return context;
 }
 
+const MOBILE_QUERY = "(max-width: 767px)";
+const subscribeMobile = (onChange: () => void) => {
+  const mql = window.matchMedia(MOBILE_QUERY);
+  mql.addEventListener("change", onChange);
+  return () => mql.removeEventListener("change", onChange);
+};
+
+// Server snapshot is `false` so SSR and hydration agree; the client value is
+// applied right after and updates live on resize.
+function useIsMobile() {
+  return React.useSyncExternalStore(subscribeMobile, () => window.matchMedia(MOBILE_QUERY).matches, () => false);
+}
+
 const PixelSidebarProvider = React.forwardRef<HTMLDivElement, React.ComponentProps<"div"> & { defaultOpen?: boolean; open?: boolean; onOpenChange?: (open: boolean) => void }>(
   ({ defaultOpen = true, open: openProp, onOpenChange: setOpenProp, className, style, children, ...props }, ref) => {
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const isMobile = useIsMobile();
     const [openMobile, setOpenMobile] = React.useState(false);
     const [_open, _setOpen] = React.useState(defaultOpen);
     const open = openProp ?? _open;
@@ -127,7 +140,7 @@ PixelSidebarGroup.displayName = "PixelSidebarGroup";
 
 const PixelSidebarGroupLabel = React.forwardRef<HTMLDivElement, React.ComponentProps<"div"> & { asChild?: boolean }>(({ className, asChild = false, ...props }, ref) => {
   const Comp = asChild ? Slot : "div";
-  return <Comp ref={ref} data-sidebar="group-label" className={cn("flex h-8 shrink-0 items-center px-2 text-[10px] uppercase tracking-widest text-muted-foreground", "peer-data-[collapsible=icon]:pointer-events-none peer-data-[collapsible=icon]:-mt-8 peer-data-[collapsible=icon]:opacity-0", className)} {...props} />;
+  return <Comp ref={ref} data-sidebar="group-label" className={cn("flex h-8 shrink-0 items-center px-2 text-[0.7rem] uppercase tracking-widest text-muted-foreground", "peer-data-[collapsible=icon]:pointer-events-none peer-data-[collapsible=icon]:-mt-8 peer-data-[collapsible=icon]:opacity-0", className)} {...props} />;
 });
 PixelSidebarGroupLabel.displayName = "PixelSidebarGroupLabel";
 
@@ -151,7 +164,7 @@ const sidebarMenuButtonVariants = cva(
   {
     variants: {
       variant: { default: "hover:bg-accent hover:text-accent-foreground", outline: "bg-transparent border-2 border-foreground shadow-[var(--pixel-shadow)] hover:bg-accent hover:text-accent-foreground" },
-      size: { default: "h-8 text-xs", sm: "h-7 text-[10px]", lg: "h-12 text-sm" },
+      size: { default: "h-8 text-xs", sm: "h-7 text-[0.7rem]", lg: "h-12 text-sm" },
     },
     defaultVariants: { variant: "default", size: "default" },
   }
@@ -175,7 +188,7 @@ const PixelSidebarMenuAction = React.forwardRef<HTMLButtonElement, React.Compone
 });
 PixelSidebarMenuAction.displayName = "PixelSidebarMenuAction";
 
-const PixelSidebarMenuBadge = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(({ className, ...props }, ref) => <div ref={ref} data-sidebar="menu-badge" className={cn("pointer-events-none absolute right-1 flex min-w-5 items-center justify-center border-2 border-foreground bg-primary px-1 text-[8px] text-primary-foreground tabular-nums", "peer-data-[size=default]/menu-button:top-1.5 peer-data-[size=lg]/menu-button:top-2", className)} {...props} />);
+const PixelSidebarMenuBadge = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(({ className, ...props }, ref) => <div ref={ref} data-sidebar="menu-badge" className={cn("pointer-events-none absolute right-1 flex min-w-5 items-center justify-center border-2 border-foreground bg-primary px-1 text-[0.6rem] text-primary-foreground tabular-nums", "peer-data-[size=default]/menu-button:top-1.5 peer-data-[size=lg]/menu-button:top-2", className)} {...props} />);
 PixelSidebarMenuBadge.displayName = "PixelSidebarMenuBadge";
 
 const PixelSidebarMenuSkeleton = React.forwardRef<HTMLDivElement, React.ComponentProps<"div"> & { showIcon?: boolean }>(({ className, showIcon = false, ...props }, ref) => {
@@ -192,7 +205,7 @@ PixelSidebarMenuSubItem.displayName = "PixelSidebarMenuSubItem";
 
 const PixelSidebarMenuSubButton = React.forwardRef<HTMLAnchorElement, React.ComponentProps<"a"> & { asChild?: boolean; size?: "sm" | "md"; isActive?: boolean }>(({ asChild = false, size = "md", isActive, className, ...props }, ref) => {
   const Comp = asChild ? Slot : "a";
-  return <Comp ref={ref} data-sidebar="menu-sub-button" data-size={size} data-active={isActive} className={cn("flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0", size === "sm" && "text-[10px]", size === "md" && "text-xs", "data-[active=true]:text-foreground", className)} {...props} />;
+  return <Comp ref={ref} data-sidebar="menu-sub-button" data-size={size} data-active={isActive} className={cn("flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden text-muted-foreground outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0", size === "sm" && "text-[0.7rem]", size === "md" && "text-xs", "data-[active=true]:text-foreground", className)} {...props} />;
 });
 PixelSidebarMenuSubButton.displayName = "PixelSidebarMenuSubButton";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { componentsMeta, categories } from "@/lib/components";
 import { componentDemos } from "@/components/component-demos";
@@ -8,10 +8,8 @@ import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle, PixelCard
 import { PixelButton } from "@/components/ui/button";
 
 export default function ComponentsPage() {
-  const router = useRouter();
-
   return (
-    <div className="px-6 py-12 pb-24">
+    <div className="px-4 py-12 pb-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <h1 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-2">Components</h1>
         <p className="text-sm text-muted-foreground mb-8">
@@ -33,13 +31,13 @@ export default function ComponentsPage() {
                     <PixelCard key={comp.name} className="h-full flex flex-col hover:border-primary transition-colors">
                       <PixelCardHeader className="pb-2">
                         <PixelCardTitle className="text-xs">{comp.title}</PixelCardTitle>
-                        <PixelCardDescription className="text-[10px] leading-relaxed">{comp.description}</PixelCardDescription>
+                        <PixelCardDescription className="text-[0.7rem] leading-relaxed">{comp.description}</PixelCardDescription>
                       </PixelCardHeader>
 
                       {/* Interactive preview — NOT wrapped in a nav handler so users can test it */}
                       <PixelCardContent className="flex-1">
-                        <div className="flex min-h-[110px] items-center justify-center border-2 border-dashed border-border p-4 overflow-hidden">
-                          {Demo ? <Demo /> : <span className="text-[10px] text-muted-foreground">No preview</span>}
+                        <div className="pixel-demo flex min-h-[110px] min-w-0 items-center justify-center-safe border-2 border-dashed border-border p-4 overflow-x-auto">
+                          {Demo ? <Demo /> : <span className="text-[0.7rem] text-muted-foreground">No preview</span>}
                         </div>
                       </PixelCardContent>
 
@@ -48,11 +46,13 @@ export default function ComponentsPage() {
                         <PixelButton
                           variant="ghost"
                           size="sm"
-                          className="w-full justify-between text-[10px]"
-                          onClick={() => router.push(`/docs/components/${comp.name}`)}
+                          className="w-full justify-between text-left text-[0.7rem]"
+                          asChild
                         >
-                          View {comp.title}
-                          <ChevronRight className="h-3.5 w-3.5" />
+                          <Link href={`/docs/components/${comp.name}`}>
+                            <span className="min-w-0 break-words">View {comp.title}</span>
+                            <ChevronRight className="h-3.5 w-3.5" />
+                          </Link>
                         </PixelButton>
                       </div>
                     </PixelCard>

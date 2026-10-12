@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Press_Start_2P, VT323, Silkscreen, Pixelify_Sans, DotGothic16 } from "next/font/google";
 import "./globals.css";
 import { PixelProvider } from "@/components/pixel-provider";
+import { PIXEL_SETTINGS_SCRIPT } from "@/lib/pixel-settings";
+import { InlineScript } from "@/components/inline-script";
 
 const pressStart = Press_Start_2P({ weight: "400", subsets: ["latin"], variable: "--font-press-start" });
 const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323" });
@@ -17,6 +19,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${pressStart.variable} ${vt323.variable} ${silkscreen.variable} ${pixelify.variable} ${dotgothic.variable}`}>
+      <head>
+        {/* Applies saved preset/font/size before first paint (no theme flash). */}
+        <InlineScript html={PIXEL_SETTINGS_SCRIPT} />
+      </head>
       <body>
         <PixelProvider>{children}</PixelProvider>
       </body>

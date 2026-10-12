@@ -140,7 +140,7 @@ const PixelDropdownMenuLabel = React.forwardRef<
   <DropdownMenuPrimitive.Label
     ref={ref}
     data-slot="dropdown-menu-label"
-    className={cn("px-2 py-1.5 text-[10px] uppercase tracking-widest text-muted-foreground", inset && "pl-8", className)}
+    className={cn("px-2 py-1.5 text-[0.7rem] uppercase tracking-widest text-muted-foreground", inset && "pl-8", className)}
     {...props}
   />
 ));
@@ -155,7 +155,7 @@ const PixelDropdownMenuSeparator = React.forwardRef<
 PixelDropdownMenuSeparator.displayName = "PixelDropdownMenuSeparator";
 
 const PixelDropdownMenuShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span data-slot="dropdown-menu-shortcut" className={cn("ml-auto text-[10px] tracking-widest text-muted-foreground", className)} {...props} />
+  <span data-slot="dropdown-menu-shortcut" className={cn("ml-auto text-[0.7rem] tracking-widest text-muted-foreground", className)} {...props} />
 );
 PixelDropdownMenuShortcut.displayName = "PixelDropdownMenuShortcut";
 

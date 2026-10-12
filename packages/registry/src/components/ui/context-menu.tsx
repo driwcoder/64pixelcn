@@ -136,7 +136,7 @@ const PixelContextMenuLabel = React.forwardRef<
   <ContextMenuPrimitive.Label
     ref={ref}
     data-slot="context-menu-label"
-    className={cn("px-2 py-1.5 text-[10px] uppercase tracking-widest text-muted-foreground", inset && "pl-8", className)}
+    className={cn("px-2 py-1.5 text-[0.7rem] uppercase tracking-widest text-muted-foreground", inset && "pl-8", className)}
     {...props}
   />
 ));
@@ -151,7 +151,7 @@ const PixelContextMenuSeparator = React.forwardRef<
 PixelContextMenuSeparator.displayName = "PixelContextMenuSeparator";
 
 const PixelContextMenuShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => (
-  <span data-slot="context-menu-shortcut" className={cn("ml-auto text-[10px] tracking-widest text-muted-foreground", className)} {...props} />
+  <span data-slot="context-menu-shortcut" className={cn("ml-auto text-[0.7rem] tracking-widest text-muted-foreground", className)} {...props} />
 );
 PixelContextMenuShortcut.displayName = "PixelContextMenuShortcut";
 

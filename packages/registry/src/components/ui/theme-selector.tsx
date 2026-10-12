@@ -31,7 +31,7 @@ const PixelThemeSelector = React.forwardRef<HTMLDivElement, PixelThemeSelectorPr
         className={cn("w-full font-[family-name:var(--pixel-font)]", className)}
         {...props}
       >
-        <div className="mb-2 flex items-center gap-2 text-[10px] uppercase tracking-widest text-muted-foreground">
+        <div className="mb-2 flex items-center gap-2 text-[0.7rem] uppercase tracking-widest text-muted-foreground">
           <Palette className="h-3 w-3" strokeWidth={3} /> Theme
         </div>
         <div className="flex flex-wrap gap-2">
@@ -44,7 +44,7 @@ const PixelThemeSelector = React.forwardRef<HTMLDivElement, PixelThemeSelectorPr
                 onClick={() => onValueChange?.(theme.id)}
                 data-active={active}
                 className={cn(
-                  "flex items-center gap-2 border-2 border-foreground px-3 py-2 text-[10px] uppercase tracking-widest transition-all",
+                  "flex items-center gap-2 border-2 border-foreground px-3 py-2 text-[0.7rem] uppercase tracking-widest transition-all",
                   "hover:-translate-y-0.5",
                   active
                     ? "bg-primary text-primary-foreground shadow-[var(--pixel-shadow)]"

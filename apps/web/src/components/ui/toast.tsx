@@ -52,7 +52,7 @@ const PixelToastAction = React.forwardRef<
     ref={ref}
     data-slot="toast-action"
     className={cn(
-      "inline-flex h-8 shrink-0 items-center border-2 border-current bg-transparent px-3 text-[10px] uppercase tracking-widest",
+      "inline-flex h-8 shrink-0 items-center border-2 border-current bg-transparent px-3 text-[0.7rem] uppercase tracking-widest",
       "transition-colors hover:bg-current/10 focus:outline-none focus:ring-2 focus:ring-ring",
       className
     )}

@@ -32,7 +32,7 @@ function PixelCalendar({
         month_grid: "w-full border-collapse",
         weekdays: "flex",
         weekday:
-          "w-8 font-normal text-[10px] uppercase text-muted-foreground text-center",
+          "w-8 font-normal text-[0.7rem] uppercase text-muted-foreground text-center",
         week: "flex w-full mt-1",
         day: "h-8 w-8 p-0 font-normal text-xs text-center border-2 border-transparent hover:border-foreground relative",
         day_button:

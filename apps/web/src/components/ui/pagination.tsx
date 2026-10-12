@@ -10,7 +10,7 @@ PixelPagination.displayName = "PixelPagination";
 
 const PixelPaginationContent = React.forwardRef<HTMLUListElement, React.ComponentProps<"ul">>(
   ({ className, ...props }, ref) => (
-    <ul ref={ref} data-slot="pagination-content" className={cn("flex flex-row items-center gap-1", className)} {...props} />
+    <ul ref={ref} data-slot="pagination-content" className={cn("flex flex-row flex-wrap items-center justify-center gap-1", className)} {...props} />
   )
 );
 PixelPaginationContent.displayName = "PixelPaginationContent";
@@ -24,14 +24,11 @@ type PixelPaginationLinkProps = {
   isActive?: boolean;
 } & Pick<React.ComponentProps<typeof PixelButton>, "size"> & React.ComponentProps<"a">;
 
+// Renders a real <a> (via asChild) so pages are links, not buttons with href.
 const PixelPaginationLink = ({ className, isActive, size = "icon", ...props }: PixelPaginationLinkProps) => (
-  <PixelButton
-    aria-current={isActive ? "page" : undefined}
-    variant={isActive ? "default" : "ghost"}
-    size={size}
-    className={cn("min-w-9", className)}
-    {...(props as React.ComponentProps<typeof PixelButton>)}
-  />
+  <PixelButton asChild variant={isActive ? "default" : "ghost"} size={size} className={cn("min-w-9", className)}>
+    <a aria-current={isActive ? "page" : undefined} {...props} />
+  </PixelButton>
 );
 PixelPaginationLink.displayName = "PixelPaginationLink";
 

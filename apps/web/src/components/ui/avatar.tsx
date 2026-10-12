@@ -9,7 +9,7 @@ const PixelAvatar = React.forwardRef<
   <AvatarPrimitive.Root
     ref={ref}
     data-slot="avatar"
-    className={cn("relative flex h-10 w-10 shrink-0 overflow-hidden border-2 border-foreground", className)}
+    className={cn("@container relative flex h-10 w-10 shrink-0 overflow-hidden border-2 border-foreground", className)}
     {...props}
   />
 ));
@@ -35,7 +35,7 @@ const PixelAvatarFallback = React.forwardRef<
   <AvatarPrimitive.Fallback
     ref={ref}
     data-slot="avatar-fallback"
-    className={cn("flex h-full w-full items-center justify-center bg-muted font-[family-name:var(--pixel-font)] text-xs uppercase", className)}
+    className={cn("flex h-full w-full items-center justify-center bg-muted font-[family-name:var(--pixel-font)] text-[clamp(0.5rem,32cqw,1rem)] leading-none uppercase", className)}
     {...props}
   />
 ));

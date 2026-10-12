@@ -57,7 +57,7 @@ PixelCardContent.displayName = "PixelCardContent";
 
 const PixelCardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} data-slot="card-footer" className={cn("flex items-center px-[1.5em] pb-[1.5em]", className)} {...props} />
+    <div ref={ref} data-slot="card-footer" className={cn("flex flex-wrap items-center gap-[0.5em] px-[1.5em] pb-[1.5em]", className)} {...props} />
   )
 );
 PixelCardFooter.displayName = "PixelCardFooter";

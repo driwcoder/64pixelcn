@@ -34,7 +34,7 @@ const PixelXpBar = React.forwardRef<HTMLDivElement, PixelXpBarProps>(
     return (
       <div ref={ref} data-slot="xp-bar" className={cn("w-full", className)} {...props}>
         {showLabel && (
-          <div className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-widest">
+          <div className="mb-1 flex items-center justify-between text-[0.7rem] uppercase tracking-widest">
             <span className="flex items-center gap-1">
               {showIcon && <Star className="h-3 w-3" strokeWidth={3} />}
               {level !== undefined ? `Lv ${level}` : "XP"}
