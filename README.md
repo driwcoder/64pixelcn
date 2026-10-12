@@ -23,7 +23,7 @@ Prefer another look? Build it at [/create](https://pixelcn.vercel.app/create) an
 | Components | `/docs/components` | Every component, including game UI (bars, inventory, dialogue, scoreboard...) |
 | Blocks | `/docs/blocks` | Ready-made screens: game screens first (title, pause, story log, shop, battle...), then website sections |
 | Engine kits | `/kits` | pixelcn outside React: HTML & JS kit, a text RPG and a Phaser game, grouped by platform |
-| Assets | `/assets` | Pixel art in your palette: icon sets and the item icon generator (characters and enemies next) |
+| Assets | `/assets` | Pixel art in your palette: icon sets and generators for items, characters and enemies (PNG/SVG) |
 
 ## Project Structure
 

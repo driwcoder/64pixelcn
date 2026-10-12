@@ -4,6 +4,18 @@ All notable changes to pixelcn. The version is in `apps/web/package.json` and
 follows [Semantic Versioning](https://semver.org): while it is 0.x, a minor
 bump may change component markup or tokens.
 
+## 0.6.0 - 2026-10-12
+
+### Added
+
+- **Character generator** in Assets: knights, mages, rogues, archers and villagers on a 24x24 grid. The seed varies hair style, beard, cape, shield and the secondary colors; pick the outfit tone and one of four skin tones.
+- **Enemy generator** in Assets: slimes, goblins, skeletons, bats, ghosts, floating eyes and mushrooms, each with its own variations (size, horns and ears, teeth, wings, eyestalks, spots...).
+- Both share the item generator's look: theme tone ramps, top-left shading, selective outline, 8 variations per seed, PNG (1x to 16x) and SVG export.
+
+### Changed
+
+- Items, characters and enemies run on one engine, `lib/sprite-core.ts` (seeded random, painting helpers, shading, outline, colors, SVG), and one UI, `components/sprite-studio.tsx`. Item seeds produce the same icons as before.
+
 ## 0.5.0 - 2026-10-12
 
 ### Added

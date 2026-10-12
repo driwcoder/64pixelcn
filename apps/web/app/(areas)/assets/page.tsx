@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { PixelBadge } from "@/components/ui/badge";
 import { PixelCard, PixelCardContent, PixelCardDescription, PixelCardHeader, PixelCardTitle } from "@/components/ui/card";
 import { IconGallery } from "@/components/icon-gallery";
-import { ItemGenerator } from "@/components/item-generator";
+import { CharacterGenerator, EnemyGenerator, ItemGenerator } from "@/components/sprite-studio";
 import { ASSET_SECTIONS } from "@/lib/assets";
 
 export const metadata: Metadata = {
   title: "Assets — 64pixelcn",
-  description: "Pixel art for your game: icon sets now, item, character and enemy generators next.",
+  description: "Pixel art for your game in your theme's palette: icon sets and item, character and enemy generators.",
 };
 
 export default function AssetsPage() {
@@ -42,6 +42,24 @@ export default function AssetsPage() {
           </PixelCardHeader>
           <PixelCardContent>
             <ItemGenerator />
+          </PixelCardContent>
+        </PixelCard>
+
+        <PixelCard id="characters">
+          <PixelCardHeader>
+            <PixelCardTitle className="text-xs">Characters</PixelCardTitle>
+          </PixelCardHeader>
+          <PixelCardContent>
+            <CharacterGenerator />
+          </PixelCardContent>
+        </PixelCard>
+
+        <PixelCard id="enemies">
+          <PixelCardHeader>
+            <PixelCardTitle className="text-xs">Enemies</PixelCardTitle>
+          </PixelCardHeader>
+          <PixelCardContent>
+            <EnemyGenerator />
           </PixelCardContent>
         </PixelCard>
 
