@@ -424,6 +424,12 @@ export interface FontSpec {
    * 0.65/0.40, system mono 0.70/0.59.
    */
   adjust: string;
+  /**
+   * false for scripts that can't be read in all caps (blackletter): text the
+   * components set `uppercase` keeps its written case instead, and the wide
+   * letter-spacing of uppercase labels is tightened. See NO_CAPS_DECLS.
+   */
+  caps?: boolean;
 }
 
 export const FONTS = {
@@ -432,8 +438,8 @@ export const FONTS = {
   silkscreen: { label: "Silkscreen", cssVar: "--font-silkscreen", google: { family: "Silkscreen", import: "Silkscreen", subsets: ["latin"] }, fallback: "monospace", adjust: "none" },
   pixelify: { label: "Pixelify Sans", cssVar: "--font-pixelify", google: { family: "Pixelify Sans", import: "Pixelify_Sans", subsets: ["latin"] }, fallback: "monospace", adjust: "cap-height 0.68" },
   dotgothic: { label: "DotGothic16", cssVar: "--font-dotgothic", google: { family: "DotGothic16", import: "DotGothic16", subsets: ["latin", "latin-ext"] }, fallback: "monospace", adjust: "cap-height 0.7" },
-  jacquard: { label: "Jacquard 12", cssVar: "--font-jacquard", google: { family: "Jacquard 12", import: "Jacquard_12", subsets: ["latin", "latin-ext"] }, fallback: "serif", adjust: "cap-height 0.72" },
-  jacquard24: { label: "Jacquard 24", cssVar: "--font-jacquard24", google: { family: "Jacquard 24", import: "Jacquard_24", subsets: ["latin", "latin-ext"] }, fallback: "serif", adjust: "cap-height 0.72" },
+  jacquard: { label: "Jacquard 12", cssVar: "--font-jacquard", google: { family: "Jacquard 12", import: "Jacquard_12", subsets: ["latin", "latin-ext"] }, fallback: "serif", adjust: "cap-height 0.72", caps: false },
+  jacquard24: { label: "Jacquard 24", cssVar: "--font-jacquard24", google: { family: "Jacquard 24", import: "Jacquard_24", subsets: ["latin", "latin-ext"] }, fallback: "serif", adjust: "cap-height 0.72", caps: false },
   handjet: { label: "Handjet", cssVar: "--font-handjet", google: { family: "Handjet", import: "Handjet", subsets: ["latin", "latin-ext"] }, fallback: "monospace", adjust: "cap-height 0.7" },
   system: { label: "System Mono", fallback: 'ui-monospace, "Cascadia Code", "Courier New", monospace', adjust: "none" },
 } satisfies Record<string, FontSpec>;
@@ -503,6 +509,19 @@ export const APPEARANCE_ATTRS: { [K in keyof Appearance]: string } = {
   radius: "data-radius",
   shading: "data-shading",
 };
+
+/**
+ * For fonts with `caps: false`. Blackletter capitals are ornate and were
+ * never set in runs, so all-caps text is unreadable: `uppercase` text keeps
+ * the case it was written in, and Tailwind's tracking scale (letter-spacing,
+ * used on uppercase labels) is brought close to normal, since spaced-out
+ * blackletter falls apart too.
+ */
+export const NO_CAPS_TRACKING: Tokens = { "tracking-wide": "0.01em", "tracking-wider": "0.015em", "tracking-widest": "0.02em" };
+export const NO_CAPS_DECLS: CssDecls = { "text-transform": "none" };
+export function fontHasCaps(font: PixelFont) {
+  return (FONTS[font] as FontSpec).caps !== false;
+}
 
 /** CSS value of --pixel-font for a font, given the variable holding the family. */
 export function fontFamily(font: PixelFont, familyVar?: string) {
@@ -686,6 +705,10 @@ export function buildThemeCss() {
     ...PIXEL_SIZES.map((s) => rule(`[data-size="${s}"]`, SIZE_TOKENS[s])),
     ...TEXT_SCALE_IDS.map((t) => rule(`[data-text-scale="${t}"]`, { "pixel-text-scale": TEXT_SCALES[t].value })),
     ...FONT_IDS.map((f) => rule(`[data-font="${f}"]`, fontVars(f))),
+    ...FONT_IDS.filter((f) => !fontHasCaps(f)).flatMap((f) => [
+      rule(`[data-font="${f}"]`, NO_CAPS_TRACKING),
+      declRule(`[data-font="${f}"] .uppercase`, NO_CAPS_DECLS),
+    ]),
     ...SHADING_IDS.map((s) => rule(`[data-shading="${s}"]`, shadingTokens(s))),
     ...RADIUS_IDS.flatMap((id) => roundedRules(id).map(([sel, decls]) => declRule(`[data-radius="${id}"] ${sel}`, decls))),
     ...RADIUS_IDS.flatMap((id) => {

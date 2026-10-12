@@ -10,6 +10,7 @@ bump may change component markup or tokens.
 
 - Color presets are now called **themes**: the "Theme" select in Display and /create, `data-theme` on `<html>` (was `data-preset`) and the `theme` field in code. "Preset" now only means the whole /create configuration that `shadcn init --preset` installs.
 - Old `?c=` preset links are no longer accepted; use `?preset=` codes.
+- Jacquard 12 and Jacquard 24 (blackletter) are no longer set in all caps: with them, text the components make `uppercase` keeps the case it was written in, and the wide letter-spacing of labels is tightened, since blackletter capitals can't be read in runs. Presets with these fonts install the same rules.
 
 ## 0.2.1 - 2026-10-12
 

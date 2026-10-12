@@ -11,6 +11,9 @@ import {
   roundedRules,
   extrudedRoundedDecls,
   shadingTokens,
+  fontHasCaps,
+  NO_CAPS_DECLS,
+  NO_CAPS_TRACKING,
   NON_INHERITED_VARS,
   type FontSpec,
   type PixelFont,
@@ -87,12 +90,15 @@ export function buildPresetItem(choice: PresetChoice, origin: string) {
       theme: {
         "font-sans": "var(--pixel-font)",
         "font-pixel": "var(--pixel-font)",
+        ...(fontHasCaps(choice.font) ? {} : NO_CAPS_TRACKING),
       },
       light,
       dark,
     },
     css: {
       "@utility pixel-shadow": { "box-shadow": "var(--pixel-shadow)" },
+      // Blackletter can't be read in all caps (see NO_CAPS_DECLS).
+      ...(fontHasCaps(choice.font) ? {} : { ".uppercase": NO_CAPS_DECLS }),
       ...Object.fromEntries(NON_INHERITED_VARS.map((name) => [`@property ${name}`, { syntax: '"*"', inherits: "false" }])),
       ...(Object.keys(rounded).length ? { "@layer components": rounded } : {}),
       "@layer base": {
