@@ -8,8 +8,7 @@
     "class-variance-authority"
   ],
   "registryDependencies": [
-    "utils",
-    "input"
+    "utils"
   ],
   "files": [
     {

@@ -9,7 +9,7 @@
   ],
   "registryDependencies": [
     "utils",
-    "button"
+    "https://pixelcn.vercel.app/r/button.json"
   ],
   "files": [
     {

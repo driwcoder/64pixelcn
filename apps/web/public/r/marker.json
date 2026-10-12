@@ -3,8 +3,10 @@
   "name": "marker",
   "type": "registry:ui",
   "title": "Marker",
-  "description": "Pixel art marker",
-  "dependencies": [],
+  "description": "Pixel art text marker",
+  "dependencies": [
+    "class-variance-authority"
+  ],
   "registryDependencies": [
     "utils"
   ],

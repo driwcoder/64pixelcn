@@ -4,4 +4,5 @@ export const SECTIONS = [
   { href: "/docs", label: "Get Started" },
   { href: "/docs/components", label: "Components" },
   { href: "/docs/blocks", label: "Blocks" },
+  { href: "/create", label: "Create" },
 ];

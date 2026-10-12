@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Item",
   "description": "Pixel art item",
-  "dependencies": [],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
   "registryDependencies": [
     "utils"
   ],

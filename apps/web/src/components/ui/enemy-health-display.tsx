@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Skull } from "lucide-react";
+import { Skull } from "./icons";
 
 export interface PixelEnemyHealthDisplayProps
   extends React.HTMLAttributes<HTMLDivElement> {

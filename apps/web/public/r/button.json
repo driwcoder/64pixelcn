@@ -6,9 +6,7 @@
   "description": "Pixel art button with retro gaming aesthetics",
   "dependencies": [
     "@radix-ui/react-slot",
-    "class-variance-authority",
-    "clsx",
-    "tailwind-merge"
+    "class-variance-authority"
   ],
   "registryDependencies": [
     "utils"

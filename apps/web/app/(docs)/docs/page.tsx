@@ -1,7 +1,7 @@
 "use client";
 
 import { PixelButton } from "@/components/ui/button";
-import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle, PixelCardDescription, PixelCardFooter } from "@/components/ui/card";
+import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle } from "@/components/ui/card";
 import { PixelInput } from "@/components/ui/input";
 import { PixelBadge } from "@/components/ui/badge";
 import { PixelCheckbox } from "@/components/ui/checkbox";

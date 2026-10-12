@@ -1,13 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { Sword, Shield, Zap, Star, Trophy, Users, Rocket, Heart, Flame, Target } from "lucide-react";
+import { Sword, Shield, Zap, Trophy, Users, Sparkles, Flame } from "@/components/ui/icons";
 import {
-  PixelButton, PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle, PixelCardDescription,
-  PixelBadge, PixelInput, PixelSeparator, PixelAvatar, PixelAvatarFallback, PixelTabs, PixelTabsList,
-  PixelTabsTrigger, PixelTabsContent, PixelProgress, PixelHealthBar, PixelManaBar, PixelXpBar,
+  PixelButton, PixelCard, PixelCardContent, PixelCardTitle, PixelCardDescription,
+  PixelBadge, PixelInput, PixelAvatar, PixelAvatarFallback, 
+  PixelProgress, PixelHealthBar, PixelManaBar, PixelXpBar,
   PixelAccordion, PixelAccordionItem, PixelAccordionTrigger, PixelAccordionContent,
-  PixelSlider, PixelSwitch, PixelSelect, PixelSelectContent, PixelSelectItem, PixelSelectTrigger, PixelSelectValue,
+  
   PixelCalendar,
 } from "@/components/ui/index";
 
@@ -36,7 +36,7 @@ export function HeroSplit() {
         <PixelButton className="w-fit">Explore</PixelButton>
       </div>
       <div className="bg-muted border-t-2 md:border-t-0 md:border-l-2 border-foreground flex items-center justify-center p-8 min-h-[160px]">
-        <Rocket className="h-16 w-16 text-primary" strokeWidth={2} />
+        <Sparkles className="h-16 w-16 text-primary" strokeWidth={2} />
       </div>
     </div>
   );

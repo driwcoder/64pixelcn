@@ -3,8 +3,10 @@
   "name": "bubble",
   "type": "registry:ui",
   "title": "Bubble",
-  "description": "Pixel art bubble",
-  "dependencies": [],
+  "description": "Pixel art chat bubble",
+  "dependencies": [
+    "class-variance-authority"
+  ],
   "registryDependencies": [
     "utils"
   ],

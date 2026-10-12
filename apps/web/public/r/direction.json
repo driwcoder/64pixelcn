@@ -3,7 +3,7 @@
   "name": "direction",
   "type": "registry:ui",
   "title": "Direction",
-  "description": "Pixel art direction provider",
+  "description": "Pixel art RTL/LTR direction provider",
   "dependencies": [
     "@radix-ui/react-direction"
   ],

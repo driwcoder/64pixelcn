@@ -6,7 +6,9 @@
     "dev": "pnpm --filter web dev",
     "build": "pnpm --filter web build",
     "start": "pnpm --filter web start",
-    "registry:build": "cd packages/registry && node scripts/build-registry.mjs"
+    "test:layout": "pnpm --filter web test:layout",
+    "lint": "pnpm --filter web lint",
+    "registry:build": "pnpm --filter web registry:build"
   },
   "devDependencies": {
     "typescript": "^5.9.3"

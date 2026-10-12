@@ -76,7 +76,7 @@ const ChartStyle = ({
   config: ChartConfig;
 }) => {
   const colorConfig = Object.entries(config).filter(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+     
     ([, config]) => config.theme || config.color
   );
 
@@ -119,13 +119,13 @@ function ChartTooltip({
   indicator = "dot",
   hideLabel = false,
   hideIndicator = false,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   formatter,
   color,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   labelFormatter,
 }: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   active?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload?: any[];

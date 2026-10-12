@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Message",
   "description": "Pixel art message",
-  "dependencies": [],
+  "dependencies": [
+    "class-variance-authority"
+  ],
   "registryDependencies": [
     "utils"
   ],

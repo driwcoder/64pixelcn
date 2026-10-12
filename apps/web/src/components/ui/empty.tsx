@@ -6,7 +6,9 @@ function PixelEmpty({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="empty"
       className={cn(
-        "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 border-2 border-foreground p-6 text-center md:p-12",
+        // Padding follows the component width (not the viewport), so it stays
+        // roomy on wide layouts without crushing the text in narrow cards.
+        "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 border-2 border-foreground p-[clamp(1rem,8%,3rem)] text-center",
         "font-[family-name:var(--pixel-font)]",
         className
       )}
@@ -17,7 +19,7 @@ function PixelEmpty({ className, ...props }: React.ComponentProps<"div">) {
 
 function PixelEmptyHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div data-slot="empty-header" className={cn("flex max-w-sm flex-col items-center gap-2 text-center", className)} {...props} />
+    <div data-slot="empty-header" className={cn("flex min-w-0 max-w-sm flex-col items-center gap-2 text-center", className)} {...props} />
   );
 }
 
@@ -43,14 +45,14 @@ function PixelEmptyMedia({
 }
 
 function PixelEmptyTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="empty-title" className={cn("text-sm uppercase tracking-widest", className)} {...props} />;
+  return <div data-slot="empty-title" className={cn("max-w-full text-sm uppercase tracking-widest wrap-anywhere", className)} {...props} />;
 }
 
 function PixelEmptyDescription({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <div
       data-slot="empty-description"
-      className={cn("text-xs text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a]:hover:text-primary", className)}
+      className={cn("max-w-full text-xs text-muted-foreground wrap-anywhere [&>a]:underline [&>a]:underline-offset-4 [&>a]:hover:text-primary", className)}
       {...props}
     />
   );

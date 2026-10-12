@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { Monitor, Tv } from "lucide-react";
+import { Monitor, Tv } from "./icons";
 
 const retroModeSwitcherVariants = cva(
   "inline-flex items-center gap-2 border-2 border-foreground bg-card font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)] transition-all hover:bg-accent",

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
+import { Menu } from "@/components/ui/icons";
 import { componentsMeta } from "@/lib/components";
 import { SECTIONS } from "@/lib/docs-sections";
 import { PixelNavButton } from "@/components/pixel-nav";

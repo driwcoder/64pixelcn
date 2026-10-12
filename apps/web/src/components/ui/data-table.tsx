@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { flexRender, type ColumnDef } from "@tanstack/react-table";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { flexRender, type ColumnDef, type RowData } from "@tanstack/react-table";
+import { ChevronLeft, ChevronRight } from "./icons";
 import { PixelButton } from "./button";
 import {
   PixelSelect,
@@ -20,17 +20,17 @@ import {
   PixelTableRow,
 } from "./table";
 
-interface DataTableProps<TData> {
+interface DataTableProps<TData extends RowData> {
   // TanStack v9 Table type takes two generics and pulls in a large feature
   // union; a structural `any` here keeps the component usable with any
   // feature set the consumer enables (pagination, sorting, etc.).
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   table: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  columns: ColumnDef<any, any>[];
+  columns: ColumnDef<any, TData>[];
 }
 
-export function PixelDataTable<TData>({
+export function PixelDataTable<TData extends RowData>({
   table,
   columns,
 }: DataTableProps<TData>) {

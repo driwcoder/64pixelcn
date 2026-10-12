@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { CalendarIcon } from "lucide-react";
+import { Calendar } from "./icons";
 import { cn } from "@/lib/utils";
 import { PixelButton } from "./button";
 import { PixelCalendar } from "./calendar";
@@ -29,7 +29,7 @@ export function PixelDatePicker({ date, onDateChange, placeholder = "Pick a date
             className
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4" strokeWidth={3} />
+          <Calendar className="mr-2 h-4 w-4" strokeWidth={3} />
           <span className="truncate">{date ? date.toLocaleDateString() : placeholder}</span>
         </PixelButton>
       </PixelPopoverTrigger>

@@ -79,11 +79,11 @@ const PixelSidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div"
   ({ side = "left", variant = "sidebar", collapsible = "offcanvas", className, children, ...props }, ref) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
     if (collapsible === "none") {
-      return <div className={cn("flex h-full w-[--sidebar-width] flex-col bg-card border-r-2 border-foreground", className)} ref={ref} {...props}>{children}</div>;
+      return <div className={cn("flex h-full w-(--sidebar-width) flex-col bg-card border-r-2 border-foreground", className)} ref={ref} {...props}>{children}</div>;
     }
     if (isMobile) {
       return <PixelSheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
-        <PixelSheetContent data-sidebar="sidebar" data-mobile="true" className="w-[--sidebar-width] bg-card p-0 [&>button]:hidden" style={{ "--sidebar-width": SIDEBAR_WIDTH_MOBILE } as React.CSSProperties} side={side}>
+        <PixelSheetContent data-sidebar="sidebar" data-mobile="true" className="w-(--sidebar-width) bg-card p-0 [&>button]:hidden" style={{ "--sidebar-width": SIDEBAR_WIDTH_MOBILE } as React.CSSProperties} side={side}>
           <PixelSheetHeader className="sr-only"><PixelSheetTitle>Sidebar</PixelSheetTitle><PixelSheetDescription>Displays the mobile sidebar.</PixelSheetDescription></PixelSheetHeader>
           <div className="flex h-full w-full flex-col">{children}</div>
         </PixelSheetContent>
@@ -91,8 +91,8 @@ const PixelSidebar = React.forwardRef<HTMLDivElement, React.ComponentProps<"div"
     }
     return (
       <div ref={ref} className="group peer hidden text-card-foreground md:block" data-state={state} data-collapsible={state === "collapsed" ? collapsible : ""} data-variant={variant} data-side={side}>
-        <div className={cn("relative h-svh w-[--sidebar-width] bg-transparent transition-[width] duration-200 ease-linear", "group-data-[collapsible=offcanvas]:w-0", "group-data-[side=right]:rotate-180", variant === "floating" || variant === "inset" ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]" : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]")} />
-        <div className={cn("fixed inset-y-0 z-10 hidden h-svh w-[--sidebar-width] transition-[left,right,width] duration-200 ease-linear md:flex", side === "left" ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]" : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]", variant === "floating" ? "p-2" : variant === "inset" ? "p-2 md:p-2" : "group-data-[side=left]:border-r-2 group-data-[side=left]:border-foreground group-data-[side=right]:border-l-2 group-data-[side=right]:border-foreground", className)} {...props}>
+        <div className={cn("relative h-svh w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear", "group-data-[collapsible=offcanvas]:w-0", "group-data-[side=right]:rotate-180", variant === "floating" || variant === "inset" ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]" : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)")} />
+        <div className={cn("fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex", side === "left" ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]" : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]", variant === "floating" ? "p-2" : variant === "inset" ? "p-2 md:p-2" : "group-data-[side=left]:border-r-2 group-data-[side=left]:border-foreground group-data-[side=right]:border-l-2 group-data-[side=right]:border-foreground", className)} {...props}>
           <div data-sidebar="sidebar" className="flex h-full w-full flex-col bg-card group-data-[variant=floating]:border-2 group-data-[variant=floating]:border-foreground group-data-[variant=floating]:shadow-[var(--pixel-shadow)]">{children}</div>
         </div>
       </div>
@@ -192,8 +192,10 @@ const PixelSidebarMenuBadge = React.forwardRef<HTMLDivElement, React.ComponentPr
 PixelSidebarMenuBadge.displayName = "PixelSidebarMenuBadge";
 
 const PixelSidebarMenuSkeleton = React.forwardRef<HTMLDivElement, React.ComponentProps<"div"> & { showIcon?: boolean }>(({ className, showIcon = false, ...props }, ref) => {
-  const width = React.useMemo(() => `${Math.floor(Math.random() * 40) + 50}%`, []);
-  return <div ref={ref} data-sidebar="menu-skeleton" className={cn("flex h-8 items-center gap-2 px-2", className)} {...props}>{showIcon && <PixelSkeleton className="size-4" data-sidebar="menu-skeleton-icon" />}<PixelSkeleton className="h-4 max-w-[--skeleton-width] flex-1" data-sidebar="menu-skeleton-text" style={{ "--skeleton-width": width } as React.CSSProperties} /></div>;
+  // Deterministic "random" width (50-89%) so server and client render the same.
+  const id = React.useId();
+  const width = `${50 + ([...id].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 0) >>> 0) % 40}%`;
+  return <div ref={ref} data-sidebar="menu-skeleton" className={cn("flex h-8 items-center gap-2 px-2", className)} {...props}>{showIcon && <PixelSkeleton className="size-4" data-sidebar="menu-skeleton-icon" />}<PixelSkeleton className="h-4 max-w-(--skeleton-width) flex-1" data-sidebar="menu-skeleton-text" style={{ "--skeleton-width": width } as React.CSSProperties} /></div>;
 });
 PixelSidebarMenuSkeleton.displayName = "PixelSidebarMenuSkeleton";
 

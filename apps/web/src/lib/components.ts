@@ -35,6 +35,7 @@ export const componentsMeta: ComponentMeta[] = [
   { name: "scroll-area", title: "Scroll Area", description: "Pixel art scroll area", category: "Layout" },
   { name: "aspect-ratio", title: "Aspect Ratio", description: "Pixel art aspect ratio", category: "Layout" },
   { name: "sidebar", title: "Sidebar", description: "Pixel art sidebar", category: "Layout" },
+  { name: "direction", title: "Direction", description: "Pixel art RTL/LTR direction provider", category: "Layout" },
 
   // Navigation
   { name: "breadcrumb", title: "Breadcrumb", description: "Pixel art breadcrumb", category: "Navigation" },
@@ -66,6 +67,7 @@ export const componentsMeta: ComponentMeta[] = [
   { name: "message", title: "Message", description: "Pixel art message", category: "Data Display" },
   { name: "message-scroller", title: "Message Scroller", description: "Pixel art message scroller", category: "Data Display" },
   { name: "attachment", title: "Attachment", description: "Pixel art attachment", category: "Data Display" },
+  { name: "carousel", title: "Carousel", description: "Pixel art carousel", category: "Data Display" },
 
   // Overlays
   { name: "dialog", title: "Dialog", description: "Pixel art modal dialog", category: "Overlays" },

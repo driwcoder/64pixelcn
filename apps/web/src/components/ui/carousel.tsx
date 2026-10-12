@@ -1,6 +1,6 @@
 import * as React from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "./icons";
 import { cn } from "@/lib/utils";
 import { PixelButton } from "./button";
 
@@ -24,16 +24,22 @@ function useCarousel() {
 const PixelCarousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & CarouselProps>(
   ({ orientation = "horizontal", opts, setApi, plugins, className, children, ...props }, ref) => {
     const [carouselRef, api] = useEmblaCarousel({ ...opts, axis: orientation === "horizontal" ? "x" : "y" }, plugins);
-    const [canScrollPrev, setCanScrollPrev] = React.useState(false);
-    const [canScrollNext, setCanScrollNext] = React.useState(false);
-    const onSelect = React.useCallback((api: CarouselApi) => {
-      if (!api) return;
-      setCanScrollPrev(api.canScrollPrev());
-      setCanScrollNext(api.canScrollNext());
-    }, []);
+    // Read scroll state straight from Embla; subscribe/unsubscribe with the api
+    // (the previous effect never removed its listeners).
+    const subscribe = React.useCallback(
+      (onChange: () => void) => {
+        if (!api) return () => {};
+        api.on("reInit", onChange).on("select", onChange);
+        return () => {
+          api.off("reInit", onChange).off("select", onChange);
+        };
+      },
+      [api]
+    );
+    const canScrollPrev = React.useSyncExternalStore(subscribe, () => api?.canScrollPrev() ?? false, () => false);
+    const canScrollNext = React.useSyncExternalStore(subscribe, () => api?.canScrollNext() ?? false, () => false);
     const scrollPrev = React.useCallback(() => api?.scrollPrev(), [api]);
     const scrollNext = React.useCallback(() => api?.scrollNext(), [api]);
-    React.useEffect(() => { if (!api) return; onSelect(api); api.on("reInit", onSelect); api.on("select", onSelect); }, [api, onSelect]);
     React.useEffect(() => { if (api && setApi) setApi(api); }, [api, setApi]);
     return (
       <CarouselContext.Provider value={{ carouselRef, api, opts, orientation, scrollPrev, scrollNext, canScrollPrev, canScrollNext }}>

@@ -162,7 +162,7 @@ export function FieldDemo() {
   )
 }`,
 
-  "input-group": `import { Search } from "lucide-react"
+  "input-group": `import { Search } from "@/components/ui/icons"
 import {
   PixelInputGroup,
   PixelInputGroupAddon,
@@ -209,7 +209,7 @@ export function SliderDemo() {
   return <PixelSlider defaultValue={[50]} max={100} step={1} />
 }`,
 
-  "toggle": `import { Bold } from "lucide-react"
+  "toggle": `import { Bold } from "@/components/ui/icons"
 import { PixelToggle } from "@/components/ui/toggle"
 
 export function ToggleDemo() {
@@ -301,7 +301,7 @@ export function AccordionDemo() {
   PixelCollapsibleContent,
   PixelCollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import { ChevronsUpDown } from "lucide-react"
+import { ChevronsUpDown } from "@/components/ui/icons"
 
 export function CollapsibleDemo() {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -600,7 +600,7 @@ export function SpinnerDemo() {
   return <PixelSpinner className="h-8 w-8" />
 }`,
 
-  "empty": `import { Bell } from "lucide-react"
+  "empty": `import { Bell } from "@/components/ui/icons"
 import { PixelButton } from "@/components/ui/button"
 import {
   PixelEmpty,
@@ -734,7 +734,7 @@ export function ChartDemo() {
   )
 }`,
 
-  "item": `import { Bell } from "lucide-react"
+  "item": `import { Bell } from "@/components/ui/icons"
 import { PixelButton } from "@/components/ui/button"
 import {
   PixelItem,

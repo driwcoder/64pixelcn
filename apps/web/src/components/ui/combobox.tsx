@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import * as CommandPrimitive from "cmdk";
-import { ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDown } from "./icons";
 import { cn } from "@/lib/utils";
 
 const PixelCombobox = PopoverPrimitive.Root;

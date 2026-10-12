@@ -1,9 +1,9 @@
-import { Loader2Icon } from "lucide-react";
+import { Loader } from "./icons";
 import { cn } from "@/lib/utils";
 
 function PixelSpinner({ className, ...props }: React.ComponentProps<"svg">) {
   return (
-    <Loader2Icon
+    <Loader
       role="status"
       aria-label="Loading"
       data-slot="spinner"

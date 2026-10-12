@@ -5,7 +5,8 @@
   "title": "Toggle",
   "description": "Pixel art toggle",
   "dependencies": [
-    "@radix-ui/react-toggle"
+    "@radix-ui/react-toggle",
+    "class-variance-authority"
   ],
   "registryDependencies": [
     "utils"

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { use } from "react";
 import Link from "next/link";
-import { ArrowLeft, ChevronLeft, ChevronRight, Check, Copy } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, Check, Copy } from "@/components/ui/icons";
 import { getComponentMeta, componentsMeta } from "@/lib/components";
 import { getCodeSnippet } from "@/lib/code-snippets";
 import { componentDemos } from "@/components/component-demos";
@@ -74,7 +74,10 @@ export default function ComponentPage({ params }: { params: Promise<{ slug: stri
   }
 
   const Demo = componentDemos[meta.name];
-  const installCmd = `npx shadcn@latest init https://pixelcn.vercel.app/r/pixelcn.json && npx shadcn@latest add https://pixelcn.vercel.app/r/${meta.name}.json`;
+  const installCmd = `# once per project (or pick your own preset at /create)
+npx shadcn@latest init --force --no-reinstall --preset https://pixelcn.vercel.app/r/pixelcn.json
+
+npx shadcn@latest add https://pixelcn.vercel.app/r/${meta.name}.json`;
   const usageCode = getCodeSnippet(meta.name);
 
   return (

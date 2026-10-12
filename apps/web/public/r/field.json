@@ -3,13 +3,14 @@
   "name": "field",
   "type": "registry:ui",
   "title": "Field",
-  "description": "Pixel art field",
+  "description": "Pixel art field wrapper",
   "dependencies": [
     "class-variance-authority"
   ],
   "registryDependencies": [
     "utils",
-    "label"
+    "https://pixelcn.vercel.app/r/label.json",
+    "https://pixelcn.vercel.app/r/separator.json"
   ],
   "files": [
     {

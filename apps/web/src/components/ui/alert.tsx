@@ -3,7 +3,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const pixelAlertVariants = cva(
-  "relative w-full border-2 border-foreground px-4 py-3 font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)]",
+  [
+    "relative grid w-full grid-cols-[0_1fr] items-start gap-y-[0.35em] border-2 border-foreground px-4 py-3 font-[family-name:var(--pixel-font)] shadow-[var(--pixel-shadow)]",
+    // A direct child icon gets its own column on the left, with a gap that
+    // scales with the font, instead of stacking on top of the title.
+    "has-[>svg]:grid-cols-[1.25em_1fr] has-[>svg]:gap-x-[0.9em] [&>svg]:size-[1.25em] [&>svg]:translate-y-[0.05em] [&>svg]:text-current",
+  ],
   {
     variants: {
       variant: {
@@ -27,14 +32,14 @@ PixelAlert.displayName = "PixelAlert";
 
 const PixelAlertTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h5 ref={ref} data-slot="alert-title" className={cn("mb-1 text-xs uppercase leading-none tracking-widest", className)} {...props} />
+    <h5 ref={ref} data-slot="alert-title" className={cn("col-start-2 text-xs uppercase leading-snug tracking-widest", className)} {...props} />
   )
 );
 PixelAlertTitle.displayName = "PixelAlertTitle";
 
 const PixelAlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} data-slot="alert-description" className={cn("text-xs leading-relaxed [&_p]:leading-relaxed", className)} {...props} />
+    <div ref={ref} data-slot="alert-description" className={cn("col-start-2 text-xs leading-relaxed [&_p]:leading-relaxed", className)} {...props} />
   )
 );
 PixelAlertDescription.displayName = "PixelAlertDescription";

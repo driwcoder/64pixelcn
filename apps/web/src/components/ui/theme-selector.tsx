@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Palette } from "lucide-react";
+import { Palette } from "./icons";
 
 export interface ThemeOption {
   id: string;

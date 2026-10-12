@@ -1,10 +1,9 @@
 import * as React from "react";
-import { GripVertical } from "lucide-react";
+import { GripVertical } from "./icons";
 import { Group, Panel, Separator } from "react-resizable-panels";
 import { cn } from "@/lib/utils";
 
-interface PixelResizablePanelGroupProps
-  extends React.ComponentProps<typeof Group> {}
+type PixelResizablePanelGroupProps = React.ComponentProps<typeof Group>;
 
 function PixelResizablePanelGroup({
   className,

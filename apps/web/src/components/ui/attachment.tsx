@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Paperclip, X } from "lucide-react";
+import { Paperclip, X } from "./icons";
 import { cn } from "@/lib/utils";
 
 const attachmentVariants = cva(

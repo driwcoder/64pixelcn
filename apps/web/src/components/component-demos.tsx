@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import {
-  Check, ChevronDown, Heart, Search, Bell, Mail, Settings, User,
-  Plus, Trash2, Star, Copy, Download, Calendar as CalendarIcon,
-} from "lucide-react";
+  Check, ChevronDown, Heart, Search, Bell, Settings, User,
+  Star,
+} from "@/components/ui/icons";
 import {
   PixelAccordion, PixelAccordionItem, PixelAccordionTrigger, PixelAccordionContent,
   PixelAlert, PixelAlertTitle, PixelAlertDescription,
@@ -15,7 +15,7 @@ import {
   PixelCalendar, PixelCard, PixelCardContent, PixelCardDescription, PixelCardFooter,
   PixelCardHeader, PixelCardTitle, PixelCarousel, PixelCarouselContent, PixelCarouselItem,
   PixelCarouselNext, PixelCarouselPrevious,
-  PixelCheckbox, PixelCollapsible, PixelCollapsibleContent, PixelCollapsibleTrigger,
+  PixelCheckbox, PixelCollapsible, PixelCollapsibleContent, 
   PixelContextMenu, PixelContextMenuContent, PixelContextMenuItem, PixelContextMenuTrigger,
   PixelDataTable, PixelDatePicker, PixelDialog, PixelDialogContent, PixelDialogDescription,
   PixelDialogHeader, PixelDialogTitle, PixelDialogTrigger, PixelDirectionProvider,
@@ -23,7 +23,7 @@ import {
   PixelDrawerTrigger, PixelDropdownMenu, PixelDropdownMenuContent, PixelDropdownMenuItem,
   PixelDropdownMenuLabel, PixelDropdownMenuSeparator, PixelDropdownMenuTrigger,
   PixelEmpty, PixelEmptyContent, PixelEmptyDescription, PixelEmptyHeader, PixelEmptyMedia,
-  PixelEmptyTitle, PixelField, PixelFieldGroup, PixelFieldLabel, PixelFieldLegend,
+  PixelEmptyTitle, PixelField, PixelFieldGroup, PixelFieldLabel, 
   PixelHoverCard, PixelHoverCardContent, PixelHoverCardTrigger, PixelInput, PixelInputGroup,
   PixelInputGroupAddon, PixelInputGroupInput, PixelInputOTP, PixelInputOTPGroup,
   PixelInputOTPSlot, PixelItem, PixelItemActions, PixelItemContent, PixelItemDescription,
@@ -32,8 +32,8 @@ import {
   PixelMenubarTrigger, PixelNavigationMenu, PixelNavigationMenuContent, PixelNavigationMenuItem,
   PixelNavigationMenuLink, PixelNavigationMenuList, PixelNavigationMenuTrigger,
   PixelPopover, PixelPopoverContent, PixelPopoverTrigger, PixelProgress, PixelQuestionnaire,
-  PixelRadioGroup, PixelRadioGroupItem, PixelResizableHandle, PixelResizablePanel,
-  PixelResizablePanelGroup, PixelScrollArea, PixelSeparator, PixelSheet, PixelSheetContent,
+  PixelRadioGroup, PixelRadioGroupItem, 
+  PixelScrollArea, PixelSeparator, PixelSheet, PixelSheetContent,
   PixelSheetDescription, PixelSheetHeader, PixelSheetTitle, PixelSheetTrigger,
   PixelSidebar, PixelSidebarContent, PixelSidebarFooter, PixelSidebarGroup,
   PixelSidebarGroupContent, PixelSidebarGroupLabel, PixelSidebarHeader, PixelSidebarInset,
@@ -59,7 +59,7 @@ import {
   PixelResizablePanel as RP,
   PixelResizableHandle as RH,
 } from "@/components/ui/resizable";
-import { ChartContainer, ChartTooltip, ChartLegendContent } from "@/components/ui/chart";
+import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { Bar, BarChart, XAxis } from "recharts";
 
 // ─── Dados de exemplo ─────────────────────────────────────────────
@@ -773,7 +773,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
       <PixelTypographyH2>The quick brown fox</PixelTypographyH2>
       <PixelTypographyH3>Subtitle here</PixelTypographyH3>
       <PixelTypographyP>Paragraph text in pixel font. <PixelTypographyInlineCode>npm install</PixelTypographyInlineCode></PixelTypographyP>
-      <PixelTypographyBlockquote>"Pixel perfect or nothing."</PixelTypographyBlockquote>
+      <PixelTypographyBlockquote>&ldquo;Pixel perfect or nothing.&rdquo;</PixelTypographyBlockquote>
       <PixelTypographyList>
         <li>First item</li>
         <li>Second item</li>

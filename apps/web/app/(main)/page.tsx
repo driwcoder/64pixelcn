@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PixelButton } from "@/components/ui/button";
 import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle, PixelCardDescription, PixelCardFooter } from "@/components/ui/card";
 import { PixelBadge } from "@/components/ui/badge";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/components/ui/icons";
 
 export default function Home() {
   return (

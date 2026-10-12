@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "registry:build": "node ../packages/registry/scripts/build-registry.mjs"
+    "test:layout": "playwright test",
+    "icons:build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-icons.mjs",
+    "registry:build": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-registry.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.21",
@@ -56,6 +58,8 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@hackernoon/pixel-icon-library": "^1.1.0",
+    "@playwright/test": "^1.64.0",
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
@@ -63,6 +67,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
+    "pixelarticons": "^2.4.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
