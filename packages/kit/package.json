@@ -1,0 +1,60 @@
+{
+  "name": "pixelcn",
+  "version": "0.4.0",
+  "description": "Pixel-art UI kit for browser games and web apps: themes from Lospec palettes, stepped corners, ramp shading, CSS role classes and a canvas renderer. No framework required.",
+  "type": "module",
+  "main": "./dist/pixelcn.js",
+  "module": "./dist/pixelcn.js",
+  "types": "./dist/types/kit/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/kit/index.d.ts",
+      "import": "./dist/pixelcn.js"
+    },
+    "./pixelcn.css": "./dist/pixelcn.css",
+    "./css": "./dist/pixelcn.css",
+    "./min": "./dist/pixelcn.min.js",
+    "./fonts/*": "./dist/fonts/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "build": "node ../../apps/web/scripts/build-package.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "pixel-art",
+    "pixel",
+    "retro",
+    "8-bit",
+    "ui",
+    "game-ui",
+    "canvas",
+    "css",
+    "theme",
+    "lospec",
+    "palette",
+    "shadcn"
+  ],
+  "homepage": "https://pixelcn.vercel.app/docs/kit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/driwcoder/64pixelcn.git",
+    "directory": "packages/kit"
+  },
+  "bugs": {
+    "url": "https://github.com/driwcoder/64pixelcn/issues"
+  },
+  "license": "MIT",
+  "author": "driwcoder",
+  "engines": {
+    "node": ">=18"
+  }
+}

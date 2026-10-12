@@ -105,6 +105,11 @@ No React or Tailwind needed: `https://pixelcn.vercel.app/kit/pixelcn.css` and
 generator (any Lospec palette), `applyAppearance()`, `applyPalette()` and `drawPanel()`, which draws the
 same panels on a `<canvas>`. Docs and a live demo at `/docs/kit`. Rebuild with `pnpm kit:build`.
 
+The same kit is the npm package `pixelcn` (`packages/kit`): `npm install pixelcn`, then
+`import "pixelcn/pixelcn.css"` and `import { drawPanel } from "pixelcn"`. To publish a new version:
+bump `packages/kit/package.json`, then push a `kit-v<version>` tag (the `Publish kit to npm` workflow
+publishes it with the `NPM_TOKEN` secret), or run `npm publish` in `packages/kit`.
+
 ## Testing
 
 ```bash

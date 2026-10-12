@@ -1,0 +1,31 @@
+name: Publish kit to npm
+
+# Push a tag like kit-v0.4.0 (matching packages/kit/package.json "version")
+# to publish the `pixelcn` package. Needs the NPM_TOKEN repository secret
+# (an npm "Automation" token): Settings -> Secrets and variables -> Actions.
+on:
+  push:
+    tags: ["kit-v*"]
+
+permissions:
+  contents: read
+  id-token: write # npm provenance
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - name: Tag matches package version
+        run: test "kit-v$(node -p "require('./packages/kit/package.json').version")" = "${GITHUB_REF_NAME}"
+      - run: npm publish --provenance --access public
+        working-directory: packages/kit
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
