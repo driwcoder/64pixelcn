@@ -150,7 +150,7 @@ export default function BlocksPage() {
                     <PixelCardDescription className="text-[10px]">{b.desc}</PixelCardDescription>
                   </PixelCardHeader>
                   <PixelCardContent>
-                    <div className="border-2 border-dashed border-border p-3 overflow-hidden">
+                    <div className="pixel-demo border-2 border-dashed border-border p-[0.75em] overflow-hidden">
                       <b.Demo />
                     </div>
                   </PixelCardContent>

@@ -64,13 +64,13 @@ export function FeaturesCardGrid() {
     { icon: Zap, title: "Multi-size", desc: "8px to 128px" },
   ];
   return (
-    <div className="grid md:grid-cols-3 gap-3">
+    <div className="grid md:grid-cols-3 gap-[0.6em]">
       {items.map((f) => (
-        <PixelCard key={f.title}>
-          <PixelCardContent className="pt-4 text-center">
-            <f.icon className="h-8 w-8 mx-auto mb-2 text-primary" strokeWidth={2} />
-            <PixelCardTitle className="text-xs mb-1">{f.title}</PixelCardTitle>
-            <p className="text-[10px] text-muted-foreground">{f.desc}</p>
+        <PixelCard key={f.title} className="h-full">
+          <PixelCardContent className="pt-[0.9em] pb-[0.9em] px-[0.9em] text-center flex flex-col items-center gap-[0.4em]">
+            <f.icon className="h-[2em] w-[2em] text-primary shrink-0" strokeWidth={2} />
+            <PixelCardTitle className="text-[0.8em] leading-tight">{f.title}</PixelCardTitle>
+            <p className="text-[0.7em] leading-relaxed text-muted-foreground">{f.desc}</p>
           </PixelCardContent>
         </PixelCard>
       ))}
@@ -81,11 +81,11 @@ export function FeaturesCardGrid() {
 export function FeaturesList() {
   const steps = ["Install via CLI", "Pick a preset", "Build your UI"];
   return (
-    <div className="border-2 border-foreground bg-card p-4 space-y-3">
+    <div className="border-2 border-foreground bg-card p-[0.9em] space-y-[0.5em]">
       {steps.map((s, i) => (
-        <div key={i} className="flex items-center gap-3">
-          <span className="font-[family-name:var(--pixel-font)] text-xs border-2 border-foreground bg-primary text-primary-foreground h-6 w-6 flex items-center justify-center">{i + 1}</span>
-          <span className="text-xs uppercase tracking-widest">{s}</span>
+        <div key={i} className="flex items-center gap-[0.6em]">
+          <span className="font-[family-name:var(--pixel-font)] text-[0.75em] border-2 border-foreground bg-primary text-primary-foreground h-[1.8em] w-[1.8em] flex items-center justify-center shrink-0 leading-none">{i + 1}</span>
+          <span className="text-[0.8em] uppercase tracking-widest leading-relaxed">{s}</span>
         </div>
       ))}
     </div>
@@ -99,16 +99,16 @@ export function PricingTiers() {
     { name: "Pro", price: "$29", features: ["All 70 components", "Priority support"], highlight: true },
   ];
   return (
-    <div className="grid md:grid-cols-2 gap-3">
+    <div className="grid md:grid-cols-2 gap-[0.6em]">
       {tiers.map((t) => (
-        <PixelCard key={t.name} className={t.highlight ? "border-primary" : ""}>
-          <PixelCardContent className="pt-4">
-            <PixelCardTitle className="text-xs mb-1">{t.name}</PixelCardTitle>
-            <div className="font-[family-name:var(--pixel-font)] text-2xl mb-3">{t.price}</div>
-            <ul className="space-y-1">
-              {t.features.map((f) => <li key={f} className="text-[10px] text-muted-foreground">✓ {f}</li>)}
+        <PixelCard key={t.name} className={t.highlight ? "border-primary h-full" : "h-full"}>
+          <PixelCardContent className="pt-[0.9em] pb-[0.9em] px-[0.9em] flex flex-col gap-[0.4em]">
+            <PixelCardTitle className="text-[0.8em] leading-tight">{t.name}</PixelCardTitle>
+            <div className="font-[family-name:var(--pixel-font)] text-[1.6em] leading-tight">{t.price}</div>
+            <ul className="space-y-[0.3em] flex-1">
+              {t.features.map((f) => <li key={f} className="text-[0.7em] leading-relaxed text-muted-foreground">✓ {f}</li>)}
             </ul>
-            <PixelButton variant={t.highlight ? "default" : "outline"} size="sm" className="mt-3 w-full">Choose</PixelButton>
+            <PixelButton variant={t.highlight ? "default" : "outline"} size="sm" className="mt-[0.4em] w-full">Choose</PixelButton>
           </PixelCardContent>
         </PixelCard>
       ))}
@@ -143,9 +143,9 @@ export function StatsBar() {
   return (
     <div className="grid grid-cols-4 border-2 border-foreground bg-card">
       {stats.map((s) => (
-        <div key={s.label} className="p-4 text-center border-r-2 border-foreground last:border-r-0">
-          <div className="font-[family-name:var(--pixel-font)] text-xl text-primary">{s.value}</div>
-          <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{s.label}</div>
+        <div key={s.label} className="p-[0.7em] text-center border-r-2 border-foreground last:border-r-0 flex flex-col items-center justify-center gap-[0.2em]">
+          <div className="font-[family-name:var(--pixel-font)] text-[1.3em] leading-tight text-primary">{s.value}</div>
+          <div className="text-[0.65em] uppercase tracking-widest leading-relaxed text-muted-foreground">{s.label}</div>
         </div>
       ))}
     </div>

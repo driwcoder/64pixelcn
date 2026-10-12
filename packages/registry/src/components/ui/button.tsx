@@ -24,11 +24,14 @@ const pixelButtonVariants = cva(
         link: "bg-transparent text-primary underline underline-offset-4 decoration-2",
       },
       size: {
-        default: "h-10 px-6 py-2 text-xs",
-        sm: "h-8 px-4 text-[10px]",
-        lg: "h-12 px-8 text-sm",
-        xl: "h-16 px-10 text-base",
-        icon: "h-10 w-10",
+        // Padding in em so it scales WITH the button's own font-size:
+        // when text grows (bigger font / text-size), the breathing room
+        // grows too, so text never touches the pixel border.
+        default: "min-h-[2.6em] px-[1.6em] py-[0.55em] text-[0.8rem] leading-relaxed",
+        sm: "min-h-[2.2em] px-[1.2em] py-[0.4em] text-[0.7rem] leading-relaxed",
+        lg: "min-h-[3em] px-[2em] py-[0.65em] text-[0.95rem] leading-relaxed",
+        xl: "min-h-[3.6em] px-[2.6em] py-[0.8em] text-[1.1rem] leading-relaxed",
+        icon: "min-h-[2.6em] min-w-[2.6em]",
       },
     },
     defaultVariants: { variant: "default", size: "default" },

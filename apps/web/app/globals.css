@@ -280,3 +280,45 @@ body {
   background: transparent;
 }
 
+/* ── Adaptive pixel scaling ───────────────────────────────────────────
+   Pixel fonts differ wildly in metrics (some are naturally taller/wider).
+   Everything inside a block demo sizes off `em` (relative to the block's
+   own font-size), so text, padding, gaps and line-height scale together
+   when the user changes font or text-size. A roomy line-height keeps
+   pixel glyphs from colliding with borders. */
+.pixel-demo {
+  font-size: 1rem;
+  line-height: 1.8;
+  /* Normalize the visual box so a tall font doesn't push content out. */
+  container-type: inline-size;
+}
+
+/* Headroom: pixel glyphs sit high in their line box; add breathing room. */
+.pixel-demo h1,
+.pixel-demo h2,
+.pixel-demo h3 {
+  line-height: 1.9;
+  margin-block: 0.25em;
+}
+
+.pixel-demo p {
+  line-height: 1.9;
+  margin-block: 0.25em;
+}
+
+/* Adaptive spacing helpers (em = scales with font size). */
+.px-pad { padding: 1.1em; }
+.px-pad-sm { padding: 0.75em; }
+.px-gap { gap: 0.75em; }
+.px-gap-sm { gap: 0.5em; }
+
+/* Cap the leading so a very large font can't blow up card height. */
+.pixel-demo .px-tight { line-height: 1.7; }
+
+/* Ensure any fixed-px text inside demos still tracks the global scale by
+   clamping with a min/max so it never becomes unreadable or oversized. */
+.pixel-demo {
+  --px-text-min: 0.7rem;
+  --px-text-max: 1.1rem;
+}
+

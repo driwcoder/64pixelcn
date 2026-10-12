@@ -131,7 +131,7 @@ export default function ComponentPage({ params }: { params: Promise<{ slug: stri
 
           <PixelCardContent className="pt-6">
             {tab === "preview" ? (
-              <div className="flex min-h-[180px] items-center justify-center border-2 border-dashed border-border p-6 overflow-hidden">
+              <div className="pixel-demo flex min-h-[180px] items-center justify-center border-2 border-dashed border-border p-[1.1em] overflow-hidden">
                 {Demo ? <Demo /> : <span className="text-xs text-muted-foreground">No preview available</span>}
               </div>
             ) : (
