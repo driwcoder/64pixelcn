@@ -9,7 +9,7 @@ Pixel-art UI for browser games and web apps, with no framework required:
 - **Canvas renderer**: `drawPanel()` draws the same panels on a `<canvas>`, pixel for pixel (vanilla 2D, Phaser, PixiJS...).
 - 9 self-hosted pixel fonts (SIL OFL).
 
-Docs and live demo: https://pixelcn.vercel.app/docs/kit. React + shadcn/ui components: https://pixelcn.vercel.app
+Docs and live demo: https://pixelcn.vercel.app/kits/html. React + shadcn/ui components: https://pixelcn.vercel.app
 
 ## Install
 

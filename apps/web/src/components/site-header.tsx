@@ -19,7 +19,7 @@ export function SiteHeader() {
             <PixelBadge variant="outline" className="hidden text-[0.6rem] sm:inline-flex">v{VERSION}</PixelBadge>
           </Link>
         </div>
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {SECTIONS.map((s) => (
             <PixelNavButton key={s.href} href={s.href}>{s.label}</PixelNavButton>
           ))}

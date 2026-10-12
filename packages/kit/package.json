@@ -43,7 +43,7 @@
     "palette",
     "shadcn"
   ],
-  "homepage": "https://pixelcn.vercel.app/docs/kit",
+  "homepage": "https://pixelcn.vercel.app/kits/html",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/driwcoder/64pixelcn.git",

@@ -1,0 +1,199 @@
+<!doctype html>
+<!--
+  pixelcn text RPG example. One HTML file, no framework, no build step.
+  Uses the pixelcn kit: pixelcn.css (themes, fonts, .pixel-* classes) and
+  pixelcn.min.js (applyAppearance). Copy this file and change STORY to make
+  your own game. With npm: `npm install pixelcn` and import from "pixelcn".
+-->
+<html lang="en" data-theme="vinik24" data-mode="dark" data-font="silkscreen" data-size="64" data-shading="bevel" data-border="solid" data-radius="sm">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Lost Crown - pixelcn text RPG</title>
+  <link rel="stylesheet" href="/kit/pixelcn.css">
+  <style>
+    body { margin: 0; padding: 1rem; min-height: 100vh; box-sizing: border-box; background: var(--background); color: var(--foreground); font-family: var(--pixel-font); font-size: 0.8rem; line-height: 1.7; }
+    .game { max-width: 52rem; margin: 0 auto; display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr) 15rem; }
+    @media (max-width: 720px) { .game { grid-template-columns: 1fr; } }
+    .panel { background: var(--card); color: var(--card-foreground); padding: 1rem; }
+    h1, h2 { margin: 0 0 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: normal; }
+    #log { max-height: 22rem; overflow-y: auto; }
+    #log p { margin: 0 0 0.6rem; }
+    #log .you { color: var(--primary); }
+    #log .good { color: var(--chart-3); }
+    #log .bad { color: var(--destructive); }
+    #choices { list-style: none; margin: 0.75rem 0 0; padding: 0; display: grid; gap: 0.5rem; }
+    button { font: inherit; cursor: pointer; width: 100%; text-align: left; padding: 0.5rem 0.75rem; background: var(--secondary); color: var(--secondary-foreground); border: 0; }
+    button:hover, button:focus-visible { background: var(--primary); color: var(--primary-foreground); outline: none; }
+    .bar { height: 0.75rem; background: var(--muted); margin: 0.25rem 0 0.6rem; }
+    .bar > span { display: block; height: 100%; background: var(--destructive); }
+    dl { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 1rem; margin: 0 0 0.75rem; }
+    dt { color: var(--muted-foreground); text-transform: uppercase; }
+    dd { margin: 0; text-align: right; }
+    ul.bag { margin: 0; padding-left: 1.1rem; }
+    select { font: inherit; width: 100%; padding: 0.4rem; background: var(--input); color: var(--foreground); border: 0; }
+    .muted { color: var(--muted-foreground); font-size: 0.7rem; }
+  </style>
+</head>
+<body>
+  <main class="game">
+    <section class="panel pixel-raised" aria-labelledby="title">
+      <h1 id="title">The Lost Crown</h1>
+      <div id="log" aria-live="polite"></div>
+      <ol id="choices"></ol>
+    </section>
+
+    <aside class="panel pixel-raised" aria-label="Character">
+      <h2>Aria the Knight</h2>
+      <div class="muted">HP <span id="hp-text"></span></div>
+      <div class="bar pixel-sunken"><span id="hp-bar"></span></div>
+      <dl>
+        <dt>Gold</dt><dd id="gold"></dd>
+        <dt>XP</dt><dd id="xp"></dd>
+        <dt>Attack</dt><dd id="atk"></dd>
+      </dl>
+      <h2>Bag</h2>
+      <ul class="bag" id="bag"></ul>
+      <h2 style="margin-top: 1rem">Theme</h2>
+      <select id="theme" aria-label="Theme"></select>
+      <button id="new-game" class="pixel-raised" style="margin-top: 1rem; text-align: center">New game</button>
+      <p class="muted">Made with <a href="/kits/text-rpg" style="color: var(--primary)">pixelcn</a>.</p>
+    </aside>
+  </main>
+
+  <script type="module">
+    import { applyAppearance, THEME_IDS, THEMES } from "/kit/pixelcn.min.js";
+
+    // ── Game state ─────────────────────────────────────────────
+    const START = { scene: "village", hp: 30, maxHp: 30, gold: 20, xp: 0, atk: 4, bag: ["Potion"], enemyHp: 0, flags: {} };
+    const saved = JSON.parse(localStorage.getItem("pixelcn-rpg") || "null");
+    let s = saved ?? structuredClone(START);
+
+    // ── Story: each scene has text and choices. A choice can run an
+    //    effect (change state) and go to another scene. ──────────────
+    const STORY = {
+      village: {
+        text: () => "The village of Emberfall. The baker waves; the old sage sits by the well; the forest path leads north.",
+        choices: () => [
+          { label: "Talk to the sage", go: "sage" },
+          { label: "Visit the shop", go: "shop" },
+          { label: "Take the forest path", go: "forest" },
+        ],
+      },
+      sage: {
+        text: () => s.flags.crown
+          ? "\"You found it! The kingdom is in your debt.\" The sage gives you 50 gold."
+          : "\"A goblin stole the king's crown and hid in the cave beyond the forest. Bring it back.\"",
+        choices: () => [{ label: "Back to the village", go: "village", run: () => { if (s.flags.crown && !s.flags.rewarded) { s.gold += 50; s.flags.rewarded = true; } } }],
+      },
+      shop: {
+        text: () => "\"Finest goods this side of the river!\" says the merchant.",
+        choices: () => [
+          { label: "Buy a potion (10 gold)", go: "shop", if: () => s.gold >= 10, run: () => { s.gold -= 10; s.bag.push("Potion"); say("You bought a potion.", "good"); } },
+          { label: "Buy an iron sword (25 gold)", go: "shop", if: () => s.gold >= 25 && !s.bag.includes("Iron sword"), run: () => { s.gold -= 25; s.atk += 4; s.bag.push("Iron sword"); say("Attack +4!", "good"); } },
+          { label: "Leave", go: "village" },
+        ],
+      },
+      forest: {
+        text: () => "Tall pines and birdsong. A cave mouth gapes ahead. Something shiny glints in the moss.",
+        choices: () => [
+          { label: "Search the moss", go: "forest", if: () => !s.flags.coins, run: () => { s.flags.coins = true; s.gold += 15; say("You find 15 gold!", "good"); } },
+          { label: "Enter the cave", go: "cave", run: () => { s.enemyHp = 24; } },
+          { label: "Return to the village", go: "village" },
+        ],
+      },
+      cave: {
+        text: () => s.flags.crown ? "The empty cave echoes." : `A goblin clutches the crown! Goblin HP: ${s.enemyHp}`,
+        choices: () => s.flags.crown
+          ? [{ label: "Leave the cave", go: "forest" }]
+          : [
+              { label: "Attack", go: "cave", run: attack },
+              { label: "Drink a potion", go: "cave", if: () => s.bag.includes("Potion"), run: () => { s.bag.splice(s.bag.indexOf("Potion"), 1); heal(15); enemyTurn(); } },
+              { label: "Run away", go: "forest" },
+            ],
+      },
+      dead: {
+        text: () => "You collapse... The sage finds you and drags you home.",
+        choices: () => [{ label: "Wake up in the village", go: "village", run: () => { s.hp = s.maxHp; s.gold = Math.floor(s.gold / 2); } }],
+      },
+    };
+
+    function attack() {
+      const dmg = s.atk + Math.floor(Math.random() * 4);
+      s.enemyHp = Math.max(0, s.enemyHp - dmg);
+      say(`You hit the goblin for ${dmg}.`);
+      if (s.enemyHp === 0) {
+        s.flags.crown = true; s.xp += 40; s.bag.push("Crown");
+        say("The goblin flees, dropping the crown! +40 XP", "good");
+      } else enemyTurn();
+    }
+    function enemyTurn() {
+      const dmg = 2 + Math.floor(Math.random() * 4);
+      s.hp = Math.max(0, s.hp - dmg);
+      say(`The goblin hits you for ${dmg}.`, "bad");
+      if (s.hp === 0) s.scene = "dead";
+    }
+    function heal(n) { s.hp = Math.min(s.maxHp, s.hp + n); say(`+${n} HP`, "good"); }
+
+    // ── Rendering ──────────────────────────────────────────────
+    const log = document.getElementById("log");
+    function say(text, cls) {
+      const p = document.createElement("p");
+      p.textContent = text;
+      if (cls) p.className = cls;
+      log.append(p);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function choose(choice) {
+      say(`> ${choice.label}`, "you");
+      s.scene = choice.go;
+      choice.run?.();                       // may change s.scene (e.g. to "dead")
+      say(STORY[s.scene].text());
+      render();
+    }
+
+    function render() {
+      const list = document.getElementById("choices");
+      list.replaceChildren(...STORY[s.scene].choices().filter((c) => !c.if || c.if()).map((c, i) => {
+        const li = document.createElement("li");
+        const b = document.createElement("button");
+        b.className = "pixel-raised";
+        b.textContent = `${i + 1}. ${c.label}`;
+        b.onclick = () => choose(c);
+        li.append(b);
+        return li;
+      }));
+      document.getElementById("hp-text").textContent = `${s.hp} / ${s.maxHp}`;
+      document.getElementById("hp-bar").style.width = `${(s.hp / s.maxHp) * 100}%`;
+      document.getElementById("gold").textContent = s.gold;
+      document.getElementById("xp").textContent = s.xp;
+      document.getElementById("atk").textContent = s.atk;
+      document.getElementById("bag").replaceChildren(...(s.bag.length ? s.bag : ["(empty)"]).map((it) => Object.assign(document.createElement("li"), { textContent: it })));
+      localStorage.setItem("pixelcn-rpg", JSON.stringify(s));
+    }
+
+    // Number keys pick choices.
+    addEventListener("keydown", (e) => {
+      const b = document.querySelectorAll("#choices button")[Number(e.key) - 1];
+      if (b) b.click();
+    });
+
+    // ── Theme picker (any pixelcn theme) ───────────────────────
+    const select = document.getElementById("theme");
+    select.append(...THEME_IDS.map((id) => new Option(THEMES[id].label, id)));
+    select.value = document.documentElement.dataset.theme;
+    select.onchange = () => applyAppearance({ theme: select.value });
+
+    document.getElementById("new-game").onclick = () => {
+      s = structuredClone(START);
+      log.replaceChildren();
+      say(STORY[s.scene].text());
+      render();
+    };
+
+    say(STORY[s.scene].text());
+    render();
+  </script>
+</body>
+</html>

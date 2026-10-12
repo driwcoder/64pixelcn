@@ -29,7 +29,7 @@ export function PixelNavButton({ href, children, block, small }: PixelNavButtonP
       className={cn(
         "font-[family-name:var(--pixel-font)] uppercase tracking-widest leading-relaxed transition-colors break-words",
         small ? "px-2 py-1 text-[0.7rem]" : "px-3 py-2 text-[0.7rem]",
-        block ? "block w-full text-left" : "inline-block",
+        block ? "block w-full text-left" : "inline-block whitespace-nowrap",
         active
           ? "bg-primary text-primary-foreground border-[length:var(--pixel-line,2px)] border-foreground"
           : "text-muted-foreground hover:text-primary border-[length:var(--pixel-line,2px)] border-transparent hover:bg-accent/50",

@@ -4,7 +4,7 @@ import * as React from "react";
 import { usePathname } from "next/navigation";
 import { Menu } from "@/components/ui/icons";
 import { componentsMeta } from "@/lib/components";
-import { SECTIONS } from "@/lib/docs-sections";
+import { DOC_LINKS, SECTIONS } from "@/lib/docs-sections";
 import { PixelNavButton } from "@/components/pixel-nav";
 import {
   PixelSheet,
@@ -21,11 +21,9 @@ export function DocsSidebarNav() {
         Sections
       </div>
       <nav className="mb-5 flex flex-col gap-1">
-        {SECTIONS.map((s) => (
+        {[...DOC_LINKS.slice(0, 1), ...SECTIONS, ...DOC_LINKS.slice(1)].map((s) => (
           <PixelNavButton key={s.href} href={s.href} block>{s.label}</PixelNavButton>
         ))}
-        <PixelNavButton href="/docs/kit" block>Kit (vanilla JS)</PixelNavButton>
-        <PixelNavButton href="/docs/changelog" block>Changelog</PixelNavButton>
       </nav>
 
       <div className="mb-2 font-[family-name:var(--pixel-font)] text-[0.7rem] uppercase tracking-widest text-muted-foreground">

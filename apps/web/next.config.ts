@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    // The vanilla kit moved into the Engine kits area.
+    return [{ source: "/docs/kit", destination: "/kits/html", permanent: true }];
+  },
   async headers() {
     return [
       {

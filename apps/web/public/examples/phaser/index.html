@@ -1,0 +1,131 @@
+<!doctype html>
+<!--
+  pixelcn + Phaser example. One HTML file: Phaser from a CDN, pixelcn kit from
+  this site (or `npm install pixelcn`). The HUD and dialogue panels are drawn
+  by pixelcn's drawPanel() into Phaser canvas textures, so the game UI matches
+  your pixelcn theme pixel for pixel. Arrow keys / WASD to move.
+-->
+<html lang="en" data-theme="lux2k" data-mode="dark" data-font="silkscreen" data-size="64">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coin Hunt - pixelcn + Phaser</title>
+  <link rel="stylesheet" href="/kit/pixelcn.css">
+  <style>
+    body { margin: 0; padding: 1rem; background: var(--background); color: var(--foreground); font-family: var(--pixel-font); font-size: 0.75rem; }
+    .wrap { max-width: 640px; margin: 0 auto; display: grid; gap: 0.75rem; }
+    #game canvas { width: 100%; height: auto; image-rendering: pixelated; display: block; }
+    .bar { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; justify-content: space-between; }
+    select { font: inherit; padding: 0.3rem; background: var(--input); color: var(--foreground); border: 0; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <div id="game" class="pixel-sunken"></div>
+    <div class="bar">
+      <span>Arrows / WASD to move &middot; R to restart</span>
+      <label>Theme <select id="theme"></select></label>
+    </div>
+  </div>
+
+  <script type="module">
+    import { drawPanel, paletteTokens, resolveColor, applyAppearance, THEME_IDS, THEMES } from "/kit/pixelcn.min.js";
+
+    const W = 320, H = 200, GOAL = 10;
+    const ui = { theme: document.documentElement.dataset.theme, mode: "dark", size: 32, radius: "sm", shading: "bevel", border: "solid" };
+
+    // pixelcn colors (oklch etc.) -> Phaser color numbers, via a 1px canvas.
+    const probe = document.createElement("canvas").getContext("2d", { willReadFrequently: true });
+    function toNumber(css) {
+      probe.clearRect(0, 0, 1, 1); probe.fillStyle = css; probe.fillRect(0, 0, 1, 1);
+      const [r, g, b] = probe.getImageData(0, 0, 1, 1).data;
+      return (r << 16) | (g << 8) | b;
+    }
+    const color = (name) => resolveColor(`var(--${name})`, paletteTokens(ui.theme, ui.mode));
+    const font = () => getComputedStyle(document.documentElement).getPropertyValue("--pixel-font");
+
+    // A pixelcn panel as a Phaser canvas texture; returns the content box.
+    function panelTexture(scene, key, width, height, tone) {
+      if (scene.textures.exists(key)) scene.textures.remove(key);
+      const tex = scene.textures.createCanvas(key, width, height);
+      const box = drawPanel(tex.getContext(), { ...ui, x: 0, y: 0, width, height, role: "raised", tone });
+      tex.refresh();
+      return box;
+    }
+
+    class Play extends Phaser.Scene {
+      create() {
+        this.cameras.main.setBackgroundColor(toNumber(color("background")));
+        this.player = this.add.rectangle(W / 2, H / 2 + 20, 10, 10, toNumber(color("primary")));
+        this.coins = this.add.group();
+        for (let i = 0; i < GOAL; i++) this.spawnCoin();
+        this.score = 0;
+        this.time0 = this.time.now;
+        this.won = false;
+
+        // HUD: pixelcn panel + Phaser text on top.
+        this.hudBox = panelTexture(this, "hud", 120, 28, "surface");
+        this.add.image(6, 6, "hud").setOrigin(0);
+        this.hudText = this.add.text(6 + this.hudBox.x + 2, 6 + this.hudBox.y, "", { fontFamily: font(), fontSize: "10px", color: color("card-foreground") });
+
+        this.say("Collect 10 coins, fast!");
+        this.keys = this.input.keyboard.addKeys("UP,DOWN,LEFT,RIGHT,W,A,S,D,R");
+      }
+
+      spawnCoin() {
+        const c = this.add.rectangle(Phaser.Math.Between(16, W - 16), Phaser.Math.Between(48, H - 16), 6, 6, toNumber(color("accent")));
+        this.coins.add(c);
+      }
+
+      // Dialogue box at the bottom, drawn by pixelcn, for 2 seconds.
+      say(text, sticky = false) {
+        this.dialog?.destroy(); this.dialogText?.destroy();
+        const box = panelTexture(this, "dialog", W - 24, 30, "primary");
+        this.dialog = this.add.image(12, H - 40, "dialog").setOrigin(0);
+        this.dialogText = this.add.text(12 + box.x + 4, H - 40 + box.y + 4, text, { fontFamily: font(), fontSize: "10px", color: color("primary-foreground") });
+        if (!sticky) this.time.delayedCall(2000, () => { this.dialog?.destroy(); this.dialogText?.destroy(); });
+      }
+
+      update(_, dt) {
+        const k = this.keys;
+        if (Phaser.Input.Keyboard.JustDown(k.R)) return this.scene.restart();
+        const elapsed = ((this.won ? this.wonAt : this.time.now) - this.time0) / 1000;
+        this.hudText.setText(`COINS ${this.score}/${GOAL}  ${elapsed.toFixed(1)}s`);
+        if (this.won) return;
+
+        const v = 0.12 * dt;
+        const dx = (k.RIGHT.isDown || k.D.isDown) - (k.LEFT.isDown || k.A.isDown);
+        const dy = (k.DOWN.isDown || k.S.isDown) - (k.UP.isDown || k.W.isDown);
+        this.player.x = Phaser.Math.Clamp(this.player.x + dx * v, 6, W - 6);
+        this.player.y = Phaser.Math.Clamp(this.player.y + dy * v, 40, H - 6);
+
+        for (const c of this.coins.getChildren()) {
+          if (Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), c.getBounds())) {
+            c.destroy();
+            this.score++;
+            if (this.score === GOAL) {
+              this.won = true; this.wonAt = this.time.now;
+              this.say(`You win in ${elapsed.toFixed(1)}s! Press R`, true);
+            }
+          }
+        }
+      }
+    }
+
+    // Wait for the pixel font so canvas text uses it.
+    await document.fonts.load(`10px ${font()}`);
+    const game = new Phaser.Game({ type: Phaser.AUTO, width: W, height: H, parent: "game", pixelArt: true, scene: Play });
+
+    // Theme picker: restyles the page (CSS) and the game (drawPanel + colors).
+    const select = document.getElementById("theme");
+    select.append(...THEME_IDS.map((id) => new Option(THEMES[id].label, id)));
+    select.value = ui.theme;
+    select.onchange = () => {
+      ui.theme = select.value;
+      applyAppearance({ theme: ui.theme });
+      game.scene.scenes[0].scene.restart();
+    };
+  </script>
+</body>
+</html>

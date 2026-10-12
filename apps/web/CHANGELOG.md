@@ -4,6 +4,19 @@ All notable changes to pixelcn. The version is in `apps/web/package.json` and
 follows [Semantic Versioning](https://semver.org): while it is 0.x, a minor
 bump may change component markup or tokens.
 
+## 0.5.0 - 2026-10-12
+
+### Added
+
+- Five areas in the top navigation: **Create**, **Components**, **Blocks**, **Engine kits** and **Assets**. Below 1024px they live in the menu button; the home page has a card per area.
+- **Engine kits** (`/kits`), grouped by platform (browser now; PC and mobile planned):
+  - HTML & JS kit at `/kits/html` (moved from `/docs/kit`, which redirects).
+  - Text RPG (`/kits/text-rpg`): a complete text adventure in one HTML file using only the kit (story with choices, HP, gold, bag, shop, turn-based battle, autosave, theme picker).
+  - Phaser (`/kits/phaser`): a Phaser 4 mini game whose HUD and dialogue are drawn with `drawPanel()` and whose colors follow the theme.
+  - The examples live in `public/examples/` and their pages show the source read from those files.
+- **Assets** (`/assets`): gallery of the 50 UI icons in the active icon set, and a rule-based **item icon generator** (sword, potion, coin, shield, key, gem) with seeds, variations, the theme's tone ramps, outline and top-left shading, PNG (1x to 16x) and SVG export. Characters and enemies are next.
+- **Game screens** on the Blocks page, listed before the website blocks: Title Screen, Pause Menu, Story Log (text RPG choices), RPG Dialogue, Character Sheet, Inventory, Shop and Battle, grouped with the existing Main Menu, Save Slots, Loading, Party, Skill Tree, Victory, Game Over and Leaderboard.
+
 ## 0.4.0 - 2026-10-12
 
 ### Added

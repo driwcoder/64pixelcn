@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { SECTIONS } from "@/lib/docs-sections";
 import { PixelButton } from "@/components/ui/button";
-import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle, PixelCardDescription, PixelCardFooter } from "@/components/ui/card";
+import { PixelCard, PixelCardHeader, PixelCardTitle, PixelCardDescription, PixelCardFooter } from "@/components/ui/card";
 import { PixelBadge } from "@/components/ui/badge";
 import { ArrowRight } from "@/components/ui/icons";
 import { SiteFooter } from "@/components/site-footer";
@@ -39,43 +40,19 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Features */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <PixelCard>
-              <PixelCardHeader>
-                <PixelCardTitle>Shadcn Compatible</PixelCardTitle>
-                <PixelCardDescription>
-                  Same CLI install flow. Copy-paste or npm install.
-                </PixelCardDescription>
-              </PixelCardHeader>
-              <PixelCardContent>
-                <code className="text-xs text-accent font-mono">npx shadcn@latest init</code>
-              </PixelCardContent>
-            </PixelCard>
-
-            <PixelCard>
-              <PixelCardHeader>
-                <PixelCardTitle>{componentsMeta.length} Components + Blocks</PixelCardTitle>
-                <PixelCardDescription>
-                  Every shadcn component plus gaming bars (HP, MP, XP).
-                </PixelCardDescription>
-              </PixelCardHeader>
-              <PixelCardContent>
-                <Link href="/docs/components" className="text-xs text-primary hover:underline">Browse all →</Link>
-              </PixelCardContent>
-            </PixelCard>
-
-            <PixelCard>
-              <PixelCardHeader>
-                <PixelCardTitle>Multi-Size & Themes</PixelCardTitle>
-                <PixelCardDescription>
-                  8x to 128x pixels, light & dark Nintendo, GameBoy, Neon, Sepia and Mono palettes, stepped corners and pixel-art shading.
-                </PixelCardDescription>
-              </PixelCardHeader>
-              <PixelCardFooter>
-                <Link href="/create" className="text-xs text-primary hover:underline">Customize →</Link>
-              </PixelCardFooter>
-            </PixelCard>
+          {/* The five areas */}
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] gap-6">
+            {SECTIONS.map((area) => (
+              <PixelCard key={area.href} className="flex flex-col">
+                <PixelCardHeader>
+                  <PixelCardTitle>{area.label}</PixelCardTitle>
+                  <PixelCardDescription>{area.description}</PixelCardDescription>
+                </PixelCardHeader>
+                <PixelCardFooter className="mt-auto">
+                  <Link href={area.href} className="text-xs text-primary hover:underline">Open {area.label} →</Link>
+                </PixelCardFooter>
+              </PixelCard>
+            ))}
           </div>
         </div>
       </main>

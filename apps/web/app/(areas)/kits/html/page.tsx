@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { KitCanvasDemo } from "@/components/kit-demo";
 import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Kit — 64pixelcn",
+  title: "HTML & JS kit — 64pixelcn",
   description: "pixelcn without React: one CSS file and one ES module for browser games and vanilla JS apps.",
 };
 
@@ -45,7 +46,8 @@ export default function KitPage() {
     <div className="px-4 py-8 pb-24 sm:px-6">
       <div className="mx-auto max-w-3xl space-y-6 text-[0.75rem] leading-relaxed">
         <div>
-          <h1 className="mb-2 text-xl uppercase tracking-widest">Kit</h1>
+          <Link href="/kits" className="mb-3 inline-block text-xs text-muted-foreground hover:text-primary">&larr; Engine kits</Link>
+          <h1 className="mb-2 text-xl uppercase tracking-widest">HTML &amp; JS kit</h1>
           <p className="text-muted-foreground">
             pixelcn without React or Tailwind, for browser games and vanilla JS apps: one CSS file with every theme and setting, and one ES
             module with the themes, the palette-to-theme generator and a canvas renderer that draws the same panels.

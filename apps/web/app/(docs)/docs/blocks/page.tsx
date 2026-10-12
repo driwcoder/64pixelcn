@@ -11,6 +11,10 @@ import {
   GameMainMenu, GameLoadingScreen, GameOverScreen, GameVictoryScreen,
   GameSaveSlots, GameLeaderboard, LoginForm, CalendarBlockDemo, ChartBarDemo,
 } from "@/components/block-demos";
+import {
+  GameTitleScreen, GamePauseMenu, GameStoryLog, GameRpgDialogue,
+  GameCharacterSheet, GameInventoryScreen, GameShop, GameBattle,
+} from "@/components/game-blocks";
 import { PixelCard, PixelCardContent, PixelCardHeader, PixelCardTitle, PixelCardDescription } from "@/components/ui/card";
 
 interface BlockDef {
@@ -18,6 +22,47 @@ interface BlockDef {
   desc: string;
   Demo: () => React.ReactNode;
 }
+
+// Game screens come first (pixelcn is built for games); website blocks follow.
+const GAME_CATEGORIES: { title: string; blocks: BlockDef[] }[] = [
+  {
+    title: "Title & Menus",
+    blocks: [
+      { name: "Title Screen", desc: "Logo, keyboard menu and press start", Demo: GameTitleScreen },
+      { name: "Main Menu", desc: "Classic game main menu", Demo: GameMainMenu },
+      { name: "Pause Menu", desc: "Overlay with resume, save and volume", Demo: GamePauseMenu },
+      { name: "Save Slots", desc: "Save/load interface", Demo: GameSaveSlots },
+      { name: "Loading Screen", desc: "Retro loading with progress", Demo: GameLoadingScreen },
+    ],
+  },
+  {
+    title: "Story & Dialogue",
+    blocks: [
+      { name: "Story Log", desc: "Text RPG narration with numbered choices", Demo: GameStoryLog },
+      { name: "RPG Dialogue", desc: "Typed dialogue with portrait and answers", Demo: GameRpgDialogue },
+    ],
+  },
+  {
+    title: "Character",
+    blocks: [
+      { name: "Character Sheet", desc: "HP, MP, XP and attributes", Demo: GameCharacterSheet },
+      { name: "Inventory", desc: "Item grid with details and actions", Demo: GameInventoryScreen },
+      { name: "Party Grid", desc: "Team as party members", Demo: GamePartyGrid },
+      { name: "Skill Tree", desc: "Skills with levels", Demo: GameSkillTree },
+    ],
+  },
+  {
+    title: "Shop & Combat",
+    blocks: [
+      { name: "Shop", desc: "Merchant with prices and gold counter", Demo: GameShop },
+      { name: "Battle", desc: "Turn-based text battle with log", Demo: GameBattle },
+      { name: "Victory Screen", desc: "Post-battle rewards", Demo: GameVictoryScreen },
+      { name: "Game Over", desc: "Game over with retry", Demo: GameOverScreen },
+      { name: "Leaderboard", desc: "Top scores ranking", Demo: GameLeaderboard },
+      { name: "XP Progress Hero", desc: "Hero with health, mana and XP bars", Demo: GameHeroXp },
+    ],
+  },
+];
 
 const CATEGORIES: { title: string; blocks: BlockDef[] }[] = [
   {
@@ -88,25 +133,6 @@ const CATEGORIES: { title: string; blocks: BlockDef[] }[] = [
     ],
   },
   {
-    title: "Game",
-    blocks: [
-      { name: "XP Progress Hero", desc: "Hero with health, mana and XP bars", Demo: GameHeroXp },
-      { name: "Skill Tree", desc: "Feature grid with skill levels", Demo: GameSkillTree },
-      { name: "Party Grid", desc: "Team as party members", Demo: GamePartyGrid },
-    ],
-  },
-  {
-    title: "Gaming (Classic)",
-    blocks: [
-      { name: "Main Menu", desc: "Classic game main menu", Demo: GameMainMenu },
-      { name: "Loading Screen", desc: "Retro loading with progress", Demo: GameLoadingScreen },
-      { name: "Game Over", desc: "Game over with retry", Demo: GameOverScreen },
-      { name: "Victory Screen", desc: "Post-battle rewards", Demo: GameVictoryScreen },
-      { name: "Save Slots", desc: "Save/load interface", Demo: GameSaveSlots },
-      { name: "Leaderboard", desc: "Top scores ranking", Demo: GameLeaderboard },
-    ],
-  },
-  {
     title: "Authentication",
     blocks: [
       { name: "Login Form", desc: "Email and password login", Demo: LoginForm },
@@ -127,21 +153,28 @@ const CATEGORIES: { title: string; blocks: BlockDef[] }[] = [
 ];
 
 export default function BlocksPage() {
-  const total = CATEGORIES.reduce((a, c) => a + c.blocks.length, 0);
+  const all = [...GAME_CATEGORIES, ...CATEGORIES];
+  const total = all.reduce((a, c) => a + c.blocks.length, 0);
 
   return (
     <div className="px-4 py-8 pb-24 sm:px-6">
       <div className="mx-auto max-w-5xl">
         <h1 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-2">Blocks</h1>
         <p className="text-sm text-muted-foreground mb-8">
-          Pre-built, ready-to-use block templates for your retro projects. {total} blocks across {CATEGORIES.length} categories.
+          Pre-built, ready-to-use block templates for your retro projects. {total} blocks across {all.length} categories: game screens first, then website sections.
         </p>
 
-        {CATEGORIES.map((cat) => (
+        {[
+          { id: "game", title: "Game screens", cats: GAME_CATEGORIES },
+          { id: "website", title: "Website", cats: CATEGORIES },
+        ].map(({ id, title, cats }) => (
+          <div key={id} id={id} className="mb-4">
+            <h2 className="mb-6 border-b-[length:var(--pixel-line,2px)] border-border pb-2 text-lg uppercase tracking-widest">{title}</h2>
+        {cats.map((cat) => (
           <section key={cat.title} className="mb-12">
-            <h2 className="font-[family-name:var(--pixel-font)] text-sm uppercase tracking-widest text-primary mb-4">
+            <h3 className="font-[family-name:var(--pixel-font)] text-sm uppercase tracking-widest text-primary mb-4">
               {cat.title}
-            </h2>
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {cat.blocks.map((b) => (
                 <PixelCard key={b.name}>
@@ -158,6 +191,9 @@ export default function BlocksPage() {
               ))}
             </div>
           </section>
+        ))}
+
+          </div>
         ))}
 
         <footer className="border-t-[length:var(--pixel-line,2px)] border-border pt-6 text-center text-[0.7rem] text-muted-foreground">

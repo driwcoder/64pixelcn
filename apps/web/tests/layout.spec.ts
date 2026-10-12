@@ -12,7 +12,7 @@ const CORNER_STEPS = Object.fromEntries(RADIUS_IDS.map((r) => [r, RADII[r].steps
 // largest pixel size, so text clipped by a corner is caught too (layout itself
 // doesn't depend on corners or shading).
 
-const PAGES = ["/", "/docs", "/docs/components", "/docs/blocks", "/docs/changelog", "/docs/kit", "/create"];
+const PAGES = ["/", "/docs", "/docs/components", "/docs/blocks", "/docs/changelog", "/create", "/kits", "/kits/html", "/kits/text-rpg", "/kits/phaser", "/assets"];
 const WIDTHS = [375, 1280];
 
 interface Issue {

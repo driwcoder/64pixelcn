@@ -25,5 +25,5 @@ const BASE = `
 `;
 
 export function buildKitCss(fontFaces: string) {
-  return [`/* pixelcn kit - https://pixelcn.vercel.app/docs/kit */`, fontFaces, buildThemeCss(), BASE].join("\n");
+  return [`/* pixelcn kit - https://pixelcn.vercel.app/kits/html */`, fontFaces, buildThemeCss(), BASE].join("\n");
 }

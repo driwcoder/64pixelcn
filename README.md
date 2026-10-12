@@ -15,6 +15,16 @@ npx shadcn@latest add https://pixelcn.vercel.app/r/button.json
 
 Prefer another look? Build it at [/create](https://pixelcn.vercel.app/create) and copy the generated command.
 
+## Site areas
+
+| Area | URL | What it is |
+|------|-----|------------|
+| Create | `/create` | Build a preset (theme, font, size, corners, icons) and get the install command |
+| Components | `/docs/components` | Every component, including game UI (bars, inventory, dialogue, scoreboard...) |
+| Blocks | `/docs/blocks` | Ready-made screens: game screens first (title, pause, story log, shop, battle...), then website sections |
+| Engine kits | `/kits` | pixelcn outside React: HTML & JS kit, a text RPG and a Phaser game, grouped by platform |
+| Assets | `/assets` | Pixel art in your palette: icon sets and the item icon generator (characters and enemies next) |
+
 ## Project Structure
 
 Everything lives in one place, `apps/web`, which is both the docs site and the
@@ -103,7 +113,7 @@ optional tone (`pixel-tone-primary`, `-secondary`, `-accent`, `-destructive`) th
 No React or Tailwind needed: `https://pixelcn.vercel.app/kit/pixelcn.css` and
 `https://pixelcn.vercel.app/kit/pixelcn.js` (ES module). The JS has the themes, a palette-to-theme
 generator (any Lospec palette), `applyAppearance()`, `applyPalette()` and `drawPanel()`, which draws the
-same panels on a `<canvas>`. Docs and a live demo at `/docs/kit`. Rebuild with `pnpm kit:build`.
+same panels on a `<canvas>`. Docs and a live demo at `/kits/html`. Rebuild with `pnpm kit:build`.
 
 The same kit is the npm package `pixelcn` (`packages/kit`): `npm install pixelcn`, then
 `import "pixelcn/pixelcn.css"` and `import { drawPanel } from "pixelcn"`. To publish a new version:
