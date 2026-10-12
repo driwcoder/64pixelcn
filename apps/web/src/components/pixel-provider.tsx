@@ -67,9 +67,24 @@ function loadSettings(): StoredSettings {
 }
 
 export function PixelProvider({ children }: { children: ReactNode }) {
-  const [settings, setSettings] = useState<StoredSettings>(() =>
-    typeof window === "undefined" ? DEFAULTS : loadSettings()
-  );
+  // Always start from DEFAULTS so the first client render matches the
+  // server HTML exactly. Reading localStorage in the initializer would
+  // return the saved preset on the client but DEFAULTS on the server,
+  // causing a hydration mismatch (different button variants/classNames).
+  const [settings, setSettings] = useState<StoredSettings>(DEFAULTS);
+
+  // Apply persisted settings AFTER hydration, in an effect.
+  useEffect(() => {
+    const stored = loadSettings();
+    setSettings((cur) =>
+      cur.preset === stored.preset &&
+      cur.font === stored.font &&
+      cur.size === stored.size &&
+      cur.textScale === stored.textScale
+        ? cur
+        : stored
+    );
+  }, []);
 
   const { preset, font, size, textScale } = settings;
 
