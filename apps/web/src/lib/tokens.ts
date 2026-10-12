@@ -5,7 +5,8 @@
 //  - the Display menu and /create options (labels, swatches),
 //  - the shadcn registry presets served under /r (lib/preset-registry.ts).
 // The only other place font names appear is the next/font loaders in
-// app/layout.tsx, which next/font requires to be literal calls.
+// app/layout.tsx (self-hosted files in app/fonts), which next/font requires
+// to be literal calls.
 
 export type Tokens = Record<string, string>;
 
