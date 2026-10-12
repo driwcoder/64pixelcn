@@ -4,6 +4,7 @@ import * as React from "react";
 import { Settings2, ChevronDown, Check } from "lucide-react";
 import {
   usePixel,
+  type Preset,
   type PixelFont,
   type PixelSize,
   type TextScale,
@@ -15,7 +16,7 @@ const FONTS: { id: PixelFont; label: string }[] = [
   { id: "vt323", label: "VT323" },
   { id: "silkscreen", label: "Silkscreen" },
   { id: "pixelify", label: "Pixelify Sans" },
-  { id: "monogram", label: "Monogram" },
+  { id: "dotgothic", label: "DotGothic16" },
   { id: "system", label: "System Mono" },
 ];
 
@@ -27,6 +28,14 @@ const TEXT_SCALES: { id: TextScale; label: string }[] = [
   { id: "md", label: "Medium" },
   { id: "lg", label: "Large" },
   { id: "xl", label: "XL" },
+];
+
+const PRESETS: { id: Preset; label: string; swatch: string }[] = [
+  { id: "nintendo", label: "Nintendo", swatch: "#ff5f6d" },
+  { id: "gameboy", label: "GameBoy", swatch: "#8bac0f" },
+  { id: "neon", label: "Neon", swatch: "#f0f" },
+  { id: "sepia", label: "Sepia", swatch: "#c08552" },
+  { id: "mono", label: "Mono", swatch: "#e0e0e0" },
 ];
 
 function Option({
@@ -66,7 +75,7 @@ function Group({ label, children }: { label: string; children: React.ReactNode }
 }
 
 export function PixelControls() {
-  const { font, setFont, size, setSize, textScale, setTextScale } = usePixel();
+  const { preset, setPreset, font, setFont, size, setSize, textScale, setTextScale } = usePixel();
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
 
@@ -100,6 +109,31 @@ export function PixelControls() {
           role="menu"
           className="absolute right-0 top-full z-50 mt-1 w-52 border-2 border-foreground bg-popover text-popover-foreground shadow-[var(--pixel-shadow)]"
         >
+          <Group label="Color Preset">
+            {PRESETS.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => setPreset(p.id)}
+                className={cn(
+                  "flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left text-[10px] uppercase tracking-widest transition-colors",
+                  "hover:bg-accent hover:text-accent-foreground",
+                  preset === p.id && "bg-accent text-accent-foreground"
+                )}
+              >
+                <span className="flex items-center gap-2">
+                  <span
+                    aria-hidden
+                    className="inline-block h-3 w-3 border-2 border-current"
+                    style={{ backgroundColor: p.swatch }}
+                  />
+                  {p.label}
+                </span>
+                {preset === p.id && <Check className="h-3 w-3 shrink-0" strokeWidth={3} />}
+              </button>
+            ))}
+          </Group>
+
           <Group label="Font">
             {FONTS.map((f) => (
               <Option key={f.id} active={font === f.id} onClick={() => setFont(f.id)}>

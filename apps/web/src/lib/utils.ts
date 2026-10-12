@@ -13,9 +13,9 @@ export type Preset = "nintendo" | "gameboy" | "neon" | "sepia" | "mono";
 
 export const PRESETS: Preset[] = ["nintendo", "gameboy", "neon", "sepia", "mono"];
 
-export type PixelFont = "press-start" | "vt323" | "silkscreen" | "pixelify" | "monogram" | "system";
+export type PixelFont = "press-start" | "vt323" | "silkscreen" | "pixelify" | "dotgothic" | "system";
 
-export const FONTS: PixelFont[] = ["press-start", "vt323", "silkscreen", "pixelify", "monogram", "system"];
+export const FONTS: PixelFont[] = ["press-start", "vt323", "silkscreen", "pixelify", "dotgothic", "system"];
 
 export interface PixelConfig {
   preset: Preset;

@@ -15,7 +15,7 @@ export type PixelFont =
   | "vt323"
   | "silkscreen"
   | "pixelify"
-  | "monogram"
+  | "dotgothic"
   | "system";
 export type PixelSize = 8 | 16 | 32 | 64 | 128;
 export type TextScale = "xs" | "sm" | "md" | "lg" | "xl";

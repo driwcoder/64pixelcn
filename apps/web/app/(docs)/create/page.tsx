@@ -19,7 +19,7 @@ const FONTS: { id: PixelFont; label: string }[] = [
   { id: "vt323", label: "VT323" },
   { id: "silkscreen", label: "Silkscreen" },
   { id: "pixelify", label: "Pixelify Sans" },
-  { id: "monogram", label: "Monogram" },
+  { id: "dotgothic", label: "DotGothic16" },
   { id: "system", label: "System Mono" },
 ];
 
