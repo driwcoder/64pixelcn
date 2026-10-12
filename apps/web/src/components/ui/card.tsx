@@ -7,7 +7,7 @@ const PixelCard = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivE
       ref={ref}
       data-slot="card"
       className={cn(
-        "bg-card text-card-foreground flex flex-col gap-4 pixel-rounded border-2 border-foreground",
+        "bg-card text-card-foreground flex flex-col gap-4 pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground",
         "pixel-shadow",
         className
       )}

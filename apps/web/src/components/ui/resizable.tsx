@@ -44,7 +44,7 @@ function PixelResizableHandle({
       {...props}
     >
       {withHandle && (
-        <div className="z-10 flex h-4 w-3 items-center justify-center border-2 border-foreground bg-popover">
+        <div className="z-10 flex h-4 w-3 items-center justify-center border-[length:var(--pixel-line,2px)] border-foreground bg-popover">
           <GripVertical className="h-2.5 w-2.5" strokeWidth={3} />
         </div>
       )}

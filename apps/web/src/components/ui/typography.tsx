@@ -48,7 +48,7 @@ function PixelTypographyMuted({ className, ...props }: React.ComponentProps<"p">
 
 function PixelTypographyInlineCode({ className, ...props }: React.ComponentProps<"code">) {
   return (
-    <code data-slot="typography-inline-code" className={cn("relative border-2 border-foreground bg-muted px-[0.3rem] py-[0.2rem] text-[0.7rem] font-mono box-decoration-clone break-words", className)} {...props} />
+    <code data-slot="typography-inline-code" className={cn("relative border-[length:var(--pixel-line,2px)] border-foreground bg-muted px-[0.3rem] py-[0.2rem] text-[0.7rem] font-mono box-decoration-clone break-words", className)} {...props} />
   );
 }
 

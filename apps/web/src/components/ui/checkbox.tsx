@@ -11,7 +11,7 @@ const PixelCheckbox = React.forwardRef<
     ref={ref}
     data-slot="checkbox"
     className={cn(
-      "peer h-5 w-5 shrink-0 border-2 border-foreground bg-transparent",
+      "peer h-5 w-5 shrink-0 border-[length:var(--pixel-line,2px)] border-foreground bg-transparent",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
       "disabled:cursor-not-allowed disabled:opacity-50",
       "data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",

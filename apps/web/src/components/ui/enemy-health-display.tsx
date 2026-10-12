@@ -20,7 +20,7 @@ const PixelEnemyHealthDisplay = React.forwardRef<HTMLDivElement, PixelEnemyHealt
         ref={ref}
         data-slot="enemy-health-display"
         className={cn(
-          "w-full border-2 border-foreground bg-popover p-3 font-[family-name:var(--pixel-font)] pixel-shadow",
+          "w-full border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-3 font-[family-name:var(--pixel-font)] pixel-shadow",
           className
         )}
         {...props}
@@ -38,7 +38,7 @@ const PixelEnemyHealthDisplay = React.forwardRef<HTMLDivElement, PixelEnemyHealt
 
         {/* Segmented bar */}
         <div
-          className="flex h-4 w-full gap-px border-2 border-foreground bg-muted p-px"
+          className="flex h-4 w-full gap-px border-[length:var(--pixel-line,2px)] border-foreground bg-muted p-px"
           role="progressbar"
           aria-valuenow={value}
           aria-valuemin={0}

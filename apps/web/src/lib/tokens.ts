@@ -4,9 +4,8 @@
 //  - the site's theme CSS (buildThemeCss, injected by app/layout.tsx),
 //  - the Display menu and /create options (labels, swatches),
 //  - the shadcn registry presets served under /r (lib/preset-registry.ts).
-// The only other place font names appear is the next/font loaders in
-// app/layout.tsx (self-hosted files in app/fonts), which next/font requires
-// to be literal calls.
+// The only other place font names appear is app/fonts.css, the @font-face
+// rules for the self-hosted font files in public/fonts.
 
 export type Tokens = Record<string, string>;
 
@@ -329,10 +328,12 @@ export type PixelSize = (typeof PIXEL_SIZES)[number];
 
 /**
  * Per pixel size ("8x" is a low-res sprite, "128x" a high-res one):
+ *  - pixel-line: component border width (border-[length:var(--pixel-line,2px)]),
+ *    thin on low-res sprites and chunky on high-res ones;
  *  - pixel-shadow-offset: hard drop-shadow offset;
  *  - pixel-corner: one step of a stepped (rounded) corner. Always equal to the
  *    offset, so corners and shadow share one pixel grid (see
- *    roundedCornerDecls); never below the 2px component border;
+ *    roundedCornerDecls); never thinner than the border (pixel-line);
  *  - pixel-bevel: highlight/shadow bands. Low-res sprites only have room for
  *    a 2-tone ramp (1 band each side); from 32x up there's room for a 4-tone
  *    ramp (2 bands each side).
@@ -344,11 +345,11 @@ const bevel = (unit: string, bands: 1 | 2) => {
 };
 
 export const SIZE_TOKENS: Record<PixelSize, Tokens> = {
-  128: { "pixel-size": "8px", "pixel-border": "4px", "pixel-shadow-offset": "4px", "pixel-corner": "4px", "pixel-bevel": bevel("2px", 2) },
-  64: { "pixel-size": "4px", "pixel-border": "3px", "pixel-shadow-offset": "3px", "pixel-corner": "3px", "pixel-bevel": bevel("2px", 2) },
-  32: { "pixel-size": "2px", "pixel-border": "2px", "pixel-shadow-offset": "2px", "pixel-corner": "2px", "pixel-bevel": bevel("1px", 2) },
-  16: { "pixel-size": "1px", "pixel-border": "1px", "pixel-shadow-offset": "2px", "pixel-corner": "2px", "pixel-bevel": bevel("1px", 1) },
-  8: { "pixel-size": "0.5px", "pixel-border": "1px", "pixel-shadow-offset": "2px", "pixel-corner": "2px", "pixel-bevel": bevel("1px", 1) },
+  128: { "pixel-size": "8px", "pixel-border": "4px", "pixel-line": "3px", "pixel-shadow-offset": "4px", "pixel-corner": "4px", "pixel-bevel": bevel("2px", 2) },
+  64: { "pixel-size": "4px", "pixel-border": "3px", "pixel-line": "2px", "pixel-shadow-offset": "3px", "pixel-corner": "3px", "pixel-bevel": bevel("2px", 2) },
+  32: { "pixel-size": "2px", "pixel-border": "2px", "pixel-line": "2px", "pixel-shadow-offset": "2px", "pixel-corner": "2px", "pixel-bevel": bevel("1px", 2) },
+  16: { "pixel-size": "1px", "pixel-border": "1px", "pixel-line": "1px", "pixel-shadow-offset": "2px", "pixel-corner": "2px", "pixel-bevel": bevel("1px", 1) },
+  8: { "pixel-size": "0.5px", "pixel-border": "1px", "pixel-line": "1px", "pixel-shadow-offset": "2px", "pixel-corner": "2px", "pixel-bevel": bevel("1px", 1) },
 };
 
 /**
@@ -358,13 +359,32 @@ export const SIZE_TOKENS: Record<PixelSize, Tokens> = {
  * corners clip to it. `drop` is the shadow color right behind the box.
  */
 const OFFSET = "var(--pixel-shadow-offset)";
+
+/**
+ * Extruded shadow: the block's side (shade-drop) one offset out, outlined
+ * one more offset out (foreground). The side is drawn as a right strip and a
+ * bottom strip that stop `cut` short of the bottom-right corner, so with
+ * stepped corners it follows the stair instead of ending in a square corner
+ * (a single box-shadow can only be a rectangle). With cut = 0 the two strips
+ * are the plain rectangle.
+ */
+export function extrudedShadow(cut: string) {
+  const o = OFFSET;
+  const side = "var(--shade-drop)";
+  return [
+    "var(--pixel-bevel)",
+    `calc(${o} + ${cut}) ${o} 0 calc(${cut} * -1) ${side}`,
+    `${o} calc(${o} + ${cut}) 0 calc(${cut} * -1) ${side}`,
+    `calc(${o} * 2) calc(${o} * 2) 0 0 var(--foreground)`,
+  ].join(", ");
+}
 export const SHADINGS = {
   flat: { label: "Flat", shadow: "0 0 #0000", reach: 0, drop: "transparent" },
   hard: { label: "Hard drop", shadow: `${OFFSET} ${OFFSET} 0 0 var(--foreground)`, reach: 1, drop: "var(--foreground)" },
   bevel: { label: "Bevel", shadow: `var(--pixel-bevel), ${OFFSET} ${OFFSET} 0 0 var(--foreground)`, reach: 1, drop: "var(--foreground)" },
   deep: {
     label: "Extruded",
-    shadow: `var(--pixel-bevel), ${OFFSET} ${OFFSET} 0 0 var(--shade-drop), calc(${OFFSET} * 2) calc(${OFFSET} * 2) 0 0 var(--foreground)`,
+    shadow: extrudedShadow("0px"),
     reach: 2,
     drop: "var(--shade-drop)",
   },
@@ -391,7 +411,7 @@ export type TextScale = keyof typeof TEXT_SCALES;
 
 export interface FontSpec {
   label: string;
-  /** CSS variable set by the next/font loader in app/layout.tsx. */
+  /** CSS variable holding the family, defined in app/fonts.css. */
   cssVar?: string;
   /** Google Fonts family + next/font import name, used by the registry. */
   google?: { family: string; import: string; subsets: string[] };
@@ -493,7 +513,13 @@ export function fontFamily(font: PixelFont, familyVar?: string) {
 
 export function shadingTokens(shading: Shading): Tokens {
   const { shadow, reach, drop } = SHADINGS[shading];
-  return { "pixel-shadow": shadow, "pixel-shadow-reach": `calc(var(--pixel-shadow-offset) * ${reach})`, "pixel-drop-color": drop };
+  return {
+    "pixel-shadow": shadow,
+    "pixel-shadow-reach": `calc(var(--pixel-shadow-offset) * ${reach})`,
+    "pixel-drop-color": drop,
+    // Color of the outermost shadow band (Extruded's outline).
+    "pixel-drop-outer": shading === "deep" ? "var(--foreground)" : drop,
+  };
 }
 
 export type CssDecls = Record<string, string>;
@@ -520,7 +546,7 @@ export function roundedCornerDecls(steps: number): CssDecls | null {
   const k = steps;
   const s = "var(--pixel-corner)";
   const r = "var(--pixel-reach, 0px)";
-  const b = "var(--pixel-corner-border, 2px)";
+  const b = "var(--pixel-line, 2px)";
   const m = (n: number) => (n === 0 ? "0px" : `${s} * ${n}`);
   const c = (expr: string) => `calc(${expr})`;
   const minc = (a: string, z: string) => `min(${a}, ${z})`;
@@ -559,6 +585,11 @@ export function roundedCornerDecls(steps: number): CssDecls | null {
   const all = (["left", "right"] as const).flatMap((h) =>
     (["top", "bottom"] as const).flatMap((v) => stair.map((l) => ({ ...l, pos: `${h} ${l.x} ${v} ${l.y}` })))
   );
+  // Cut-away bottom-right pixels: those more than two steps inside the
+  // corner are behind the shadow's outer band (Extruded's outline), the rest
+  // behind its first band. Pixels behind no band are clipped anyway.
+  const outer = "var(--pixel-corner-shadow-outer, var(--pixel-corner-shadow, transparent))";
+  for (let i = 0; i < k - 2; i++) all.push({ x: "0px", y: c(m(i)), w: c(m(k - 2 - i)), h: s, color: outer, pos: `right 0px bottom ${c(m(i))}` });
   const behind = "var(--pixel-corner-shadow, transparent)";
   for (let i = 0; i < k; i++) all.push({ x: "0px", y: c(m(i)), w: c(m(k - i)), h: s, color: behind, pos: `right 0px bottom ${c(m(i))}` });
 
@@ -576,19 +607,21 @@ export function roundedCornerDecls(steps: number): CssDecls | null {
  * Per-element corner variables must not inherit: a rounded button inside a
  * rounded card would otherwise get the card's shadow reach and colors.
  */
-export const NON_INHERITED_VARS = ["--pixel-reach", "--pixel-corner-shadow", "--pixel-corner-color"] as const;
+export const NON_INHERITED_VARS = ["--pixel-reach", "--pixel-corner-shadow", "--pixel-corner-shadow-outer", "--pixel-corner-color"] as const;
 export const PROPERTY_RULES = NON_INHERITED_VARS.map((name) => `@property ${name}{syntax:"*";inherits:false;}`).join("\n");
 
 /** A `.pixel-shadow` element's clip makes room for its shadow. */
 export const ROUNDED_SHADOW_DECLS: CssDecls = {
   "--pixel-reach": "var(--pixel-shadow-reach)",
   "--pixel-corner-shadow": "var(--pixel-drop-color)",
+  "--pixel-corner-shadow-outer": "var(--pixel-drop-outer)",
 };
 
 /** Pressed buttons drop their shadow (active:shadow-none), so the clip does too. */
 export const ROUNDED_PRESSED_DECLS: CssDecls = {
   "--pixel-reach": "0px",
   "--pixel-corner-shadow": "transparent",
+  "--pixel-corner-shadow-outer": "transparent",
 };
 
 /** Focus ring drawn inside the box, since stepped corners clip outer rings. */
@@ -596,8 +629,18 @@ export const ROUNDED_FOCUS_DECLS: CssDecls = {
   "--tw-ring-shadow": "0 0 #0000",
   "--tw-ring-offset-shadow": "0 0 #0000",
   outline: "2px solid var(--ring)",
-  "outline-offset": "calc(-2px - var(--pixel-corner-border, 2px))",
+  "outline-offset": "calc(-2px - var(--pixel-line, 2px))",
 };
+
+/**
+ * With Extruded shading, rounded shadowed elements get a shadow whose side
+ * strips stop at this radius' corner. Declared on the element (not <html>)
+ * because only `.pixel-rounded` elements have stepped corners.
+ */
+export function extrudedRoundedDecls(radius: Radius): CssDecls | null {
+  const steps = RADII[radius].steps;
+  return steps ? { "--pixel-shadow": extrudedShadow(`calc(var(--pixel-corner) * ${steps})`) } : null;
+}
 
 /** Selectors (relative to the radius scope) and declarations for a radius. */
 export function roundedRules(radius: Radius): [selector: string, decls: CssDecls][] {
@@ -645,5 +688,9 @@ export function buildThemeCss() {
     ...FONT_IDS.map((f) => rule(`[data-font="${f}"]`, fontVars(f))),
     ...SHADING_IDS.map((s) => rule(`[data-shading="${s}"]`, shadingTokens(s))),
     ...RADIUS_IDS.flatMap((id) => roundedRules(id).map(([sel, decls]) => declRule(`[data-radius="${id}"] ${sel}`, decls))),
+    ...RADIUS_IDS.flatMap((id) => {
+      const decls = extrudedRoundedDecls(id);
+      return decls ? [declRule(`[data-radius="${id}"][data-shading="deep"] .pixel-rounded.pixel-shadow`, decls)] : [];
+    }),
   ].join("\n");
 }

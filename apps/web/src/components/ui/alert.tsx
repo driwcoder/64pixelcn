@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 const pixelAlertVariants = cva(
   [
-    "relative grid w-full grid-cols-[0_1fr] items-start gap-y-[0.35em] pixel-rounded border-2 border-foreground px-4 py-3 font-[family-name:var(--pixel-font)] pixel-shadow",
+    "relative grid w-full grid-cols-[0_1fr] items-start gap-y-[0.35em] pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground px-4 py-3 font-[family-name:var(--pixel-font)] pixel-shadow",
     // A direct child icon gets its own column on the left, with a gap that
     // scales with the font, instead of stacking on top of the title.
     "has-[>svg]:grid-cols-[1.25em_1fr] has-[>svg]:gap-x-[0.9em] [&>svg]:size-[1.25em] [&>svg]:translate-y-[0.05em] [&>svg]:text-current",

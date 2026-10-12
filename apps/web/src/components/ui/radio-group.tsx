@@ -19,7 +19,7 @@ const PixelRadioGroupItem = React.forwardRef<
     ref={ref}
     data-slot="radio-group-item"
     className={cn(
-      "aspect-square h-4 w-4 border-2 border-foreground text-primary",
+      "aspect-square h-4 w-4 border-[length:var(--pixel-line,2px)] border-foreground text-primary",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
       "disabled:cursor-not-allowed disabled:opacity-50",
       className

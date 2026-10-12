@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const inputGroupVariants = cva(
-  "flex w-full items-center border-2 border-foreground bg-transparent shadow-[inset_1px_1px_0px_var(--muted),inset_-1px_-1px_0px_var(--border)] focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-1",
+  "flex w-full items-center border-[length:var(--pixel-line,2px)] border-foreground bg-transparent shadow-[inset_1px_1px_0px_var(--muted),inset_-1px_-1px_0px_var(--border)] focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-1",
   {
     variants: {
       size: {
@@ -51,10 +51,10 @@ const PixelInputGroupAddon = React.forwardRef<
     data-align={align}
     className={cn(
       "flex items-center gap-2 border-foreground bg-muted px-3 text-[0.7rem] uppercase tracking-widest text-muted-foreground",
-      align === "inline-start" && "border-r-2",
-      align === "inline-end" && "border-l-2",
-      align === "block-start" && "border-b-2 w-full",
-      align === "block-end" && "border-t-2 w-full",
+      align === "inline-start" && "border-r-[length:var(--pixel-line,2px)]",
+      align === "inline-end" && "border-l-[length:var(--pixel-line,2px)]",
+      align === "block-start" && "border-b-[length:var(--pixel-line,2px)] w-full",
+      align === "block-end" && "border-t-[length:var(--pixel-line,2px)] w-full",
       className
     )}
     {...props}

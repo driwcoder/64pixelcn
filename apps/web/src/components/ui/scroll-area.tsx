@@ -35,7 +35,7 @@ const PixelScrollBar = React.forwardRef<
   >
     <ScrollAreaPrimitive.ScrollAreaThumb
       data-slot="scroll-area-thumb"
-      className="relative flex-1 bg-primary border-2 border-transparent"
+      className="relative flex-1 bg-primary border-[length:var(--pixel-line,2px)] border-transparent"
     />
   </ScrollAreaPrimitive.ScrollAreaScrollbar>
 ));

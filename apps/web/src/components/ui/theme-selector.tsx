@@ -44,7 +44,7 @@ const PixelThemeSelector = React.forwardRef<HTMLDivElement, PixelThemeSelectorPr
                 onClick={() => onValueChange?.(theme.id)}
                 data-active={active}
                 className={cn(
-                  "flex items-center gap-2 border-2 border-foreground px-3 py-2 text-[0.7rem] uppercase tracking-widest transition-all",
+                  "flex items-center gap-2 border-[length:var(--pixel-line,2px)] border-foreground px-3 py-2 text-[0.7rem] uppercase tracking-widest transition-all",
                   "hover:-translate-y-0.5",
                   active
                     ? "bg-primary text-primary-foreground pixel-shadow"

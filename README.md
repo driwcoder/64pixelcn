@@ -144,4 +144,4 @@ for another domain, build the registry with `PIXELCN_REGISTRY_URL=https://your-d
 - Tailwind CSS v4
 - Radix UI primitives
 - class-variance-authority (CVA)
-- Pixel fonts self-hosted with next/font/local from `apps/web/app/fonts` (default: Silkscreen)
+- Pixel fonts self-hosted in `apps/web/public/fonts` with every character subset (default: Silkscreen)

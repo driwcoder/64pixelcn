@@ -23,7 +23,7 @@ const PixelComboboxButton = React.forwardRef<
     ref={ref}
     data-slot="combobox-button"
     className={cn(
-      "flex h-10 w-full items-center justify-between border-2 border-foreground bg-transparent px-3 py-2",
+      "flex h-10 w-full items-center justify-between border-[length:var(--pixel-line,2px)] border-foreground bg-transparent px-3 py-2",
       "font-[family-name:var(--pixel-font)] text-xs",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
       "disabled:cursor-not-allowed disabled:opacity-50",

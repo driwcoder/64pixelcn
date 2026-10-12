@@ -31,8 +31,8 @@ export function PixelNavButton({ href, children, block, small }: PixelNavButtonP
         small ? "px-2 py-1 text-[0.7rem]" : "px-3 py-2 text-[0.7rem]",
         block ? "block w-full text-left" : "inline-block",
         active
-          ? "bg-primary text-primary-foreground border-2 border-foreground"
-          : "text-muted-foreground hover:text-primary border-2 border-transparent hover:bg-accent/50",
+          ? "bg-primary text-primary-foreground border-[length:var(--pixel-line,2px)] border-foreground"
+          : "text-muted-foreground hover:text-primary border-[length:var(--pixel-line,2px)] border-transparent hover:bg-accent/50",
         // Optimistic: highlight the clicked link immediately, before the
         // route finishes loading.
         "has-[[data-pending]]:bg-primary has-[[data-pending]]:text-primary-foreground has-[[data-pending]]:border-foreground"

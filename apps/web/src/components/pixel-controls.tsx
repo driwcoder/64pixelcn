@@ -18,7 +18,7 @@ export function PixelControls() {
     return (
       <span
         title="Display settings are paused while you build a preset"
-        className="flex items-center gap-1.5 border-2 border-dashed border-muted-foreground px-2.5 py-1.5 text-[0.7rem] uppercase tracking-widest text-muted-foreground"
+        className="flex items-center gap-1.5 border-[length:var(--pixel-line,2px)] border-dashed border-muted-foreground px-2.5 py-1.5 text-[0.7rem] uppercase tracking-widest text-muted-foreground"
       >
         <Settings2 className="h-3.5 w-3.5" strokeWidth={3} />
         <span className="hidden sm:inline">Display off</span>
@@ -31,7 +31,7 @@ export function PixelControls() {
       <PixelPopoverTrigger asChild>
         <button
           type="button"
-          className="flex items-center gap-1.5 border-2 border-foreground bg-transparent px-2.5 py-1.5 text-[0.7rem] uppercase tracking-widest text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex items-center gap-1.5 border-[length:var(--pixel-line,2px)] border-foreground bg-transparent px-2.5 py-1.5 text-[0.7rem] uppercase tracking-widest text-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Settings2 className="h-3.5 w-3.5" strokeWidth={3} />
           <span className="hidden sm:inline">Display</span>
@@ -48,7 +48,7 @@ export function PixelControls() {
         <button
           type="button"
           onClick={() => update(DEFAULT_APPEARANCE)}
-          className="flex w-full items-center justify-center gap-2 border-2 border-transparent px-2 py-1.5 text-[0.65rem] uppercase tracking-widest text-muted-foreground hover:border-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex w-full items-center justify-center gap-2 border-[length:var(--pixel-line,2px)] border-transparent px-2 py-1.5 text-[0.65rem] uppercase tracking-widest text-muted-foreground hover:border-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <RotateCcw className="h-3 w-3" /> Reset
         </button>

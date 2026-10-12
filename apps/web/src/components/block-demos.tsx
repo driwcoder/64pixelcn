@@ -14,7 +14,7 @@ import {
 // ─── HERO ─────────────────────────────────────────────────────
 export function HeroCentered() {
   return (
-    <div className="text-center py-10 px-4 border-2 border-foreground bg-card">
+    <div className="text-center py-10 px-4 border-[length:var(--pixel-line,2px)] border-foreground bg-card">
       <PixelBadge variant="outline" className="mb-4">NEW v0.1.0</PixelBadge>
       <h1 className="font-[family-name:var(--pixel-font)] text-2xl sm:text-3xl uppercase tracking-widest mb-3 break-words">64pixelcn</h1>
       <p className="text-xs text-muted-foreground mb-6 max-w-md mx-auto">A pixel art component library for retro UIs.</p>
@@ -28,14 +28,14 @@ export function HeroCentered() {
 
 export function HeroSplit() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 border-2 border-foreground bg-card">
+    <div className="grid grid-cols-1 md:grid-cols-2 border-[length:var(--pixel-line,2px)] border-foreground bg-card">
       <div className="min-w-0 p-[1.5em] flex flex-col justify-center">
         <PixelBadge variant="outline" className="mb-3 w-fit">RETRO UI</PixelBadge>
         <h2 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-3 wrap-anywhere">Build retro apps</h2>
         <p className="text-xs text-muted-foreground mb-5">Pixel-perfect components with modern React.</p>
         <PixelButton className="w-fit">Explore</PixelButton>
       </div>
-      <div className="bg-muted border-t-2 md:border-t-0 md:border-l-2 border-foreground flex items-center justify-center p-8 min-h-[160px]">
+      <div className="bg-muted border-t-[length:var(--pixel-line,2px)] md:border-t-0 md:border-l-[length:var(--pixel-line,2px)] border-foreground flex items-center justify-center p-8 min-h-[160px]">
         <Sparkles className="h-16 w-16 text-primary" strokeWidth={2} />
       </div>
     </div>
@@ -44,7 +44,7 @@ export function HeroSplit() {
 
 export function HeroGameTitle() {
   return (
-    <div className="border-2 border-foreground bg-card p-8 text-center">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-8 text-center">
       <div className="text-[0.7rem] uppercase tracking-widest text-muted-foreground mb-2">PRESS START</div>
       <h2 className="font-[family-name:var(--pixel-font)] text-2xl uppercase tracking-widest mb-4 text-primary">PIXEL QUEST</h2>
       <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[0.7rem] uppercase tracking-widest">
@@ -81,10 +81,10 @@ export function FeaturesCardGrid() {
 export function FeaturesList() {
   const steps = ["Install via CLI", "Pick a preset", "Build your UI"];
   return (
-    <div className="border-2 border-foreground bg-card p-[0.9em] space-y-[0.5em]">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-[0.9em] space-y-[0.5em]">
       {steps.map((s, i) => (
         <div key={i} className="flex items-center gap-[0.6em]">
-          <span className="font-[family-name:var(--pixel-font)] text-[0.75em] border-2 border-foreground bg-primary text-primary-foreground h-[1.8em] w-[1.8em] flex items-center justify-center shrink-0 leading-none">{i + 1}</span>
+          <span className="font-[family-name:var(--pixel-font)] text-[0.75em] border-[length:var(--pixel-line,2px)] border-foreground bg-primary text-primary-foreground h-[1.8em] w-[1.8em] flex items-center justify-center shrink-0 leading-none">{i + 1}</span>
           <span className="text-[0.8em] uppercase tracking-widest leading-relaxed">{s}</span>
         </div>
       ))}
@@ -119,7 +119,7 @@ export function PricingTiers() {
 // ─── FAQ ──────────────────────────────────────────────────────
 export function FaqAccordion() {
   return (
-    <PixelAccordion type="single" collapsible className="border-2 border-foreground bg-card">
+    <PixelAccordion type="single" collapsible className="border-[length:var(--pixel-line,2px)] border-foreground bg-card">
       <PixelAccordionItem value="q1">
         <PixelAccordionTrigger>Is it accessible?</PixelAccordionTrigger>
         <PixelAccordionContent>Yes, built on Radix primitives.</PixelAccordionContent>
@@ -143,7 +143,7 @@ export function StatsBar() {
   return (
     // gap + foreground background draws the dividers, so they stay correct
     // however many columns fit (4 on wide screens, 2 on phones).
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-[2px] border-2 border-foreground bg-foreground">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-[2px] border-[length:var(--pixel-line,2px)] border-foreground bg-foreground">
       {stats.map((s) => (
         <div key={s.label} className="min-w-0 bg-card p-[0.7em] text-center flex flex-col items-center justify-center gap-[0.2em]">
           <div className="font-[family-name:var(--pixel-font)] text-[1.3em] leading-tight text-primary">{s.value}</div>
@@ -176,11 +176,11 @@ export function Testimonials() {
 export function TimelineVertical() {
   const steps = ["Design", "Build", "Ship"];
   return (
-    <div className="border-2 border-foreground bg-card p-4 space-y-4">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-4 space-y-4">
       {steps.map((s, i) => (
         <div key={s} className="flex gap-3">
           <div className="flex flex-col items-center">
-            <div className="h-3 w-3 border-2 border-foreground bg-primary" />
+            <div className="h-3 w-3 border-[length:var(--pixel-line,2px)] border-foreground bg-primary" />
             {i < steps.length - 1 && <div className="w-0.5 flex-1 bg-foreground" />}
           </div>
           <div className="pb-2">
@@ -238,12 +238,12 @@ export function TeamGrid() {
 // ─── ADVANCED ─────────────────────────────────────────────────
 export function MetricsDashboard() {
   return (
-    <div className="border-2 border-foreground bg-card p-4 space-y-4">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-4 space-y-4">
       <div className="font-[family-name:var(--pixel-font)] text-xs uppercase tracking-widest">Dashboard</div>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(5.5rem,1fr))] gap-2">
-        <div className="border-2 border-foreground p-2 text-center"><div className="text-lg text-primary">1.2k</div><div className="text-[0.7rem] text-muted-foreground">Users</div></div>
-        <div className="border-2 border-foreground p-2 text-center"><div className="text-lg text-primary">98%</div><div className="text-[0.7rem] text-muted-foreground">Uptime</div></div>
-        <div className="border-2 border-foreground p-2 text-center"><div className="text-lg text-primary">70</div><div className="text-[0.7rem] text-muted-foreground">Items</div></div>
+        <div className="border-[length:var(--pixel-line,2px)] border-foreground p-2 text-center"><div className="text-lg text-primary">1.2k</div><div className="text-[0.7rem] text-muted-foreground">Users</div></div>
+        <div className="border-[length:var(--pixel-line,2px)] border-foreground p-2 text-center"><div className="text-lg text-primary">98%</div><div className="text-[0.7rem] text-muted-foreground">Uptime</div></div>
+        <div className="border-[length:var(--pixel-line,2px)] border-foreground p-2 text-center"><div className="text-lg text-primary">70</div><div className="text-[0.7rem] text-muted-foreground">Items</div></div>
       </div>
       <PixelProgress value={72} />
     </div>
@@ -265,7 +265,7 @@ export function Newsletter() {
 export function DemoShell() {
   const lines = ["$ npx shadcn init", "✓ Installing...", "✓ Done!"];
   return (
-    <div className="border-2 border-foreground bg-muted p-3 font-mono text-xs space-y-1">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-muted p-3 font-mono text-xs space-y-1">
       {lines.map((l, i) => <div key={i} className="text-green-400">{l}</div>)}
       <div className="text-muted-foreground">$ <span className="animate-pulse">_</span></div>
     </div>
@@ -275,7 +275,7 @@ export function DemoShell() {
 // ─── LAYOUT ───────────────────────────────────────────────────
 export function FooterBlock() {
   return (
-    <div className="border-2 border-foreground bg-card p-4 grid md:grid-cols-3 gap-4 text-[0.7rem]">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-4 grid md:grid-cols-3 gap-4 text-[0.7rem]">
       <div className="font-[family-name:var(--pixel-font)] uppercase tracking-widest">64pixelcn</div>
       <div className="space-y-1"><div className="uppercase tracking-widest text-muted-foreground">Product</div><div>Components</div><div>Blocks</div></div>
       <div className="space-y-1"><div className="uppercase tracking-widest text-muted-foreground">Social</div><div>GitHub</div><div>Docs</div></div>
@@ -285,7 +285,7 @@ export function FooterBlock() {
 
 export function NotFoundPage() {
   return (
-    <div className="border-2 border-foreground bg-card p-10 text-center">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-10 text-center">
       <h2 className="font-[family-name:var(--pixel-font)] text-5xl text-primary mb-3">404</h2>
       <p className="text-xs text-muted-foreground mb-4">Page not found. The pixel is elsewhere.</p>
       <PixelButton variant="outline" size="sm">Go Home</PixelButton>
@@ -296,7 +296,7 @@ export function NotFoundPage() {
 // ─── GAME ─────────────────────────────────────────────────────
 export function GameHeroXp() {
   return (
-    <div className="border-2 border-foreground bg-card p-6 space-y-3">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-6 space-y-3">
       <h2 className="font-[family-name:var(--pixel-font)] text-xl uppercase tracking-widest">Player One</h2>
       <PixelHealthBar value={85} showIcon />
       <PixelManaBar value={60} showIcon />
@@ -312,9 +312,9 @@ export function GameSkillTree() {
     { icon: Flame, name: "Fire", level: 5 },
   ];
   return (
-    <div className="border-2 border-foreground bg-card p-4 grid grid-cols-[repeat(auto-fit,minmax(6rem,1fr))] gap-2">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-4 grid grid-cols-[repeat(auto-fit,minmax(6rem,1fr))] gap-2">
       {skills.map((s) => (
-        <div key={s.name} className="min-w-0 border-2 border-foreground p-2 text-center break-words">
+        <div key={s.name} className="min-w-0 border-[length:var(--pixel-line,2px)] border-foreground p-2 text-center break-words">
           <s.icon className="h-6 w-6 mx-auto mb-1 text-primary" strokeWidth={2} />
           <div className="text-[0.7rem] uppercase tracking-widest">{s.name}</div>
           <div className="text-[0.7rem] text-muted-foreground">Lv {s.level}</div>
@@ -327,11 +327,11 @@ export function GameSkillTree() {
 export function GamePartyGrid() {
   const party = ["Warrior", "Mage", "Healer", "Rogue"];
   return (
-    <div className="border-2 border-foreground bg-card p-4">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-4">
       <div className="text-xs uppercase tracking-widest mb-2 flex items-center gap-2"><Users className="h-4 w-4" /> Party</div>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(6rem,1fr))] gap-2">
         {party.map((p) => (
-          <div key={p} className="min-w-0 border-2 border-foreground p-2 text-center text-[0.7rem] uppercase break-words">{p}</div>
+          <div key={p} className="min-w-0 border-[length:var(--pixel-line,2px)] border-foreground p-2 text-center text-[0.7rem] uppercase break-words">{p}</div>
         ))}
       </div>
     </div>
@@ -342,10 +342,10 @@ export function GamePartyGrid() {
 export function GameMainMenu() {
   const items = ["New Game", "Continue", "Options", "Quit"];
   return (
-    <div className="border-2 border-foreground bg-card p-6 space-y-2">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-6 space-y-2">
       <div className="font-[family-name:var(--pixel-font)] text-lg text-primary mb-3 text-center">PIXEL QUEST</div>
       {items.map((it, i) => (
-        <div key={it} className={`text-xs uppercase tracking-widest px-3 py-1.5 border-2 ${i === 0 ? "border-primary bg-primary text-primary-foreground" : "border-transparent text-muted-foreground"}`}>▶ {it}</div>
+        <div key={it} className={`text-xs uppercase tracking-widest px-3 py-1.5 border-[length:var(--pixel-line,2px)] ${i === 0 ? "border-primary bg-primary text-primary-foreground" : "border-transparent text-muted-foreground"}`}>▶ {it}</div>
       ))}
     </div>
   );
@@ -353,7 +353,7 @@ export function GameMainMenu() {
 
 export function GameLoadingScreen() {
   return (
-    <div className="border-2 border-foreground bg-card p-10 text-center space-y-4">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-10 text-center space-y-4">
       <div className="text-xs uppercase tracking-widest">Loading...</div>
       <PixelProgress value={66} />
       <div className="text-[0.7rem] text-muted-foreground">Loading assets 66%</div>
@@ -363,7 +363,7 @@ export function GameLoadingScreen() {
 
 export function GameOverScreen() {
   return (
-    <div className="border-2 border-foreground bg-destructive p-10 text-center">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-destructive p-10 text-center">
       <h2 className="font-[family-name:var(--pixel-font)] text-2xl text-destructive-foreground mb-3">GAME OVER</h2>
       <p className="text-xs text-destructive-foreground/80 mb-4">Final Score: 12,450</p>
       <PixelButton variant="outline" size="sm">Retry</PixelButton>
@@ -373,7 +373,7 @@ export function GameOverScreen() {
 
 export function GameVictoryScreen() {
   return (
-    <div className="border-2 border-foreground bg-card p-8 text-center space-y-3">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-8 text-center space-y-3">
       <Trophy className="h-12 w-12 mx-auto text-primary" strokeWidth={2} />
       <h2 className="font-[family-name:var(--pixel-font)] text-xl text-primary">VICTORY!</h2>
       <div className="text-[0.7rem] uppercase tracking-widest text-muted-foreground">+500 XP · +100 Gold</div>
@@ -383,9 +383,9 @@ export function GameVictoryScreen() {
 
 export function GameSaveSlots() {
   return (
-    <div className="border-2 border-foreground bg-card p-4 space-y-2">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-4 space-y-2">
       {["Slot 1", "Slot 2", "Slot 3"].map((s) => (
-        <div key={s} className="flex justify-between border-2 border-foreground px-3 py-2 text-xs uppercase tracking-widest">
+        <div key={s} className="flex justify-between border-[length:var(--pixel-line,2px)] border-foreground px-3 py-2 text-xs uppercase tracking-widest">
           <span>{s}</span><span className="text-muted-foreground">Empty</span>
         </div>
       ))}
@@ -400,9 +400,9 @@ export function GameLeaderboard() {
     { rank: 3, name: "Carol", score: 72000 },
   ];
   return (
-    <div className="border-2 border-foreground bg-card p-4 space-y-1">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-4 space-y-1">
       {entries.map((e) => (
-        <div key={e.rank} className="flex justify-between border-2 border-foreground px-3 py-1.5 text-[0.7rem] uppercase">
+        <div key={e.rank} className="flex justify-between border-[length:var(--pixel-line,2px)] border-foreground px-3 py-1.5 text-[0.7rem] uppercase">
           <span>#{e.rank} {e.name}</span><span className="text-primary">{e.score}</span>
         </div>
       ))}
@@ -427,7 +427,7 @@ export function LoginForm() {
 // ─── CALENDAR ─────────────────────────────────────────────────
 export function CalendarBlockDemo() {
   return (
-    <div className="border-2 border-foreground p-2 inline-block">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground p-2 inline-block">
       <PixelCalendar mode="single" />
     </div>
   );
@@ -435,5 +435,5 @@ export function CalendarBlockDemo() {
 
 // ─── CHARTS ───────────────────────────────────────────────────
 export function ChartBarDemo() {
-  return <div className="border-2 border-foreground bg-card p-3 text-center text-[0.7rem] text-muted-foreground">Bar Chart (see Chart component)</div>;
+  return <div className="border-[length:var(--pixel-line,2px)] border-foreground bg-card p-3 text-center text-[0.7rem] text-muted-foreground">Bar Chart (see Chart component)</div>;
 }

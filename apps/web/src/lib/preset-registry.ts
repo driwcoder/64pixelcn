@@ -9,6 +9,7 @@ import {
   fontFamily,
   paletteTokens,
   roundedRules,
+  extrudedRoundedDecls,
   shadingTokens,
   NON_INHERITED_VARS,
   type FontSpec,
@@ -63,7 +64,9 @@ export function buildPresetItem(choice: PresetChoice, origin: string) {
   // pick :root is light and .dark is dark; for a dark pick both are dark.
   const light = { ...paletteTokens(choice.preset, choice.mode === "light" ? "light" : "dark"), ...shared };
   const dark = { ...paletteTokens(choice.preset, "dark"), ...shared };
-  const rounded = Object.fromEntries(roundedRules(choice.radius));
+  const rounded: Record<string, Record<string, string>> = Object.fromEntries(roundedRules(choice.radius));
+  const extruded = choice.shading === "deep" ? extrudedRoundedDecls(choice.radius) : null;
+  if (extruded) rounded[".pixel-rounded.pixel-shadow"] = { ...rounded[".pixel-rounded.pixel-shadow"], ...extruded };
 
   const registryDependencies = [
     "utils",

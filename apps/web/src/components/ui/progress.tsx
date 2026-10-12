@@ -9,7 +9,7 @@ const PixelProgress = React.forwardRef<
   <ProgressPrimitive.Root
     ref={ref}
     data-slot="progress"
-    className={cn("relative h-4 w-full overflow-hidden border-2 border-foreground bg-muted", className)}
+    className={cn("relative h-4 w-full overflow-hidden border-[length:var(--pixel-line,2px)] border-foreground bg-muted", className)}
     {...props}
   >
     <ProgressPrimitive.Indicator

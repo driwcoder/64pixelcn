@@ -38,7 +38,7 @@ const PixelDropdownMenuSubContent = React.forwardRef<
   <DropdownMenuPrimitive.SubContent
     ref={ref}
     data-slot="dropdown-menu-sub-content"
-    className={cn("z-50 min-w-[8rem] pixel-rounded border-2 border-foreground bg-popover p-1 text-popover-foreground pixel-shadow", className)}
+    className={cn("z-50 min-w-[8rem] pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-1 text-popover-foreground pixel-shadow", className)}
     {...props}
   />
 ));
@@ -54,7 +54,7 @@ const PixelDropdownMenuContent = React.forwardRef<
       data-slot="dropdown-menu-content"
       sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-[8rem] pixel-rounded border-2 border-foreground bg-popover p-1 text-popover-foreground pixel-shadow",
+        "z-50 min-w-[8rem] pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-1 text-popover-foreground pixel-shadow",
         "font-[family-name:var(--pixel-font)]",
         className
       )}
@@ -150,7 +150,7 @@ const PixelDropdownMenuSeparator = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <DropdownMenuPrimitive.Separator ref={ref} data-slot="dropdown-menu-separator" className={cn("-mx-1 my-1 h-0 border-b-2 border-foreground", className)} {...props} />
+  <DropdownMenuPrimitive.Separator ref={ref} data-slot="dropdown-menu-separator" className={cn("-mx-1 my-1 h-0 border-b-[length:var(--pixel-line,2px)] border-foreground", className)} {...props} />
 ));
 PixelDropdownMenuSeparator.displayName = "PixelDropdownMenuSeparator";
 

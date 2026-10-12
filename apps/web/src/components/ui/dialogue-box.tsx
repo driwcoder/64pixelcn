@@ -59,7 +59,7 @@ const PixelDialogueBox = React.forwardRef<HTMLDivElement, PixelDialogueBoxProps>
       // The speaker tab sits outside the box so stepped corners can't clip it.
       <div data-slot="dialogue" className="w-full min-w-0">
         {speaker && (
-          <span className="ml-[1em] inline-block max-w-[calc(100%-2em)] truncate border-2 border-b-0 border-foreground bg-primary px-[0.75em] align-bottom font-[family-name:var(--pixel-font)] text-[0.6rem] uppercase leading-[1.8em] tracking-widest text-primary-foreground">
+          <span className="ml-[1em] inline-block max-w-[calc(100%-2em)] truncate border-[length:var(--pixel-line,2px)] border-b-0 border-foreground bg-primary px-[0.75em] align-bottom font-[family-name:var(--pixel-font)] text-[0.6rem] uppercase leading-[1.8em] tracking-widest text-primary-foreground">
             {speaker}
           </span>
         )}
@@ -81,7 +81,7 @@ const PixelDialogueBox = React.forwardRef<HTMLDivElement, PixelDialogueBoxProps>
             }
           }}
           className={cn(
-            "pixel-rounded pixel-shadow relative flex w-full cursor-pointer gap-[1em] border-2 border-foreground bg-popover p-[1em] text-popover-foreground",
+            "pixel-rounded pixel-shadow relative flex w-full cursor-pointer gap-[1em] border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-[1em] text-popover-foreground",
             "font-[family-name:var(--pixel-font)] text-[0.8rem] leading-relaxed",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             className
@@ -89,7 +89,7 @@ const PixelDialogueBox = React.forwardRef<HTMLDivElement, PixelDialogueBoxProps>
           {...props}
         >
           {portrait && (
-            <div data-slot="dialogue-portrait" className="flex size-[4em] shrink-0 items-center justify-center overflow-hidden border-2 border-foreground bg-muted [&_img]:size-full [&_img]:object-cover">
+            <div data-slot="dialogue-portrait" className="flex size-[4em] shrink-0 items-center justify-center overflow-hidden border-[length:var(--pixel-line,2px)] border-foreground bg-muted [&_img]:size-full [&_img]:object-cover">
               {portrait}
             </div>
           )}

@@ -26,20 +26,20 @@ function PixelCalendar({
         caption_label: "text-xs uppercase tracking-widest font-medium select-none",
         nav: "absolute inset-x-0 top-1 flex h-9 items-center justify-between px-0 z-10",
         button_previous:
-          "inline-flex h-7 w-7 items-center justify-center border-2 border-foreground bg-transparent p-0 opacity-70 transition-all hover:opacity-100 hover:bg-accent active:translate-x-px disabled:opacity-30 disabled:hover:bg-transparent",
+          "inline-flex h-7 w-7 items-center justify-center border-[length:var(--pixel-line,2px)] border-foreground bg-transparent p-0 opacity-70 transition-all hover:opacity-100 hover:bg-accent active:translate-x-px disabled:opacity-30 disabled:hover:bg-transparent",
         button_next:
-          "inline-flex h-7 w-7 items-center justify-center border-2 border-foreground bg-transparent p-0 opacity-70 transition-all hover:opacity-100 hover:bg-accent active:translate-x-px disabled:opacity-30 disabled:hover:bg-transparent",
+          "inline-flex h-7 w-7 items-center justify-center border-[length:var(--pixel-line,2px)] border-foreground bg-transparent p-0 opacity-70 transition-all hover:opacity-100 hover:bg-accent active:translate-x-px disabled:opacity-30 disabled:hover:bg-transparent",
         month_grid: "w-full border-collapse",
         weekdays: "flex",
         weekday:
           "w-8 font-normal text-[0.7rem] uppercase text-muted-foreground text-center",
         week: "flex w-full mt-1",
-        day: "h-8 w-8 p-0 font-normal text-xs text-center border-2 border-transparent hover:border-foreground relative",
+        day: "h-8 w-8 p-0 font-normal text-xs text-center border-[length:var(--pixel-line,2px)] border-transparent hover:border-foreground relative",
         day_button:
           "h-8 w-8 p-0 font-normal aria-selected:opacity-100 inline-flex items-center justify-center",
         selected:
-          "bg-primary text-primary-foreground border-2 border-foreground hover:bg-primary hover:text-primary-foreground",
-        today: "border-2 border-accent font-bold",
+          "bg-primary text-primary-foreground border-[length:var(--pixel-line,2px)] border-foreground hover:bg-primary hover:text-primary-foreground",
+        today: "border-[length:var(--pixel-line,2px)] border-accent font-bold",
         outside: "text-muted-foreground opacity-40",
         disabled: "text-muted-foreground opacity-30",
         range_middle: "bg-accent text-accent-foreground",

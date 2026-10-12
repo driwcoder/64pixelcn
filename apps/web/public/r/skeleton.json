@@ -11,7 +11,7 @@
   "files": [
     {
       "path": "components/ui/skeleton.tsx",
-      "content": "import { cn } from \"@/lib/utils\";\n\nfunction PixelSkeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\n        \"border-2 border-muted bg-muted/50\",\n        \"animate-pulse\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { PixelSkeleton };\n",
+      "content": "import { cn } from \"@/lib/utils\";\n\nfunction PixelSkeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      data-slot=\"skeleton\"\n      className={cn(\n        \"border-[length:var(--pixel-line,2px)] border-muted bg-muted/50\",\n        \"animate-pulse\",\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { PixelSkeleton };\n",
       "type": "registry:ui"
     }
   ]

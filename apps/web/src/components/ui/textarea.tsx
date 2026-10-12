@@ -8,7 +8,7 @@ const PixelTextarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTMLAt
       data-slot="textarea"
       className={cn(
         "flex min-h-[80px] w-full bg-transparent px-3 py-2",
-        "pixel-rounded border-2 border-input [--pixel-corner-color:var(--input)]",
+        "pixel-rounded border-[length:var(--pixel-line,2px)] border-input [--pixel-corner-color:var(--input)]",
         "font-[family-name:var(--pixel-font)] text-xs",
         "placeholder:text-muted-foreground",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background",

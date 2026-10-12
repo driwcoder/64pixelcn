@@ -63,7 +63,7 @@ const PixelNavigationMenuContent = React.forwardRef<
     ref={ref}
     data-slot="navigation-menu-content"
     className={cn(
-      "left-0 top-0 w-full pixel-rounded border-2 border-foreground bg-popover p-4 text-popover-foreground pixel-shadow",
+      "left-0 top-0 w-full pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-4 text-popover-foreground pixel-shadow",
       "data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out",
       className
     )}
@@ -82,7 +82,7 @@ const PixelNavigationMenuViewport = React.forwardRef<
     <NavigationMenuPrimitive.Viewport
       ref={ref}
       data-slot="navigation-menu-viewport"
-      className={cn("origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden pixel-rounded border-2 border-foreground bg-popover pixel-shadow", className)}
+      className={cn("origin-top-center relative mt-1.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover pixel-shadow", className)}
       {...props}
     />
   </div>
@@ -99,7 +99,7 @@ const PixelNavigationMenuIndicator = React.forwardRef<
     className={cn("top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=visible]:animate-in data-[state=hidden]:animate-out", className)}
     {...props}
   >
-    <div className="relative top-[60%] h-2 w-2 rotate-45 border-2 border-foreground bg-popover" />
+    <div className="relative top-[60%] h-2 w-2 rotate-45 border-[length:var(--pixel-line,2px)] border-foreground bg-popover" />
   </NavigationMenuPrimitive.Indicator>
 ));
 PixelNavigationMenuIndicator.displayName = "PixelNavigationMenuIndicator";

@@ -37,11 +37,11 @@ function CodeBlock({ code }: { code: string }) {
         type="button"
         onClick={copy}
         aria-label={copied ? "Copied" : "Copy code"}
-        className="absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center border-2 border-foreground bg-popover text-muted-foreground hover:text-primary transition-colors"
+        className="absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center border-[length:var(--pixel-line,2px)] border-foreground bg-popover text-muted-foreground hover:text-primary transition-colors"
       >
         {copied ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : <Copy className="h-3.5 w-3.5" strokeWidth={3} />}
       </button>
-      <pre className="overflow-x-auto border-2 border-border bg-muted p-4 pr-12 font-mono text-[0.6875rem] leading-relaxed">
+      <pre className="overflow-x-auto border-[length:var(--pixel-line,2px)] border-border bg-muted p-4 pr-12 font-mono text-[0.6875rem] leading-relaxed">
         <code>{code}</code>
       </pre>
     </div>
@@ -84,7 +84,7 @@ npx shadcn@latest add https://pixelcn.vercel.app/r/${meta.name}.json`;
     <div className="px-4 pt-4 pb-24 sm:px-6">
       <div className="mx-auto max-w-3xl">
         {/* ── Top prev / next ─────────────────────────────────── */}
-        <div className="flex items-center justify-between gap-4 mb-6 pb-4 border-b-2 border-border">
+        <div className="flex items-center justify-between gap-4 mb-6 pb-4 border-b-[length:var(--pixel-line,2px)] border-border">
           {prev ? (
             <Link href={`/docs/components/${prev.name}`} className="flex min-w-0 max-w-[50%] items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
               <ChevronLeft className="h-4 w-4 shrink-0" />
@@ -120,12 +120,12 @@ npx shadcn@latest add https://pixelcn.vercel.app/r/${meta.name}.json`;
 
         {/* ── Preview / Code tabs ─────────────────────────────── */}
         <PixelCard className="mb-6">
-          <div className="flex items-center gap-1 border-b-2 border-border px-4 pt-3">
+          <div className="flex items-center gap-1 border-b-[length:var(--pixel-line,2px)] border-border px-4 pt-3">
             <button
               onClick={() => setTab("preview")}
               className={cn(
                 "px-3 py-1.5 font-[family-name:var(--pixel-font)] text-[0.7rem] uppercase tracking-widest transition-colors",
-                tab === "preview" ? "bg-primary text-primary-foreground border-2 border-b-0 border-foreground" : "text-muted-foreground hover:text-primary"
+                tab === "preview" ? "bg-primary text-primary-foreground border-[length:var(--pixel-line,2px)] border-b-0 border-foreground" : "text-muted-foreground hover:text-primary"
               )}
             >
               Preview
@@ -134,7 +134,7 @@ npx shadcn@latest add https://pixelcn.vercel.app/r/${meta.name}.json`;
               onClick={() => setTab("code")}
               className={cn(
                 "px-3 py-1.5 font-[family-name:var(--pixel-font)] text-[0.7rem] uppercase tracking-widest transition-colors",
-                tab === "code" ? "bg-primary text-primary-foreground border-2 border-b-0 border-foreground" : "text-muted-foreground hover:text-primary"
+                tab === "code" ? "bg-primary text-primary-foreground border-[length:var(--pixel-line,2px)] border-b-0 border-foreground" : "text-muted-foreground hover:text-primary"
               )}
             >
               Code
@@ -143,7 +143,7 @@ npx shadcn@latest add https://pixelcn.vercel.app/r/${meta.name}.json`;
 
           <PixelCardContent className="pt-6">
             {tab === "preview" ? (
-              <div className="pixel-demo flex min-h-[180px] items-center justify-center-safe border-2 border-dashed border-border p-[1.1em] overflow-x-auto">
+              <div className="pixel-demo flex min-h-[180px] items-center justify-center-safe border-[length:var(--pixel-line,2px)] border-dashed border-border p-[1.1em] overflow-x-auto">
                 {Demo ? <Demo /> : <span className="text-xs text-muted-foreground">No preview available</span>}
               </div>
             ) : (
@@ -172,7 +172,7 @@ npx shadcn@latest add https://pixelcn.vercel.app/r/${meta.name}.json`;
         <ComponentApiDocs name={meta.name} />
 
         {/* ── Bottom prev / next ──────────────────────────────── */}
-        <div className="flex items-center justify-between gap-4 pt-6 border-t-2 border-border">
+        <div className="flex items-center justify-between gap-4 pt-6 border-t-[length:var(--pixel-line,2px)] border-border">
           {prev ? (
             <Link href={`/docs/components/${prev.name}`} className="flex min-w-0 max-w-[50%] items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors">
               <ChevronLeft className="h-4 w-4 shrink-0" />

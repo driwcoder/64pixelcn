@@ -180,7 +180,7 @@ function ChartTooltip({
   return (
     <div
       className={cn(
-        "border-2 border-foreground bg-popover px-2.5 py-1.5 text-xs pixel-shadow",
+        "border-[length:var(--pixel-line,2px)] border-foreground bg-popover px-2.5 py-1.5 text-xs pixel-shadow",
         className
       )}
     >
@@ -209,7 +209,7 @@ function ChartTooltip({
                     !hideIndicator && (
                       <div
                         className={cn(
-                          "shrink-0 border-2 border-foreground",
+                          "shrink-0 border-[length:var(--pixel-line,2px)] border-foreground",
                           {
                             "h-2.5 w-2.5": indicator === "dot",
                             "w-1": indicator === "line",
@@ -301,7 +301,7 @@ function ChartLegendContent({
               ) : (
                 !hideIcon && (
                   <div
-                    className="h-2 w-2 shrink-0 border-2 border-foreground"
+                    className="h-2 w-2 shrink-0 border-[length:var(--pixel-line,2px)] border-foreground"
                     style={{ backgroundColor: item.color }}
                   />
                 )

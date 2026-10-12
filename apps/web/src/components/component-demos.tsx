@@ -150,7 +150,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
   ),
 
   "aspect-ratio": () => (
-    <PixelAspectRatio ratio={16 / 9} className="w-full max-w-md bg-muted border-2 border-foreground flex items-center justify-center">
+    <PixelAspectRatio ratio={16 / 9} className="w-full max-w-md bg-muted border-[length:var(--pixel-line,2px)] border-foreground flex items-center justify-center">
       <span className="text-xs uppercase tracking-widest">16 / 9</span>
     </PixelAspectRatio>
   ),
@@ -244,7 +244,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
   ),
 
   calendar: () => (
-    <div className="border-2 border-foreground p-2 inline-block">
+    <div className="border-[length:var(--pixel-line,2px)] border-foreground p-2 inline-block">
       <PixelCalendar mode="single" />
     </div>
   ),
@@ -270,7 +270,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
       <PixelCarouselContent>
         {[1, 2, 3].map((n) => (
           <PixelCarouselItem key={n}>
-            <div className="flex aspect-video items-center justify-center border-2 border-foreground bg-muted">
+            <div className="flex aspect-video items-center justify-center border-[length:var(--pixel-line,2px)] border-foreground bg-muted">
               <span className="text-xs uppercase tracking-widest">Slide {n}</span>
             </div>
           </PixelCarouselItem>
@@ -304,8 +304,8 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
   ),
 
   command: () => (
-    <div className="w-full max-w-sm border-2 border-foreground bg-popover p-2">
-      <div className="flex items-center border-b-2 border-foreground px-2 pb-2">
+    <div className="w-full max-w-sm border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-2">
+      <div className="flex items-center border-b-[length:var(--pixel-line,2px)] border-foreground px-2 pb-2">
         <Search className="mr-2 h-4 w-4 opacity-50" strokeWidth={3} />
         <input placeholder="Type a command..." className="h-8 w-full bg-transparent text-xs outline-none" />
       </div>
@@ -319,7 +319,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
 
   "context-menu": () => (
     <PixelContextMenu>
-      <PixelContextMenuTrigger className="flex h-[100px] w-full max-w-xs items-center justify-center border-2 border-dashed border-foreground text-xs uppercase tracking-widest">
+      <PixelContextMenuTrigger className="flex h-[100px] w-full max-w-xs items-center justify-center border-[length:var(--pixel-line,2px)] border-dashed border-foreground text-xs uppercase tracking-widest">
         Right click here
       </PixelContextMenuTrigger>
       <PixelContextMenuContent>
@@ -540,7 +540,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
   ),
 
   "message-scroller": () => (
-    <PixelMessageScroller className="h-[150px] w-full max-w-sm border-2 border-foreground p-3">
+    <PixelMessageScroller className="h-[150px] w-full max-w-sm border-[length:var(--pixel-line,2px)] border-foreground p-3">
       {Array.from({ length: 10 }).map((_, i) => (
         <PixelMessage key={i} variant="flat">
           <PixelMessageContent>
@@ -592,7 +592,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
   ),
 
   resizable: () => (
-    <RPG className="min-h-[150px] w-full max-w-sm border-2 border-foreground">
+    <RPG className="min-h-[150px] w-full max-w-sm border-[length:var(--pixel-line,2px)] border-foreground">
       <RP defaultSize={50}>
         <div className="flex h-full items-center justify-center p-3 text-xs">One</div>
       </RP>
@@ -604,7 +604,7 @@ export const componentDemos: Record<string, () => React.ReactNode> = {
   ),
 
   "scroll-area": () => (
-    <PixelScrollArea className="h-40 w-full max-w-sm border-2 border-foreground p-3">
+    <PixelScrollArea className="h-40 w-full max-w-sm border-[length:var(--pixel-line,2px)] border-foreground p-3">
       <div className="space-y-2">
         {Array.from({ length: 20 }).map((_, i) => (
           <div key={i} className="text-xs">Scroll item {i + 1}</div>
@@ -870,16 +870,16 @@ function CollapsibleDemo() {
   const [open, setOpen] = React.useState(false);
   return (
     <PixelCollapsible open={open} onOpenChange={setOpen} className="w-full max-w-sm">
-      <div className="flex items-center justify-between border-2 border-foreground px-3 py-2">
+      <div className="flex items-center justify-between border-[length:var(--pixel-line,2px)] border-foreground px-3 py-2">
         <span className="text-xs">@peduarte starred 3 repositories</span>
         <PixelButton variant="ghost" size="sm" onClick={() => setOpen(!open)}>
           <ChevronDown className={"h-4 w-4 transition-transform " + (open ? "rotate-180" : "")} />
         </PixelButton>
       </div>
       <PixelCollapsibleContent className="space-y-2 pt-2">
-        <div className="border-2 border-foreground px-3 py-2 text-xs">@radix-ui/primitives</div>
-        <div className="border-2 border-foreground px-3 py-2 text-xs">@radix-ui/colors</div>
-        <div className="border-2 border-foreground px-3 py-2 text-xs">@stitches/react</div>
+        <div className="border-[length:var(--pixel-line,2px)] border-foreground px-3 py-2 text-xs">@radix-ui/primitives</div>
+        <div className="border-[length:var(--pixel-line,2px)] border-foreground px-3 py-2 text-xs">@radix-ui/colors</div>
+        <div className="border-[length:var(--pixel-line,2px)] border-foreground px-3 py-2 text-xs">@stitches/react</div>
       </PixelCollapsibleContent>
     </PixelCollapsible>
   );
@@ -906,7 +906,7 @@ function ComboboxDemo() {
         </PixelButton>
       </PixelPopoverTrigger>
       <PixelPopoverContent className="w-full max-w-sm p-0">
-        <div className="flex items-center border-b-2 border-foreground px-3">
+        <div className="flex items-center border-b-[length:var(--pixel-line,2px)] border-foreground px-3">
           <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" strokeWidth={3} />
           <input
             placeholder="Search framework..."
@@ -1059,7 +1059,7 @@ function NavigationMenuDemo() {
                 <PixelNavigationMenuLink asChild>
                   <a
                     href="#"
-                    className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
+                    className="block select-none border-[length:var(--pixel-line,2px)] border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
                   >
                     <div className="text-xs uppercase tracking-widest">Introduction</div>
                     <p className="text-[0.7rem] leading-snug text-muted-foreground">Re-usable pixel components.</p>
@@ -1070,7 +1070,7 @@ function NavigationMenuDemo() {
                 <PixelNavigationMenuLink asChild>
                   <a
                     href="#"
-                    className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
+                    className="block select-none border-[length:var(--pixel-line,2px)] border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
                   >
                     <div className="text-xs uppercase tracking-widest">Installation</div>
                     <p className="text-[0.7rem] leading-snug text-muted-foreground">How to install via the CLI.</p>
@@ -1081,7 +1081,7 @@ function NavigationMenuDemo() {
                 <PixelNavigationMenuLink asChild>
                   <a
                     href="#"
-                    className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
+                    className="block select-none border-[length:var(--pixel-line,2px)] border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
                   >
                     <div className="text-xs uppercase tracking-widest">Typography</div>
                     <p className="text-[0.7rem] leading-snug text-muted-foreground">Styles for headings and text.</p>
@@ -1108,7 +1108,7 @@ function NavigationMenuDemo() {
                   <PixelNavigationMenuLink asChild>
                     <a
                       href="#"
-                      className="block select-none border-2 border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
+                      className="block select-none border-[length:var(--pixel-line,2px)] border-transparent p-2 leading-none no-underline outline-none transition-colors hover:border-foreground hover:bg-accent"
                     >
                       <div className="text-xs uppercase tracking-widest">{c.title}</div>
                       <p className="text-[0.7rem] leading-snug text-muted-foreground">{c.desc}</p>

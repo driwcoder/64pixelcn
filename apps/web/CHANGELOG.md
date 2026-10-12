@@ -4,6 +4,18 @@ All notable changes to pixelcn. The version is in `apps/web/package.json` and
 follows [Semantic Versioning](https://semver.org): while it is 0.x, a minor
 bump may change component markup or tokens.
 
+## 0.2.1 - 2026-10-12
+
+### Changed
+
+- Border width follows the pixel size: 1px at 8x/16x, 2px at 32x/64x (default, unchanged) and 3px at 128x. Components use `border-[length:var(--pixel-line,2px)]`, so they still get 2px without a preset.
+- Fonts are self-hosted from `public/fonts` with every character subset each font has (latin, latin-ext, cyrillic, greek, vietnamese...), so accented letters like Ł, Ő or Ğ render in the pixel font. Browsers only download the subsets a page uses. The build no longer fetches Google Fonts.
+
+### Fixed
+
+- Extruded shading with stepped corners: the block's side follows the corner stair instead of ending in a square corner.
+- Long words in the accessibility notes could overflow their card.
+
 ## 0.2.0 - 2026-10-12
 
 ### Added

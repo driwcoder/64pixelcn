@@ -5,7 +5,7 @@ function PixelSkeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElem
     <div
       data-slot="skeleton"
       className={cn(
-        "border-2 border-muted bg-muted/50",
+        "border-[length:var(--pixel-line,2px)] border-muted bg-muted/50",
         "animate-pulse",
         className
       )}

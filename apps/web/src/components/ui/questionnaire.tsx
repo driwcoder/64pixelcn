@@ -19,7 +19,7 @@ interface PixelQuestionnaireProps {
 }
 
 const questionCardVariants = cva(
-  "pixel-rounded border-2 border-foreground bg-card pixel-shadow p-4 font-[family-name:var(--pixel-font)]",
+  "pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-card pixel-shadow p-4 font-[family-name:var(--pixel-font)]",
   {
     variants: {
       state: { default: "", active: "border-primary", answered: "border-accent" },

@@ -36,7 +36,7 @@ export default function ComponentsPage() {
 
                       {/* Interactive preview — NOT wrapped in a nav handler so users can test it */}
                       <PixelCardContent className="flex-1">
-                        <div className="pixel-demo flex min-h-[110px] min-w-0 items-center justify-center-safe border-2 border-dashed border-border p-4 overflow-x-auto">
+                        <div className="pixel-demo flex min-h-[110px] min-w-0 items-center justify-center-safe border-[length:var(--pixel-line,2px)] border-dashed border-border p-4 overflow-x-auto">
                           {Demo ? <Demo /> : <span className="text-[0.7rem] text-muted-foreground">No preview</span>}
                         </div>
                       </PixelCardContent>

@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const itemVariants = cva(
-  "group/item flex flex-wrap items-center border-2 border-transparent text-xs outline-none transition-colors font-[family-name:var(--pixel-font)]",
+  "group/item flex flex-wrap items-center border-[length:var(--pixel-line,2px)] border-transparent text-xs outline-none transition-colors font-[family-name:var(--pixel-font)]",
   {
     variants: {
       variant: {
@@ -34,8 +34,8 @@ const pixelItemMediaVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        icon: "size-8 border-2 border-foreground [&_svg:not([class*='size-'])]:size-4",
-        image: "size-10 overflow-hidden border-2 border-foreground [&_img]:size-full [&_img]:object-cover",
+        icon: "size-8 border-[length:var(--pixel-line,2px)] border-foreground [&_svg:not([class*='size-'])]:size-4",
+        image: "size-10 overflow-hidden border-[length:var(--pixel-line,2px)] border-foreground [&_img]:size-full [&_img]:object-cover",
       },
     },
     defaultVariants: { variant: "default" },

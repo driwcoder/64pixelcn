@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 /** Inline `code` and **bold** in a changelog line. */
 function inline(text: string) {
   return text.split(/(`[^`]+`|\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
-    if (part.startsWith("`")) return <code key={i} className="inline-block max-w-full border-2 border-border bg-muted px-1 align-middle font-mono text-[0.9em] wrap-anywhere">{part.slice(1, -1)}</code>;
+    if (part.startsWith("`")) return <code key={i} className="inline-block max-w-full border-[length:var(--pixel-line,2px)] border-border bg-muted px-1 align-middle font-mono text-[0.9em] wrap-anywhere">{part.slice(1, -1)}</code>;
     if (part.startsWith("**")) return <strong key={i}>{part.slice(2, -2)}</strong>;
     const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (link) return <a key={i} href={link[2]} className="text-primary underline underline-offset-4">{link[1]}</a>;
@@ -37,7 +37,7 @@ export default function ChangelogPage() {
     if (line.startsWith("# ")) continue; // page title below
     if (line.startsWith("## ")) {
       flush();
-      blocks.push(<h2 key={blocks.length} className="mb-3 mt-8 border-b-2 border-border pb-2 text-base uppercase tracking-widest">{line.slice(3)}</h2>);
+      blocks.push(<h2 key={blocks.length} className="mb-3 mt-8 border-b-[length:var(--pixel-line,2px)] border-border pb-2 text-base uppercase tracking-widest">{line.slice(3)}</h2>);
     } else if (line.startsWith("### ")) {
       flush();
       blocks.push(<h3 key={blocks.length} className="mb-2 mt-4 text-xs uppercase tracking-widest text-muted-foreground">{line.slice(4)}</h3>);

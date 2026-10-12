@@ -35,7 +35,7 @@ const PixelContextMenuSubContent = React.forwardRef<
   <ContextMenuPrimitive.SubContent
     ref={ref}
     data-slot="context-menu-sub-content"
-    className={cn("z-50 min-w-[8rem] pixel-rounded border-2 border-foreground bg-popover p-1 text-popover-foreground pixel-shadow", className)}
+    className={cn("z-50 min-w-[8rem] pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-1 text-popover-foreground pixel-shadow", className)}
     {...props}
   />
 ));
@@ -50,7 +50,7 @@ const PixelContextMenuContent = React.forwardRef<
       ref={ref}
       data-slot="context-menu-content"
       className={cn(
-        "z-50 min-w-[8rem] pixel-rounded border-2 border-foreground bg-popover p-1 text-popover-foreground pixel-shadow",
+        "z-50 min-w-[8rem] pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-1 text-popover-foreground pixel-shadow",
         "font-[family-name:var(--pixel-font)]",
         className
       )}
@@ -146,7 +146,7 @@ const PixelContextMenuSeparator = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <ContextMenuPrimitive.Separator ref={ref} data-slot="context-menu-separator" className={cn("-mx-1 my-1 h-0 border-b-2 border-foreground", className)} {...props} />
+  <ContextMenuPrimitive.Separator ref={ref} data-slot="context-menu-separator" className={cn("-mx-1 my-1 h-0 border-b-[length:var(--pixel-line,2px)] border-foreground", className)} {...props} />
 ));
 PixelContextMenuSeparator.displayName = "PixelContextMenuSeparator";
 

@@ -10,7 +10,7 @@ const PixelToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants>
 >(({ className, variant, size, children, ...props }, ref) => (
-  <ToggleGroupPrimitive.Root ref={ref} data-slot="toggle-group" className={cn("flex items-center border-2 border-foreground [&>*:not(:first-child)]:border-l-2 [&>*:not(:first-child)]:border-l-foreground", className)} {...props}>
+  <ToggleGroupPrimitive.Root ref={ref} data-slot="toggle-group" className={cn("flex items-center border-[length:var(--pixel-line,2px)] border-foreground [&>*:not(:first-child)]:border-l-[length:var(--pixel-line,2px)] [&>*:not(:first-child)]:border-l-foreground", className)} {...props}>
     <PixelToggleGroupContext.Provider value={{ variant, size }}>{children}</PixelToggleGroupContext.Provider>
   </ToggleGroupPrimitive.Root>
 ));

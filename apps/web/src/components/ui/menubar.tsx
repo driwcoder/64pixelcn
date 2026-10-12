@@ -16,7 +16,7 @@ const PixelMenubar = React.forwardRef<
   <MenubarPrimitive.Root
     ref={ref}
     data-slot="menubar"
-    className={cn("flex h-10 items-center gap-1 pixel-rounded border-2 border-foreground bg-muted p-1 font-[family-name:var(--pixel-font)]", className)}
+    className={cn("flex h-10 items-center gap-1 pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-muted p-1 font-[family-name:var(--pixel-font)]", className)}
     {...props}
   />
 ));
@@ -62,7 +62,7 @@ const PixelMenubarSubContent = React.forwardRef<
   <MenubarPrimitive.SubContent
     ref={ref}
     data-slot="menubar-sub-content"
-    className={cn("z-50 min-w-[8rem] pixel-rounded border-2 border-foreground bg-popover p-1 text-popover-foreground pixel-shadow", className)}
+    className={cn("z-50 min-w-[8rem] pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-1 text-popover-foreground pixel-shadow", className)}
     {...props}
   />
 ));
@@ -79,7 +79,7 @@ const PixelMenubarContent = React.forwardRef<
       align={align}
       alignOffset={alignOffset}
       sideOffset={sideOffset}
-      className={cn("z-50 min-w-[12rem] pixel-rounded border-2 border-foreground bg-popover p-1 text-popover-foreground pixel-shadow", className)}
+      className={cn("z-50 min-w-[12rem] pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover p-1 text-popover-foreground pixel-shadow", className)}
       {...props}
     />
   </MenubarPrimitive.Portal>
@@ -154,7 +154,7 @@ const PixelMenubarSeparator = React.forwardRef<
   React.ElementRef<typeof MenubarPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof MenubarPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <MenubarPrimitive.Separator ref={ref} data-slot="menubar-separator" className={cn("-mx-1 my-1 h-0 border-b-2 border-foreground", className)} {...props} />
+  <MenubarPrimitive.Separator ref={ref} data-slot="menubar-separator" className={cn("-mx-1 my-1 h-0 border-b-[length:var(--pixel-line,2px)] border-foreground", className)} {...props} />
 ));
 PixelMenubarSeparator.displayName = "PixelMenubarSeparator";
 

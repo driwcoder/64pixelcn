@@ -19,8 +19,8 @@ interface ComponentApi {
 
 const API = api as Record<string, ComponentApi>;
 
-const th = "border-b-2 border-border px-2 py-1.5 text-left font-normal uppercase tracking-widest text-muted-foreground";
-const td = "border-b-2 border-border px-2 py-1.5 align-top wrap-anywhere";
+const th = "border-b-[length:var(--pixel-line,2px)] border-border px-2 py-1.5 text-left font-normal uppercase tracking-widest text-muted-foreground";
+const td = "border-b-[length:var(--pixel-line,2px)] border-border px-2 py-1.5 align-top wrap-anywhere";
 
 /** API reference + accessibility notes, generated from the component source (scripts/component-api.mjs). */
 export function ComponentApiDocs({ name }: { name: string }) {
@@ -37,7 +37,7 @@ export function ComponentApiDocs({ name }: { name: string }) {
             <h3 className="mb-2 uppercase tracking-widest text-muted-foreground">Exports</h3>
             <p className="flex flex-wrap gap-1.5">
               {doc.exports.map((e) => (
-                <code key={e} className="max-w-full border-2 border-border bg-muted px-1.5 py-0.5 font-mono wrap-anywhere">{e}</code>
+                <code key={e} className="max-w-full border-[length:var(--pixel-line,2px)] border-border bg-muted px-1.5 py-0.5 font-mono wrap-anywhere">{e}</code>
               ))}
             </p>
             <p className="mt-2 text-muted-foreground">
@@ -106,7 +106,7 @@ export function ComponentApiDocs({ name }: { name: string }) {
             <PixelCardTitle className="text-xs">Accessibility</PixelCardTitle>
           </PixelCardHeader>
           <PixelCardContent>
-            <ul className="list-disc space-y-2 pl-5 text-[0.7rem] leading-relaxed">
+            <ul className="list-disc space-y-2 pl-5 text-[0.7rem] leading-relaxed wrap-anywhere">
               {doc.accessibility.map((a) => <li key={a}>{a}</li>)}
             </ul>
           </PixelCardContent>

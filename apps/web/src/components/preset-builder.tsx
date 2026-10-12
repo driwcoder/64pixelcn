@@ -112,7 +112,7 @@ export function PresetBuilder() {
           </p>
         </div>
         {/* ── Command ──────────────────────────────────────────── */}
-        <div className="pixel-rounded space-y-3 border-2 border-foreground bg-card p-4 pixel-shadow">
+        <div className="pixel-rounded space-y-3 border-[length:var(--pixel-line,2px)] border-foreground bg-card p-4 pixel-shadow">
           <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
             <div className="space-y-1">
               <div className="text-[0.65rem] uppercase tracking-widest text-muted-foreground">Project</div>
@@ -164,7 +164,7 @@ export function PresetBuilder() {
       </div>
 
       {/* ── Options ───────────────────────────────────────────── */}
-      <aside aria-label="Preset options" className="pixel-rounded lg:col-start-1 lg:row-span-2 lg:row-start-1 border-2 border-foreground bg-card pixel-shadow lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100dvh-5.5rem)] lg:self-start lg:overflow-y-auto">
+      <aside aria-label="Preset options" className="pixel-rounded lg:col-start-1 lg:row-span-2 lg:row-start-1 border-[length:var(--pixel-line,2px)] border-foreground bg-card pixel-shadow lg:sticky lg:top-[4.5rem] lg:max-h-[calc(100dvh-5.5rem)] lg:self-start lg:overflow-y-auto">
         <div className="space-y-4 p-4">
           <AppearanceSelects value={choice} onChange={update} idPrefix="create" />
           <label className="flex items-center justify-between gap-3 text-[0.7rem] uppercase tracking-widest">
@@ -209,7 +209,7 @@ function Segmented<T extends string>({
           aria-checked={value === o.id}
           onClick={() => onChange(o.id)}
           className={cn(
-            "border-2 px-2 py-1 text-[0.65rem] uppercase tracking-widest transition-colors",
+            "border-[length:var(--pixel-line,2px)] px-2 py-1 text-[0.65rem] uppercase tracking-widest transition-colors",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             value === o.id ? "border-foreground bg-primary text-primary-foreground" : "border-transparent text-muted-foreground hover:text-foreground"
           )}
@@ -239,7 +239,7 @@ function CommandBox({ command }: { command: string }) {
 
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-stretch">
-      <pre className="min-w-0 flex-1 overflow-auto whitespace-pre-wrap wrap-anywhere border-2 border-border bg-muted p-3 font-mono text-[0.6875rem] leading-relaxed">
+      <pre className="min-w-0 flex-1 overflow-auto whitespace-pre-wrap wrap-anywhere border-[length:var(--pixel-line,2px)] border-border bg-muted p-3 font-mono text-[0.6875rem] leading-relaxed">
         <code>{command}</code>
       </pre>
       <PixelButton className="shrink-0" onClick={copy} aria-live="polite">

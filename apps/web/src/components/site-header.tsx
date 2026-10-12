@@ -10,7 +10,7 @@ import { VERSION } from "@/lib/version";
 // (h-14) so offsets below it (top-14, 100dvh-3.5rem) track every text size.
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 h-14 shrink-0 border-b-2 border-foreground bg-background/95 backdrop-blur px-4 sm:px-6">
+    <header className="sticky top-0 z-40 h-14 shrink-0 border-b-[length:var(--pixel-line,2px)] border-foreground bg-background/95 backdrop-blur px-4 sm:px-6">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-2">
         <div className="flex min-w-0 items-center gap-2">
           <DocsMobileNav />

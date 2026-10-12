@@ -8,7 +8,7 @@ function PixelEmpty({ className, ...props }: React.ComponentProps<"div">) {
       className={cn(
         // Padding follows the component width (not the viewport), so it stays
         // roomy on wide layouts without crushing the text in narrow cards.
-        "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 pixel-rounded border-2 border-foreground p-[clamp(1rem,8%,3rem)] text-center",
+        "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground p-[clamp(1rem,8%,3rem)] text-center",
         "font-[family-name:var(--pixel-font)]",
         className
       )}
@@ -29,7 +29,7 @@ const emptyMediaVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        icon: "bg-muted text-foreground flex size-10 shrink-0 items-center justify-center border-2 border-foreground [&_svg:not([class*='size-'])]:size-6",
+        icon: "bg-muted text-foreground flex size-10 shrink-0 items-center justify-center border-[length:var(--pixel-line,2px)] border-foreground [&_svg:not([class*='size-'])]:size-6",
       },
     },
     defaultVariants: { variant: "default" },

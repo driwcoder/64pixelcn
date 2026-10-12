@@ -6,7 +6,7 @@ import { VERSION } from "@/lib/version";
 // is CC BY 4.0, which asks for attribution wherever the icons are shown).
 export function SiteFooter() {
   return (
-    <footer className="border-t-2 border-foreground px-4 py-6 text-[0.65rem] leading-relaxed text-muted-foreground sm:px-6">
+    <footer className="border-t-[length:var(--pixel-line,2px)] border-foreground px-4 py-6 text-[0.65rem] leading-relaxed text-muted-foreground sm:px-6">
       <div className="mx-auto flex max-w-7xl flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <p className="min-w-0">
           64pixelcn{" "}

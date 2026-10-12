@@ -9,7 +9,7 @@ const PixelAvatar = React.forwardRef<
   <AvatarPrimitive.Root
     ref={ref}
     data-slot="avatar"
-    className={cn("@container relative flex h-10 w-10 shrink-0 overflow-hidden border-2 border-foreground", className)}
+    className={cn("@container relative flex h-10 w-10 shrink-0 overflow-hidden border-[length:var(--pixel-line,2px)] border-foreground", className)}
     {...props}
   />
 ));

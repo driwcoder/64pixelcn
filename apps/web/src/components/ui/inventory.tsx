@@ -74,7 +74,7 @@ const PixelInventory = React.forwardRef<HTMLDivElement, PixelInventoryProps>(
         aria-label={props["aria-label"] ?? "Inventory"}
         data-slot="inventory"
         className={cn(
-          "pixel-rounded pixel-shadow inline-grid max-w-full gap-[0.4em] border-2 border-foreground bg-card p-[0.6em] text-card-foreground",
+          "pixel-rounded pixel-shadow inline-grid max-w-full gap-[0.4em] border-[length:var(--pixel-line,2px)] border-foreground bg-card p-[0.6em] text-card-foreground",
           "font-[family-name:var(--pixel-font)] text-[0.7rem]",
           className
         )}
@@ -105,7 +105,7 @@ const PixelInventory = React.forwardRef<HTMLDivElement, PixelInventoryProps>(
                   }}
                   onKeyDown={(e) => onKeyDown(e, i)}
                   className={cn(
-                    "relative flex aspect-square min-w-0 cursor-pointer items-center justify-center border-2 bg-muted",
+                    "relative flex aspect-square min-w-0 cursor-pointer items-center justify-center border-[length:var(--pixel-line,2px)] bg-muted",
                     "[&_svg]:size-[55%] [&_img]:size-[70%] [&_img]:object-contain",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     isSelected ? "border-primary bg-primary/25" : "border-border hover:border-foreground",

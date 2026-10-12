@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const bubbleVariants = cva(
-  "inline-block border-2 border-foreground px-3 py-2 text-xs font-[family-name:var(--pixel-font)] break-words",
+  "inline-block border-[length:var(--pixel-line,2px)] border-foreground px-3 py-2 text-xs font-[family-name:var(--pixel-font)] break-words",
   {
     variants: {
       variant: { default: "bg-primary text-primary-foreground", secondary: "bg-muted text-muted-foreground", outline: "bg-transparent text-foreground" },

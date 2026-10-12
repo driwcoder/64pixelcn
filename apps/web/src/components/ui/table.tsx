@@ -3,14 +3,14 @@ import { cn } from "@/lib/utils";
 
 function PixelTable({ className, ...props }: React.ComponentProps<"table">) {
   return (
-    <div data-slot="table-container" className="relative w-full overflow-x-auto border-2 border-foreground">
+    <div data-slot="table-container" className="relative w-full overflow-x-auto border-[length:var(--pixel-line,2px)] border-foreground">
       <table data-slot="table" className={cn("w-full caption-bottom text-xs font-[family-name:var(--pixel-font)]", className)} {...props} />
     </div>
   );
 }
 
 function PixelTableHeader({ className, ...props }: React.ComponentProps<"thead">) {
-  return <thead data-slot="table-header" className={cn("bg-muted [&_tr]:border-b-2 [&_tr]:border-foreground", className)} {...props} />;
+  return <thead data-slot="table-header" className={cn("bg-muted [&_tr]:border-b-[length:var(--pixel-line,2px)] [&_tr]:border-foreground", className)} {...props} />;
 }
 
 function PixelTableBody({ className, ...props }: React.ComponentProps<"tbody">) {
@@ -18,11 +18,11 @@ function PixelTableBody({ className, ...props }: React.ComponentProps<"tbody">) 
 }
 
 function PixelTableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
-  return <tfoot data-slot="table-footer" className={cn("border-t-2 border-foreground bg-muted/50 font-medium", className)} {...props} />;
+  return <tfoot data-slot="table-footer" className={cn("border-t-[length:var(--pixel-line,2px)] border-foreground bg-muted/50 font-medium", className)} {...props} />;
 }
 
 function PixelTableRow({ className, ...props }: React.ComponentProps<"tr">) {
-  return <tr data-slot="table-row" className={cn("border-b-2 border-foreground transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", className)} {...props} />;
+  return <tr data-slot="table-row" className={cn("border-b-[length:var(--pixel-line,2px)] border-foreground transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", className)} {...props} />;
 }
 
 function PixelTableHead({ className, ...props }: React.ComponentProps<"th">) {

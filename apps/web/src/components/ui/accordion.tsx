@@ -12,7 +12,7 @@ const PixelAccordionItem = React.forwardRef<
   <AccordionPrimitive.Item
     ref={ref}
     data-slot="accordion-item"
-    className={cn("border-b-2 border-foreground px-[1em]", className)}
+    className={cn("border-b-[length:var(--pixel-line,2px)] border-foreground px-[1em]", className)}
     {...props}
   />
 ));

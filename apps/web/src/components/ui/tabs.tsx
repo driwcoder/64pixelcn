@@ -11,7 +11,7 @@ const PixelTabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     data-slot="tabs-list"
-    className={cn("inline-flex max-w-full flex-wrap items-center gap-1 pixel-rounded border-2 border-foreground bg-muted p-1", className)}
+    className={cn("inline-flex max-w-full flex-wrap items-center gap-1 pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-muted p-1", className)}
     {...props}
   />
 ));
@@ -29,7 +29,7 @@ const PixelTabsTrigger = React.forwardRef<
       "font-[family-name:var(--pixel-font)] text-[0.7rem] uppercase tracking-widest",
       "transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
       "disabled:pointer-events-none disabled:opacity-50",
-      "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-2 data-[state=active]:border-foreground data-[state=active]:shadow-[2px_2px_0px_var(--foreground)]",
+      "data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-[length:var(--pixel-line,2px)] data-[state=active]:border-foreground data-[state=active]:shadow-[2px_2px_0px_var(--foreground)]",
       className
     )}
     {...props}

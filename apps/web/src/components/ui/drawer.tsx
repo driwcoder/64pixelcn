@@ -29,7 +29,7 @@ const PixelDrawerContent = React.forwardRef<
       ref={ref}
       data-slot="drawer-content"
       className={cn(
-        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col border-2 border-foreground bg-popover font-[family-name:var(--pixel-font)]",
+        "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col border-[length:var(--pixel-line,2px)] border-foreground bg-popover font-[family-name:var(--pixel-font)]",
         className
       )}
       {...props}

@@ -150,7 +150,7 @@ export default function BlocksPage() {
                     <PixelCardDescription className="text-[0.7rem]">{b.desc}</PixelCardDescription>
                   </PixelCardHeader>
                   <PixelCardContent>
-                    <div className="pixel-demo border-2 border-dashed border-border p-[0.75em] overflow-x-auto">
+                    <div className="pixel-demo border-[length:var(--pixel-line,2px)] border-dashed border-border p-[0.75em] overflow-x-auto">
                       <b.Demo />
                     </div>
                   </PixelCardContent>
@@ -160,7 +160,7 @@ export default function BlocksPage() {
           </section>
         ))}
 
-        <footer className="border-t-2 border-border pt-6 text-center text-[0.7rem] text-muted-foreground">
+        <footer className="border-t-[length:var(--pixel-line,2px)] border-border pt-6 text-center text-[0.7rem] text-muted-foreground">
           64pixelcn ·{" "}
           <a href="https://pixelcn.vercel.app" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
             pixelcn.vercel.app

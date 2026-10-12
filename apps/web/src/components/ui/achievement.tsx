@@ -21,7 +21,7 @@ const PixelAchievement = React.forwardRef<HTMLDivElement, PixelAchievementProps>
       data-slot="achievement"
       data-state={unlocked ? "unlocked" : "locked"}
       className={cn(
-        "pixel-rounded pixel-shadow flex w-full max-w-sm items-center gap-[0.9em] border-2 border-foreground bg-card p-[0.9em] text-card-foreground",
+        "pixel-rounded pixel-shadow flex w-full max-w-sm items-center gap-[0.9em] border-[length:var(--pixel-line,2px)] border-foreground bg-card p-[0.9em] text-card-foreground",
         "font-[family-name:var(--pixel-font)] text-[0.75rem] leading-relaxed",
         !unlocked && "text-muted-foreground",
         className
@@ -31,7 +31,7 @@ const PixelAchievement = React.forwardRef<HTMLDivElement, PixelAchievementProps>
       <div
         aria-hidden
         className={cn(
-          "flex size-[3em] shrink-0 items-center justify-center border-2 border-foreground [&_svg]:size-[1.8em]",
+          "flex size-[3em] shrink-0 items-center justify-center border-[length:var(--pixel-line,2px)] border-foreground [&_svg]:size-[1.8em]",
           unlocked ? "bg-primary text-primary-foreground" : "bg-muted"
         )}
       >

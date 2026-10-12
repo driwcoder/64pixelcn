@@ -11,7 +11,7 @@ const PixelNativeSelect = React.forwardRef<
       ref={ref}
       data-slot="native-select"
       className={cn(
-        "peer h-10 w-full appearance-none border-2 border-foreground bg-transparent px-3 py-2 pr-8",
+        "peer h-10 w-full appearance-none border-[length:var(--pixel-line,2px)] border-foreground bg-transparent px-3 py-2 pr-8",
         "font-[family-name:var(--pixel-font)] text-xs",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
         "disabled:cursor-not-allowed disabled:opacity-50",

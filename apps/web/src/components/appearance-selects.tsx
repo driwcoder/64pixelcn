@@ -23,7 +23,7 @@ const FIELD_META: { [K in Field]: { label: string; option: (v: Appearance[K]) =>
     label: "Color preset",
     option: (v) => ({
       label: PRESETS[v].label,
-      hint: <span aria-hidden className="inline-block h-3 w-3 shrink-0 border-2 border-current" style={{ backgroundColor: PRESETS[v].swatch }} />,
+      hint: <span aria-hidden className="inline-block h-3 w-3 shrink-0 border-[length:var(--pixel-line,2px)] border-current" style={{ backgroundColor: PRESETS[v].swatch }} />,
     }),
   },
   mode: { label: "Mode", option: (v) => ({ label: MODES[v].label }) },

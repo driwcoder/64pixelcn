@@ -12,7 +12,7 @@ const PixelCommand = React.forwardRef<
   <CommandPrimitive
     ref={ref}
     data-slot="command"
-    className={cn("flex h-full w-full flex-col overflow-hidden pixel-rounded border-2 border-foreground bg-popover text-popover-foreground font-[family-name:var(--pixel-font)]", className)}
+    className={cn("flex h-full w-full flex-col overflow-hidden pixel-rounded border-[length:var(--pixel-line,2px)] border-foreground bg-popover text-popover-foreground font-[family-name:var(--pixel-font)]", className)}
     {...props}
   />
 ));
@@ -32,7 +32,7 @@ const PixelCommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
-  <div data-slot="command-input-wrapper" className="flex items-center border-b-2 border-foreground px-3" cmdk-input-wrapper="">
+  <div data-slot="command-input-wrapper" className="flex items-center border-b-[length:var(--pixel-line,2px)] border-foreground px-3" cmdk-input-wrapper="">
     <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" strokeWidth={3} />
     <CommandPrimitive.Input
       ref={ref}
@@ -70,7 +70,7 @@ const PixelCommandSeparator = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Separator>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>
 >(({ className, ...props }, ref) => (
-  <CommandPrimitive.Separator ref={ref} data-slot="command-separator" className={cn("-mx-1 my-1 h-0 border-b-2 border-foreground", className)} {...props} />
+  <CommandPrimitive.Separator ref={ref} data-slot="command-separator" className={cn("-mx-1 my-1 h-0 border-b-[length:var(--pixel-line,2px)] border-foreground", className)} {...props} />
 ));
 PixelCommandSeparator.displayName = "PixelCommandSeparator";
 

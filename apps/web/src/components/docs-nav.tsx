@@ -58,7 +58,7 @@ export function DocsMobileNav() {
     <PixelSheet open={open} onOpenChange={setOpen}>
       <PixelSheetTrigger
         aria-label="Open navigation"
-        className="flex h-9 w-9 shrink-0 items-center justify-center border-2 border-foreground text-foreground transition-colors hover:bg-accent hover:text-accent-foreground lg:hidden"
+        className="flex h-9 w-9 shrink-0 items-center justify-center border-[length:var(--pixel-line,2px)] border-foreground text-foreground transition-colors hover:bg-accent hover:text-accent-foreground lg:hidden"
       >
         <Menu className="h-4 w-4" strokeWidth={3} />
       </PixelSheetTrigger>
